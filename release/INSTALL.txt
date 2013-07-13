@@ -1,0 +1,6 @@
+﻿Tao Modular Realism
+QUICK INSTALL
+-------------------------------
+
+Copy the @tmr folder to your Arma 3 directory. Launch Arma 3, open the Extensions menu, and select 'Tao Modular Realism'. Click the Enable button and restart Arma 3.
+
