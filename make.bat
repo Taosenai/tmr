@@ -5,84 +5,72 @@
 :: Run as 'make.bat release 0.2beta' to make a release zip file
 
 :: BUILD SETTINGS
+set modules=tmr_core,tmr_nlaw
+set releaseDir=%CD%\release\@tmr\Addons\
 set workPath=P:\
 set BinPBO="C:\Program Files (x86)\Bohemia Interactive\Tools\BinPBO Personal Edition\BinPBO.exe"
 set Zip="C:\Program Files\7-Zip\7z.exe"
 set Arma3Dir="C:\Games\Arma 3"
 
-mkdir release\@tmr\Addons
-
-set releaseDir=%CD%\release\@tmr\Addons\
-
-
-
-
-
-
-
-ECHO Building all modules of TMR...
-ECHO -------------------------------
-
-::::::::::::::::::::::::::::
-
-set currentModule=tmr_core
-
-ECHO Building %currentModule%...
-
-ECHO Copying files to %workPath%
-
-rmdir %workPath%%currentModule% /S /Q 
-robocopy %currentModule% %workPath%%currentModule% /E /njh /njs /ndl /nc /ns
-
-ECHO BinPBOing %currentModule%...
-
-%BinPBO% %workPath%%currentModule% %releaseDir%
-
-ECHO Build of %currentModule% complete!
-ECHO -------------------------------
-
-::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::
 
-set currentModule=tmr_nlaw
+mkdir %releaseDir%
 
-ECHO Building %currentModule%...
+FOR %%A IN (%modules%) DO (
+	set currentModule=%%A
+	CALL :Build
+)
 
-ECHO Copying files to %workPath%
+CALL :Cleanup
 
-rmdir %workPath%%currentModule% /S /Q 
-robocopy %currentModule% %workPath%%currentModule% /E /njh /njs /ndl /nc /ns
-
-ECHO BinPBOing %currentModule%...
-
-%BinPBO% %workPath%%currentModule% %releaseDir%
-
-ECHO Build of %currentModule% complete!
-ECHO -------------------------------
-
-::::::::::::::::::::::::::::
-
-ECHO Build complete, cleaning up...
-
-del %releaseDir%*.log
-
-IF "%1"=="release" GOTO :Release
-if "%1"=="test" GOTO :Test
+IF "%1"=="release" CALL :Release
+IF "%1"=="test" CALL :Test
 
 GOTO :End
 
+::::::::::::::::::::::::::::
+
+:: Sub to build a module
+:Build
+ECHO ###############################
+ECHO Building %currentModule%...
+ECHO ###############################
+
+ECHO Copying files to %workPath% ...
+rmdir %workPath%%currentModule% /S /Q 
+robocopy %currentModule% %workPath%%currentModule% /E /njh /njs /ndl /nc /ns /NFL
+
+ECHO BinPBOing %currentModule%...
+ECHO -------------------------------
+%BinPBO% %workPath%%currentModule% %releaseDir%
+ECHO -------------------------------
+ECHO:
+ECHO Build of %currentModule% complete!
+ECHO:
+ECHO:
+
+GOTO :EOF
+
+:: Sub to make release
 :Release
 ECHO Zipping up release...
 del @tmr-%2.zip
 %Zip% a @tmr-%2.zip .\release\*
-GOTO :End
+GOTO :EOF
 
+:: Sub to copy the build to your Arma 3 folder
 :Test
 ECHO Copying current build to Arma 3...
-robocopy release\@tmr %Arma3Dir%\@tmr /E /njh /njs /ndl /nc /ns
-GOTO :End
+robocopy release\@tmr %Arma3Dir%\@tmr /E /njh /njs /ndl /nc /ns /nfl
+GOTO :EOF
+
+:: Sub to cleanup log files
+:Cleanup
+ECHO All builds complete, cleaning up...
+del %releaseDir%*.log
+GOTO :EOF
 
 :End
 PAUSE
