@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, tmr_core};
+		requiredAddons[] = {A3_Weapons_F, A3_UI_F, tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://ryanschultz.org/arma-3/";
@@ -195,5 +195,17 @@ class CfgSounds {
 		name = "tmr_nlaw_plungerRelease";
 		sound[] = {"\tmr_nlaw\data\plunger_release.wss", db-0, 1};
 		titles[] = {};
+	};
+};
+
+class CfgMissions {
+	class Missions {
+		class TMRTraining {
+			class PCMLGuidance {
+				briefingName = "PCML Guidance";
+				// It's critical that this not begin with '\' !!
+				directory = "tmr_nlaw\TMR_PCMLTraining.Stratis";
+			};
+		};
 	};
 };

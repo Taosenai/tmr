@@ -229,6 +229,7 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 				// We permit an adjustment of _mod every 1 second.
 				// Compensate for the script execution time.
 				_execTime = time - _startExecTime;
+				if (_execTime == 0) then { _execTime = 0.0000001; };
 				_modY = _modY * _execTime;
 				_modP = _modP * _execTime;
 

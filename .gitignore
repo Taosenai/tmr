@@ -2,6 +2,7 @@
 *.exe
 *.log
 *.zip
+*.bin
 
 
 # OS generated files #

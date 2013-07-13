@@ -1,0 +1,264 @@
+version=12;
+class Mission
+{
+	addOns[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"a3_map_stratis",
+		"A3_Weapons_F_Ammoboxes",
+		"a3_weapons_f_beta_ammoboxes",
+		"A3_Armor_F_Marid"
+	};
+	addOnsAuto[]=
+	{
+		"A3_Characters_F_BLUFOR",
+		"A3_Armor_F_Marid",
+		"A3_Weapons_F_Ammoboxes",
+		"a3_weapons_f_beta_ammoboxes",
+		"a3_map_stratis"
+	};
+	randomSeed=9812095;
+	class Intel
+	{
+		briefingName="PCML Guidance";
+		overviewText="Master the new functionality of the PCML in this TMR training mission.";
+		startWind=0.099999994;
+		startWaves=0.099999994;
+		forecastWeather=0.19;
+		forecastWind=0.099999994;
+		forecastWaves=0.099999994;
+		forecastLightnings=0.099999994;
+		year=2035;
+		month=6;
+		day=6;
+		hour=10;
+		minute=0;
+		startFogDecay=0.0049333;
+		forecastFogDecay=0.0049333;
+	};
+	class Groups
+	{
+		items=2;
+		class Item0
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={6394.0029,9,5444.2007};
+					azimut=-35.330601;
+					id=0;
+					side="WEST";
+					vehicle="B_Soldier_F";
+					player="PLAYER COMMANDER";
+					leader=1;
+					skill=0.60000002;
+					init="this addbackpack ""B_AssaultPack_rgr"";";
+				};
+			};
+		};
+		class Item1
+		{
+			side="EAST";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={6366.3354,3.0057909,5534.1221};
+					azimut=-132.85564;
+					special="NONE";
+					id=1;
+					side="EAST";
+					vehicle="O_APC_Wheeled_02_rcws_F";
+					leader=1;
+					skill=0.51078928;
+					ammo=0;
+					text="marid";
+					init="{_x disableAI ""TARGET""; _x disableAI ""AUTOTARGET""; _x setCaptive true} foreach crew this; this setpos [0,0,0]; this enablesimulation false;";
+				};
+			};
+			class Waypoints
+			{
+				items=2;
+				class Item0
+				{
+					position[]={6255.8042,9.8386059,5435.0122};
+					combatMode="BLUE";
+					speed="LIMITED";
+					combat="CARELESS";
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item1
+				{
+					position[]={6352.2061,3.4238305,5520.9814};
+					type="CYCLE";
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+			};
+		};
+	};
+	class Vehicles
+	{
+		items=2;
+		class Item0
+		{
+			position[]={6392.3867,9,5445.5273};
+			azimut=-50.681004;
+			special="NONE";
+			id=2;
+			side="EMPTY";
+			vehicle="Box_NATO_WpsLaunch_F";
+			leader=1;
+			skill=0.51078928;
+			text="launcherbox";
+			init="clearmagazinecargo this; clearweaponcargo this; this addweaponcargo [""launch_nlaw_f"", 5]; this addmagazinecargo [""nlaw_f"",5];";
+		};
+		class Item1
+		{
+			position[]={6410.1113,7.3753905,5438.9297};
+			azimut=-75.030098;
+			special="NONE";
+			id=3;
+			side="EMPTY";
+			vehicle="Box_NATO_WpsLaunch_F";
+			leader=1;
+			skill=0.51078928;
+			text="launcherbox_1";
+			init="clearmagazinecargo this; clearweaponcargo this; this addweaponcargo [""launch_nlaw_f"", 10]; this addmagazinecargo [""nlaw_f"",10]; this addweaponcargo [""tmr_launch_nlaw_mpv_f"", 10]; this addmagazinecargo [""tmr_nlaw_mpv_f"",10];";
+		};
+	};
+	class Markers
+	{
+		items=2;
+		class Item0
+		{
+			position[]={6330.3516,5.504828,5491.9751};
+			name="ifrit_pos";
+			type="Empty";
+		};
+		class Item1
+		{
+			position[]={6352.0762,3.4128137,5520.8452};
+			name="marid_pos";
+			type="Empty";
+		};
+	};
+	class Sensors
+	{
+		items=1;
+		class Item0
+		{
+			position[]={6395.7822,9,5447.481};
+			a=0;
+			b=0;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Tutorial";
+			name="Tutorial";
+			expCond="time > 2";
+			expActiv="nul = [] execVM ""tutorialFlow.sqf"";";
+			class Effects
+			{
+			};
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=3715573;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=14;
+		minute=15;
+		startFogDecay=0.0049333;
+		forecastFogDecay=0.0049333;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=12166372;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=14;
+		minute=15;
+		startFogDecay=0.0049333;
+		forecastFogDecay=0.0049333;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=15112826;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=14;
+		minute=15;
+		startFogDecay=0.0049333;
+		forecastFogDecay=0.0049333;
+	};
+};

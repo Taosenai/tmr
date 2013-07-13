@@ -31,11 +31,12 @@ ECHO Building %currentModule%...
 
 ECHO Copying files to %workPath%
 
+rmdir %workPath%%currentModule% /S /Q 
 robocopy %currentModule% %workPath%%currentModule% /E /njh /njs /ndl /nc /ns
 
 ECHO BinPBOing %currentModule%...
 
-%BinPBO% %workPath%%currentModule% %releaseDir% -BINARIZE
+%BinPBO% %workPath%%currentModule% %releaseDir%
 
 ECHO Build of %currentModule% complete!
 ECHO -------------------------------
@@ -51,11 +52,12 @@ ECHO Building %currentModule%...
 
 ECHO Copying files to %workPath%
 
+rmdir %workPath%%currentModule% /S /Q 
 robocopy %currentModule% %workPath%%currentModule% /E /njh /njs /ndl /nc /ns
 
 ECHO BinPBOing %currentModule%...
 
-%BinPBO% %workPath%%currentModule% %releaseDir% -BINARIZE
+%BinPBO% %workPath%%currentModule% %releaseDir%
 
 ECHO Build of %currentModule% complete!
 ECHO -------------------------------

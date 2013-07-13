@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F};
+		requiredAddons[] = {A3_Weapons_F, A3_UI_F};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://ryanschultz.org/arma-3/";
@@ -68,5 +68,17 @@ class CfgAmmo {
 		timetolive = 2.5;
 
 		typicalspeed = 1400;
+	};
+};
+
+class CfgMissions {
+	class Missions {
+		class TMRTraining {
+			displayName = "TMR Training";
+			briefingName = "TMR Training";
+			overviewText = "Training missions for the new systems and weapons in TMR.";
+			overviewPicture = "\tmr_core\data\training_ca.paa";
+			author = "TMR";
+		};
 	};
 };

@@ -1,0 +1,58 @@
+dev = "Tao Modular Realism";
+author = "Taosenai";
+briefingName = "PCML Guidance";
+onLoadName = "PCML Guidance";
+loadScreen = "\tmr_nlaw\TMR_PCMLTraining.Stratis\pcml_ca.paa";
+onLoadMission = "Master the new functionality of the PCML in this TMR training mission.";
+
+overviewText = "Master the new functionality of the PCML in this TMR training mission.";
+overviewTextLocked = "Locked.";
+overviewPicture = "\tmr_nlaw\TMR_PCMLTraining.Stratis\pcml_ca.paa";
+
+doneKeys[] = {"TMR_PCMLTutorial.Stratis_done"};
+
+class CfgDebriefing
+{
+	class End1
+	{
+        	title = "Tutorial complete.";
+        	subtitle = "";
+        	description = "";
+       		picture = "b_inf";
+		pictureColor[] = {0.0,0.3,0.6,1};
+	};
+};
+
+class CfgHints {
+	class TMR {
+		displayName = "Weapons";
+		class PCMLInit {
+			arguments[] = {};
+			description = "<t color='#90BDE2'>TMR NLAW Attack &amp; Guidance</t> makes the PCML behave like its real counterpart, the NLAW. <br/><br/>This tutorial will teach you how to employ the new version.<br/>%1%2Take a PCML from the box ahead of you and ready it.<br/>";
+			displayName = "PCML Operation";
+			image = "launcher_ca.paa";
+			tip = "";
+		};
+		class PCMLOTADirectAttack {
+			arguments[] = {};
+			description = "The standard PCML AT has two guidance modes: <t color='#90BDE2'>flattened trajectory</t> and <t color='#90BDE2'>predicted line-of-sight</t> (PLOS).<br/><br/>In flattened trajectory mode, the missile flies directly towards the target after reaching its overfly altitude. Gravity and wind are corrected.<br/>%1%2An Ifrit has appeared ahead of you. Look through the scope of the PCML, place the tip of the red triangle near the center of the target, and fire.";
+			displayName = "Flattened Trajectory";
+			image = "";
+			tip = "The anti-tank version of the PCML uses an overfly top attack (OTA) flight profile. It will 'pop-up' above the sight line. This enables it to fire its penetrator warhead directly down into the target.<br/>";
+		};
+		class PCMLOTAPLOS {
+			arguments[] = {{{"LockTargets"}}};
+			description = "Good job. Grab a new launcher.<br/><br/>The second guidance mode is called <t color='#90BDE2'>predicted line-of-sight (PLOS)</t>. In this mode, the missile will attempt to fly to the future location of the target.<br/>%1%2Another target has appeared. To use PLOS guidance, depress the %11 plunger and continue holding it as you steadily track the target for 2 to 3 seconds. <t color='#90BDE2'>Fire without releasing the plunger.</t><br/>%1%2A steady hand, consistent movement by the target, and an appropriate range are all necessary for success with PLOS.";
+			displayName = "Predicted Line-of-Sight";
+			image = "";
+			tip = "For good results, PLOS should only be used against targets at ranges less than 200 meters.<br/>";
+		};
+		class PCMLMPV {
+			arguments[] = {};
+			description = "Good aiming. <t color='#90BDE2'>You've mastered the PCML!</t><br/><br/>Note that a second variant of the PCML exists with a direct attack, multi-purpose warhead (PCML MPV). Employment of this weapon is the same; however, the pop-up will not occur.<br/><br/>You can leave the mission when you're ready.";
+			displayName = "Multi-Purpose Variant";
+			image = "";
+			tip = "You can find more PCML launchers in an ammunition crate behind you.<br/>";
+		};
+	};
+};
