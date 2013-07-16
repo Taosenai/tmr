@@ -130,7 +130,7 @@ tmr_nlaw_fnc_pcml_firedEH = {
 	_flyUpDistance = 18; 
 	_flyUpHeight = 0;
 	if (_weaponType in _pcmlOTAMissiles) then {
-		_flyUpHeight = 5.3; // Height in meters above LOS that missile will fly-up to. Add 0.3 to compensate for soft-launch drop.
+		_flyUpHeight = 4.4; // Height in meters above LOS that missile will fly-up to. Add 0.3 to compensate for soft-launch drop.
 		_flyUpHeight = _flyUpHeight / 10; // Not sure why. But this gives correct overfly.
 	};
 	// Because the optic on the PCML is boresighted rather than canted up slightly,
@@ -358,7 +358,7 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 		// Do downward-facing EFP sensor check (if equipped with one)
 		if (_hasEFP) then {
 			_canSense = ["Car", "Motorcycle", "Tank", "StaticCannon", "Helicopter", "Plane", "Ship"];
-			_senseDistance = 8; // Downward look range
+			_senseDistance = 11; // Downward look range
 			_missilePosASL = getPosASL _missile;
 			missile = _missile;
 

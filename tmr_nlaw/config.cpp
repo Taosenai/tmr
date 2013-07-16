@@ -140,18 +140,20 @@ class CfgMagazines {
 	class CA_LauncherMagazine;
 	class NLAW_F : CA_LauncherMagazine {
 		ammo = "M_NLAW_AT_F";
+		model = "\A3\weapons_f\launchers\nlaw\nlaw_proxy";
 
 		displayname = "PCML AT Missile";
-		descriptionshort = "Type: PCML internal ammunition";
+		descriptionshort = "Type: 150mm AT missile<br />Rounds: 1<br />Used in: PCML AT";
 		// picture = '';
 		//type = "1 * 256";
 	};
 
 	class TMR_NLAW_MPV_F : NLAW_F {
 		ammo = "TMR_M_NLAW_MPV_F";
+		model = "\A3\weapons_f\launchers\nlaw\nlaw_proxy";
 		
 		displayname = "PCML MPV Missile";
-		descriptionshort = "Type: PCML internal ammunition";
+		descriptionshort = "Type: 150mm MPV missile<br />Rounds: 1<br />Used in: PCML MPV";
 		// picture = '';
 		//type = "1 * 256";
 	};
