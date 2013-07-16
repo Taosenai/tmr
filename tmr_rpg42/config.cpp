@@ -25,19 +25,19 @@ class CfgMods {
 	};
 };
 
-// class Extended_PostInit_EventHandlers {
-// 	class tmr_rpg42 {
-// 		clientInit = "call compile preProcessFileLineNumbers '\tmr_rpg42\init.sqf'";
-// 	};
-// };
+class Extended_PostInit_EventHandlers {
+	class tmr_rpg42 {
+		clientInit = "call compile preProcessFileLineNumbers '\tmr_rpg42\init.sqf'";
+	};
+};
 
-// class Extended_FiredBIS_EventHandlers {
-// 	class CAManBase {
-// 		class tmr_pnlaw {
-// 			clientFiredBISPlayer = "_this call tmr_rpg42_fnc_pcml_firedEH";
-// 		};
-// 	};
-// };
+class Extended_FiredBIS_EventHandlers {
+	class CAManBase {
+		class tmr_rpg42 {
+			clientFiredBISPlayer = "_this call tmr_rpg42_fnc_rpg42_firedEH";
+		};
+	};
+};
 
 
 class CfgAmmo {
@@ -46,19 +46,23 @@ class CfgAmmo {
 	class M_RPG32_F : MissileBase {
 		irlock = 0;
 		canLock = 0;
-		fuseDistance = 5;
-		initTime = 0;
-		maxspeed = 150;
+
+		fuseDistance = 7;
+
+		maxspeed = 260;
+		thrust = 1;
 		thrusttime = 0.1;
-		timeToLive = 10;
-		sideAirFriction = 0.12;
-		airFriction = 0.52;
+		initTime = 0.01;
+		sideairfriction = 0.5;
+		airFriction = 0.5;
 
-		effectsMissile = "";
 
-		// Inherit hit
+		hit = 490;
 		indirecthit = 45;
 		indirecthitrange = 10;
+
+		// It's backwards!
+		//model = "\A3\weapons_f\launchers\RPG32\rpg32_rocket.p3d";
 	};
 
 	class M_RPG32_AA_F: M_RPG32_F {
@@ -71,8 +75,11 @@ class CfgMagazines {
 	class RPG32_F : CA_LauncherMagazine {
 		ammo = "M_RPG32_F";
 
-		displayname = "RPG-32 AT Rocket";
-		descriptionshort = "Type: Anti-tank<br />Rounds: 1<br />Used in: RPG-42";
+		displayname = "RPG-42 AT Rocket";
+		descriptionshort = "Type: 105mm anti-tank rocket<br />Rounds: 1<br />Used in: RPG-42";
+
+		initSpeed = 100;
+
 		// picture = '';
 		//type = "1 * 256";
 	};
@@ -82,10 +89,10 @@ class CfgMagazines {
 class CfgWeapons {
 	class Launcher_Base_F;
 	class launch_RPG32_F : Launcher_Base_F {
-		descriptionshort = "Multipurpose rocket-propelled grenade launcher";
+		descriptionshort = "Rocket-propelled grenade launcher";
 		displayname = "RPG-42";
 
-		magazines[] = {"M_RPG32_F"};
+		magazines[] = {"RPG32_F"};
 
 		irlock = 0;
 		canLock = 0;
