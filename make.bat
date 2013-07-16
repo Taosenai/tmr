@@ -5,14 +5,17 @@
 :: Run as 'make.bat release 0.2beta' to make a release zip file
 
 :: BUILD SETTINGS
+set releaseFolder=@tmr
 set modules=tmr_core,tmr_nlaw
-set releaseDir=%CD%\release\@tmr\Addons\
 set workPath=P:\
 set BinPBO="C:\Program Files (x86)\Bohemia Interactive\Tools\BinPBO Personal Edition\BinPBO.exe"
 set Zip="C:\Program Files\7-Zip\7z.exe"
 set Arma3Dir="C:\Games\Arma 3"
 
 
+::::::::::::::::::::::::::::
+
+set releaseDir=%CD%\release\%releaseFolder%\Addons\
 
 ::::::::::::::::::::::::::::
 
@@ -63,7 +66,7 @@ GOTO :EOF
 :: Sub to copy the build to your Arma 3 folder
 :Test
 ECHO Copying current build to Arma 3...
-robocopy release\@tmr %Arma3Dir%\@tmr /E /njh /njs /ndl /nc /ns /nfl
+robocopy release\@tmr %Arma3Dir%\%releaseFolder% /E /njh /njs /ndl /nc /ns /nfl
 GOTO :EOF
 
 :: Sub to cleanup log files
