@@ -49,12 +49,17 @@ class CfgAmmo {
 
 		fuseDistance = 7;
 
-		maxspeed = 260;
-		thrust = 1;
-		thrusttime = 0.1;
-		initTime = 0.01;
-		sideairfriction = 0.5;
-		airFriction = 0.5;
+		maxspeed = 270;
+		//thrust = 400;
+		//thrusttime = 0.1;
+		thrust = 155;
+		thrusttime = 0.4;
+		initTime = 0.11;
+		//initTime = 0.002;
+		//sideairfriction = 0.09;
+		airFriction = 0.47;
+
+		timetolive = 15;
 
 
 		hit = 490;
@@ -63,10 +68,6 @@ class CfgAmmo {
 
 		// It's backwards!
 		//model = "\A3\weapons_f\launchers\RPG32\rpg32_rocket.p3d";
-	};
-
-	class M_RPG32_AA_F: M_RPG32_F {
-		airlock = 0;
 	};
 };
 
@@ -78,7 +79,7 @@ class CfgMagazines {
 		displayname = "RPG-42 AT Rocket";
 		descriptionshort = "Type: 105mm anti-tank rocket<br />Rounds: 1<br />Used in: RPG-42";
 
-		initSpeed = 100;
+		//initSpeed = 77;
 
 		// picture = '';
 		//type = "1 * 256";
@@ -97,9 +98,33 @@ class CfgWeapons {
 		irlock = 0;
 		canLock = 0;
 		airLock = 0;
-		fuseDistance = 5;
+		fuseDistance = 7;
 
-		//modelOptics = "\tmr_rpg42\data\tmr_reticle_pcml";
+		magazinereloadtime = 16;
+
+		modelOptics = "\tmr_rpg42\data\tmr_reticle_RPG42";
+
+		class OpticsModes {
+			class optic {
+				cameradir = "look";
+				// discretedistance[] = {100, 200, 300, 400, 500, 600, 700, 800};
+				// discretedistanceinitindex = 1;
+				// discretefov[] = {0.0623, 0.0623};
+				// discreteinitindex = 0;
+				// distancezoommax = 120;
+				// distancezoommin = 400;
+				memorypointcamera = "eye";
+				opticsdisableperipherialvision = 1;
+				opticsflare = 1;
+				opticsid = 1;
+				opticsppeffects[] = {"OpticsCHAbera1", "OpticsBlur1"};
+				opticszoominit = 0.26;
+				opticszoommax = 0.26;
+				opticszoommin = 0.26;
+				usemodeloptics = 1;
+				visionmode[] = {"Normal", "NVG"};
+			};
+		};
 	};
 };
 

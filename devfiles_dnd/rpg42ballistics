@@ -1,0 +1,28 @@
+25m = 0 hash
+50 m = 5.5 hash
+100m  =  13 hash
+150m = 18 hash
+200m = 22.3 hash
+250m = 26.5 hash
+300m = 31 hash
+350m = 34 hash
+400m = 38 hash
+
+50m moving = far tip of red bar
+100 m moving target = inside tip of black bar
+150m moving target = half of red length into black bar
+200m moving target = full red length into black bar
+
+
+
+HORIZONTAL
+
+at 25m -- 3 full bar set lengths
+at 50m -- 1.5 full bar legnths
+at 100m -- LEFT ALL SEGS + 8 segments right
+at 150m -- LEFT, full length - 1 seg
+at 200m -- LEFT, full - 5 segs (17 segs)
+at 250m -- 10 segs
+at 300m -- 9 segs
+at 350m -- 8 segs
+at 400m -- 6 segs
