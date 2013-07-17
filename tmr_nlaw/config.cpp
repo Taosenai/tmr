@@ -121,8 +121,8 @@ class CfgAmmo {
 		fuseDistance = 7;
 
 		hit = 367;
-		indirecthit = 34;
-		indirecthitrange = 11;
+		indirecthit = 33;
+		indirecthitrange = 10;
 	};
 
 	class SmallSecondary;
@@ -132,7 +132,7 @@ class CfgAmmo {
 		craterEffects = "";
 		hit = 190;
 		indirecthit = 17;
-		indirecthitrange = 8;
+		indirecthitrange = 6;
 	};
 };
 
@@ -143,7 +143,8 @@ class CfgMagazines {
 		model = "\A3\weapons_f\launchers\nlaw\nlaw_proxy";
 
 		displayname = "PCML AT Missile";
-		descriptionshort = "Type: 150mm AT missile<br />Rounds: 1<br />Used in: PCML AT";
+		displaynameshort = "AT";
+		descriptionshort = "Type: 150mm AT missile<br />Used in: PCML AT";
 		// picture = '';
 		//type = "1 * 256";
 	};
@@ -153,7 +154,8 @@ class CfgMagazines {
 		model = "\A3\weapons_f\launchers\nlaw\nlaw_proxy";
 		
 		displayname = "PCML MPV Missile";
-		descriptionshort = "Type: 150mm MPV missile<br />Rounds: 1<br />Used in: PCML MPV";
+		displaynameshort = "MPV";
+		descriptionshort = "Type: 150mm MPV Blast-Frag missile<br />Used in: PCML MPV";
 		// picture = '';
 		//type = "1 * 256";
 	};
