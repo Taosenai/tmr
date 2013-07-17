@@ -347,14 +347,14 @@ class CfgWeapons {
 };
 
 
-// class CfgMissions {
-// 	class Missions {
-// 		class TMRTraining {
-// 			class PCMLGuidance {
-// 				briefingName = "PCML Guidance";
-// 				// It's critical that this not begin with '\' !!
-// 				directory = "tmr_rpg42\TMR_PCMLTraining.Stratis";
-// 			};
-// 		};
-// 	};
-// };
+class CfgMissions {
+	class Missions {
+		class TMRTraining {
+			class RPG42Reticle {
+				briefingName = "RPG42Reticle";
+				// It's critical that this not begin with '\' !!
+				directory = "tmr_rpg42\TMR_RPG42Training.Stratis";
+			};
+		};
+	};
+};

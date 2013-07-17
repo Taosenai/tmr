@@ -1,0 +1,297 @@
+version=12;
+class Mission
+{
+	addOns[]=
+	{
+		"a3_map_stratis",
+		"A3_Weapons_F_Ammoboxes",
+		"a3_weapons_f_beta_ammoboxes",
+		"A3_Armor_F_Marid",
+		"A3_Characters_F_OPFOR",
+		"A3_Armor_F_AMV",
+		"A3_Soft_F_MRAP_01",
+		"a3_soft_f_hemtt",
+		"A3_Soft_F_MRAP_03"
+	};
+	addOnsAuto[]=
+	{
+		"A3_Characters_F_OPFOR",
+		"A3_Weapons_F_Ammoboxes",
+		"a3_weapons_f_beta_ammoboxes",
+		"A3_Armor_F_AMV",
+		"A3_Soft_F_MRAP_01",
+		"A3_Soft_F_MRAP_03",
+		"A3_Soft_F_HEMTT",
+		"a3_map_stratis"
+	};
+	randomSeed=9812095;
+	class Intel
+	{
+		briefingName="RPG-42 Reticle";
+		overviewText="Learn how to use the reticle to make accurate shots with the RPG-42.";
+		startWind=0.099999994;
+		startWaves=0.099999994;
+		forecastWeather=0.19;
+		forecastWind=0.099999994;
+		forecastWaves=0.099999994;
+		forecastLightnings=0.099999994;
+		year=2035;
+		month=6;
+		day=6;
+		hour=10;
+		minute=0;
+		startFogDecay=0.0049333;
+		forecastFogDecay=0.0049333;
+	};
+	class Groups
+	{
+		items=1;
+		class Item0
+		{
+			side="EAST";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={6394.1489,9.0507784,5444.0732};
+					azimut=-35.330601;
+					id=0;
+					side="EAST";
+					vehicle="O_Soldier_F";
+					player="PLAYER COMMANDER";
+					leader=1;
+					skill=0.60000002;
+					init="this addbackpack ""B_AssaultPack_rgr"";";
+				};
+			};
+		};
+	};
+	class Vehicles
+	{
+		items=8;
+		class Item0
+		{
+			position[]={6392.3867,9,5445.5273};
+			azimut=-50.681;
+			special="NONE";
+			id=1;
+			side="EMPTY";
+			vehicle="Box_East_WpsLaunch_F";
+			leader=1;
+			skill=0.51078928;
+			text="launcherbox";
+			init="clearmagazinecargo this; clearweaponcargo this; this addweaponcargo [""launch_RPG32_f"", 5]; this addmagazinecargo [""rpg32_f"",20];";
+		};
+		class Item1
+		{
+			position[]={6336.0313,3.0357277,5457.6729};
+			azimut=31.4051;
+			special="NONE";
+			id=2;
+			side="EMPTY";
+			vehicle="B_APC_Wheeled_01_cannon_F";
+			leader=1;
+			skill=0.60000002;
+			text="u2";
+		};
+		class Item2
+		{
+			position[]={6372.501,2.2194288,5486.6538};
+			azimut=58.830799;
+			special="NONE";
+			id=3;
+			side="EMPTY";
+			vehicle="B_MRAP_01_F";
+			leader=1;
+			skill=0.60000002;
+			text="u1";
+		};
+		class Item3
+		{
+			position[]={6336.0317,4.4438272,5503.1694};
+			azimut=10.3923;
+			special="NONE";
+			id=4;
+			side="EMPTY";
+			vehicle="B_MRAP_01_gmg_F";
+			leader=1;
+			skill=0.60000002;
+			text="u3";
+		};
+		class Item4
+		{
+			position[]={6288.3418,2.9484215,5518.439};
+			azimut=10.3923;
+			special="NONE";
+			id=5;
+			side="EMPTY";
+			vehicle="I_MRAP_03_hmg_F";
+			leader=1;
+			skill=0.60000002;
+			text="u4";
+		};
+		class Item5
+		{
+			position[]={6325.9858,4.3694277,5535.3472};
+			azimut=65.951698;
+			special="NONE";
+			id=6;
+			side="EMPTY";
+			vehicle="B_Truck_01_transport_F";
+			leader=1;
+			skill=0.60000002;
+			text="u5";
+		};
+		class Item6
+		{
+			position[]={6230.5391,3.4040625,5569.0234};
+			azimut=12.3662;
+			special="NONE";
+			id=7;
+			side="EMPTY";
+			vehicle="B_APC_Wheeled_01_cannon_F";
+			leader=1;
+			skill=0.60000002;
+			text="u6";
+		};
+		class Item7
+		{
+			position[]={6410.9365,7.3474817,5439.1099};
+			azimut=-50.681;
+			special="NONE";
+			id=8;
+			side="EMPTY";
+			vehicle="Box_East_WpsLaunch_F";
+			leader=1;
+			skill=0.51078928;
+			text="launcherbox_1";
+			init="clearmagazinecargo this; clearweaponcargo this; this addweaponcargo [""launch_RPG32_f"", 5]; this addmagazinecargo [""rpg32_f"",10];  this addmagazinecargo [""tmr_rpg32_tb_f"",10]; this addmagazinecargo [""tmr_rpg32_smoke_f"",10];";
+		};
+	};
+	class Markers
+	{
+		items=2;
+		class Item0
+		{
+			position[]={6330.3516,5.504828,5491.9751};
+			name="ifrit_pos";
+			type="Empty";
+		};
+		class Item1
+		{
+			position[]={6352.0762,3.4128137,5520.8452};
+			name="marid_pos";
+			type="Empty";
+		};
+	};
+	class Sensors
+	{
+		items=1;
+		class Item0
+		{
+			position[]={6395.7822,9,5447.481};
+			a=0;
+			b=0;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Tutorial";
+			name="Tutorial";
+			expCond="time > 2";
+			expActiv="nul = [] execVM ""tutorialFlow.sqf"";";
+			class Effects
+			{
+			};
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=3715573;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=14;
+		minute=15;
+		startFogDecay=0.0049333;
+		forecastFogDecay=0.0049333;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=12166372;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=14;
+		minute=15;
+		startFogDecay=0.0049333;
+		forecastFogDecay=0.0049333;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"a3_map_stratis"
+	};
+	addOnsAuto[]=
+	{
+		"a3_map_stratis"
+	};
+	randomSeed=15112826;
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=7;
+		day=6;
+		hour=14;
+		minute=15;
+		startFogDecay=0.0049333;
+		forecastFogDecay=0.0049333;
+	};
+};
