@@ -12,6 +12,8 @@ set BinPBO="C:\Program Files (x86)\Bohemia Interactive\Tools\BinPBO Personal Edi
 set Zip="C:\Program Files\7-Zip\7z.exe"
 set Arma3Dir="C:\Games\Arma 3"
 
+set releaseVersion=%2
+
 
 ::::::::::::::::::::::::::::
 
@@ -59,8 +61,8 @@ GOTO :EOF
 :: Sub to make release
 :Release
 ECHO Zipping up release...
-del @tmr-%2.zip
-%Zip% a @tmr-%2.zip .\release\*
+del @tmr-%releaseVersion%.zip
+%Zip% a @tmr-%releaseVersion%.zip .\release\*
 GOTO :EOF
 
 :: Sub to copy the build to your Arma 3 folder
