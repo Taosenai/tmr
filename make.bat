@@ -6,7 +6,7 @@
 
 :: BUILD SETTINGS
 set releaseFolder=@tmr
-set modules=tmr_core,tmr_nlaw,tmr_rpg42
+set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts
 set workPath=P:\
 set BinPBO="C:\Program Files (x86)\Bohemia Interactive\Tools\BinPBO Personal Edition\BinPBO.exe"
 set Zip="C:\Program Files\7-Zip\7z.exe"

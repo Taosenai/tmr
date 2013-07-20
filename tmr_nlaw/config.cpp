@@ -33,7 +33,7 @@ class Extended_PostInit_EventHandlers {
 
 class Extended_FiredBIS_EventHandlers {
 	class CAManBase {
-		class tmr_pnlaw {
+		class tmr_nlaw {
 			clientFiredBISPlayer = "_this call tmr_nlaw_fnc_pcml_firedEH";
 		};
 	};
