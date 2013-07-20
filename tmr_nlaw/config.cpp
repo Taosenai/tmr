@@ -120,6 +120,9 @@ class CfgAmmo {
 		canLock = 0;
 		fuseDistance = 7;
 
+		cratereffects = "ATMissileCrater";
+		explosioneffects = "ATMissileExplosion";
+
 		hit = 367;
 		indirecthit = 33;
 		indirecthitrange = 10;
@@ -141,6 +144,8 @@ class CfgMagazines {
 	class NLAW_F : CA_LauncherMagazine {
 		ammo = "M_NLAW_AT_F";
 		model = "\A3\weapons_f\launchers\nlaw\nlaw_proxy";
+
+		mass = 80;
 
 		displayname = "PCML AT Missile";
 		displaynameshort = "AT";

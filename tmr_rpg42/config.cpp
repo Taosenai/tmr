@@ -280,6 +280,7 @@ class CfgMagazines {
 	class CA_LauncherMagazine;
 	class RPG32_F : CA_LauncherMagazine {
 		ammo = "M_RPG32_F";
+		mass = 80;
 
 		displayname = "RPG-42 AT Rocket";
 		displaynameshort = "AT";
@@ -321,6 +322,11 @@ class CfgWeapons {
 		magazinereloadtime = 16;
 
 		modelOptics = "\tmr_rpg42\data\tmr_reticle_RPG42";
+
+		class WeaponSlotsInfo {
+			allowedslots[] = {901};
+			mass = 100;
+		};
 
 		class OpticsModes {
 			class optic {
