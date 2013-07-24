@@ -49,7 +49,7 @@ robocopy %currentModule% %workPath%%currentModule% /E /njh /njs /ndl /nc /ns /NF
 
 ECHO BinPBOing %currentModule%...
 ECHO -------------------------------
-%BinPBO% %workPath%%currentModule% %releaseDir%
+%BinPBO% -BINARIZE %workPath%%currentModule% %releaseDir%
 ECHO -------------------------------
 ECHO:
 ECHO Build of %currentModule% complete!
