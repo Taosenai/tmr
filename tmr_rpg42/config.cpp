@@ -34,7 +34,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_FiredBIS_EventHandlers {
 	class CAManBase {
 		class tmr_rpg42 {
-			clientFiredBISPlayer = "_this call tmr_rpg42_fnc_rpg42_firedEH";
+			clientFiredBIS = "_this call tmr_rpg42_fnc_rpg42_firedEH";
 		};
 	};
 };
@@ -239,17 +239,23 @@ class CfgAmmo {
 		fuseDistance = 7;
 
 		maxspeed = 270;
-		//thrust = 400;
-		//thrusttime = 0.1;
 		thrust = 155;
 		thrusttime = 0.4;
 		initTime = 0.11;
-		//initTime = 0.002;
-		//sideairfriction = 0.09;
 		airFriction = 0.47;
 
-		timetolive = 15;
+		// These settings are for the AI!
+		// Produces a reasonably flat projectile.
+		// maxspeed = 280;
+		// thrust = 550;
+		// thrusttime = 0.45;
+		// airFriction = 0.2;
 
+		maneuvrability = 0;
+		maxcontrolrange = 0;
+		simulationStep = 0.05;
+
+		timetolive = 20;
 
 		hit = 550;
 		indirecthit = 29;
@@ -300,7 +306,7 @@ class CfgMagazines {
 		ammo = "TMR_M_RPG32_Smoke_F";
 
 		displayname = "RPG-42 Smoke Rocket";
-		displaynameshort = "Smoke"
+		displaynameshort = "Smoke";
 		descriptionshort = "Type: 105mm smoke/marker rocket<br />Used in: RPG-42";
 	};
 

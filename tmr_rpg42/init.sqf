@@ -13,7 +13,7 @@ tmr_rpg42_fnc_rpg42_firedEH = {
 	_missile = _this select 6;
 
 	if (!local _unit) exitwith {};
-	if (!isPlayer _unit) exitwith {};
+	// if (!isPlayer _unit) exitwith {};
 
 	// Case sensitive!
 	_rpg42Launchers = ["launch_RPG32_F"];

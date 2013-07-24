@@ -79,7 +79,7 @@ tmr_nlaw_fnc_pcml_firedEH = {
 	_missile = _this select 6;
 
 	if (!local _unit) exitwith {};
-	if (!isPlayer _unit) exitwith {};
+	// if (!isPlayer _unit) exitwith {};
 
 	tmr_nlaw_missile = _missile;
 

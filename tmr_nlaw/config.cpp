@@ -34,7 +34,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_FiredBIS_EventHandlers {
 	class CAManBase {
 		class tmr_nlaw {
-			clientFiredBISPlayer = "_this call tmr_nlaw_fnc_pcml_firedEH";
+			clientFiredBIS = "_this call tmr_nlaw_fnc_pcml_firedEH";
 		};
 	};
 };
@@ -109,12 +109,19 @@ class CfgAmmo {
 
 		timetolive = 2;
 
-		hit = 630;
-		indirectHit = 0;
-		indirectHitRange = 0;
+		hit = 660;
+		indirectHit = 5;
+		indirectHitRange = 1;
 	};
 
-	class M_NLAW_AT_F;
+	class MissileBase;
+	class M_NLAW_AT_F : MissileBase {
+		maneuvrability = 0;
+		maxcontrolrange = 0;
+
+		thrust = 457; // This value is only used by the AI.
+	};
+
 	class TMR_M_NLAW_MPV_F : M_NLAW_AT_F {
 		irlock = 0;
 		canLock = 0;
