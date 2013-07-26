@@ -46,6 +46,11 @@ class CfgVehicles {
 	class O_Soldier_LAT_F : O_Soldier_base_F {
 	};
 
+	class I_Soldier_base_F;
+	class I_Soldier_LAT_F : I_Soldier_base_F {
+		backpack = "";
+	};
+
 	/////////////////////////////////////////////////////////////////
 	// BACKPACKS
 	/////////////////////////////////////////////////////////////////
@@ -86,9 +91,9 @@ class CfgVehicles {
 	class B_FieldPack_oli;
 	class B_Fieldpack_oli_LAT: B_FieldPack_oli {
 		class TransportMagazines {
-			class _xx_RPG32_F {
-				count = 2;
-				magazine = "RPG32_F";
+			class _xx_NLAW_F {
+				count = 0;
+				magazine = "NLAW_F";
 			};
 		};
 	};
@@ -139,13 +144,21 @@ class CfgVehicles {
 	class IND_Box_Base;
 	class Box_IND_WpsLaunch_F: IND_Box_Base {
 		class TransportMagazines {
-			class _xx_TMR_RPG32_Smoke_F {
+			class _xx_NLAW_F {
 				count = 2;
-				magazine = "TMR_RPG32_Smoke_F";
+				magazine = "NLAW_F";
+			};
+			class _xx_RPG32_F {
+				count = 0;
+				magazine = "RPG32_F";
 			};
 		};
 
 		class TransportWeapons {
+			class _xx_launch_RPG32_F {
+				count = 0;
+				weapon = "launch_RPG32_F";
+			};
 			class _xx_launch_NLAW_F {
 				count = 2;
 				weapon = "launch_NLAW_F";
@@ -178,6 +191,21 @@ class CfgVehicles {
 		};
 	};
 
+
+	class I_supplyCrate_F : B_supplyCrate_F {
+		class TransportWeapons {
+			class _xx_launch_NLAW_F {
+				count = 2;
+				weapon = "launch_NLAW_F";
+			};
+		};
+		class TransportMagazines {
+			class _xx_NLAW_F {
+				count = 2;
+				magazine = "NLAW_F";
+			};
+		};
+	};
 
 	class O_supplyCrate_F : B_supplyCrate_F {
 		class TransportMagazines {
