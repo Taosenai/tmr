@@ -1,4 +1,4 @@
-﻿name = "Tao Modular Realism";
+﻿name = "TMR: Tao Modular Realism";
 picture = "tmr_ca.paa";
 actionName = "Website";
 action = "http://www.ryanschultz.org/arma-3/";
