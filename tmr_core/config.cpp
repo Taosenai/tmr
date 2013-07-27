@@ -9,7 +9,7 @@ class CfgPatches {
 		requiredAddons[] = {A3_Weapons_F, A3_UI_F};
 		version = 0.1;
 		author[] = {"Taosenai"};
-		authorUrl = "http://ryanschultz.org/arma-3/";
+		authorUrl = "http://www.ryanschultz.org/tmr/";
 	};
 };
 
@@ -17,12 +17,12 @@ class CfgPatches {
 class CfgMods {
 	class tmr_core {
 		dir = "tmr_core";
-		name = "Tao Modular Realism: Core Module";
+		name = "TMR: Core Module";
 		picture = "";
 		hidePicture = "true";
 		hideName = "true";
 		actionName = "Website";
-		action = "http://ryanschultz.org/arma-3/";
+		action = "http://www.ryanschultz.org/tmr/";
 	};
 };
 

@@ -1,5 +1,5 @@
-﻿name = "TMR: Tao Modular Realism";
+﻿name = "TMR";
 picture = "tmr_ca.paa";
 actionName = "Website";
-action = "http://www.ryanschultz.org/arma-3/";
-description = "Collection of modular addons that increase systems simulation and realism in Arma 3.";
+action = "http://www.ryanschultz.org/tmr/";
+description = "Comprehensive modification for Arma 3 aimed at increasing realism and complexity without sacrificing engaging gameplay and accessibility.";

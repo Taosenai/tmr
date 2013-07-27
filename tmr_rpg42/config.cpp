@@ -9,19 +9,19 @@ class CfgPatches {
 		requiredAddons[] = {A3_Weapons_F, A3_UI_F, tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
-		authorUrl = "http://ryanschultz.org/arma-3/";
+		authorUrl = "http://www.ryanschultz.org/tmr/";
 	};
 };
 
 class CfgMods {
 	class tmr_rpg42 {
 		dir = "tmr_rpg42";
-		name = "Tao Modular Realism: RPG-42 Module";
+		name = "TMR: RPG-42 Module";
 		picture = "";
 		hidePicture = "true";
 		hideName = "true";
 		actionName = "Website";
-		action = "http://ryanschultz.org/arma-3/";
+		action = "http://www.ryanschultz.org/tmr/";
 	};
 };
 
