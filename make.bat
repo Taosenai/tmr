@@ -6,7 +6,7 @@
 
 :: BUILD SETTINGS
 set releaseFolder=@tmr
-set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts
+set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts,tmr_recoil
 set workPath=P:\
 set BinPBO="C:\Program Files (x86)\Bohemia Interactive\Tools\BinPBO Personal Edition\BinPBO.exe"
 set Zip="C:\Program Files\7-Zip\7z.exe"
@@ -74,7 +74,7 @@ GOTO :EOF
 :: Sub to cleanup log files
 :Cleanup
 ECHO All builds complete, cleaning up...
-del %releaseDir%*.log
+::del %releaseDir%*.log
 GOTO :EOF
 
 :End
