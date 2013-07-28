@@ -25,21 +25,35 @@ class CfgMods {
 	};
 };
 
+class Extended_PostInit_EventHandlers {
+	class tmr_recoil {
+		clientInit = "call compile preProcessFileLineNumbers '\tmr_recoil\init.sqf'";
+	};
+};
+
+class Extended_FiredBIS_EventHandlers {
+	class CAManBase {
+		class tmr_rpg42 {
+			clientFiredBISPlayer = "_this call tmr_recoil_fnc_firedEH";
+		};
+	};
+};
+
 class CfgRecoils {
-	tmr_recoil_single_mx[] = 				{0, 0, 0,		0.045, 0.0115, 0.01520,		0.134, 0, -0.0065,		0.143, 0, 0};
-	tmr_recoil_auto_mx[] = 					{0, 0, 0,		0.045, 0.0115, 0.01530,		0.134, 0, -0.0065,		0.143, 0, 0};
-	tmr_recoil_single_prone_mx[] = 			{0, 0, 0,		0.045, 0.0104, 0.00900,		0.134, 0, -0.0044,		0.143, 0, 0};
-	tmr_recoil_auto_prone_mx[] = 			{0, 0, 0,		0.045, 0.0104, 0.00910,		0.134, 0, -0.0044,		0.143, 0, 0};
+	tmr_recoil_single_mx[] = 				{0, 0, 0,		0.020, 0.0115, 0.01570,		0.134, 0, -0.0065,		0.143, 0, 0};
+	tmr_recoil_auto_mx[] = 					{0, 0, 0,		0.020, 0.0115, 0.01620,		0.134, 0, -0.0065,		0.143, 0, 0};
+	tmr_recoil_single_prone_mx[] = 			{0, 0, 0,		0.020, 0.0104, 0.01000,		0.134, 0, -0.0044,		0.143, 0, 0};
+	tmr_recoil_auto_prone_mx[] = 			{0, 0, 0,		0.020, 0.0104, 0.01005,		0.134, 0, -0.0044,		0.143, 0, 0};
 
-	tmr_recoil_single_katiba[] = 			{0, 0, 0,		0.040, 0.0115, 0.01515,		0.134, 0, -0.0065,		0.143, 0, 0};
-	tmr_recoil_auto_katiba[] = 				{0, 0, 0,		0.040, 0.0115, 0.01520,		0.134, 0, -0.0065,		0.143, 0, 0};
-	tmr_recoil_single_prone_katiba[] = 		{0, 0, 0,		0.040, 0.0104, 0.00900,		0.134, 0, -0.0044,		0.143, 0, 0};
-	tmr_recoil_auto_prone_katiba[] = 		{0, 0, 0,		0.040, 0.0104, 0.00910,		0.134, 0, -0.0044,		0.143, 0, 0};
+	tmr_recoil_single_katiba[] = 			{0, 0, 0,		0.020, 0.0115, 0.01550,		0.134, 0, -0.0065,		0.143, 0, 0};
+	tmr_recoil_auto_katiba[] = 				{0, 0, 0,		0.020, 0.0115, 0.01590,		0.134, 0, -0.0065,		0.143, 0, 0};
+	tmr_recoil_single_prone_katiba[] = 		{0, 0, 0,		0.020, 0.0104, 0.00970,		0.134, 0, -0.0044,		0.143, 0, 0};
+	tmr_recoil_auto_prone_katiba[] = 		{0, 0, 0,		0.020, 0.0104, 0.00970,		0.134, 0, -0.0044,		0.143, 0, 0};
 
-	tmr_recoil_single_mk20[] = 				{0, 0, 0,		0.040, 0.0110, 0.01514,		0.132, 0, -0.0065,		0.141, 0, 0};
-	tmr_recoil_auto_mk20[] = 				{0, 0, 0,		0.040, 0.0110, 0.01518,		0.132, 0, -0.0065,		0.141, 0, 0};
-	tmr_recoil_single_prone_mk20[] = 		{0, 0, 0,		0.040, 0.0102, 0.00900,		0.132, 0, -0.0044,		0.141, 0, 0};
-	tmr_recoil_auto_prone_mk20[] = 			{0, 0, 0,		0.040, 0.0102, 0.00904,		0.132, 0, -0.0044,		0.141, 0, 0};
+	tmr_recoil_single_mk20[] = 				{0, 0, 0,		0.020, 0.0110, 0.01514,		0.132, 0, -0.0065,		0.141, 0, 0};
+	tmr_recoil_auto_mk20[] = 				{0, 0, 0,		0.020, 0.0110, 0.01519,		0.132, 0, -0.0065,		0.141, 0, 0};
+	tmr_recoil_single_prone_mk20[] = 		{0, 0, 0,		0.020, 0.0102, 0.00900,		0.132, 0, -0.0044,		0.141, 0, 0};
+	tmr_recoil_auto_prone_mk20[] = 			{0, 0, 0,		0.020, 0.0102, 0.00905,		0.132, 0, -0.0044,		0.141, 0, 0};
 
 	tmr_recoil_single_vermin[] = 			{0, 0, 0,		0.040, 0.0120, 0.01300,		0.129, 0, -0.0055,		0.138, 0, 0};
 	tmr_recoil_auto_vermin[] = 				{0, 0, 0,		0.040, 0.0120, 0.01300,		0.129, 0, -0.0055,		0.138, 0, 0};
@@ -51,91 +65,95 @@ class CfgRecoils {
 	tmr_recoil_single_prone_skorpion[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800,		0.129, 0, -0.0034,		0.138, 0, 0};
 	tmr_recoil_auto_prone_skorpion[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800,		0.129, 0, -0.0034,		0.138, 0, 0};
 
-	tmr_recoil_auto_mk200[] = 				{0, 0, 0,		0.043, 0.0120, 0.01650,		0.112, 0, -0.0065,		0.121, 0, 0};
-	tmr_recoil_auto_prone_mk200[] = 		{0, 0, 0,		0.043, 0.0104, 0.00950,		0.112, 0, -0.0044,		0.121, 0, 0};
+	tmr_recoil_auto_mk200[] = 				{0, 0, 0,		0.043, 0.0120, 0.01690,		0.112, 0, -0.0065,		0.121, 0, 0};
+	tmr_recoil_auto_prone_mk200[] = 		{0, 0, 0,		0.043, 0.0104, 0.00960,		0.112, 0, -0.0044,		0.121, 0, 0};
 
-	tmr_recoil_auto_zafir[] = 				{0, 0, 0,		0.040, 0.0140, 0.02520,		0.122, 0, -0.0065,		0.131, 0, 0};
-	tmr_recoil_auto_prone_zafir[] = 		{0, 0, 0,		0.040, 0.0120, 0.01200,		0.122, 0, -0.0044,		0.131, 0, 0};
+	tmr_recoil_auto_zafir[] = 				{0, 0, 0,		0.040, 0.0140, 0.02570,		0.122, 0, -0.0065,		0.131, 0, 0};
+	tmr_recoil_auto_prone_zafir[] = 		{0, 0, 0,		0.040, 0.0120, 0.01230,		0.122, 0, -0.0044,		0.131, 0, 0};
 
-	tmr_recoil_single_ebr[] = 				{0, 0, 0,		0.050, 0.0140, 0.02450,		0.132, 0, -0.0065,		0.138, 0, 0};
-	tmr_recoil_auto_ebr[] = 				{0, 0, 0,		0.050, 0.0140, 0.02600,		0.132, 0, -0.0065,		0.138, 0, 0};
-	tmr_recoil_single_prone_ebr[] = 		{0, 0, 0,		0.050, 0.0120, 0.01150,		0.132, 0, -0.0044,		0.138, 0, 0};
-	tmr_recoil_auto_prone_ebr[] = 			{0, 0, 0,		0.050, 0.0120, 0.01350,		0.132, 0, -0.0044,		0.138, 0, 0};
+	tmr_recoil_single_ebr[] = 				{0, 0, 0,		0.040, 0.0140, 0.02600,		0.132, 0, -0.0065,		0.138, 0, 0};
+	tmr_recoil_auto_ebr[] = 				{0, 0, 0,		0.040, 0.0140, 0.02750,		0.132, 0, -0.0065,		0.138, 0, 0};
+	tmr_recoil_single_prone_ebr[] = 		{0, 0, 0,		0.040, 0.0120, 0.01150,		0.132, 0, -0.0044,		0.138, 0, 0};
+	tmr_recoil_auto_prone_ebr[] = 			{0, 0, 0,		0.040, 0.0120, 0.01350,		0.132, 0, -0.0044,		0.138, 0, 0};
 
-	tmr_recoil_single_lrr[] = 				{0, 0, 0,		0.040, 0.0330, 0.10000,		0.260, 0, 0};
-	tmr_recoil_single_prone_lrr[] = 		{0, 0, 0,		0.040, 0.0290, 0.03300,		0.260, 0, 0};
+	tmr_recoil_single_lrr[] = 				{0, 0, 0,		0.010, 0.0350, 0.10000,								0.260, 0, 0};
+	tmr_recoil_single_prone_lrr[] = 		{0, 0, 0,		0.010, 0.0310, 0.03300,		0.170, 0, -0.0090,		0.260, 0, 0};
 
-	tmr_recoil_single_gm6[] = 				{0, 0, 0,		0.040, 0.0330, 0.10000,		0.260, 0, 0};
-	tmr_recoil_single_prone_gm6[] = 		{0, 0, 0,		0.040, 0.0290, 0.03300,		0.260, 0, 0};
+	tmr_recoil_single_gm6[] = 				{0, 0, 0,		0.010, 0.0350, 0.10000,		0.260, 0, 0};
+	tmr_recoil_single_prone_gm6[] = 		{0, 0, 0,		0.010, 0.0310, 0.03300,		0.260, 0, 0};
 };
 
 class CfgCameraShake {
-	// This doesn't seem to be respected by the Arma 3 engine. Neat!
-	defaultCaliberCoefWeaponFire = 1;
+	// What does this do, really?
+	defaultCaliberCoefWeaponFire = 0;
 };
 
-#define TMR_CAMSHAKEFIRE_BASE 0.0
-#define TMR_CAMSHAKEFIRE_LESS 0.0
-#define TMR_CAMSHAKEFIRE_MORE 0.0
+#define TMR_CAMSHAKEFIRE_BASE 0
+#define TMR_CAMSHAKEFIRE_LESS 0
+#define TMR_CAMSHAKEFIRE_MORE 0
 
 class CfgMovesBasic {
 	class Default {
 		camShakeFire = TMR_CAMSHAKEFIRE_NORMAL;
 	};
-	class AmovPercMstpSlowWrflDnon;
-	class AmovPknlMstpSlowWrflDnon : AmovPercMstpSlowWrflDnon {
-		camShakeFire = TMR_CAMSHAKEFIRE_LESS;
-	};
-	class AmovPercMstpSrasWrflDnon;
-	class AmovPpneMstpSrasWrflDnon : AmovPercMstpSrasWrflDnon {
-		camShakeFire = TMR_CAMSHAKEFIRE_LESS;
-	};
-	class AmovPknlMstpSrasWlnrDnon : Default {
-		camShakeFire = TMR_CAMSHAKEFIRE_LESS;
-	};
-	class AmovPknlMrunSlowWrflDf;
-	class AmovPknlMtacSlowWrflDf : AmovPknlMrunSlowWrflDf {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMrunSlowWrflDfl;
-	class AmovPknlMtacSlowWrflDfl : AmovPknlMrunSlowWrflDfl {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMrunSlowWrflDl;
-	class AmovPknlMtacSlowWrflDl : AmovPknlMrunSlowWrflDl {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMrunSlowWrflDbl;
-	class AmovPknlMtacSlowWrflDbl : AmovPknlMrunSlowWrflDbl {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMrunSlowWrflDb;
-	class AmovPknlMtacSlowWrflDb : AmovPknlMrunSlowWrflDb {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMrunSlowWrflDbr;
-	class AmovPknlMtacSlowWrflDbr : AmovPknlMrunSlowWrflDbr {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMrunSlowWrflDr;
-	class AmovPknlMtacSlowWrflDr : AmovPknlMrunSlowWrflDr {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMrunSlowWrflDfr;
-	class AmovPknlMtacSlowWrflDfr : AmovPknlMrunSlowWrflDfr {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMstpSrasWrflDnon;
-	class AmovPknlMwlkSrasWrflDf : AmovPknlMstpSrasWrflDnon {
-		camShakeFire = TMR_CAMSHAKEFIRE_NORMAL;
-	};
-	class AmovPknlMrunSrasWrflDf;
-	class AmovPknlMtacSrasWrflDf : AmovPknlMrunSrasWrflDf {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
-	};
-	class AmovPknlMwlkSrasWpstDf;
-	class AmovPknlMtacSrasWpstDf : AmovPknlMwlkSrasWpstDf {
-		camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+};
+class CfgMovesMaleSdr : CfgMovesBasic {
+	class States {
+		class AmovPercMstpSlowWrflDnon;
+		class AmovPknlMstpSlowWrflDnon : AmovPercMstpSlowWrflDnon {
+			camShakeFire = TMR_CAMSHAKEFIRE_LESS;
+		};
+		class AmovPercMstpSrasWrflDnon;
+		class AmovPpneMstpSrasWrflDnon : AmovPercMstpSrasWrflDnon {
+			camShakeFire = TMR_CAMSHAKEFIRE_LESS;
+		};
+		class AmovPknlMstpSrasWlnrDnon : Default {
+			camShakeFire = TMR_CAMSHAKEFIRE_LESS;
+		};
+		class AmovPknlMrunSlowWrflDf;
+		class AmovPknlMtacSlowWrflDf : AmovPknlMrunSlowWrflDf {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMrunSlowWrflDfl;
+		class AmovPknlMtacSlowWrflDfl : AmovPknlMrunSlowWrflDfl {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMrunSlowWrflDl;
+		class AmovPknlMtacSlowWrflDl : AmovPknlMrunSlowWrflDl {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMrunSlowWrflDbl;
+		class AmovPknlMtacSlowWrflDbl : AmovPknlMrunSlowWrflDbl {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMrunSlowWrflDb;
+		class AmovPknlMtacSlowWrflDb : AmovPknlMrunSlowWrflDb {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMrunSlowWrflDbr;
+		class AmovPknlMtacSlowWrflDbr : AmovPknlMrunSlowWrflDbr {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMrunSlowWrflDr;
+		class AmovPknlMtacSlowWrflDr : AmovPknlMrunSlowWrflDr {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMrunSlowWrflDfr;
+		class AmovPknlMtacSlowWrflDfr : AmovPknlMrunSlowWrflDfr {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMstpSrasWrflDnon;
+		class AmovPknlMwlkSrasWrflDf : AmovPknlMstpSrasWrflDnon {
+			camShakeFire = TMR_CAMSHAKEFIRE_NORMAL;
+		};
+		class AmovPknlMrunSrasWrflDf;
+		class AmovPknlMtacSrasWrflDf : AmovPknlMrunSrasWrflDf {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
+		class AmovPknlMwlkSrasWpstDf;
+		class AmovPknlMtacSrasWpstDf : AmovPknlMwlkSrasWpstDf {
+			camShakeFire = TMR_CAMSHAKEFIRE_MORE;
+		};
 	};
 };
 
@@ -147,6 +165,7 @@ class CfgWeapons {
 	class Rifle_Base_F;
 
 	class arifle_MX_Base_F : Rifle_Base_F {	
+		tmr_recoil_shakeMultiplier = 1;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_mx";
 			recoilProne = "tmr_recoil_single_prone_mx";
@@ -159,6 +178,7 @@ class CfgWeapons {
 	};
 
 	class arifle_katiba_Base_F : Rifle_Base_F {	
+		tmr_recoil_shakeMultiplier = 1;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_katiba";
 			recoilProne = "tmr_recoil_single_prone_katiba";
@@ -171,6 +191,7 @@ class CfgWeapons {
 	};
 
 	class mk20_base_F : Rifle_Base_F {
+		tmr_recoil_shakeMultiplier = 0.8;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_mk20";
 			recoilProne = "tmr_recoil_single_prone_mk20";
@@ -183,6 +204,7 @@ class CfgWeapons {
 	};
 
 	class Tavor_base_F : Rifle_Base_F {
+		tmr_recoil_shakeMultiplier = 0.8;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_mk20";
 			recoilProne = "tmr_recoil_single_prone_mk20";
@@ -195,6 +217,7 @@ class CfgWeapons {
 	};
 
 	class SDAR_base_F : Rifle_Base_F {
+		tmr_recoil_shakeMultiplier = 0.8;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_mk20";
 			recoilProne = "tmr_recoil_single_prone_mk20";
@@ -207,6 +230,7 @@ class CfgWeapons {
 	};
 
 	class SMG_01_Base: Rifle_Base_F {
+		tmr_recoil_shakeMultiplier = 0.7;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_vermin";
 			recoilProne = "tmr_recoil_single_prone_vermin";
@@ -224,6 +248,7 @@ class CfgWeapons {
 	};
 
 	class SMG_02_Base: Rifle_Base_F {
+		tmr_recoil_shakeMultiplier = 0.7;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_skorpion";
 			recoilProne = "tmr_recoil_single_prone_skorpion";
@@ -245,6 +270,7 @@ class CfgWeapons {
 	class Rifle_Long_Base_F;
 
 	class LMG_Mk200_F : Rifle_Long_Base_F {
+		tmr_recoil_shakeMultiplier = 1.2;
 		class manual: Mode_FullAuto {
 			recoil = "tmr_recoil_auto_mk200";
 			recoilprone = "tmr_recoil_auto_prone_mk200";
@@ -252,6 +278,7 @@ class CfgWeapons {
 	};
 
 	class LMG_Zafir_F: Rifle_Long_Base_F {
+		tmr_recoil_shakeMultiplier = 1.6;
 		class Single: Mode_SemiAuto {
 			recoil = "tmr_recoil_auto_zafir";
 			recoilprone = "tmr_recoil_auto_prone_zafir";
@@ -263,6 +290,7 @@ class CfgWeapons {
 	};
 
 	class EBR_base_F : Rifle_Long_Base_F {
+		tmr_recoil_shakeMultiplier = 1.6;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_ebr";
 			recoilProne = "tmr_recoil_single_prone_ebr";
@@ -275,6 +303,7 @@ class CfgWeapons {
 	};
 
 	class LRR_base_F : Rifle_Long_Base_F {
+		tmr_recoil_shakeMultiplier = 3.7;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_lrr";
 			recoilProne = "tmr_recoil_single_prone_lrr";
@@ -282,6 +311,7 @@ class CfgWeapons {
 	};
 
 	class GM6_base_F : Rifle_Long_Base_F {
+		tmr_recoil_shakeMultiplier = 3.6;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_gm6";
 			recoilProne = "tmr_recoil_single_prone_gm6";

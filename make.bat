@@ -8,7 +8,7 @@
 :: Name of the release
 set releaseFolder=@tmr
 :: Modules to build
-set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts
+set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts,tmr_recoil
 :: BI work drive
 set workPath=P:\
 :: Location of the BinPBO utility.
