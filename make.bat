@@ -5,12 +5,25 @@
 :: Run as 'make.bat release 0.2beta' to make a release zip file
 
 :: BUILD SETTINGS
+:: Name of the release
 set releaseFolder=@tmr
-set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts,tmr_recoil
+:: Modules to build
+set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts
+:: BI work drive
 set workPath=P:\
+:: Location of the BinPBO utility.
 set BinPBO="C:\Program Files (x86)\Bohemia Interactive\Tools\BinPBO Personal Edition\BinPBO.exe"
+:: Location of 7zip. Only needed to build releases!
 set Zip="C:\Program Files\7-Zip\7z.exe"
+:: Your Arma 3 directory
 set Arma3Dir="C:\Games\Arma 3"
+:: Should the packages be signed? Only enable if you are the TMR maintainer.
+set DoSign="YES"
+:: Path to DSSignFile
+set DSSignFile="C:\Program Files (x86)\Bohemia Interactive\Tools\BinPBO Personal Edition\DSSignFile\DSSignFile.exe"
+:: Path to private key
+set PrivateKey="F:\Workspace\tmr_sign\TMR.biprivatekey"
+
 
 set releaseVersion=%2
 
@@ -44,15 +57,17 @@ ECHO Building %currentModule%...
 ECHO ###############################
 
 ECHO Copying files to %workPath% ...
-rmdir %workPath%%currentModule% /S /Q 
+rmdir %workPath%%currentModule% /S /Q
 robocopy %currentModule% %workPath%%currentModule% /E /njh /njs /ndl /nc /ns /NFL
 
 ECHO BinPBOing %currentModule%...
 ECHO -------------------------------
-%BinPBO% -BINARIZE %workPath%%currentModule% %releaseDir%
+%BinPBO% %workPath%%currentModule% %releaseDir% -CLEAR
 ECHO -------------------------------
 ECHO:
 ECHO Build of %currentModule% complete!
+
+IF %DoSign%=="YES" CALL :Sign
 ECHO:
 ECHO:
 
@@ -71,10 +86,16 @@ ECHO Copying current build to Arma 3...
 robocopy release\@tmr %Arma3Dir%\%releaseFolder% /E /njh /njs /ndl /nc /ns /nfl
 GOTO :EOF
 
+:: Sub to sign a package
+:Sign
+ECHO Signing package...
+%DSSignFile% %PrivateKey% %releaseDir%%currentModule% 
+GOTO :EOF
+
 :: Sub to cleanup log files
 :Cleanup
 ECHO All builds complete, cleaning up...
-::del %releaseDir%*.log
+del %releaseDir%*.log
 GOTO :EOF
 
 :End

@@ -3,6 +3,7 @@
 *.log
 *.zip
 *.bin
+*.bisign
 
 
 # OS generated files #
