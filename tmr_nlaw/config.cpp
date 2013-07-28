@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_UI_F, tmr_core};
+		requiredAddons[] = {A3_Weapons_F, A3_UI_F, "A3_Data_F", "A3_Missions_F", tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -219,9 +219,42 @@ class CfgMissions {
 		class TMRTraining {
 			class PCMLGuidance {
 				briefingName = "PCML Guidance";
-				// It's critical that this not begin with '\' !!
 				directory = "tmr_nlaw\TMR_PCMLTraining.Stratis";
 			};
+		};
+	};
+};
+
+class CfgHints {
+	class TMR {
+		displayName = "Weapons";
+		class PCMLInit {
+			arguments[] = {};
+			description = "TMR NLAW Attack &amp; Guidance makes the PCML behave like its real counterpart, the NLAW. <br/><br/>This tutorial will teach you how to employ the new version.<br/>%1%2Take a PCML from the box ahead of you and ready it.<br/>";
+			displayName = "PCML Operation";
+			image = "launcher_ca.paa";
+			tip = "";
+		};
+		class PCMLOTADirectAttack {
+			arguments[] = {};
+			description = "The standard PCML AT has two guidance modes: flattened trajectory and predicted line-of-sight (PLOS).<br/><br/>In flattened trajectory mode, the missile flies directly towards the target after reaching its overfly altitude. Gravity and wind are corrected.<br/>%1%2An Ifrit has appeared ahead of you. Look through the scope of the PCML, place the tip of the red triangle near the center of the target, and fire.";
+			displayName = "Flattened Trajectory";
+			image = "";
+			tip = "The anti-tank version of the PCML uses an overfly top attack (OTA) flight profile. It will 'pop-up' above the sight line. This enables it to fire its penetrator warhead directly down into the target.<br/>";
+		};
+		class PCMLOTAPLOS {
+			arguments[] = {{{"LockTargets"}}};
+			description = "Good job. Grab a new launcher.<br/><br/>The second guidance mode is called predicted line-of-sight (PLOS). In this mode, the missile will attempt to fly to the future location of the target.<br/>%1%2Another target has appeared. To use PLOS guidance, depress the %11 plunger and continue holding it as you steadily track the target for 2 to 3 seconds. Fire without releasing the plunger.<br/>%1%2A steady hand, consistent movement by the target, and an appropriate range are all necessary for success with PLOS.";
+			displayName = "Predicted Line-of-Sight";
+			image = "";
+			tip = "For good results, PLOS should only be used against targets at ranges less than 200 meters.<br/>";
+		};
+		class PCMLMPV {
+			arguments[] = {};
+			description = "Good aiming. You've mastered the PCML!<br/><br/>Note that a second variant of the PCML exists with a direct attack, multi-purpose warhead (PCML MPV). Employment of this weapon is the same; however, the pop-up will not occur.<br/><br/>You can leave the mission when you're ready.";
+			displayName = "Multi-Purpose Variant";
+			image = "";
+			tip = "You can find more PCML launchers in an ammunition crate behind you.<br/>";
 		};
 	};
 };

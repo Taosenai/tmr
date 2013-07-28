@@ -1,8 +1,8 @@
-[["TMR","RPG42Init"]] call tmr_advHint;
+[["TMR","RPG42Init"], 360, "false", 120, "false", true, true] call bis_fnc_advHint;
 
 waituntil {sleep 1; currentweapon player == "launch_RPG32_f"};
 
-[["TMR","RPG42Rangefinding"]] call tmr_advHint;
+[["TMR","RPG42Rangefinding"], 360, "false", 120, "false", true, true] call bis_fnc_advHint;
 
 tutorial_ready = false;
 ready_action = player addAction ["Ready!", 'ready.sqf'];
@@ -15,10 +15,10 @@ waituntil {sleep 0.3; tutorial_ready};
 
 player removeAction ready_action;
 
-[["TMR", "RPG42Engagement"]] call tmr_advhint;
+[["TMR", "RPG42Engagement"], 360, "false", 120, "false", true, true] call bis_fnc_advHint;
 
 waituntil {sleep 1; damage u1 > 0.5 && damage u2 > 0.5 && damage u3 > 0.5 && damage u6 > 0.5};
 
-[["TMR", "RPG42GoodWork"]] call tmr_advhint;
+[["TMR", "RPG42GoodWork"], 360, "false", 120, "false", true, true] call bis_fnc_advHint;
 
 activateKey "TMR_RPG42Tutorial.Stratis_done";

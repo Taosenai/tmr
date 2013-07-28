@@ -23,40 +23,6 @@ class CfgDebriefing
 	};
 };
 
-class CfgHints {
-	class TMR {
-		displayName = "Weapons";
-		class RPG42Init {
-			arguments[] = {};
-			description = "<t color='#90BDE2'>TMR RPG-42</t> changes the RPG-42 to be an unguided soft-launch RPG with a fully-calibrated reticle.<br/><br/>This tutorial will teach you how to employ the new version.<br/>%1%2Take an RPG-42 from the box ahead of you and ready it. You may want to carry extra rockets in your pack.<br/>";
-			displayName = "RPG-42 Operation";
-			image = "";
-			tip = "";
-		};
-		class RPG42Rangefinding {
-			arguments[] = {};
-			description = "The reticle has three functions: <t color='#90BDE2'>rangefinding</t>, <t color='#90BDE2'>drop compensation</t>, and <t color='#90BDE2'>leading</t>.<br/><br/>Study the diagram. Select 'Ready!' from the action menu when you're ready.<br/>%1%2The points where the <t color='#90BDE2'>horizontal lines intersect the main vertical line</t> correspond to the appropriate drop compensation for a target at that range. %1%2The <t color='#90BDE2'>length of each horizontal line</t> indicates the approximate length of an armored vehicle viewed from the side at the corresponding range. %1%2The <t color='#90BDE2'>small verticle marks</t> indicate an approximate lead for an armored vehicle at the corresponding range moving at roughly 10 km/h.<br/>";
-			displayName = "Using the Reticle";
-			image = "";
-			tip = "Red areas are illuminated for nighttime use.<br/>";
-		};
-		class RPG42Engagement {
-			arguments[] = {};
-			description = "There are six targets ahead of you at various ranges. Engage and destroy them.";
-			displayName = "Practice";
-			image = "";
-			tip = "The RPG-42 is most effective against targets less than 200m away.<br/>";
-		};
-		class RPG42GoodWork {
-			arguments[] = {};
-			description = "Good work. <t color='#90BDE2'>You've mastered the RPG-42!</t><br/><br/>You can leave the mission when you're ready.";
-			displayName = "Good Work";
-			image = "";
-			tip = "You can find more RPG-42 rockets in the crate behind you.<br/>";
-		};
-	};
-};
-
 class TMR_RscPicture
 {
    type = 0;
