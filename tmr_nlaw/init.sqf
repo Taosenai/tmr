@@ -10,6 +10,11 @@ tmr_nlaw_deltaYOverTAverage = 0;
 tmr_nlaw_deltaZOverTAverage = 0;
 tmr_nlaw_trackingWarheads = ["NLAW_F", "TMR_NLAW_MPV_F"];
 
+tmr_nlaw_deltaXOverTSum = 0;
+tmr_nlaw_deltaYOverTSum = 0;
+tmr_nlaw_deltaZOverTSum = 0;
+tmr_nlaw_trackCount = 0;
+
 // Include modified BIS functions
 #include "bis_functions.sqf"
 
@@ -63,6 +68,15 @@ tmr_nlaw_fnc_trackingKeyUpEH = {
 		// Switch mode to direct attack
 		tmr_nlaw_trackingMode = 0;
 
+		// Clear tracking values.
+		tmr_nlaw_deltaXOverTAverage = 0;
+		tmr_nlaw_deltaYOverTAverage = 0;
+		tmr_nlaw_deltaZOverTAverage = 0;
+		tmr_nlaw_deltaXOverTSum = 0;
+		tmr_nlaw_deltaYOverTSum = 0;
+		tmr_nlaw_deltaZOverTSum = 0;
+		tmr_nlaw_trackCount = 0;
+
 		playSound "tmr_nlaw_plungerRelease";
 	};
 
@@ -114,7 +128,7 @@ tmr_nlaw_fnc_pcml_firedEH = {
 
 	// In rocketLife seconds, missile accelerates from initV m/s to maxV
 	_acceleration = (_rocketMaxV - _rocketInitV) / _rocketLife;
-	_drag = -22;
+	_drag = -0.015;
 
 	// EFP characteristics
 	_hasEFP = false;
@@ -127,17 +141,16 @@ tmr_nlaw_fnc_pcml_firedEH = {
 
 	// Fly-up for OTA
 	// Distance in meters before rocket has fully popped-up. (Guessed, no data.)
-	_flyUpDistance = 18; 
+	_flyUpDistance = 20; 
 	_flyUpHeight = 0;
 	if (_weaponType in _pcmlOTAMissiles) then {
-		_flyUpHeight = 4.4; // Height in meters above LOS that missile will fly-up to. Add 0.3 to compensate for soft-launch drop.
-		_flyUpHeight = _flyUpHeight / 10; // Not sure why. But this gives correct overfly.
+		_flyUpHeight = 3.1; // Height in meters above LOS that missile will fly-up to.
 	};
 	// Because the optic on the PCML is boresighted rather than canted up slightly,
 	// the fly-up height is lower than it would otherwise be, I think.
 
 	// Flight time at which best accuracy is desired when using PLOS.
-	_plosFlightTime = 1.2; 
+	//_plosFlightTime = 1.2; 
 
 	// Call guidance code
 	[_unit, _missile, _weaponType, _lineOfSight, _launcherAcceleration, _rocketInitTime, _rocketLife, _rocketInitV, _acceleration, _drag, _flyUpDistance, _flyUpHeight, _plosFlightTime, _launchPos, _launchPosASL, _launchTime, _efpSpeed, _efpType, _efpMissileExplodeType, _hasEFP, _missileType] call tmr_nlaw_fnc_plosMissile_guidance;
@@ -168,23 +181,7 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 	_efpMissileExplodeType = _this select 18;
 	_hasEFP = _this select 19;
 
-	// Compute flight vector for missile.
-	_targetVector = _lineOfSight; // Direct attack
-
-	if (tmr_nlaw_trackingMode == 1) then { // PLOS
-		// Get the anticipated increase in vector dimensions over the flighttime
-		_deltaX = tmr_nlaw_deltaXOverTAverage * _plosFlightTime;
-		_deltaY = tmr_nlaw_deltaYOverTAverage * _plosFlightTime;
-		_deltaZ = tmr_nlaw_deltaZOverTAverage * _plosFlightTime;
-
-		_deltaVector = [_deltaX, _deltaY, _deltaZ];
-
-		// Add increase to line of sight vector
-		_predictedVector = [_lineOfSight, _deltaVector] call BIS_fnc_vectorAdd;
-
-		_targetVector = _predictedVector;
-		//player sidechat format ["Tar: %1  LOS: %2    Pre: %3", _targetVector, _lineOfSight, _predictedVector];
-	};
+	_targetVector = _lineOfSight; // Deprecated!
 
 	// End the tracking system (prevent loop resource fight).
 	tmr_nlaw_trackingMode = 0;
@@ -195,159 +192,141 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 	_handle = [
 	/* Code */
 	{
-		//player sidechat format ["rbo:%1\nra: %2\nrsa:%3, time %4",_rocketBurnout,_rocketActive,_rocketStartedAt, time];
-		// Acceleration due to launch rocket or main rocket
-		if (!_rocketBurnout) then {
-			if (_rocketActive && time >= _rocketStartedAt + _rocketLife) then {
-				// Burnout. This is our final vector.
-				_rocketActive = false;
-				_rocketBurnout = true;
-				_maxV = _mag;
-				_dropVector = _currentVector;
-			} else {
-				// Adjust flight path towards target vector
-				// Also pop-up if in PLOS guidance.
-				_cvX = _currentVector select 0;
-				_cvY = _currentVector select 1;
-				_cvZ = _currentVector select 2;
+		// Guidance System
+		// -----------------------------------
+		_flightTime = (time - _launchTime) + 1.0;
 
-				_tvX = _targetVector select 0;
-				_tvY = _targetVector select 1;
-				_tvZ = _targetVector select 2;
+		_deltaX = _deltaXOverTAverage * _flightTime;
+		_deltaY = _deltaYOverTAverage * _flightTime;
+		//_deltaZ = _deltaZOverTAverage * _flightTime;
+		_deltaZ = 0; // Only azimuth is considered in PLOS, not elevation.
 
-				// Adjust the flight path slightly each tick until
-				// perfectly aligned with target vector.
-				// If vector is too far, do our best to get there 
-				// at the max rate of adjustment.
+		// These values will be 0 if PLOS is not being used, so you will get
+		// a straight flight path.
+		_deltaVector = [_deltaX, _deltaY, _deltaZ];
 
-				// Maximum adjustment allowed per second (to unit vector)
-				// Determined experimentally.
-				_modY = 0.74; // Yaw
-				_modP = 0.9; // Pitch
+		// Add increase to initial flight vector
+		_targetVector = [_initialVector, _deltaVector] call BIS_fnc_vectorAdd;
+		_tvX = _targetVector select 0;
+		_tvY = _targetVector select 1;
+		_tvZ = _targetVector select 2;
 
-				// Script lag compensation
-				// We permit an adjustment of _mod every 1 second.
-				// Compensate for the script execution time.
-				_execTime = time - _startExecTime;
-				if (_execTime == 0) then { _execTime = 0.0000001; };
-				_modY = _modY * _execTime;
-				_modP = _modP * _execTime;
+		// Adjust the flight path slightly each tick until
+		// perfectly aligned with target vector.
+		// If vector is too far, do our best to get there 
+		// at the max rate of adjustment.
+		_cvX = _currentVector select 0;
+		_cvY = _currentVector select 1;
+		_cvZ = _currentVector select 2;
 
-				_d = _cvX - _tvX;
-				if (_d < 0) then {
-					_cvX = _cvX + (_modY min abs _d);
-				};
-				if (_d > 0) then {
-					_cvX = _cvX - (_modY min abs _d);
-				};
+		// Maximum adjustment allowed per second (to unit vector)
+		// Determined experimentally.
+		_modY = 0.74; // Yaw
+		_modP = 0.74; // Pitch
 
-				_d = _cvY - _tvY;
-				if (_d < 0) then {
-					_cvY = _cvY + (_modY min abs _d);
-				};
-				if (_d > 0) then {
-					_cvY = _cvY - (_modY min abs _d);
-				};
+		// Script lag compensation
+		// We permit an adjustment of _mod every 1 second.
+		// Compensate for the script execution time.
+		_execTime = time - _startExecTime;
+		if (_execTime == 0) then { _execTime = 0.0000001; };
+		_modY = _modY * _execTime;
+		_modP = _modP * _execTime;
 
-				_d = _cvZ - _tvZ;
-				if (_d < 0) then {
-					_cvYZ = _cvZ + (_modP min abs _d);
-				};
-				if (_d > 0) then {
-					_cvZ = _cvZ - (_modP min abs _d);
-				};
-
-				//_cvZ = 0.4;
-
-				_currentVector = [_cvX, _cvY, _cvZ];
-
-				// If the missile has not reached the fly up distance yet, adjust up
-				if (_launchPosASL distance getPosASL _missile < _flyUpDistance) then {
-					_flyUpVector = [_currentVector, _flyUpDistance] call BIS_fnc_vectorMultiply;
-					_flyUpVector = [_flyUpVector select 0, _flyUpVector select 1, (_flyUpVector select 2) + _flyUpHeight];
-
-					// Get the vector from current position to the fly-up height
-					_flyUpTransformVector = [_currentVector, _flyUpVector] call BIS_fnc_vectorFromXToY;
-					_currentVector = [_currentVector select 0, _currentVector select 1, _flyUpTransformVector select 2];
-				};
-
-				// Start main rocket if launch rocket has burned out
-				if (!_rocketActive && time > _launchTime + _rocketInitTime) then {
-					_rocketStartedAt = time;
-					_rocketActive = true;
-				};
-
-				// Compute new V
-				_deltaV = 0;
-				if (!_rocketActive) then {
-					// Launch rocket acceleration
-					_deltaV = _launcherAcceleration * (time - _launchTime);
-				} else {
-					// Main rocket acceleration
-					_deltaV = _acceleration * (time - _rocketStartedAt);
-				};
-				_mag = _rocketInitV + _deltaV;
-				_velocity = [_currentVector, _mag] call BIS_fnc_vectorMultiply;
-
-				_deltaT = time - _launchTime;
-				if (_deltaT < 0.1 && _execTime < 0.03) then {
-					// Main motor has not fired, flight correction not active -- drop rapidly
-					// Visual fudge, not simulation.
-					// Only do this when we have high script performance.
-					_zDrop = 0.13 / _execTime; // 13 m/s/s drop
-					// We will need to fly up to correct this. Increase flyupheight if it's 0.
-					if (_flyUpHeight == 0) then {
-						_flyUpHeight = 0.31;
-					};
-					_missile setVelocity [_velocity select 0, _velocity select 1, (_velocity select 2) - _zDrop];
-				} else {
-					// Main rocketmotor active
-					_missile setVelocity _velocity;
-				};
-
-				// Set the missile's pitch and yaw (visual meaning only)
-				// Get a vector to a position just ahead of the missile's flight path
-				_pitchVector = [_currentVector, [_currentVector, 3] call BIS_fnc_vectorMultiply] call BIS_fnc_vectorFromXtoY;
-
-				_currentYaw = getDir _missile;
-				_adjustedYaw = _pitchVector call CBA_fnc_vectDir; // Direction to the future position
-				_missile setDir _adjustedYaw;
-
-				_vDir = [_pitchVector, _adjustedYaw] call BIS_fnc_rotateVector2D; // Rotate vector for north normalizing
-				_pitch = atan ((_vDir select 2) / (_vDir select 1)); // Pitch to future position
-
-				[_missile, _pitch,  0] call BIS_fnc_setPitchBank;
-			};
-		// Decelerating from drag.
-		} else {
-			_mag = (velocity _missile) call BIS_fnc_magnitude;
-			_deltaV = _drag * (time - (_rocketStartedAt + _rocketLife));
-			_mag = _maxV + _deltaV;
-
-			// Apply a drop. This is a non-physics fudge to represent the missile stalling out as it pitches against gravity.
-			// TODO: Gravity should be involved here, rather than just fudge magic. Need to know how real missile behaves!
-			_execTime = time - _startExecTime;
-			_modZ = 0.024; // Woohoo! Magic numbers acquired by experimentation!
-			_magic = 132;
-			_modZ = _modZ * _execTime * (abs _deltaV / _magic); 
-			_dropVector = [_dropVector select 0, _dropVector select 1, (_dropVector select 2) - _modZ];
-			//_dropVector = [_dropVector select 0, _dropVector select 1, (_dropVector select 2)];
-			_missile setVelocity ([_dropVector, _mag] call BIS_fnc_vectorMultiply);
-
-			// Set the missile's pitch and yaw (visual meaning only)
-			// Get a vector to a position just ahead of the missile's flight path
-			_pitchVector = [_currentVector, [_currentVector, 3] call BIS_fnc_vectorMultiply] call BIS_fnc_vectorFromXtoY;
-			
-
-			_currentYaw = getDir _missile;
-			_adjustedYaw = _pitchVector call CBA_fnc_vectDir; // Direction to the future position
-			_missile setDir _adjustedYaw;
-
-			_vDir = [_pitchVector, _adjustedYaw] call BIS_fnc_rotateVector2D; // Rotate vector for north normalizing
-			_pitch = atan ((_vDir select 2) / (_vDir select 1)); // Pitch to future position
-
-			[_missile, _pitch,  0] call BIS_fnc_setPitchBank;
+		_d = _cvX - _tvX;
+		if (_d < 0) then {
+			_cvX = _cvX + (_modY min abs _d);
 		};
+		if (_d > 0) then {
+			_cvX = _cvX - (_modY min abs _d);
+		};
+
+		_d = _cvY - _tvY;
+		if (_d < 0) then {
+			_cvY = _cvY + (_modY min abs _d);
+		};
+		if (_d > 0) then {
+			_cvY = _cvY - (_modY min abs _d);
+		};
+
+		_d = _cvZ - _tvZ;
+		if (_d < 0) then {
+			_cvYZ = _cvZ + (_modP min abs _d);
+		};
+		if (_d > 0) then {
+			_cvZ = _cvZ - (_modP min abs _d);
+		};
+
+		_currentVector = [_cvX, _cvY, _cvZ];
+
+		// If the missile has not reached the fly up distance yet, adjust up
+		if (_launchPosASL distance getPosASL _missile < _flyUpDistance) then {
+			_flyUpVector = [_currentVector, _flyUpDistance] call BIS_fnc_vectorMultiply;
+			_flyUpVector = [_flyUpVector select 0, _flyUpVector select 1, (_flyUpVector select 2) + _flyUpHeight / 7.75];
+
+			// Get the vector from current position to the fly-up height
+			_flyUpTransformVector = [_currentVector, _flyUpVector] call BIS_fnc_vectorFromXToY;
+			_currentVector = [_currentVector select 0, _currentVector select 1, _flyUpTransformVector select 2];
+		};
+
+		// Start main rocket if launch rocket has burned out
+		if (!_rocketBurnout && !_rocketActive && time > _launchTime + _rocketInitTime) then {
+			_rocketStartedAt = time;
+			_rocketActive = true;
+		};
+
+		if (!_rocketBurnout && _rocketActive && time >= _rocketStartedAt + _rocketLife) then {
+			// Burnout.
+			_rocketActive = false;
+			_rocketBurnout = true;
+			_maxV = (velocity _missile) call BIS_fnc_magnitude;
+		};
+
+		_deltaV = 0;
+		if (!_rocketActive && !_rocketBurnout) then {
+			// Launch rocket acceleration
+			_deltaV = _launcherAcceleration * (time - _launchTime);
+			_mag = _rocketInitV + _deltaV;
+		} else {
+			if (!_rocketBurnout) then {
+				// Main rocket acceleration
+				_deltaV = _acceleration * (time - _rocketStartedAt);
+				_mag = _rocketInitV + _deltaV;
+			} else {
+				// No thrust -- deceleration from drag.
+				_deltaV = _drag * (time - (_rocketStartedAt + _rocketLife));
+				_mag = _mag + _deltaV;
+			};
+		};
+
+		// Drop from gravity
+		_gravity = 0;
+		// Slight, increasing drop even in 'flattened trajectory'
+		if (_rocketBurnout) then {
+			_gravity = 0.000018 * ((time - _launchTime) * 1.9);
+		};
+		_dropTime = (time - _launchTime);
+		_modZ = _gravity * (time - _launchTime);
+		_currentVector = [_currentVector select 0, _currentVector select 1, (_currentVector select 2) - _gravity];
+
+		// Calculate the velocity vector for the missile
+		if (_mag < 0) then {_mag = 0};
+		_velocity = [_currentVector, _mag] call BIS_fnc_vectorMultiply;
+
+		// Set velocity
+		_missile setVelocity _velocity;
+
+		// Set the missile's pitch and yaw (visual meaning only)
+		// Get a vector to a position just ahead of the missile's flight path
+		_pitchVector = [_currentVector, [_currentVector, 3] call BIS_fnc_vectorMultiply] call BIS_fnc_vectorFromXtoY;
+
+		_currentYaw = getDir _missile;
+		_adjustedYaw = _pitchVector call CBA_fnc_vectDir; // Direction to the future position
+		_missile setDir _adjustedYaw;
+
+		_vDir = [_pitchVector, _adjustedYaw] call BIS_fnc_rotateVector2D; // Rotate vector for north normalizing
+		_pitch = atan ((_vDir select 2) / (_vDir select 1)); // Pitch to future position
+
+		[_missile, _pitch,  0] call BIS_fnc_setPitchBank;
 
 		// Netsync position
 		if (alive _missile) then {
@@ -492,14 +471,14 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 		_startExecTime = time;
 	}, 
 	/* Parameters */
-	[_missile, _lineOfSight, _targetVector, _launcherAcceleration, _rocketInitTime, _rocketLife, _rocketInitV, _acceleration, _drag, _flyUpDistance, _flyUpHeight, _launchPos, _launchPosASL, _launchTime, _efpSpeed, _efpType, _efpMissileExplodeType, _hasEFP, _weaponType],
+	[_missile, _lineOfSight, _lineOfSight, _launcherAcceleration, _rocketInitTime, _rocketLife, _rocketInitV, _acceleration, _drag, _flyUpDistance, _flyUpHeight, _launchPos, _launchPosASL, _launchTime, _efpSpeed, _efpType, _efpMissileExplodeType, _hasEFP, _weaponType],
 	/* Delay */
 	0,
 	/* Initialization */
 	{
 		_missile = _this select 0;
 		_currentVector = _this select 1; // Line of sight
-		_targetVector = _this select 2;
+		_targetVector = _this select 2; // Deprecated!
 		_launcherAcceleration = _this select 3;
 		_rocketInitTime = _this select 4;
 		_rocketLife = _this select 5;
@@ -516,6 +495,26 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 		_efpMissileExplodeType = _this select 16;
 		_hasEFP = _this select 17;
 		_weaponType = _this select 18;
+
+		//_deltaXOverTAverage = tmr_nlaw_deltaXOverTAverage;
+		//_deltaYOverTAverage = tmr_nlaw_deltaYOverTAverage;
+		//_deltaZOverTAverage = tmr_nlaw_deltaZOverTAverage;
+		if (tmr_nlaw_trackCount > 0) then {
+			_deltaXOverTAverage = tmr_nlaw_deltaXOverTSum / tmr_nlaw_trackCount;
+			_deltaYOverTAverage = tmr_nlaw_deltaYOverTSum / tmr_nlaw_trackCount;
+			_deltaZOverTAverage = tmr_nlaw_deltaZOverTSum / tmr_nlaw_trackCount;
+
+			// Reset the values now that we have them.
+			tmr_nlaw_deltaXOverTSum = 0;
+			tmr_nlaw_deltaYOverTSum = 0;
+			tmr_nlaw_deltaZOverTSum = 0;
+			tmr_nlaw_trackCount = 0;
+		};
+		_initialVector = _this select 1; // Line of sight
+
+		tmr_nlaw_deltaXOverTAverage = 0;
+		tmr_nlaw_deltaYOverTAverage = 0;
+		tmr_nlaw_deltaZOverTAverage = 0;
 
 		// Tracked in this loop only
 		_fireEFP = false;
@@ -546,7 +545,7 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 	/* Exit condition */
 	{!alive _missile || _fireEFP}, 
 	/* Private variables */
-	["_missile", "_currentVector", "_targetVector", "_launcherAcceleration", "_rocketInitTime", "_rocketLife",  "_rocketStartedAt", "_rocketInitV", "_acceleration", "_drag", "_flyUpDistance", "_flyUpHeight", "_launchPos", "_launchPosASL", "_launchTime", "_fireEFP", "_rocketActive", "_rocketBurnout", "_maxV", "_mag", "_dropVector",  "_startExecTime", "_efpSpeed", "_efpType", "_efpMissileExplodeType", "_hasEFP", "_missilePos", "_weaponType"]
+	["_missile", "_currentVector", "_targetVector", "_launcherAcceleration", "_rocketInitTime", "_rocketLife",  "_rocketStartedAt", "_rocketInitV", "_acceleration", "_drag", "_flyUpDistance", "_flyUpHeight", "_launchPos", "_launchPosASL", "_launchTime", "_fireEFP", "_rocketActive", "_rocketBurnout", "_maxV", "_mag", "_dropVector",  "_startExecTime", "_efpSpeed", "_efpType", "_efpMissileExplodeType", "_hasEFP", "_missilePos", "_weaponType", "_deltaXOverTAverage", "_deltaYOverTAverage", "_deltaZOverTAverage", "_initialVector"]
 	] call cba_common_fnc_addPerFrameHandlerLogic;
 
 };
@@ -561,9 +560,8 @@ tmr_nlaw_fnc_track = {
 	player setVariable ["tmr_nlaw_deltaDirOverTAverage", 0];
 	player setVariable ["tmr_nlaw_deltaElevOverTAverage", 0];
 
-	_trackingPeriod = 0.2; // Collect data every x seconds
-
-	_tracking = true;
+	// Let player 'settle' after pressing the track button
+	sleep 0.2;
 
 	// Huge public event handler follows.
 	_handle = [
@@ -581,24 +579,7 @@ tmr_nlaw_fnc_track = {
 
 		// Where we end up~
 		_currentVector = _unit weaponDirection (currentWeapon _unit);
-		//player sidechat format ["Cur: %1", _currentVector];
 
-		//hintSilent format ["DeltaT: %1", _deltaT];
-
-		// Polar bad because of oVDir 358, cvDir 2 means huge delta.
-		// Convert to polar because it's easier for my brain...
-		//_oVPolar = _oldVector call CBA_fnc_vect2polar;
-		//_cVpolar = _currentVector call CBA_fnc_vect2polar;
-
-		//_ovDir = _ovPolar select 1;
-		//_ovElev = _ovPolar select 2;
-
-		//_cvDir = _cvPolar select 1;
-		//_cvElev = _cvPolar select 2;
-
-		// Get the delta over time
-		//_deltaDirOverT = (_cvDir - _ovDir) / _trackingPeriod;
-		//_deltaElevOverT = (_cvElev - _ovElev) / _trackingPeriod;
 
 		_diff = [_oldVector, _currentVector] call BIS_fnc_vectorDiff;
 
@@ -608,23 +589,31 @@ tmr_nlaw_fnc_track = {
 		_deltaZOverT = (_diff select 2) / _deltaT;
 
 		// Dampen jerky movements in later tracking.
-		if (_runTime > 0.75) then {
-			if ( abs (_deltaXOverT - tmr_nlaw_deltaXOverTAverage) > (tmr_nlaw_deltaXOverTAverage / 1.9)) then {
-				_deltaXOverT = _deltaXOverT - (_deltaXOverT - tmr_nlaw_deltaXOverTAverage) / 1.9;
+		/*
+		if (_runTime > 1) then {
+			if ( abs (_deltaXOverT - tmr_nlaw_deltaXOverTAverage) > (tmr_nlaw_deltaXOverTAverage / 1.4)) then {
+				_deltaXOverT = _deltaXOverT - (_deltaXOverT - tmr_nlaw_deltaXOverTAverage) / 1.4;
 			};
-			if ( abs (_deltaYOverT - tmr_nlaw_deltaYOverTAverage) > (tmr_nlaw_deltaYOverTAverage / 1.9)) then {
-				_deltaYOverT = _deltaYOverT - (_deltaYOverT - tmr_nlaw_deltaYOverTAverage) / 1.9;
+			if ( abs (_deltaYOverT - tmr_nlaw_deltaYOverTAverage) > (tmr_nlaw_deltaYOverTAverage / 1.4)) then {
+				_deltaYOverT = _deltaYOverT - (_deltaYOverT - tmr_nlaw_deltaYOverTAverage) / 1.4;
 			};
 			// Z-dampening is more aggressive
-			if ( abs (_deltaZOverT - tmr_nlaw_deltaZOverTAverage) > (tmr_nlaw_deltaZOverTAverage / 1.9)) then {
-				_deltaZOverT = _deltaZOverT - (_deltaZOverT - tmr_nlaw_deltaZOverTAverage) / 1.9;
+			if ( abs (_deltaZOverT - tmr_nlaw_deltaZOverTAverage) > (tmr_nlaw_deltaZOverTAverage / 1.1)) then {
+				_deltaZOverT = _deltaZOverT - (_deltaZOverT - tmr_nlaw_deltaZOverTAverage) / 1.1;
 			};
-		};
+		};*/
+		
 
 		// Average into current data for whole tracking sequence
 		tmr_nlaw_deltaXOverTAverage = (tmr_nlaw_deltaXOverTAverage + _deltaXOverT) / 2;
 		tmr_nlaw_deltaYOverTAverage = (tmr_nlaw_deltaYOverTAverage + _deltaYOverT) / 2;
 		tmr_nlaw_deltaZOverTAverage = (tmr_nlaw_deltaZOverTAverage + _deltaZOverT) / 2;
+
+		tmr_nlaw_deltaXOverTSum = tmr_nlaw_deltaXOverTSum + _deltaXOverT;
+		tmr_nlaw_deltaYOverTSum = tmr_nlaw_deltaYOverTSum + _deltaYOverT;
+		tmr_nlaw_deltaZOverTSum = tmr_nlaw_deltaZOverTSum + _deltaZOverT;
+		tmr_nlaw_trackCount = tmr_nlaw_trackCount + 1;
+
 
 		// Store the old vector for next computation.
 		_oldVector = _unit weaponDirection (currentWeapon _unit);
@@ -646,6 +635,11 @@ tmr_nlaw_fnc_track = {
 		tmr_nlaw_deltaYOverTAverage = 0;
 		tmr_nlaw_deltaZOverTAverage = 0;
 
+		tmr_nlaw_deltaXOverTSum = 0;
+		tmr_nlaw_deltaYOverTSum = 0;
+		tmr_nlaw_deltaZOverTSum = 0;
+		tmr_nlaw_trackCount = 0;
+
 		// Get first vector.
 		_oldVector = _unit weaponDirection (currentWeapon _unit);
 		_oldTime = time;
@@ -655,11 +649,11 @@ tmr_nlaw_fnc_track = {
 	/* On exit, do...*/
 	{
 		// Empty deltas if we left tracking mode.
-		if (tmr_nlaw_trackingMode != 1) then {
-			tmr_nlaw_deltaXOverTAverage = 0;
-			tmr_nlaw_deltaYOverTAverage = 0;
-			tmr_nlaw_deltaZOverTAverage = 0;
-		};
+		//if (tmr_nlaw_trackingMode != 1) then {
+		//	tmr_nlaw_deltaXOverTAverage = 0;
+		//	tmr_nlaw_deltaYOverTAverage = 0;
+		//	tmr_nlaw_deltaZOverTAverage = 0;
+		//};
 	}, 
 	/* Run condition */
 	{true},
