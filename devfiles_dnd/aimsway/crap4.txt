@@ -1,0 +1,692 @@
+	class Default {
+		aimPrecision = 1;
+
+};
+class AidlPercMstpSrasWrflDnon_G0S;
+		class AmovPercMstpSrasWrflDnon_turnL : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 2;
+
+};
+		class AmovPercMstpSrasWrflDnon_turnR : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 2;
+
+};
+		class AmovPercMstpSrasWrflDnon_AadjPercMstpSrasWrflDup : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 1.0;
+
+};
+		class AmovPercMstpSrasWrflDnon_AadjPercMstpSrasWrflDdown : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 1.0;
+
+};
+		class AmovPercMstpSrasWrflDnon_AadjPercMstpSrasWrflDleft : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 1.0;
+
+};
+		class AmovPercMstpSrasWrflDnon_AadjPercMstpSrasWrflDright : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 1.0;
+
+};
+		class AadjPercMstpSrasWrflDup : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 1.0;
+
+};
+class AmovPercMstpSlowWrflDnon;
+		class AmovPknlMstpSlowWrflDnon : AmovPercMstpSlowWrflDnon {
+			aimPrecision = 0.55;
+
+};
+class AmovPknlMstpSlowWrflDnon;
+		class AmovPknlMstpSlowWrflDnon_relax : AmovPknlMstpSlowWrflDnon {
+			aimPrecision = 0.5;
+
+};
+class AmovPknlMstpSrasWrflDnon;
+		class AmovPknlMstpSrasWrflDnon_turnL : AmovPknlMstpSrasWrflDnon {
+			aimPrecision = 2.5;
+
+};
+		class AmovPknlMstpSrasWrflDnon_turnR : AmovPknlMstpSrasWrflDnon {
+			aimPrecision = 2.5;
+
+};
+class AmovPercMstpSrasWrflDnon;
+		class AmovPpneMstpSrasWrflDnon : AmovPercMstpSrasWrflDnon {
+			aimPrecision = 0.1;
+
+};
+class AidlPpneMstpSrasWrflDnon_G0S;
+		class AmovPpneMstpSrasWrflDnon_relax : AidlPpneMstpSrasWrflDnon_G0S {
+			aimPrecision = 0.3;
+
+};
+class AgonyBaseRfl;
+		class AmovPpneMstpSrasWrflDnon_injured : AgonyBaseRfl {
+			aimPrecision = 2;
+
+};
+		class AmovPpneMstpSrasWrflDnon_turnL : AidlPpneMstpSrasWrflDnon_G0S {
+			aimPrecision = 4;
+
+};
+		class AmovPpneMstpSrasWrflDnon_turnR : AidlPpneMstpSrasWrflDnon_G0S {
+			aimPrecision = 4;
+
+};
+class AmovPercMstpSrasWpstDnon;
+		class AmovPercMstpSrasWpstDnon_AadjPercMstpSrasWpstDup : AmovPercMstpSrasWpstDnon {
+			aimprecision = 1.0;
+
+};
+		class AmovPercMstpSrasWpstDnon_AadjPercMstpSrasWpstDdown : AmovPercMstpSrasWpstDnon {
+			aimprecision = 1.0;
+
+};
+		class AmovPercMstpSrasWpstDnon_AadjPercMstpSrasWpstDleft : AmovPercMstpSrasWpstDnon {
+			aimprecision = 1.0;
+
+};
+		class AmovPercMstpSrasWpstDnon_AadjPercMstpSrasWpstDright : AmovPercMstpSrasWpstDnon {
+			aimprecision = 1.0;
+
+};
+		class AadjPercMstpSrasWpstDup : AmovPercMstpSrasWpstDnon {
+			aimPrecision = 1.0;
+
+};
+		class AmovPercMstpSrasWpstDnon_turnL : AmovPercMstpSrasWpstDnon {
+			aimPrecision = 2;
+
+};
+		class AmovPercMstpSrasWpstDnon_turnR : AmovPercMstpSrasWpstDnon {
+			aimPrecision = 2;
+
+};
+class AmovPknlMstpSrasWpstDnon;
+		class AmovPcrhMstpSrasWpstDnon_AadjPcrhMstpSrasWpstDup : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 1.05;
+
+};
+		class AmovPcrhMstpSrasWpstDnon_AadjPcrhMstpSrasWpstDdown : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 1.05;
+
+};
+		class AmovPcrhMstpSrasWpstDnon_AadjPcrhMstpSrasWpstDleft : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 1.05;
+
+};
+		class AmovPcrhMstpSrasWpstDnon_AadjPcrhMstpSrasWpstDright : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 1.05;
+
+};
+		class AadjPcrhMstpSrasWpstDup : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 1.05;
+
+};
+		class AmovPknlMstpSrasWpstDnon_AadjPknlMstpSrasWpstDup : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 0.55;
+
+};
+		class AmovPknlMstpSrasWpstDnon_AadjPknlMstpSrasWpstDdown : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 0.55;
+
+};
+		class AmovPknlMstpSrasWpstDnon_AadjPknlMstpSrasWpstDleft : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 0.55;
+
+};
+		class AmovPknlMstpSrasWpstDnon_AadjPknlMstpSrasWpstDright : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 0.55;
+
+};
+		class AadjPknlMstpSrasWpstDup : AmovPknlMstpSrasWpstDnon {
+			aimPrecision = 0.55;
+
+};
+class AmovPknlMwlkSlowWpstDf;
+		class AmovPknlMtacSlowWpstDf : AmovPknlMwlkSlowWpstDf {
+			aimPrecision = 3.0;
+
+};
+		class AmovPknlMstpSrasWpstDnon_turnL : AmovPknlMstpSrasWpstDnon {
+			aimPrecision = 3;
+
+};
+		class AmovPknlMstpSrasWpstDnon_turnR : AmovPknlMstpSrasWpstDnon {
+			aimPrecision = 3;
+
+};
+		class AmovPpneMstpSrasWpstDnon : AmovPercMstpSrasWpstDnon {
+			aimPrecision = 0.1;
+
+};
+class AidlPpneMstpSrasWpstDnon_G0S;
+		class AmovPpneMstpSrasWpstDnon_turnL : AidlPpneMstpSrasWpstDnon_G0S {
+			aimPrecision = 4;
+
+};
+		class AmovPpneMstpSrasWpstDnon_turnR : AidlPpneMstpSrasWpstDnon_G0S {
+			aimPrecision = 4;
+
+};
+class Default;
+		class AmovPknlMstpSrasWlnrDnon : Default {
+			aimPrecision = 0.55;
+
+};
+class AidlPknlMstpSrasWlnrDnon_G0S;
+		class AmovPknlMstpSrasWlnrDnon_turnL : AidlPknlMstpSrasWlnrDnon_G0S {
+			aimPrecision = 3;
+
+};
+		class AmovPknlMstpSrasWlnrDnon_turnR : AidlPknlMstpSrasWlnrDnon_G0S {
+			aimPrecision = 3;
+
+};
+class amovppnemstpsraswlnrdnon;
+		class amovppnemstpsraswlnrdnon_turnl : amovppnemstpsraswlnrdnon {
+			aimPrecision = 4;
+
+};
+		class amovppnemstpsraswlnrdnon_turnr : amovppnemstpsraswlnrdnon {
+			aimPrecision = 4;
+
+};
+		class AmovPercMwlkSlowWrflDf : AmovPercMstpSlowWrflDnon {
+			aimPrecision = 3.0;
+
+};
+		class AmovPercMwlkSrasWrflDf : AmovPercMstpSrasWrflDnon {
+			aimPrecision = 1.5;
+
+};
+class AmovPercMwlkSrasWrflDf;
+		class AmovPercMtacSrasWrflDf : AmovPercMwlkSrasWrflDf {
+			aimPrecision = 3.0;
+
+};
+		class AmovPercMrunSrasWrflDf : AmovPercMstpSrasWrflDnon {
+			aimPrecision = 5;
+
+};
+class AidlPknlMstpSlowWpstDnon_G0S;
+		class AmovPknlMwlkSlowWrflDf : AidlPknlMstpSlowWpstDnon_G0S {
+			aimPrecision = 1.65;
+
+};
+class AmovPknlMrunSlowWrflDf;
+		class AmovPknlMtacSlowWrflDf : AmovPknlMrunSlowWrflDf {
+			aimPrecision = 1.65;
+
+};
+class AmovPknlMrunSlowWrflDfl;
+		class AmovPknlMtacSlowWrflDfl : AmovPknlMrunSlowWrflDfl {
+			aimPrecision = 1.65;
+
+};
+class AmovPknlMrunSlowWrflDl;
+		class AmovPknlMtacSlowWrflDl : AmovPknlMrunSlowWrflDl {
+			aimPrecision = 1.65;
+
+};
+class AmovPknlMrunSlowWrflDbl;
+		class AmovPknlMtacSlowWrflDbl : AmovPknlMrunSlowWrflDbl {
+			aimPrecision = 1.65;
+
+};
+class AmovPknlMrunSlowWrflDb;
+		class AmovPknlMtacSlowWrflDb : AmovPknlMrunSlowWrflDb {
+			aimPrecision = 1.65;
+
+};
+class AmovPknlMrunSlowWrflDbr;
+		class AmovPknlMtacSlowWrflDbr : AmovPknlMrunSlowWrflDbr {
+			aimPrecision = 1.65;
+
+};
+class AmovPknlMrunSlowWrflDr;
+		class AmovPknlMtacSlowWrflDr : AmovPknlMrunSlowWrflDr {
+			aimPrecision = 1.65;
+
+};
+class AmovPknlMrunSlowWrflDfr;
+		class AmovPknlMtacSlowWrflDfr : AmovPknlMrunSlowWrflDfr {
+			aimPrecision = 1.65;
+
+};
+		class AmovPknlMwlkSrasWrflDf : AmovPknlMstpSrasWrflDnon {
+			aimPrecision = 1.2;
+
+};
+class AmovPknlMrunSrasWrflDf;
+		class AmovPknlMtacSrasWrflDf : AmovPknlMrunSrasWrflDf {
+			aimPrecision = 2.5;
+
+};
+		class AmovPercMwlkSrasWpstDf : AmovPercMstpSrasWpstDnon {
+			aimPrecision = 1.5;
+
+};
+class AmovPercMwlkSlowWpstDf;
+		class AmovPercMtacSlowWpstDf : AmovPercMwlkSlowWpstDf {
+			aimPrecision = 3.0;
+
+};
+class AmovPercMwlkSrasWpstDf;
+		class AmovPercMtacSrasWpstDf : AmovPercMwlkSrasWpstDf {
+			aimPrecision = 3.0;
+
+};
+		class AmovPknlMwlkSrasWpstDf : AmovPknlMstpSrasWpstDnon {
+			aimPrecision = 1.2;
+
+};
+class AmovPknlMwlkSrasWpstDf;
+		class AmovPknlMtacSrasWpstDf : AmovPknlMwlkSrasWpstDf {
+			aimPrecision = 2.5;
+
+};
+		class AmovPknlMwlkSrasWlnrDf : AidlPknlMstpSrasWlnrDnon_G0S {
+			aimPrecision = 1.5;
+
+};
+		class AmovPknlMtacSrasWlnrDf : AidlPknlMstpSrasWlnrDnon_G0S {
+			aimPrecision = 1.65;
+
+};
+class AmovPpneMstpSrasWrflDnon;
+		class AmovPincMstpSrasWrflDnon : AmovPpneMstpSrasWrflDnon {
+			aimPrecision = 0.3;
+
+};
+class WeaponMagazineReloadStand;
+		class WeaponMagazineReloadProne : WeaponMagazineReloadStand {
+			aimPrecision = 0.5;
+
+};
+class PistolMagazineReloadStand;
+		class PistolMagazineReloadProne : PistolMagazineReloadStand {
+			aimPrecision = 0.5;
+
+};
+class AadjPknlMstpSrasWrflDdown;
+		class AadjPpneMstpSrasWrflDup_AadjPknlMstpSrasWrflDdown : AadjPknlMstpSrasWrflDdown {
+			aimPrecision = 0.55;
+
+};
+class AadjPpneMstpSrasWrflDup;
+		class AadjPknlMstpSrasWrflDdown_AadjPpneMstpSrasWrflDup : AadjPpneMstpSrasWrflDup {
+			aimPrecision = 0.1;
+
+};
+class TransAnimBase;
+		class AmovPercMstpSrasWlnrDnon_AmovPpneMstpSrasWlnrDnon : TransAnimBase {
+			aimPrecision = 0.1;
+
+};
+		class AmovPercMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon : AmovPpneMstpSrasWrflDnon {
+			aimPrecision = 0.1;
+
+};
+		class AmovPknlMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon : AmovPpneMstpSrasWrflDnon {
+			aimPrecision = 0.1;
+
+};
+class amovpercmstpsraswrfldnon_amovpercmstpsraswlnrdnon;
+		class AmovPknlMstpSrasWrflDnon_AmovPknlMstpSrasWlnrDnon : amovpercmstpsraswrfldnon_amovpercmstpsraswlnrdnon {
+			aimPrecision = 0.55;
+
+};
+class AmovPercMstpSrasWrflDnon_AmovPercMstpSrasWlnrDnon_end;
+		class AmovPknlMstpSrasWrflDnon_AmovPknlMstpSrasWlnrDnon_end : AmovPercMstpSrasWrflDnon_AmovPercMstpSrasWlnrDnon_end {
+			aimPrecision = 0.55;
+
+};
+class amovpercmstpsraswlnrdnon_amovpercmstpsraswrfldnon;
+		class AmovPknlMstpSrasWlnrDnon_AmovPknlMstpSrasWrflDnon : amovpercmstpsraswlnrdnon_amovpercmstpsraswrfldnon {
+			aimPrecision = 0.55;
+
+};
+class amovpercmstpsraswlnrdnon_amovpercmstpsraswrfldnon_end;
+		class AmovPknlMstpSrasWlnrDnon_AmovPknlMstpSrasWrflDnon_end : amovpercmstpsraswlnrdnon_amovpercmstpsraswrfldnon_end {
+			aimPrecision = 0.55;
+
+};
+class AmovPercMevaSrasWrflDf;
+		class AmovPercMevaSlowWrflDfl : AmovPercMevaSrasWrflDf {
+			aimPrecision = 3.0;
+
+};
+		class AdvePercMstpSnonWrflDnon : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 1.7;
+
+};
+		class AsdvPercMstpSnonWrflDnon : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 1.7;
+
+};
+		class AbdvPercMstpSnonWrflDnon : AidlPercMstpSrasWrflDnon_G0S {
+			aimPrecision = 1.7;
+
+};
+class AdvePercMstpSnonWrflDnon;
+		class AdvePercMstpSnonWrflDnon_AdvePercMstpSnonWnonDnon : AdvePercMstpSnonWrflDnon {
+			aimPrecision = 0.7;
+
+};
+class AdvePercMstpSnonWnonDnon;
+		class AdvePercMstpSnonWnonDnon_AdvePercMstpSnonWrflDnon : AdvePercMstpSnonWnonDnon {
+			aimPrecision = 0.7;
+
+};
+class AbdvPercMstpSnonWnonDnon;
+		class AbdvPercMstpSnonWnonDnon_AbdvPercMstpSnonWrflDnon : AbdvPercMstpSnonWnonDnon {
+			aimPrecision = 0.7;
+
+};
+class AsdvPercMstpSnonWrflDnon;
+		class AsdvPercMstpSnonWrflDnon_AsdvPercMstpSnonWnonDnon : AsdvPercMstpSnonWrflDnon {
+			aimPrecision = 0.7;
+
+};
+class AsdvPercMstpSnonWnonDnon;
+		class AsdvPercMstpSnonWnonDnon_AsdvPercMstpSnonWrflDnon : AsdvPercMstpSnonWnonDnon {
+			aimPrecision = 0.7;
+
+};
+		class AwopPercMstpSoptWbinDnon_rfl : AmovPercMstpSlowWrflDnon {
+			aimprecision = 2;
+
+};
+class AwopPercMstpSoptWbinDnon_rfl;
+		class AmovPercMwlkSoptWbinDf_rfl : AwopPercMstpSoptWbinDnon_rfl {
+			aimprecision = 2.5;
+
+};
+		class AwopPknlMstpSoptWbinDnon_rfl : AmovPknlMstpSrasWrflDnon {
+			aimprecision = 0.5;
+
+};
+class AwopPknlMstpSoptWbinDnon_rfl;
+		class AmovPknlMwlkSoptWbinDf_rfl : AwopPknlMstpSoptWbinDnon_rfl {
+			aimprecision = 2.5;
+
+};
+		class AwopPpneMstpSoptWbinDnon_rfl : AmovPpneMstpSrasWrflDnon {
+			aimprecision = 0.05;
+
+};
+class AwopPpneMstpSoptWbinDnon_rfl;
+		class AmovPpneMwlkSoptWbinDf_rfl : AwopPpneMstpSoptWbinDnon_rfl {
+			aimprecision = 2.5;
+
+};
+		class AwopPercMstpSoptWbinDnon_pst : AmovPercMstpSlowWrflDnon {
+			aimprecision = 2;
+
+};
+class AwopPercMstpSoptWbinDnon_pst;
+		class AmovPercMwlkSoptWbinDf_pst : AwopPercMstpSoptWbinDnon_pst {
+			aimprecision = 2.5;
+
+};
+		class AwopPknlMstpSoptWbinDnon_pst : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 0.5;
+
+};
+class AwopPknlMstpSoptWbinDnon_pst;
+		class AmovPknlMwlkSoptWbinDf_pst : AwopPknlMstpSoptWbinDnon_pst {
+			aimprecision = 2.5;
+
+};
+class AmovPpneMstpSrasWpstDnon;
+		class AwopPpneMstpSoptWbinDnon_pst : AmovPpneMstpSrasWpstDnon {
+			aimprecision = 0.05;
+
+};
+class AwopPpneMstpSoptWbinDnon_pst;
+		class AmovPpneMwlkSoptWbinDf_pst : AwopPpneMstpSoptWbinDnon_pst {
+			aimprecision = 2.5;
+
+};
+		class AwopPercMstpSoptWbinDnon_lnr : AmovPercMstpSlowWrflDnon {
+			aimprecision = 2;
+
+};
+class AwopPercMstpSoptWbinDnon_lnr;
+		class AmovPercMwlkSoptWbinDf_lnr : AwopPercMstpSoptWbinDnon_lnr {
+			aimprecision = 2.5;
+
+};
+class AmovPknlMstpSrasWlnrDnon;
+		class AwopPknlMstpSoptWbinDnon_lnr : AmovPknlMstpSrasWlnrDnon {
+			aimprecision = 0.5;
+
+};
+class AwopPknlMstpSoptWbinDnon_lnr;
+		class AmovPknlMwlkSoptWbinDf_lnr : AwopPknlMstpSoptWbinDnon_lnr {
+			aimprecision = 2.5;
+
+};
+		class AwopPpneMstpSoptWbinDnon_lnr : amovppnemstpsraswlnrdnon {
+			aimprecision = 0.05;
+
+};
+class AwopPpneMstpSoptWbinDnon_lnr;
+		class AmovPpneMwlkSoptWbinDf_lnr : AwopPpneMstpSoptWbinDnon_lnr {
+			aimprecision = 2.5;
+
+};
+		class AwopPercMstpSoptWbinDnon_non : AmovPercMstpSlowWrflDnon {
+			aimprecision = 2;
+
+};
+class AwopPercMstpSoptWbinDnon_non;
+		class AmovPercMwlkSoptWbinDf_non : AwopPercMstpSoptWbinDnon_non {
+			aimprecision = 2.5;
+
+};
+		class AwopPknlMstpSoptWbinDnon_non : AmovPknlMstpSrasWpstDnon {
+			aimprecision = 0.5;
+
+};
+class AwopPknlMstpSoptWbinDnon_non;
+		class AmovPknlMwlkSoptWbinDf_non : AwopPknlMstpSoptWbinDnon_non {
+			aimprecision = 2.5;
+
+};
+		class AwopPpneMstpSoptWbinDnon_non : AmovPpneMstpSrasWpstDnon {
+			aimprecision = 0.05;
+
+};
+class AwopPpneMstpSoptWbinDnon_non;
+		class AmovPpneMwlkSoptWbinDf_non : AwopPpneMstpSoptWbinDnon_non {
+			aimprecision = 2.5;
+
+};
+class AmovPercMstpSlowWrflDnon_AcinPknlMwlkSlowWrflDb_1;
+		class AcinPknlMstpSrasWrflDnon : AmovPercMstpSlowWrflDnon_AcinPknlMwlkSlowWrflDb_1 {
+			aimPrecision = 3.0;
+
+};
+		class AcinPknlMwlkSrasWrflDb : AmovPercMstpSlowWrflDnon_AcinPknlMwlkSlowWrflDb_1 {
+			aimPrecision = 5.0;
+
+};
+class InjuredMovedBase;
+		class AcinPercMrunSrasWrflDf : InjuredMovedBase {
+			aimPrecision = 5;
+
+};
+class AcinPknlMstpSrasWrflDnon_AcinPercMrunSrasWrflDnon;
+		class AcinPercMstpSrasWrflDnon : AcinPknlMstpSrasWrflDnon_AcinPercMrunSrasWrflDnon {
+			aimPrecision = 3.0;
+
+};
+class AgonyBase;
+		class AmovPpneMstpSnonWnonDnon_injured : AgonyBase {
+			aimPrecision = 2;
+
+};
+		class AcinPercMrunSnonWnonDf : InjuredMovedBase {
+			aimPrecision = 5;
+
+};
+class AcinPknlMstpSnonWnonDnon_AcinPercMrunSnonWnonDnon;
+		class AcinPercMstpSnonWnonDnon : AcinPknlMstpSnonWnonDnon_AcinPercMrunSnonWnonDnon {
+			aimPrecision = 5;
+
+};
+class AcinPercMstpSnonWnonDnon;
+		class AcinPercMstpSnonWpstDnon : AcinPercMstpSnonWnonDnon {
+			aimPrecision = 3.0;
+
+};
+class amovpercmstpsraswlnrdnon;
+		class amovpercmstpSlowwlnrdnon : amovpercmstpsraswlnrdnon {
+			aimPrecision = 1.0;
+
+};
+class amovpercmstpSlowwlnrdnon;
+		class AmovPercMwlkSlowWlnrDf : amovpercmstpSlowwlnrdnon {
+			aimPrecision = 3.0;
+
+};
+class AidlPercMstpSrasWlnrDnon_G0S;
+		class AmovPercMwlkSrasWlnrDf : AidlPercMstpSrasWlnrDnon_G0S {
+			aimPrecision = 3.0;
+
+};
+		class AmovPercMtacSrasWlnrDf : AidlPercMstpSrasWlnrDnon_G0S {
+			aimPrecision = 3.0;
+
+};
+		class amovpercmstpsraswlnrdnon_turnl : amovpercmstpsraswlnrdnon {
+			aimPrecision = 2;
+
+};
+		class amovpercmstpSraswlnrdnon_turnr : amovpercmstpsraswlnrdnon {
+			aimPrecision = 2;
+
+};
+class AadjPknlMstpSrasWrflDleft;
+		class AadjPercMstpSrasWrflDleft_AadjPknlMstpSrasWrflDleft : AadjPknlMstpSrasWrflDleft {
+			aimPrecision = 0.55;
+
+};
+class AadjPknlMstpSrasWrflDright;
+		class AadjPercMstpSrasWrflDright_AadjPknlMstpSrasWrflDright : AadjPknlMstpSrasWrflDright {
+			aimPrecision = 0.55;
+
+};
+		class AadjPercMstpSrasWrflDdown_AadjPknlMstpSrasWrflDdown : AadjPknlMstpSrasWrflDdown {
+			aimPrecision = 0.55;
+
+};
+class AadjPknlMstpSrasWrflDup;
+		class AadjPercMstpSrasWrflDdown_AadjPknlMstpSrasWrflDup : AadjPknlMstpSrasWrflDup {
+			aimPrecision = 0.55;
+
+};
+		class AadjPercMstpSrasWrflDup_AadjPknlMstpSrasWrflDup : AadjPknlMstpSrasWrflDup {
+			aimPrecision = 0.55;
+
+};
+class AadjPknlMstpSrasWpstDleft;
+		class AadjPercMstpSrasWpstDleft_AadjPknlMstpSrasWpstDleft : AadjPknlMstpSrasWpstDleft {
+			aimPrecision = 0.55;
+
+};
+class AadjPknlMstpSrasWpstDright;
+		class AadjPercMstpSrasWpstDright_AadjPknlMstpSrasWpstDright : AadjPknlMstpSrasWpstDright {
+			aimPrecision = 0.55;
+
+};
+class AadjPknlMstpSrasWpstDdown;
+		class AadjPercMstpSrasWpstDdown_AadjPknlMstpSrasWpstDdown : AadjPknlMstpSrasWpstDdown {
+			aimPrecision = 0.55;
+
+};
+class AadjPknlMstpSrasWpstDup;
+		class AadjPercMstpSrasWpstDdown_AadjPknlMstpSrasWpstDup : AadjPknlMstpSrasWpstDup {
+			aimPrecision = 0.55;
+
+};
+		class AadjPercMstpSrasWpstDup_AadjPknlMstpSrasWpstDup : AadjPknlMstpSrasWpstDup {
+			aimPrecision = 0.55;
+
+};
+class AmovPercMrunSrasWrflDf;
+		class AmovPercMrunSrasWrflDf_AmovPercMrunSrasWrflDfr : AmovPercMrunSrasWrflDf {
+			aimPrecision = 2.0;
+
+};
+		class AmovPercMrunSrasWrflDf_AmovPercMrunSrasWrflDfl : AmovPercMrunSrasWrflDf {
+			aimPrecision = 2.0;
+
+};
+class AmovPercMrunSrasWrflDfl;
+		class AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDfr : AmovPercMrunSrasWrflDfl {
+			aimPrecision = 2.0;
+
+};
+		class AmovPercMrunSrasWrflDfl_AmovPercMrunSrasWrflDf : AmovPercMrunSrasWrflDfl {
+			aimPrecision = 2.0;
+
+};
+class AmovPercMrunSrasWrflDfr;
+		class AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDfl : AmovPercMrunSrasWrflDfr {
+			aimPrecision = 2.0;
+
+};
+		class AmovPercMrunSrasWrflDfr_AmovPercMrunSrasWrflDf : AmovPercMrunSrasWrflDfr {
+			aimPrecision = 2.0;
+
+};
+		class AfalPercMstpSrasWrflDnon : AmovPercMstpSrasWrflDnon {
+			aimPrecision = 7.0;
+
+};
+		class AfalPknlMstpSrasWrflDnon : AmovPknlMstpSrasWrflDnon {
+			aimPrecision = 7.0;
+
+};
+		class AfalPpneMstpSrasWrflDnon : AmovPpneMstpSrasWrflDnon {
+			aimPrecision = 7.0;
+
+};
+		class AfalPercMstpSrasWpstDnon : AmovPercMstpSrasWpstDnon {
+			aimPrecision = 7.0;
+
+};
+		class AfalPknlMstpSrasWpstDnon : AmovPknlMstpSrasWpstDnon {
+			aimPrecision = 7.0;
+
+};
+		class AfalPpneMstpSrasWpstDnon : AmovPpneMstpSrasWpstDnon {
+			aimPrecision = 7.0;
+
+};
+class AmovPercMstpSnonWnonDnon;
+		class AfalPercMstpSnonWnonDnon : AmovPercMstpSnonWnonDnon {
+			aimPrecision = 7.0;
+
+};
+class AmovPknlMstpSnonWnonDnon;
+		class AfalPknlMstpSnonWnonDnon : AmovPknlMstpSnonWnonDnon {
+			aimPrecision = 7.0;
+
+};
+class AmovPpneMstpSnonWnonDnon;
+		class AfalPpneMstpSnonWnonDnon : AmovPpneMstpSnonWnonDnon {
+			aimPrecision = 7.0;
+
+};
+		class AfalPercMstpSrasWlnrDnon : amovpercmstpsraswlnrdnon {
+			aimPrecision = 7.0;
+
+};
+		class AfalPknlMstpSrasWlnrDnon : AmovPknlMstpSrasWlnrDnon {
+			aimPrecision = 7.0;
+
+};
