@@ -149,9 +149,6 @@ tmr_nlaw_fnc_pcml_firedEH = {
 	// Because the optic on the PCML is boresighted rather than canted up slightly,
 	// the fly-up height is lower than it would otherwise be, I think.
 
-	// Flight time at which best accuracy is desired when using PLOS.
-	//_plosFlightTime = 1.2; 
-
 	// Call guidance code
 	[_unit, _missile, _weaponType, _lineOfSight, _launcherAcceleration, _rocketInitTime, _rocketLife, _rocketInitV, _acceleration, _drag, _flyUpDistance, _flyUpHeight, _plosFlightTime, _launchPos, _launchPosASL, _launchTime, _efpSpeed, _efpType, _efpMissileExplodeType, _hasEFP, _missileType] call tmr_nlaw_fnc_plosMissile_guidance;
 };

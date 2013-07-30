@@ -39,48 +39,50 @@ class Extended_FiredBIS_EventHandlers {
 	};
 };
 
+// Global muzzle climb increase
+#define TMR_MC 0.000024
 class CfgRecoils {
-	tmr_recoil_single_mx[] = 				{0, 0, 0,		0.020, 0.0115, 0.01570,		0.134, 0, -0.0065,		0.143, 0, 0};
-	tmr_recoil_auto_mx[] = 					{0, 0, 0,		0.020, 0.0115, 0.01620,		0.134, 0, -0.0065,		0.143, 0, 0};
-	tmr_recoil_single_prone_mx[] = 			{0, 0, 0,		0.020, 0.0104, 0.01000,		0.134, 0, -0.0044,		0.143, 0, 0};
-	tmr_recoil_auto_prone_mx[] = 			{0, 0, 0,		0.020, 0.0104, 0.01005,		0.134, 0, -0.0044,		0.143, 0, 0};
+	tmr_recoil_single_mx[] = 				{0, 0, 0,		0.020, 0.0115, 0.01572+TMR_MC,		0.134, 0, -0.0065,		0.143, 0, 0};
+	tmr_recoil_auto_mx[] = 					{0, 0, 0,		0.020, 0.0115, 0.01622+TMR_MC,		0.134, 0, -0.0065,		0.143, 0, 0};
+	tmr_recoil_single_prone_mx[] = 			{0, 0, 0,		0.020, 0.0104, 0.01002+TMR_MC,		0.134, 0, -0.0044,		0.143, 0, 0};
+	tmr_recoil_auto_prone_mx[] = 			{0, 0, 0,		0.020, 0.0104, 0.01007+TMR_MC,		0.134, 0, -0.0044,		0.143, 0, 0};
 
-	tmr_recoil_single_katiba[] = 			{0, 0, 0,		0.020, 0.0115, 0.01550,		0.134, 0, -0.0065,		0.143, 0, 0};
-	tmr_recoil_auto_katiba[] = 				{0, 0, 0,		0.020, 0.0115, 0.01590,		0.134, 0, -0.0065,		0.143, 0, 0};
-	tmr_recoil_single_prone_katiba[] = 		{0, 0, 0,		0.020, 0.0104, 0.00970,		0.134, 0, -0.0044,		0.143, 0, 0};
-	tmr_recoil_auto_prone_katiba[] = 		{0, 0, 0,		0.020, 0.0104, 0.00970,		0.134, 0, -0.0044,		0.143, 0, 0};
+	tmr_recoil_single_katiba[] = 			{0, 0, 0,		0.020, 0.0115, 0.01552+TMR_MC,		0.134, 0, -0.0065,		0.143, 0, 0};
+	tmr_recoil_auto_katiba[] = 				{0, 0, 0,		0.020, 0.0115, 0.01592+TMR_MC,		0.134, 0, -0.0065,		0.143, 0, 0};
+	tmr_recoil_single_prone_katiba[] = 		{0, 0, 0,		0.020, 0.0104, 0.00972+TMR_MC,		0.134, 0, -0.0044,		0.143, 0, 0};
+	tmr_recoil_auto_prone_katiba[] = 		{0, 0, 0,		0.020, 0.0104, 0.00972+TMR_MC,		0.134, 0, -0.0044,		0.143, 0, 0};
 
-	tmr_recoil_single_mk20[] = 				{0, 0, 0,		0.020, 0.0110, 0.01514,		0.132, 0, -0.0065,		0.141, 0, 0};
-	tmr_recoil_auto_mk20[] = 				{0, 0, 0,		0.020, 0.0110, 0.01519,		0.132, 0, -0.0065,		0.141, 0, 0};
-	tmr_recoil_single_prone_mk20[] = 		{0, 0, 0,		0.020, 0.0102, 0.00900,		0.132, 0, -0.0044,		0.141, 0, 0};
-	tmr_recoil_auto_prone_mk20[] = 			{0, 0, 0,		0.020, 0.0102, 0.00905,		0.132, 0, -0.0044,		0.141, 0, 0};
+	tmr_recoil_single_mk20[] = 				{0, 0, 0,		0.020, 0.0110, 0.01514+TMR_MC,		0.132, 0, -0.0065,		0.141, 0, 0};
+	tmr_recoil_auto_mk20[] = 				{0, 0, 0,		0.020, 0.0110, 0.01519+TMR_MC,		0.132, 0, -0.0065,		0.141, 0, 0};
+	tmr_recoil_single_prone_mk20[] = 		{0, 0, 0,		0.020, 0.0102, 0.00900+TMR_MC,		0.132, 0, -0.0044,		0.141, 0, 0};
+	tmr_recoil_auto_prone_mk20[] = 			{0, 0, 0,		0.020, 0.0102, 0.00905+TMR_MC,		0.132, 0, -0.0044,		0.141, 0, 0};
 
-	tmr_recoil_single_vermin[] = 			{0, 0, 0,		0.040, 0.0120, 0.01300,		0.129, 0, -0.0055,		0.138, 0, 0};
-	tmr_recoil_auto_vermin[] = 				{0, 0, 0,		0.040, 0.0120, 0.01300,		0.129, 0, -0.0055,		0.138, 0, 0};
-	tmr_recoil_single_prone_vermin[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800,		0.129, 0, -0.0034,		0.138, 0, 0};
-	tmr_recoil_auto_prone_vermin[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800,		0.129, 0, -0.0034,		0.138, 0, 0};
+	tmr_recoil_single_vermin[] = 			{0, 0, 0,		0.040, 0.0120, 0.01300+TMR_MC,		0.129, 0, -0.0055,		0.138, 0, 0};
+	tmr_recoil_auto_vermin[] = 				{0, 0, 0,		0.040, 0.0120, 0.01300+TMR_MC,		0.129, 0, -0.0055,		0.138, 0, 0};
+	tmr_recoil_single_prone_vermin[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_MC,		0.129, 0, -0.0034,		0.138, 0, 0};
+	tmr_recoil_auto_prone_vermin[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_MC,		0.129, 0, -0.0034,		0.138, 0, 0};
 
-	tmr_recoil_single_skorpion[] = 			{0, 0, 0,		0.040, 0.0109, 0.01460,		0.129, 0, -0.0055,		0.138, 0, 0};
-	tmr_recoil_auto_skorpion[] = 			{0, 0, 0,		0.040, 0.0109, 0.01460,		0.129, 0, -0.0055,		0.138, 0, 0};
-	tmr_recoil_single_prone_skorpion[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800,		0.129, 0, -0.0034,		0.138, 0, 0};
-	tmr_recoil_auto_prone_skorpion[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800,		0.129, 0, -0.0034,		0.138, 0, 0};
+	tmr_recoil_single_skorpion[] = 			{0, 0, 0,		0.040, 0.0109, 0.01460+TMR_MC,		0.129, 0, -0.0055,		0.138, 0, 0};
+	tmr_recoil_auto_skorpion[] = 			{0, 0, 0,		0.040, 0.0109, 0.01460+TMR_MC,		0.129, 0, -0.0055,		0.138, 0, 0};
+	tmr_recoil_single_prone_skorpion[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_MC,		0.129, 0, -0.0034,		0.138, 0, 0};
+	tmr_recoil_auto_prone_skorpion[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_MC,		0.129, 0, -0.0034,		0.138, 0, 0};
 
-	tmr_recoil_auto_mk200[] = 				{0, 0, 0,		0.043, 0.0120, 0.01690,		0.112, 0, -0.0065,		0.121, 0, 0};
-	tmr_recoil_auto_prone_mk200[] = 		{0, 0, 0,		0.043, 0.0104, 0.00960,		0.112, 0, -0.0044,		0.121, 0, 0};
+	tmr_recoil_auto_mk200[] = 				{0, 0, 0,		0.043, 0.0120, 0.01690+TMR_MC,		0.112, 0, -0.0065,		0.121, 0, 0};
+	tmr_recoil_auto_prone_mk200[] = 		{0, 0, 0,		0.043, 0.0104, 0.00960+TMR_MC,		0.112, 0, -0.0044,		0.121, 0, 0};
 
-	tmr_recoil_auto_zafir[] = 				{0, 0, 0,		0.040, 0.0140, 0.02570,		0.122, 0, -0.0065,		0.131, 0, 0};
-	tmr_recoil_auto_prone_zafir[] = 		{0, 0, 0,		0.040, 0.0120, 0.01230,		0.122, 0, -0.0044,		0.131, 0, 0};
+	tmr_recoil_auto_zafir[] = 				{0, 0, 0,		0.040, 0.0140, 0.02570+TMR_MC,		0.122, 0, -0.0065,		0.131, 0, 0};
+	tmr_recoil_auto_prone_zafir[] = 		{0, 0, 0,		0.040, 0.0120, 0.01230+TMR_MC,		0.122, 0, -0.0044,		0.131, 0, 0};
 
-	tmr_recoil_single_ebr[] = 				{0, 0, 0,		0.040, 0.0140, 0.02600,		0.132, 0, -0.0065,		0.138, 0, 0};
-	tmr_recoil_auto_ebr[] = 				{0, 0, 0,		0.040, 0.0140, 0.02750,		0.132, 0, -0.0065,		0.138, 0, 0};
-	tmr_recoil_single_prone_ebr[] = 		{0, 0, 0,		0.040, 0.0120, 0.01150,		0.132, 0, -0.0044,		0.138, 0, 0};
-	tmr_recoil_auto_prone_ebr[] = 			{0, 0, 0,		0.040, 0.0120, 0.01350,		0.132, 0, -0.0044,		0.138, 0, 0};
+	tmr_recoil_single_ebr[] = 				{0, 0, 0,		0.040, 0.0140, 0.02600+TMR_MC,		0.132, 0, -0.0065,		0.138, 0, 0};
+	tmr_recoil_auto_ebr[] = 				{0, 0, 0,		0.040, 0.0140, 0.02750+TMR_MC,		0.132, 0, -0.0065,		0.138, 0, 0};
+	tmr_recoil_single_prone_ebr[] = 		{0, 0, 0,		0.040, 0.0120, 0.01150+TMR_MC,		0.132, 0, -0.0044,		0.138, 0, 0};
+	tmr_recoil_auto_prone_ebr[] = 			{0, 0, 0,		0.040, 0.0120, 0.01350+TMR_MC,		0.132, 0, -0.0044,		0.138, 0, 0};
 
-	tmr_recoil_single_lrr[] = 				{0, 0, 0,		0.010, 0.0350, 0.10000,								0.260, 0, 0};
-	tmr_recoil_single_prone_lrr[] = 		{0, 0, 0,		0.010, 0.0310, 0.03300,		0.170, 0, -0.0090,		0.260, 0, 0};
+	tmr_recoil_single_lrr[] = 				{0, 0, 0,		0.010, 0.0350, 0.10000+TMR_MC,								0.260, 0, 0};
+	tmr_recoil_single_prone_lrr[] = 		{0, 0, 0,		0.010, 0.0310, 0.03300+TMR_MC,		0.170, 0, -0.0090,		0.260, 0, 0};
 
-	tmr_recoil_single_gm6[] = 				{0, 0, 0,		0.010, 0.0350, 0.10000,		0.260, 0, 0};
-	tmr_recoil_single_prone_gm6[] = 		{0, 0, 0,		0.010, 0.0310, 0.03300,		0.260, 0, 0};
+	tmr_recoil_single_gm6[] = 				{0, 0, 0,		0.010, 0.0350, 0.10000+TMR_MC,		0.260, 0, 0};
+	tmr_recoil_single_prone_gm6[] = 		{0, 0, 0,		0.010, 0.0310, 0.03300+TMR_MC,		0.260, 0, 0};
 };
 
 class CfgCameraShake {
@@ -88,6 +90,9 @@ class CfgCameraShake {
 	defaultCaliberCoefWeaponFire = 0;
 };
 
+
+
+// Completely disable BI's camshake on fire.
 #define TMR_CAMSHAKEFIRE_BASE 0
 #define TMR_CAMSHAKEFIRE_LESS 0
 #define TMR_CAMSHAKEFIRE_MORE 0
@@ -191,7 +196,7 @@ class CfgWeapons {
 	};
 
 	class mk20_base_F : Rifle_Base_F {
-		tmr_recoil_shakeMultiplier = 0.8;
+		tmr_recoil_shakeMultiplier = 0.9;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_mk20";
 			recoilProne = "tmr_recoil_single_prone_mk20";
@@ -204,7 +209,7 @@ class CfgWeapons {
 	};
 
 	class Tavor_base_F : Rifle_Base_F {
-		tmr_recoil_shakeMultiplier = 0.8;
+		tmr_recoil_shakeMultiplier = 0.9;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_mk20";
 			recoilProne = "tmr_recoil_single_prone_mk20";
@@ -217,7 +222,7 @@ class CfgWeapons {
 	};
 
 	class SDAR_base_F : Rifle_Base_F {
-		tmr_recoil_shakeMultiplier = 0.8;
+		tmr_recoil_shakeMultiplier = 0.9;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_mk20";
 			recoilProne = "tmr_recoil_single_prone_mk20";
@@ -230,7 +235,7 @@ class CfgWeapons {
 	};
 
 	class SMG_01_Base: Rifle_Base_F {
-		tmr_recoil_shakeMultiplier = 0.7;
+		tmr_recoil_shakeMultiplier = 0.9;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_vermin";
 			recoilProne = "tmr_recoil_single_prone_vermin";
@@ -248,7 +253,7 @@ class CfgWeapons {
 	};
 
 	class SMG_02_Base: Rifle_Base_F {
-		tmr_recoil_shakeMultiplier = 0.7;
+		tmr_recoil_shakeMultiplier = 0.9;
 		class Single : Mode_SemiAuto {
 			recoil = "tmr_recoil_single_skorpion";
 			recoilProne = "tmr_recoil_single_prone_skorpion";
