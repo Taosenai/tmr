@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core};
+		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core, tmr_smallarms_suppressors, tmr_smallarms_recoil};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -31,8 +31,20 @@ class CfgMods {
 	//};
 //};
 
+//////////////////////////////////////////////////////
+// TMR strings update for weapons and magazines:
+// 1. Change descriptionshort to match TMR standards.
+// 2. Change displayname to match TMR standards.
+// 3. Add displaynameshort to TMR standards.
+//////////////////////////////////////////////////////
+
 class CfgMagazines {
 	class CA_Magazine;
+
+	// Magazine updates:
+	// 1. Update all magazines with tracer mix to use 1 in 5 mix. Full tracer mags should not be changed!
+	// 2. Remove tracers at bottom of magazine.
+	// 3. Do string updates.
 
 	// 5.56mm ////////////////////////////////////
 
@@ -199,56 +211,6 @@ class CfgMagazines {
 	};
 };
 
-
-// If you're using this but not TMR recoil, suppressed weapons will have very low recoil comparatively.
-// You can always mod these recoils in your own pbo.
-// Sorry!
-
-// Remember that all muzzle climb is increased by TMR_MC, defined in tmr_recoil, if we're using tmr_recoil.
-// So this value should be an increase from the base, not a reduction.
-#define TMR_SUPMC 0.0002555
-			   // 0.01572
-
-// Global recovery sequence duration increase
-#define TMR_SUPRSD 0.0145
-             // 0.134
-
-class CfgRecoils {
-	tmr_recoil_single_mxSuppressed[] = 				{0, 0, 0,		0.020, 0.0115, 0.01572+TMR_SUPMC,		0.134+TMR_SUPRSD, 0, -0.0065,		0.143+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_mxSuppressed[] = 				{0, 0, 0,		0.020, 0.0115, 0.01622+TMR_SUPMC,		0.134+TMR_SUPRSD, 0, -0.0065,		0.143+TMR_SUPRSD, 0, 0};
-	tmr_recoil_single_prone_mxSuppressed[] = 		{0, 0, 0,		0.020, 0.0104, 0.01002+TMR_SUPMC,		0.134+TMR_SUPRSD, 0, -0.0044,		0.143+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_prone_mxSuppressed[] = 			{0, 0, 0,		0.020, 0.0104, 0.01007+TMR_SUPMC,		0.134+TMR_SUPRSD, 0, -0.0044,		0.143+TMR_SUPRSD, 0, 0};
-
-	tmr_recoil_single_katibaSuppressed[] = 			{0, 0, 0,		0.020, 0.0115, 0.01552+TMR_SUPMC,		0.134+TMR_SUPRSD, 0, -0.0065,		0.143+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_katibaSuppressed[] = 			{0, 0, 0,		0.020, 0.0115, 0.01592+TMR_SUPMC,		0.134+TMR_SUPRSD, 0, -0.0065,		0.143+TMR_SUPRSD, 0, 0};
-	tmr_recoil_single_prone_katibaSuppressed[] = 	{0, 0, 0,		0.020, 0.0104, 0.00972+TMR_SUPMC,		0.134+TMR_SUPRSD, 0, -0.0044,		0.143+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_prone_katibaSuppressed[] = 		{0, 0, 0,		0.020, 0.0104, 0.00972+TMR_SUPMC,		0.134+TMR_SUPRSD, 0, -0.0044,		0.143+TMR_SUPRSD, 0, 0};
-
-	tmr_recoil_single_scorpionSuppressed[] = 		{0, 0, 0,		0.040, 0.0109, 0.01460+TMR_SUPMC,		0.129+TMR_SUPRSD, 0, -0.0055,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_scorpionSuppressed[] = 			{0, 0, 0,		0.040, 0.0109, 0.01460+TMR_SUPMC,		0.129+TMR_SUPRSD, 0, -0.0055,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_single_prone_scorpionSuppressed[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_SUPMC,		0.129+TMR_SUPRSD, 0, -0.0034,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_prone_scorpionSuppressed[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_SUPMC,		0.129+TMR_SUPRSD, 0, -0.0034,		0.138+TMR_SUPRSD, 0, 0};
-
-	tmr_recoil_single_verminSuppressed[] = 			{0, 0, 0,		0.040, 0.0120, 0.01300+TMR_SUPMC,		0.129+TMR_SUPRSD, 0, -0.0055,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_verminSuppressed[] = 			{0, 0, 0,		0.040, 0.0120, 0.01300+TMR_SUPMC,		0.129+TMR_SUPRSD, 0, -0.0055,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_single_prone_verminSuppressed[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_SUPMC,		0.129+TMR_SUPRSD, 0, -0.0034,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_prone_verminSuppressed[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_SUPMC,		0.129+TMR_SUPRSD, 0, -0.0034,		0.138+TMR_SUPRSD, 0, 0};
-
-	tmr_recoil_single_mk20Suppressed[] = 			{0, 0, 0,		0.020, 0.0110, 0.01514+TMR_SUPMC,		0.132+TMR_SUPRSD, 0, -0.0065,		0.141+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_mk20Suppressed[] = 				{0, 0, 0,		0.020, 0.0110, 0.01519+TMR_SUPMC,		0.132+TMR_SUPRSD, 0, -0.0065,		0.141+TMR_SUPRSD, 0, 0};
-	tmr_recoil_single_prone_mk20Suppressed[] = 		{0, 0, 0,		0.020, 0.0102, 0.00900+TMR_SUPMC,		0.132+TMR_SUPRSD, 0, -0.0044,		0.141+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_prone_mk20Suppressed[] = 		{0, 0, 0,		0.020, 0.0102, 0.00905+TMR_SUPMC,		0.132+TMR_SUPRSD, 0, -0.0044,		0.141+TMR_SUPRSD, 0, 0};
-
-	tmr_recoil_single_ebrSuppressed[] = 			{0, 0, 0,		0.040, 0.0140, 0.02600+TMR_SUPMC,		0.132+TMR_SUPRSD, 0, -0.0065,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_ebrSuppressed[] = 				{0, 0, 0,		0.040, 0.0140, 0.02750+TMR_SUPMC,		0.132+TMR_SUPRSD, 0, -0.0065,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_single_prone_ebrSuppressed[] = 		{0, 0, 0,		0.040, 0.0120, 0.01150+TMR_SUPMC,		0.132+TMR_SUPRSD, 0, -0.0044,		0.138+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_prone_ebrSuppressed[] = 		{0, 0, 0,		0.040, 0.0120, 0.01350+TMR_SUPMC,		0.132+TMR_SUPRSD, 0, -0.0044,		0.138+TMR_SUPRSD, 0, 0};
-
-	tmr_recoil_auto_mk200Suppressed[] = 			{0, 0, 0,		0.043, 0.0120, 0.01690+TMR_SUPMC,		0.112+TMR_SUPRSD, 0, -0.0065,		0.121+TMR_SUPRSD, 0, 0};
-	tmr_recoil_auto_prone_mk200Suppressed[] = 		{0, 0, 0,		0.043, 0.0104, 0.00960+TMR_SUPMC,		0.112+TMR_SUPRSD, 0, -0.0044,		0.121+TMR_SUPRSD, 0, 0};
-
-};
-
 class Mode_SemiAuto;
 class Mode_Burst;
 class Mode_FullAuto;
@@ -257,38 +219,64 @@ class CfgWeapons {
 	class WeaponSlotsInfo;
 	class SlotInfo;
 	class Rifle_Base_F;
-	// 	class WeaponSlotsInfo {
-	// 		class SlotInfo;
-	// 	};
-	// };
 
 	///////////////////////////////////////////////////////////////////////////////
 	//////////// SMALL ARMS WEAPONS ///////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////
+
+	// Weapon updates:
+	// 1. Do string update.
+	// 2. Fix magazine compatibility as needed.
+	// 3. Fix firing modes as needed.
+	// 4. Fix accessory compatibility as needed.
 
 	// MXs ////////////////////////////////////////////////////
 
 	class arifle_MX_Base_F : Rifle_Base_F {
 		magazines[] = {"30Rnd_65x39_caseless_mag", "30Rnd_65x39_caseless_mag_Tracer", "100Rnd_65x39_caseless_mag", "100Rnd_65x39_caseless_mag_Tracer"};
 
-		//displayName = "6.5mm";
-		//descriptionShort = "$STR_A3_CfgWeapons_arifle_XMX1";
+		displayName = "MX-1";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
 
 		class Single : Mode_SemiAuto {};
 	};
 
+	class arifle_MX_F : Rifle_Base_F {
+		displayName = "MX-1";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
+	};
+
+	class arifle_MXC_F : arifle_MX_Base_F {
+		displayName = "MX-1C";
+		descriptionShort = "Carbine<br />Caliber: 6.5x38mm";
+	};
+
+
+	class arifle_MX_GL_F : arifle_MX_Base_F {
+		displayName = "MX-1 GLM";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
+	};
+
 	class arifle_MX_SW_F : arifle_MX_Base_F {
+		displayName = "MX-1 LSW";
+		descriptionShort = "Light Support Weapon<br />Caliber: 6.5x38mm";
+
 		modes[] = {"single", "manual", "close", "short", "medium", "far_optic1", "far_optic2"};
 
-		class Single : Single {
-			recoil = "tmr_recoil_single_mx";
-			recoilProne = "tmr_recoil_single_prone_mx";
-		};
+		class Single : Single {};
+	};
+
+	class arifle_MXM_F : arifle_MX_Base_F {
+		displayName = "MX-1M";
+		descriptionShort = "Marksman Rifle<br />Caliber: 6.5x38mm";
 	};
 
 	// Katibas ////////////////////////////////////////////////////
 
 	class arifle_katiba_Base_F : Rifle_Base_F {
+		displayName = "Katiba KT-2";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
+
 		class WeaponSlotsInfo : WeaponSlotsInfo {
 			class MuzzleSlot : SlotInfo {
 				compatibleItems[] = {"tmr_muzzle_snds_h_katiba"};
@@ -296,7 +284,20 @@ class CfgWeapons {
 		};
 	};
 
-	class arifle_Katiba_GL_F;
+	class arifle_Katiba_F : arifle_katiba_Base_F {
+		displayName = "Katiba KT-2";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
+	};
+
+	class arifle_Katiba_GL_F : arifle_katiba_Base_F {
+		displayName = "Katiba KT-2 KGL";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
+	};
+
+	class arifle_Katiba_C_F : arifle_katiba_Base_F {
+		displayName = "Katiba KT-2C";
+		descriptionShort = "Carbine<br />Caliber: 6.5x39mm";
+	};
 
 	class arifle_Katiba_GL_ACO_pointer_snds_F : arifle_Katiba_GL_F {
 		class LinkedItems {	
@@ -306,8 +307,6 @@ class CfgWeapons {
 			};
 		};
 	};
-	
-	class arifle_Katiba_C_F;
 
 	class arifle_Katiba_C_ACO_pointer_snds_F : arifle_Katiba_C_F {
 		class LinkedItems {
@@ -318,8 +317,6 @@ class CfgWeapons {
 		};
 	};
 	
-	class arifle_Katiba_F;
-
 	class arifle_Katiba_ACO_pointer_snds_F : arifle_Katiba_F {
 		class LinkedItems {
 			class LinkedItemsMuzzle {
@@ -338,9 +335,37 @@ class CfgWeapons {
 		};
 	};
 
-	// SMG Scorpions ////////////////////////////////////////////////////
+	class SDAR_base_F : Rifle_Base_F {
+		displayName = "SDAR";
+		descriptionShort = "Amphibious Rifle<br />Caliber: 5.56x45mm";
+	};
+
+	class Tavor_base_F : Rifle_Base_F {
+		displayName = "TRG-21";
+		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
+	};
+
+	class arifle_TRG21_F : Tavor_base_F {
+		displayName = "TRG-21";
+		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
+	};
+
+	class arifle_TRG21_GL_F : arifle_TRG21_F {
+		displayName = "TRG-21 EGLM";
+		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
+	};
+
+	class arifle_TRG20_F : Tavor_base_F {
+		displayName = "TRG-20";
+		descriptionShort = "Carbine<br />Caliber: 5.56x45mm"; // It's not really a carbine...
+	};
+
+	// SMG Vermin ////////////////////////////////////////////////////
 
 	class SMG_01_Base : Rifle_Base_F {
+		displayName = "Vermin SMG";
+		descriptionShort = "Submachine gun<br />Caliber: .45 ACP";
+
 		class Burst : Mode_Burst {
 			burst = 2;
 		};
@@ -352,6 +377,9 @@ class CfgWeapons {
 	};
 
 	class SMG_01_F : SMG_01_Base {
+		displayName = "Vermin SMG";
+		descriptionShort = "Submachine gun<br />Caliber: .45 ACP";
+		
 	};
 
 	class SMG_01_Holo_pointer_snds_F : SMG_01_F {
@@ -363,10 +391,11 @@ class CfgWeapons {
 		};
 	};
 
-	// SMG Vermins ////////////////////////////////////////////////////
+	// SMG Scorpion ////////////////////////////////////////////////////
 
 	class SMG_02_base_F : Rifle_Base_F {
-		descriptionShort = "Submachine Gun<br />Caliber: 9x19 mm";
+		displayName = "Scorpion EVO-4";
+		descriptionShort = "Submachine Gun<br />Caliber: 9x19mm";
 			
 		class WeaponSlotsInfo : WeaponSlotsInfo {
 			class MuzzleSlot : SlotInfo {
@@ -375,11 +404,27 @@ class CfgWeapons {
 		};
 	};	
 
+	class SMG_02_F : SMG_02_base_F {
+		displayName = "Scorpion EVO-4";
+		descriptionShort = "Submachine Gun<br />Caliber: 9x19mm";
+	};
+
 	// Pistols //////////////////////////////////////////////
 
 	class Pistol_Base_F;
 	class hgun_P07_F : Pistol_Base_F {
-		descriptionShort = "Handgun<br />Caliber: 9x19 mm";
+		displayName = "P07";
+		descriptionShort = "Handgun<br />Caliber: 9x19mm";
+	};
+
+	class hgun_Rook40_F : Pistol_Base_F {
+		displayName = "Rook-40";
+		descriptionShort = "Handgun<br />Caliber: 9x19mm";
+	};
+
+	class hgun_ACPC2_F : Pistol_Base_F {
+		displayName = "ACP-C2";
+		descriptionShort = "Handgun<br />Caliber: .45 ACP";
 	};
 
 	// LMGs //////////////////////////////////////////////
@@ -387,8 +432,12 @@ class CfgWeapons {
 	class Rifle_Long_Base_F;
 
 	class LMG_Mk200_F : Rifle_Long_Base_F {
+		displayName = "Mk200 LMG";
+		descriptionShort = "Light Machine Gun<br />Caliber: 6.5x38mm";
+
 		modes[] = {"manual", "single", "close", "short", "medium", "far_optic1", "far_optic2"};
 		class Single : Mode_SemiAuto {
+			// SOUND MOD ALERT
 			reloadTime = 0.075;
 			dispersion = 0.00093;
 			recoil = "tmr_recoil_auto_mk200";
@@ -414,19 +463,28 @@ class CfgWeapons {
 	};
 
 	class LMG_Zafir_F: Rifle_Long_Base_F {
+		displayName = "Zafir ZG7 GPMG";
+		descriptionShort = "General Purpose Machine Gun<br />Caliber: 7.62x51mm";
+
 		modes[] = {"FullAuto", "Single",  "close", "short", "medium", "far_optic1", "far_optic2"};
 	};
 
 	// Sniper and anti-materiel rifles /////////////////////////////////
 
-	//class EBR_base_F : Rifle_Long_Base_F {
-	//};
+	class EBR_base_F : Rifle_Long_Base_F {
+		displayName = "Mk18 ABR";
+		descriptionShort = "Marksman/Battle Rifle<br />Caliber: 7.62x51mm";
+	};
 
-	//class LRR_base_F : Rifle_Long_Base_F {
-	//};
+	class LRR_base_F : Rifle_Long_Base_F {
+		displayName = "M320 LRR";
+		descriptionShort = "Anti-materiel Rifle<br />Caliber: .408 Cheetah";
+	};
 
-	//class GM6_base_F : Rifle_Long_Base_F {
-	//};
+	class GM6_base_F : Rifle_Long_Base_F {
+		displayName = "GM6 Lynx";
+		descriptionShort = "Anti-materiel Rifle<br />Caliber: 12.7x108mm";
+	};
 
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -437,42 +495,19 @@ class CfgWeapons {
 	class InventoryItem_Base_F;
 	class InventoryMuzzleItem_Base_F;
 
+	// Suppressor updates:
+	// 1. Do strings update.
+	// 2. Set weights and properties.
+
+	// See tmr_smallarms_suppressors for the rest.
+	//   (e.g., cyclic rate, firing modes)
+
 	class muzzle_snds_H : ItemCore { // 6.5mm suppressor threaded for MX
 		displayName = "Suppressor (6.5mm MX)";
 		descriptionShort = "Threaded for 6.5mm MX rifle barrels.";
 
 		class ItemInfo : InventoryMuzzleItem_Base_F {
 			mass = 5;
-			
-			class MagazineCoef {
-				initSpeed = 1;
-			};
-			
-			class AmmoCoef {
-				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
-				typicalSpeed = 1.0;
-				airFriction = 1.0;
-			};
-			
-			//modes[] = {"Single", "FullAuto", "fullauto_medium", "single_medium_optics1", "single_far_optics2"};
-			
-			class Single : Mode_SemiAuto {
-				reloadTime = 0.092; // Cyclic rate increased due to higher backpressure: default 0.096
-				recoil = "tmr_recoil_single_mxSuppressed";
-				recoilProne = "tmr_recoil_single_prone_mxSuppressed";
-				//dispersion = 0.00087;
-			};
-			
-			class FullAuto : Mode_FullAuto {
-				reloadTime = 0.092; // Cyclic rate increased due to higher backpressure: default 0.096
-				recoil = "tmr_recoil_auto_mxSuppressed";
-				recoilProne = "tmr_recoil_auto_prone_mxSuppressed";
-			};
 		};
 	};
 
@@ -481,17 +516,7 @@ class CfgWeapons {
 		descriptionShort = "Threaded for 6.5mm Katiba rifle barrels.";
 
 		class ItemInfo : ItemInfo {
-			class Single : Single {
-				reloadTime = 0.071; // Cyclic rate increased due to higher backpressure: default 0.075
-				recoil = "tmr_recoil_single_katibaSuppressed";
-				recoilProne = "tmr_recoil_single_prone_katibaSuppressed";
-			};
-			
-			class FullAuto : FullAuto {
-				reloadTime = 0.071; // Cyclic rate increased due to higher backpressure: default 0.075
-				recoil = "tmr_recoil_auto_katibaSuppressed";
-				recoilProne = "tmr_recoil_auto_prone_katibaSuppressed";
-			};
+			mass = 5;
 		};
 	};
 	
@@ -500,213 +525,43 @@ class CfgWeapons {
 		descriptionShort = "Threaded for 9mm pistol barrels.";
 
 		class ItemInfo : ItemInfo {
-			class MagazineCoef {
-				initSpeed = 1;
-			};
-			
-			class AmmoCoef {
-				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
-				typicalSpeed = 1.0;
-				airFriction = 1.0;
-			};
-
-			// These do not apply to the pistol, and are inherited by the SMG-specific suppressor.
-			modes[] = {"Single", "Burst", "FullAuto"};
-
-			// BIS didn't finish the configs for these as of 0.74
-
-			class Single : Mode_SemiAuto {
-				reloadTime = 0.0541; // Default 0.0545
-				recoil = "tmr_recoil_single_scorpionSuppressed";
-				recoilProne = "tmr_recoil_single_prone_scorpionSuppressed";
-
-				begin1[] = {"A3\sounds_f\weapons\silenced\silent-07", 1.0, 1, 600};
-				begin2[] = {"A3\sounds_f\weapons\silenced\silent-08", 1.0, 1, 600};
-				soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
-				closure1[] = {"A3\sounds_f\weapons\closure\closure_rifle_7", 1.0, 1, 200};
-				closure2[] = {"A3\sounds_f\weapons\closure\closure_rifle_6", 1.0, 1, 200};
-				soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
-				weaponSoundEffect = "DefaultHandgun";
-			};
-
-			class Burst : Mode_Burst {
-				reloadTime = 0.0541; // Default 0.0545
-				recoil = "tmr_recoil_single_scorpionSuppressed";
-				recoilProne = "tmr_recoil_single_prone_scorpionSuppressed";
-
-				begin1[] = {"A3\sounds_f\weapons\silenced\silent-07", 1.0, 1, 600};
-				begin2[] = {"A3\sounds_f\weapons\silenced\silent-08", 1.0, 1, 600};
-				soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
-				closure1[] = {"A3\sounds_f\weapons\closure\closure_rifle_7", 1.0, 1, 200};
-				closure2[] = {"A3\sounds_f\weapons\closure\closure_rifle_6", 1.0, 1, 200};
-				soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
-				weaponSoundEffect = "DefaultHandgun";
-
-				minRange = 10;
-				minRangeProbab = 0.3;
-				midRange = 20;
-				midRangeProbab = 0.7;
-				maxRange = 40;
-				maxRangeProbab = 0.05;
-				aiRateOfFire = 1.0;	
-				aiRateOfFireDistance = 80;
-			};
-			
-			class FullAuto : Mode_FullAuto {
-				reloadTime = 0.0541; // Default 0.0545
-				recoil = "tmr_recoil_single_scorpionSuppressed";
-				recoilProne = "tmr_recoil_single_prone_scorpionSuppressed";
-
-				begin1[] = {"A3\sounds_f\weapons\silenced\silent-07", 1.0, 1, 600};
-				begin2[] = {"A3\sounds_f\weapons\silenced\silent-08", 1.0, 1, 600};
-				soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
-				closure1[] = {"A3\sounds_f\weapons\closure\closure_rifle_7", 1.0, 1, 200};
-				closure2[] = {"A3\sounds_f\weapons\closure\closure_rifle_6", 1.0, 1, 200};
-				soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
-				weaponSoundEffect = "DefaultHandgun";
-
-				minRange = 0;
-				minRangeProbab = 0.3;
-				midRange = 10;
-				midRangeProbab = 0.7;
-				maxRange = 20;
-				maxRangeProbab = 0.05;
-				aiRateOfFire = 0.3;
-				aiRateOfFireDistance = 40;
-			};
+			mass = 4;
 		};
 	};
 	
 	class tmr_muzzle_snds_L_smg : muzzle_snds_L { // 9mm SMG suppressor (scorpion)
 		displayName = "Suppressor (9mm SMG)";
 		descriptionShort = "Threaded for 9mm SMG barrels.";
+
+		class ItemInfo : ItemInfo {
+			mass = 4.5;
+		};
 	};
 
 	class muzzle_snds_M : muzzle_snds_H { // 5.56 suppressor
 		displayName = "Suppressor (5.56mm Rifle)";
 		descriptionShort = "Threaded for rifle barrels.";
+
 		class ItemInfo : ItemInfo {
-			mass = 4;
-			
-			class MagazineCoef {
-				initSpeed = 1;
-			};
-			
-			class AmmoCoef {
-				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
-				typicalSpeed = 1.0;
-				airFriction = 1.0;
-			};
-			
-			class Single : Mode_SemiAuto {
-				reloadTime = 0.076; // Default 0.08;
-				recoil = "tmr_recoil_single_mk20Suppressed";
-				recoilProne = "tmr_recoil_single_prone_mk20Suppressed";
-			};
-			
-			class FullAuto : Mode_FullAuto {
-				reloadTime = 0.076; // Default 0.08;
-				recoil = "tmr_recoil_auto_mxSuppressed";
-				recoilProne = "tmr_recoil_auto_prone_mxSuppressed";
-			};
+			mass = 5;
 		};
 	};
 	
 	class muzzle_snds_B : muzzle_snds_H { // 7.62mm suppressor
 		displayName = "Suppressor (7.62mm Rifle)";
 		descriptionShort = "Threaded for 7.62mm rifle barrels.";
+
 		class ItemInfo : ItemInfo {
-			mass = 5;
-			
-			class MagazineCoef {
-				initSpeed = 1;
-			};
-			
-			class AmmoCoef {
-				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
-				typicalSpeed = 1.0;
-				airFriction = 1.0;
-			};
-			
-			class Single : Mode_SemiAuto {
-				reloadTime = 0.081; // Default is 0.085
-				recoil = "tmr_recoil_single_ebrSuppressed";
-				recoilProne = "tmr_recoil_single_prone_ebrSuppressed";
-			};
-			
-			class FullAuto : Mode_FullAuto {
-				reloadTime = 0.081;
-				recoil = "tmr_recoil_auto_ebrSuppressed";
-				recoilProne = "tmr_recoil_auto_prone_ebrSuppressed";
-			};
+			mass = 5.5;
 		};
 	};
 	
 	class muzzle_snds_H_MG : muzzle_snds_H { // 6.5 LMG suppressor
 		displayName = "Suppressor (6.5mm LMG)";
 		descriptionShort = "Threaded for 6.5mm LMG heavy barrels.";
+
 		class ItemInfo : ItemInfo {
-			class MagazineCoef {
-				initSpeed = 1;
-			};
-			
-			class AmmoCoef {
-				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
-				typicalSpeed = 1.0;
-				airFriction = 1.0;
-			};
-
-			modes[] = {"manual", "single", "close", "short", "medium", "far_optic1", "far_optic2"};
-
-			class Single : Mode_SemiAuto {
-				reloadTime = 0.071; // Default 0.075
-				dispersion = 0.00093;
-				recoil = "tmr_recoil_auto_mk200Suppressed";
-				recoilProne = "tmr_recoil_auto_prone_mk200Suppressed";
-				begin1[] = {"A3\sounds_f\weapons\M200\Mk200_st_4a", 1.25893, 1, 1200};
-				begin2[] = {"A3\sounds_f\weapons\M200\Mk200_st_5a", 1.25893, 1, 1200};
-				begin3[] = {"A3\sounds_f\weapons\M200\Mk200_st_6a", 1.25893, 1, 1200};
-				soundBegin[] = {"begin1", 0.34, "begin2", 0.33, "begin3", 0.33};
-				weaponSoundEffect = "DefaultRifle";
-				closure1[] = {"A3\sounds_f\weapons\closure\sfx7", 1.41254, 1, 40};
-				closure2[] = {"A3\sounds_f\weapons\closure\sfx8", 1.41254, 1, 40};
-				soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
-				soundContinuous = 0;
-				soundBurst = 0;
-				minRange = 0;
-				minRangeProbab = 0.3;
-				midRange = 3;
-				midRangeProbab = 0.7;
-				maxRange = 5;
-				maxRangeProbab = 0.04;
-				showToPlayer = true;
-			};
-			
-			class manual : Mode_FullAuto {
-				reloadTime = 0.071;// Default 0.075
-				recoil = "tmr_recoil_auto_mk200Suppressed";
-				recoilProne = "tmr_recoil_auto_prone_mk200Suppressed";
-			};
+			mass = 5.5;
 		};
 	};
 
@@ -715,47 +570,16 @@ class CfgWeapons {
 		descriptionShort = "Threaded for .45 ACP pistol barrels.";
 
 		class ItemInfo : ItemInfo {
-			class MagazineCoef {
-				initSpeed = 1;
-			};
-			
-			class AmmoCoef {
-				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
-				typicalSpeed = 1.0;
-				airFriction = 1.0;
-			};
-
-			// These modes are ignored for the pistol (why?), but will be inherited by the SMG suppressor. 
-			modes[] = {"Single","Burst","FullAuto"};
-			
-			class Single : Mode_SemiAuto {
-				reloadTime = 0.041; // Default 0.05
-				recoil = "tmr_recoil_single_verminSuppressed";
-				recoilProne = "tmr_recoil_single_prone_verminSuppressed";
-			};
-			
-			class Burst : Mode_Burst {
-				burst = 2;
-				reloadTime = 0.041; // Default 0.05
-				recoil = "tmr_recoil_auto_verminSuppressed";
-				recoilProne = "tmr_recoil_auto_prone_verminSuppressed";
-			};
-			
-			class FullAuto : Mode_FullAuto {
-				reloadTime = 0.041; // Default 0.05
-				recoil = "tmr_recoil_auto_verminSuppressed";
-				recoilProne = "tmr_recoil_auto_prone_verminSuppressed";
-			};
+			mass = 4;
 		};
 	};
 
 	class tmr_muzzle_snds_acp_smg : muzzle_snds_acp {
 		displayName = "Suppressor (.45 ACP SMG)";
 		descriptionShort = "Threaded for .45 ACP SMG barrels.";
+
+		class ItemInfo : ItemInfo {
+			mass = 4.5;
+		};
 	};
 };

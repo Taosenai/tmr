@@ -1,4 +1,4 @@
-// TMR: Recoil initialization and functions
+// TMR: Small Arms - Recoil initialization and functions
 // (C) 2013 Ryan Schultz. See LICENSE.
 
 tmr_recoil = false;
@@ -6,7 +6,7 @@ tmr_recoil = false;
 // -------------------------------------------------------------------------------
 // Fired EH for rifles.
 // -------------------------------------------------------------------------------
-tmr_recoil_fnc_firedEH = {
+tmr_smallarms_recoil_fnc_firedEH = {
 	_unit = _this select 0;
 	_weaponType = _this select 1;
 	_ammoType = _this select 5;
@@ -27,7 +27,7 @@ tmr_recoil_fnc_firedEH = {
 		_freqMod = 0;
 
 		_config = configFile >> "CfgWeapons" >> _weaponType;
-		_powerMulti = getNumber (_config >> "tmr_recoil_shakeMultiplier");
+		_powerMulti = getNumber (_config >> "tmr_smallarms_recoil_shakeMultiplier");
 
 		// Reduce the camshake as the player drops into lower, supported stances.
 		_detectStance = (player selectionPosition "Neck" select 2);
