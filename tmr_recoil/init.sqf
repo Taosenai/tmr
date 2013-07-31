@@ -17,9 +17,9 @@ tmr_recoil_fnc_firedEH = {
 
 	if (_weaponType == primaryWeapon player) then {
 		// Base camshake values.
-		_basePower = 0.247;
-		_baseTime = 0.214;
-		_baseFreq = 7;
+		_basePower = 0.249;
+		_baseTime = 0.216;
+		_baseFreq = 6.9;
 
 		// Modifiers.
 		_powerMod = 0;
