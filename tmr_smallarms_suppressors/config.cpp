@@ -181,16 +181,10 @@ class CfgWeapons {
 	};
 	
 	class tmr_muzzle_snds_L_smg : muzzle_snds_L { // 9mm SMG suppressor (scorpion)
-		displayName = "Suppressor (9mm SMG)";
-		descriptionShort = "Threaded for 9mm SMG barrels.";
-
 		// Fire modes are inherited.
 	};
 
 	class muzzle_snds_M : muzzle_snds_H { // 5.56 suppressor
-		displayName = "Suppressor (5.56mm Rifle)";
-		descriptionShort = "Threaded for rifle barrels.";
-
 		class ItemInfo : ItemInfo {
 			class MagazineCoef {
 				initSpeed = 1;
@@ -218,9 +212,6 @@ class CfgWeapons {
 	};
 	
 	class muzzle_snds_B : muzzle_snds_H { // 7.62mm suppressor
-		displayName = "Suppressor (7.62mm Rifle)";
-		descriptionShort = "Threaded for 7.62mm rifle barrels.";
-
 		class ItemInfo : ItemInfo {
 			class MagazineCoef {
 				initSpeed = 1;
