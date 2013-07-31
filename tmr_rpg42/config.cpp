@@ -373,7 +373,7 @@ class CfgMissions {
 
 class CfgHints {
 	class TMR {
-		displayName = "Weapons";
+		displayName = "TMR Tutorials";
 		class RPG42Init {
 			arguments[] = {};
 			description = "TMR RPG-42 changes the RPG-42 to be an unguided soft-launch RPG with a fully-calibrated reticle.<br/><br/>This tutorial will teach you how to employ the new version.<br/>%1%2Take an RPG-42 from the box ahead of you and ready it. You may want to carry extra rockets in your pack.<br/>";

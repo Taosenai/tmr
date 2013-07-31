@@ -227,7 +227,7 @@ class CfgMissions {
 
 class CfgHints {
 	class TMR {
-		displayName = "Weapons";
+		displayName = "TMR Tutorials";
 		class PCMLInit {
 			arguments[] = {};
 			description = "TMR NLAW Attack &amp; Guidance makes the PCML behave like its real counterpart, the NLAW. <br/><br/>This tutorial will teach you how to employ the new version.<br/>%1%2Take a PCML from the box ahead of you and ready it.<br/>";
