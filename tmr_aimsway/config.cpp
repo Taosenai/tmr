@@ -45,24 +45,24 @@ class CfgMods {
 // aimPrecision=TMR_SWAY_50;
 // aimPrecision=TMR_SWAY_70;
 
-#define TMR_SWAY_005 0.051
-#define TMR_SWAY_01 0.011
-#define TMR_SWAY_03 0.29
-#define TMR_SWAY_05 0.48
-#define TMR_SWAY_055 0.52
-#define TMR_SWAY_07 0.67
-#define TMR_SWAY_10 0.97
-#define TMR_SWAY_105 1.02
-#define TMR_SWAY_12 1.18
-#define TMR_SWAY_15 1.46
-#define TMR_SWAY_165 1.63
-#define TMR_SWAY_17 1.65
-#define TMR_SWAY_20 1.86
-#define TMR_SWAY_25 2.2
-#define TMR_SWAY_30 2.7
-#define TMR_SWAY_40 3.6
-#define TMR_SWAY_50 4.8
-#define TMR_SWAY_70 6.8
+#define TMR_SWAY_005 0.048
+#define TMR_SWAY_01 0.09
+#define TMR_SWAY_03 0.28
+#define TMR_SWAY_05 0.47
+#define TMR_SWAY_055 0.53
+#define TMR_SWAY_07 0.65
+#define TMR_SWAY_10 0.91
+#define TMR_SWAY_105 1.01
+#define TMR_SWAY_12 1.4
+#define TMR_SWAY_15 1.7
+#define TMR_SWAY_165 1.9
+#define TMR_SWAY_17 2.0
+#define TMR_SWAY_20 2.2
+#define TMR_SWAY_25 2.7
+#define TMR_SWAY_30 3.3
+#define TMR_SWAY_40 4.3
+#define TMR_SWAY_50 5.4
+#define TMR_SWAY_70 7.4
 
 
 class CfgMovesBasic {
