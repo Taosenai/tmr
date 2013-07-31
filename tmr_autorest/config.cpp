@@ -43,7 +43,8 @@ class CfgVehicles {
 };
 
 #define TMR_SWAY_DEPLOY 0.094
-#define TMR_DEPLOY_TURNSPEED 0.0001
+#define TMR_SWAY_DEPLOYPRONE 0.065
+#define TMR_DEPLOY_TURNSPEED 0.1
 
 // Arma 3 doesn't respect turnSpeed.
 
@@ -332,7 +333,7 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		class aadjppnemstpsraswrfldup;
 		class aadjppnemstpsraswrfldup_tmr_deploy : aadjppnemstpsraswrfldup {
-			aimPrecision = TMR_SWAY_DEPLOY;
+			aimPrecision = TMR_SWAY_DEPLOYPRONE;
 			actions = "RifleAdjustFProneActions_tmr_deploy";
 			aiming = "aimingLying";
 			speed = 0.01;
@@ -347,7 +348,7 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		class amovppnemstpsraswrfldnon;
 		class amovppnemstpsraswrfldnon_tmr_deploy : amovppnemstpsraswrfldnon {
-			aimPrecision = TMR_SWAY_DEPLOY;
+			aimPrecision = TMR_SWAY_DEPLOYPRONE;
 			actions = "RifleProneActions_tmr_deploy";
 			aiming = "aimingLying";
 			speed = 0.01;
