@@ -84,7 +84,7 @@ class CfgMagazines {
 	// 6.5mm //////////////////////////////////////////
 
 	class 30Rnd_65x39_caseless_mag : CA_Magazine { // MX!!
-		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 30<br />Used in: MX";
+		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 30<br />Used in: MX";
 		displayname = "6.5mm 30Rnd MX Mag";
 		displaynameshort = "6.5mm";
 
@@ -93,13 +93,13 @@ class CfgMagazines {
 	};
 
 	class 30Rnd_65x39_caseless_mag_Tracer : 30Rnd_65x39_caseless_mag { // MX!!
-		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Red)<br />Rounds: 30<br />Used in: MX";
+		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Red)<br />Rounds: 30<br />Used in: MX";
 		displayname = "6.5mm 30Rnd MX Tracer Mag";
 		displaynameshort = "6.5mm Tracer";
 	};
 
 	class 30Rnd_65x39_caseless_green : 30Rnd_65x39_caseless_mag { // Katiba!!
-		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 100<br />Used in: Katiba";
+		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 100<br />Used in: Katiba";
 		displayname = "6.5mm 30Rnd Katiba Mag";
 		displaynameshort = "6.5mm";
 
@@ -108,13 +108,13 @@ class CfgMagazines {
 	};
 
 	class 30Rnd_65x39_caseless_green_Tracer : 30Rnd_65x39_caseless_green { // Katiba!!
-		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 100<br />Used in: Katiba";
+		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Green)<br />Rounds: 100<br />Used in: Katiba";
 		displayname = "6.5mm 30Rnd Katiba Tracer Magazine";
 		displaynameshort = "6.5mm Tracer";
 	};
 
 	class 100Rnd_65x39_caseless_mag : CA_Magazine {
-		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 100<br />Used in: MX";
+		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 100<br />Used in: MX";
 		displayname = "6.5mm 100Rnd MX Mag";
 		displaynameshort = "6.5mm";
 
@@ -123,18 +123,18 @@ class CfgMagazines {
 	};
 
 	class 100Rnd_65x39_caseless_mag_Tracer : 100Rnd_65x39_caseless_mag {
-		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Red)<br />Rounds: 100<br />Used in: MX";
+		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Red)<br />Rounds: 100<br />Used in: MX";
 		displayname = "6.5mm 100Rnd MX Tracer Mag";
 		displaynameshort = "6.5mm Tracer";
 	};
 
 	class 200Rnd_65x39_cased_Box : CA_Magazine {
-		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 200<br />Used in: Mk200";
+		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 200<br />Used in: Mk200";
 		displayname = "6.5mm 200Rnd Box";
 		displaynameshort = "6.5mm";
 	};
 	class 200Rnd_65x39_cased_Box_Tracer: 200Rnd_65x39_cased_Box {
-		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 200<br />Used in: Mk200";
+		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Green)<br />Rounds: 200<br />Used in: Mk200";
 		displayname = "6.5mm 200Rnd Tracer Box";
 		displaynameshort = "6.5mm Tracer";
 	};
@@ -230,6 +230,11 @@ class CfgWeapons {
 	// 3. Fix firing modes as needed.
 	// 4. Fix accessory compatibility as needed.
 
+	// Grenade launchers /////////////////////////////////////
+	// Updated strings are in weapon configs.
+	class GrenadeLauncher;
+	class UGL_F : GrenadeLauncher {};
+
 	// MXs ////////////////////////////////////////////////////
 
 	class arifle_MX_Base_F : Rifle_Base_F {
@@ -255,6 +260,12 @@ class CfgWeapons {
 	class arifle_MX_GL_F : arifle_MX_Base_F {
 		displayName = "MX-1 GLM";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
+
+		class GL_3GL_F : UGL_F {
+			displayName = "GLM";
+			descriptionShort = "Grenade Launcher";
+			magazines[] = {"1Rnd_HE_Grenade_shell", "UGL_FlareWhite_F", "UGL_FlareGreen_F", "UGL_FlareRed_F", "UGL_FlareYellow_F", "UGL_FlareCIR_F", "1Rnd_Smoke_Grenade_shell", "1Rnd_SmokeRed_Grenade_shell", "1Rnd_SmokeGreen_Grenade_shell", "1Rnd_SmokeYellow_Grenade_shell", "1Rnd_SmokePurple_Grenade_shell", "1Rnd_SmokeBlue_Grenade_shell", "1Rnd_SmokeOrange_Grenade_shell", "3Rnd_HE_Grenade_shell", "3Rnd_UGL_FlareWhite_F", "3Rnd_UGL_FlareGreen_F", "3Rnd_UGL_FlareRed_F", "3Rnd_UGL_FlareYellow_F", "3Rnd_UGL_FlareCIR_F", "3Rnd_Smoke_Grenade_shell", "3Rnd_SmokeRed_Grenade_shell", "3Rnd_SmokeGreen_Grenade_shell", "3Rnd_SmokeYellow_Grenade_shell", "3Rnd_SmokePurple_Grenade_shell", "3Rnd_SmokeBlue_Grenade_shell", "3Rnd_SmokeOrange_Grenade_shell"};
+		};
 	};
 
 	class arifle_MX_SW_F : arifle_MX_Base_F {
@@ -292,6 +303,12 @@ class CfgWeapons {
 	class arifle_Katiba_GL_F : arifle_katiba_Base_F {
 		displayName = "Katiba KT-2 KGL";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
+
+		class EGLM : UGL_F {
+			displayName = "KGL";
+			descriptionShort = "Grenade Launcher";
+			magazines[] = {"1Rnd_HE_Grenade_shell", "UGL_FlareWhite_F", "UGL_FlareGreen_F", "UGL_FlareRed_F", "UGL_FlareYellow_F", "UGL_FlareCIR_F", "1Rnd_Smoke_Grenade_shell", "1Rnd_SmokeRed_Grenade_shell", "1Rnd_SmokeGreen_Grenade_shell", "1Rnd_SmokeYellow_Grenade_shell", "1Rnd_SmokePurple_Grenade_shell", "1Rnd_SmokeBlue_Grenade_shell", "1Rnd_SmokeOrange_Grenade_shell", "3Rnd_HE_Grenade_shell", "3Rnd_UGL_FlareWhite_F", "3Rnd_UGL_FlareGreen_F", "3Rnd_UGL_FlareRed_F", "3Rnd_UGL_FlareYellow_F", "3Rnd_UGL_FlareCIR_F", "3Rnd_Smoke_Grenade_shell", "3Rnd_SmokeRed_Grenade_shell", "3Rnd_SmokeGreen_Grenade_shell", "3Rnd_SmokeYellow_Grenade_shell", "3Rnd_SmokePurple_Grenade_shell", "3Rnd_SmokeBlue_Grenade_shell", "3Rnd_SmokeOrange_Grenade_shell"};
+		};
 	};
 
 	class arifle_Katiba_C_F : arifle_katiba_Base_F {
@@ -335,10 +352,14 @@ class CfgWeapons {
 		};
 	};
 
+	// SDAR //////////////////////////////////////////////////
+
 	class SDAR_base_F : Rifle_Base_F {
 		displayName = "SDAR";
 		descriptionShort = "Amphibious Rifle<br />Caliber: 5.56x45mm";
 	};
+
+	// Tavor TRG ////////////////////////////////////////////////
 
 	class Tavor_base_F : Rifle_Base_F {
 		displayName = "TRG-21";
@@ -353,11 +374,42 @@ class CfgWeapons {
 	class arifle_TRG21_GL_F : arifle_TRG21_F {
 		displayName = "TRG-21 EGLM";
 		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
+
+		class EGLM : UGL_F {
+			displayName = "EGLM";
+			descriptionShort = "Grenade Launcher";
+		};
 	};
 
 	class arifle_TRG20_F : Tavor_base_F {
 		displayName = "TRG-20";
 		descriptionShort = "Carbine<br />Caliber: 5.56x45mm"; // It's not really a carbine...
+	};
+
+	// Mk20 (F2000) //////////////////////////////////////////////////
+	class mk20_base_F : Rifle_Base_F {
+		displayName = "Mk20";
+		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
+	};
+
+	class arifle_Mk20_F : mk20_base_F {
+		displayName = "Mk20";
+		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
+	};
+
+	class arifle_Mk20C_F : mk20_base_F {
+		displayName = "Mk20C";
+		descriptionShort = "Carbine<br />Caliber: 5.56x45mm"; // It's not really a carbine...
+	};
+
+	class arifle_Mk20_GL_F : mk20_base_F {
+		displayName = "Mk20 EGLM";
+		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
+
+		class EGLM : UGL_F {
+			displayName = "EGLM";
+			descriptionShort = "Grenade Launcher";
+		};
 	};
 
 	// SMG Vermin ////////////////////////////////////////////////////
@@ -485,7 +537,6 @@ class CfgWeapons {
 		displayName = "GM6 Lynx";
 		descriptionShort = "Anti-materiel Rifle<br />Caliber: 12.7x108mm";
 	};
-
 
 	///////////////////////////////////////////////////////////////////////////////
 	//////////// WEAPON ATTACHMENTS ///////////////////////////////////////////////
