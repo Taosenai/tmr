@@ -20,7 +20,7 @@ set Arma3Dir="C:\Games\Arma 3"
 :: Should the packages be signed? Only enable if you are the TMR maintainer.
 set DoSign="YES"
 :: Path to DSSignFile
-set DSSignFile="C:\Program Files (x86)\Bohemia Interactive\Tools\BinPBO Personal Edition\DSSignFile\DSSignFile.exe"
+set DSSignFile="F:\Workspace\tmr_sign\DSSignFile.exe"
 :: Path to private key
 set PrivateKey="F:\Workspace\tmr_sign\TMR.biprivatekey"
 
@@ -89,7 +89,7 @@ GOTO :EOF
 :: Sub to sign a package
 :Sign
 ECHO Signing package...
-%DSSignFile% %PrivateKey% %releaseDir%%currentModule% 
+%DSSignFile% %PrivateKey% %releaseDir%%currentModule%.pbo
 GOTO :EOF
 
 :: Sub to cleanup log files
