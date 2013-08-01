@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core, tmr_smallarms_suppressors, tmr_smallarms_recoil, tmr_smallarms_ugl};
+		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core, tmr_smallarms_suppressors, tmr_smallarms_recoil};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -261,10 +261,10 @@ class CfgWeapons {
 		displayName = "MX-1 3GL-H";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
 
-		class GL_3GL_F : UGL_F {
-			displayName = "3GL-H";
-			descriptionShort = "Grenade Launcher";
-		};
+		// class GL_3GL_F : UGL_F {
+		// 	displayName = "3GL-H";
+		// 	descriptionShort = "Grenade Launcher";
+		// };
 	};
 
 	class arifle_MX_SW_F : arifle_MX_Base_F {
@@ -303,10 +303,10 @@ class CfgWeapons {
 		displayName = "Katiba KT-2 KGL";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
 
-		class EGLM : UGL_F {
-			displayName = "KGL";
-			descriptionShort = "Grenade Launcher";
-		};
+		//class EGLM : UGL_F {
+		//	displayName = "KGL";
+		//	descriptionShort = "Grenade Launcher";
+		//};
 	};
 
 	class arifle_Katiba_C_F : arifle_katiba_Base_F {
@@ -378,10 +378,10 @@ class CfgWeapons {
 		displayName = "TRG-21 EGLM";
 		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
 
-		class EGLM : UGL_F {
-			displayName = "EGLM";
-			descriptionShort = "Grenade Launcher";
-		};
+		// class EGLM : UGL_F {
+		// 	displayName = "EGLM";
+		// 	descriptionShort = "Grenade Launcher";
+		// };
 	};
 
 	class arifle_TRG20_F : Tavor_base_F {
@@ -410,10 +410,10 @@ class CfgWeapons {
 		displayName = "Mk20 EGLM";
 		descriptionShort = "Assault Rifle<br />Caliber: 5.56x45mm";
 
-		class EGLM : UGL_F {
-			displayName = "EGLM";
-			descriptionShort = "Grenade Launcher";
-		};
+		// class EGLM : UGL_F {
+		// 	displayName = "EGLM";
+		// 	descriptionShort = "Grenade Launcher";
+		// };
 	};
 
 	// SMG Vermin ////////////////////////////////////////////////////
