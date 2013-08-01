@@ -27,7 +27,7 @@ tmr_autorest_fnc_deployKeyDownEH = {
 	// Key press to deploy
 	if (_dikCode in actionKeys "LockTargets") then {
 		// Player must be on foot, with primary out, able to fire.
-		if !(speed player < 1 && vehicle player == player && currentWeapon player == primaryWeapon player && canFire player && canMove player) exitWith {false};
+		if !(alive player && speed player < 1 && vehicle player == player && currentWeapon player == primaryWeapon player && canFire player && canMove player) exitWith {false};
 
 		// Make sure weapon is deployable (bipod mounted)
 		_config = configFile >> "CfgWeapons" >> currentWeapon player;
@@ -95,7 +95,7 @@ tmr_autorest_fnc_deployWeapon = {
 		((uiNameSpace getVariable "TMR_Autorest_Deployed") displayCtrl 1) ctrlCommit 0.5;
 	};
 	
-	playSound "tmr_nlaw_plungerPress";
+	playSound "tmr_autorest_bipodOpen";
 
 	player setVariable ["tmr_autorest_deployed", true, false];
 
@@ -108,7 +108,7 @@ tmr_autorest_fnc_deployWeapon = {
 // Remove the deployed weapon rest characteristics from the player.
 // -------------------------------------------------------------------------------
 tmr_autorest_fnc_undeployWeapon = {
-	playSound "tmr_nlaw_plungerRelease";
+	playSound "tmr_autorest_bipodClose";
 
 	player setVariable ["tmr_autorest_deployed", false, false];
 
@@ -166,7 +166,7 @@ tmr_autorest_fnc_unrestWeapon = {
 // -------------------------------------------------------------------------------
 tmr_autorest_fnc_createRefPoints = {
 	_model = "TMR_Autorest_GeoRef";
-	// _model = "Sign_Sphere10cm_F";
+	//_model = "Sign_Sphere10cm_F";
 
 	tmr_autorest_refPoint1 = _model createVehicle position player; 
 	tmr_autorest_refPoint2 = _model createVehicle position player;  
@@ -210,10 +210,31 @@ tmr_autorest_fnc_attachRefPoints = {
 	tmr_autorest_refPoint9 attachTo [player, [0,0.57,-0.5], "RightHand"]; 
 };
 
+// -------------------------------------------------------------------------------
+// EH for respawning players.
+// -------------------------------------------------------------------------------
+tmr_autorest_fnc_respawnEH = {
+	_unit = _this select 0;
+	_corpse = _this select 1;
+
+	waituntil {sleep 0.2; alive player};
+
+	// When the player is alive, update the ref points to his new guy.
+	[] call tmr_autorest_fnc_attachRefPoints;
+
+	// Readd the event handler.
+	player addEventHandler ["Respawn", {_this spawn tmr_autorest_fnc_respawnEH}];
+};
 
 /////////////////////////////////////////////////////////////////////////////////
 
-// This PEH monitors the position of the geometry references, determines if the
+// This local EH updates the reference points when the player respawns.
+// It is readded afterwards.
+player addEventHandler ["Respawn", {_this spawn tmr_autorest_fnc_respawnEH}];
+
+/////////////////////////////////////////////////////////////////////////////////
+
+// This PFEH monitors the position of the geometry references, determines if the
 // lines between them intersect with an object, then applies the 'rested' state.
 // It also handles unit changes and updates the geo refs.
 
@@ -225,7 +246,7 @@ _handle = [
 {
 	// If the player unit has changed, reattach all the ref points to the new unit.
 	if (_unit != format ["%1", player]) then {
-		player sidechat 'player changed';
+		//player sidechat 'player changed';
 		[] call tmr_autorest_fnc_attachRefPoints;		
 	};
 
@@ -234,7 +255,7 @@ _handle = [
 
 	// Player can't be moving very much, must have rifle or launcher, and must be able to fire.
 	
-	_otherChecks = (vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player);
+	_otherChecks = (alive player && vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player);
 
 	// Also can't be deployed.
 	if (_otherChecks && !(player getVariable ["tmr_autorest_deployed", false])) then {

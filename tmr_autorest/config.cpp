@@ -455,3 +455,16 @@ class RscTitles {
 		};
 	};
 };
+
+class CfgSounds {
+	class tmr_autorest_bipodOpen {
+		name = "tmr_autorest_bipodOpen";
+		sound[] = {"\tmr_autorest\data\tmr_autorest_bipodopen.wss", db-0, 1};
+		titles[] = {};
+	};
+	class tmr_autorest_bipodClose {
+		name = "tmr_autorest_bipodClose";
+		sound[] = {"tmr_autorest\data\tmr_autorest_bipodclose.wss", db-0, 1};
+		titles[] = {};
+	};
+};
