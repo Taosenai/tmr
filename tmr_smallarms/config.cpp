@@ -99,7 +99,7 @@ class CfgMagazines {
 	};
 
 	class 30Rnd_65x39_caseless_green : 30Rnd_65x39_caseless_mag { // Katiba!!
-		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 100<br />Used in: Katiba KT-2";
+		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 100<br />Used in: Katiba KT-2002";
 		displayname = "6.5mm 30Rnd Katiba Mag";
 		displaynameshort = "6.5mm";
 
@@ -108,7 +108,7 @@ class CfgMagazines {
 	};
 
 	class 30Rnd_65x39_caseless_green_Tracer : 30Rnd_65x39_caseless_green { // Katiba!!
-		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Green)<br />Rounds: 100<br />Used in: Katiba KT-2";
+		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Green)<br />Rounds: 100<br />Used in: Katiba KT-2002";
 		displayname = "6.5mm 30Rnd Katiba Tracer Magazine";
 		displaynameshort = "6.5mm Tracer";
 	};
@@ -240,25 +240,25 @@ class CfgWeapons {
 	class arifle_MX_Base_F : Rifle_Base_F {
 		magazines[] = {"30Rnd_65x39_caseless_mag", "30Rnd_65x39_caseless_mag_Tracer", "100Rnd_65x39_caseless_mag", "100Rnd_65x39_caseless_mag_Tracer"};
 
-		displayName = "MX-1";
+		displayName = "MX";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
 
 		class Single : Mode_SemiAuto {};
 	};
 
 	class arifle_MX_F : arifle_MX_Base_F {
-		displayName = "MX-1";
+		displayName = "MX";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
 	};
 
 	class arifle_MXC_F : arifle_MX_Base_F {
-		displayName = "MX-1C";
+		displayName = "MXC";
 		descriptionShort = "Carbine<br />Caliber: 6.5x38mm";
 	};
 
 
 	class arifle_MX_GL_F : arifle_MX_Base_F {
-		displayName = "MX-1 3GL-H";
+		displayName = "MX 3GL-H";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
 
 		// class GL_3GL_F : UGL_F {
@@ -268,7 +268,7 @@ class CfgWeapons {
 	};
 
 	class arifle_MX_SW_F : arifle_MX_Base_F {
-		displayName = "MX-1 LSW";
+		displayName = "MX LSW";
 		descriptionShort = "Light Support Weapon<br />Caliber: 6.5x38mm";
 
 		modes[] = {"single", "manual", "close", "short", "medium", "far_optic1", "far_optic2"};
@@ -277,14 +277,14 @@ class CfgWeapons {
 	};
 
 	class arifle_MXM_F : arifle_MX_Base_F {
-		displayName = "MX-1M";
+		displayName = "MXM";
 		descriptionShort = "Marksman Rifle<br />Caliber: 6.5x38mm";
 	};
 
 	// Katibas ////////////////////////////////////////////////////
 
 	class arifle_katiba_Base_F : Rifle_Base_F {
-		displayName = "Katiba KT-2";
+		displayName = "Katiba KT-2002";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
 
 		class WeaponSlotsInfo : WeaponSlotsInfo {
@@ -295,12 +295,12 @@ class CfgWeapons {
 	};
 
 	class arifle_Katiba_F : arifle_katiba_Base_F {
-		displayName = "Katiba KT-2";
+		displayName = "Katiba KT-2002";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
 	};
 
 	class arifle_Katiba_GL_F : arifle_katiba_Base_F {
-		displayName = "Katiba KT-2 KGL";
+		displayName = "Katiba KT-2002 KGL";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
 
 		//class EGLM : UGL_F {
@@ -310,7 +310,7 @@ class CfgWeapons {
 	};
 
 	class arifle_Katiba_C_F : arifle_katiba_Base_F {
-		displayName = "Katiba KT-2C";
+		displayName = "Katiba KT-2002C";
 		descriptionShort = "Carbine<br />Caliber: 6.5x39mm";
 	};
 
@@ -496,8 +496,7 @@ class CfgWeapons {
 			// SOUND MOD ALERT
 			reloadTime = 0.075;
 			dispersion = 0.00093;
-			recoil = "tmr_recoil_auto_mk200";
-			recoilProne = "tmr_recoil_auto_prone_mk200";
+			// Recoil is defined in tmr_smallarms_recoil
 			begin1[] = {"A3\sounds_f\weapons\M200\Mk200_st_4a", 1.25893, 1, 1200};
 			begin2[] = {"A3\sounds_f\weapons\M200\Mk200_st_5a", 1.25893, 1, 1200};
 			begin3[] = {"A3\sounds_f\weapons\M200\Mk200_st_6a", 1.25893, 1, 1200};
