@@ -351,6 +351,10 @@ class CfgWeapons {
 
 	class LMG_Mk200_F : Rifle_Long_Base_F {
 		tmr_smallarms_recoil_shakeMultiplier = 1.2;
+		class Single : Mode_SemiAuto {
+			recoil = "tmr_smallarms_recoil_auto_mk200";
+			recoilprone = "tmr_smallarms_recoil_auto_prone_mk200";
+		};
 		class manual: Mode_FullAuto {
 			recoil = "tmr_smallarms_recoil_auto_mk200";
 			recoilprone = "tmr_smallarms_recoil_auto_prone_mk200";
