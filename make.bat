@@ -9,6 +9,7 @@
 set releaseFolder=@tmr
 :: Modules to build
 set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts,tmr_aimsway,tmr_autorest,tmr_smallarms,tmr_smallarms_suppressors,tmr_smallarms_recoil,tmr_smallarms_ugl,tmr_language
+:: ,tmr_optics,tmr_core_configwriter,tmr_core_binds
 :: Visual Studio solutions to build
 set VSsolutions=dll_configwriter\tmr_configwriter.sln
 :: Visual Studio output files to copy to release

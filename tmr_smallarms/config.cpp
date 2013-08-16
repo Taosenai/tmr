@@ -249,6 +249,8 @@ class CfgWeapons {
 	class arifle_MX_F : arifle_MX_Base_F {
 		displayName = "MX";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
+
+
 	};
 
 	class arifle_MXC_F : arifle_MX_Base_F {

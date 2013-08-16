@@ -468,3 +468,43 @@ class CfgSounds {
 		titles[] = {};
 	};
 };
+
+
+class CfgMissions {
+	class Missions {
+		class TMRTraining {
+			class Autorest {
+				briefingName = "Weapon Resting & Bipods";
+				// It's critical that this not begin with '\' !!
+				directory = "tmr_autorest\TMR_RestingTraining.Stratis";
+			};
+		};
+	};
+};
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Tutorials";
+		class AutorestInit {
+			arguments[] = {};
+			description = "TMR Autorest adds the ability for your weapons to rest on objects and allows you to deploy bipods on weapons which feature one.<br/><br/>Weapon resting happens automatically when your weapon is on an appropriate surface.<br/>%1%2Move up to wall ahead of you, crouch, and rest your weapon on the wall.<br/>";
+			displayName = "Weapon Resting";
+			image = "";
+			tip = "";
+		};
+		class AutorestBipods {
+			arguments[] = {{{"LockTargets"}}};
+			description = "The icon in the lower center of your screen indicates that the weapon is rested. Muzzle climb will be reduced when firing. Use stance adjustments to rest on a variety of surfaces and objects!<br/><br/>Some weapons may be equipped with a bipod. While prone or when on a surface where the bipod could be deployed, press %11 to deploy it.";
+			displayName = "Bipods";
+			image = "";
+			tip = "When prone, don't lift the bipod too far from the ground.<br/>";
+		};
+		class AutorestGoodWork {
+			arguments[] = {};
+			description = "Good work. You've mastered weapon resting!<br/><br/>You can leave the mission when you're ready.";
+			displayName = "Good Work";
+			image = "";
+			tip = "Always rest your weapon when possible!<br/>";
+		};
+	};
+};

@@ -168,18 +168,18 @@ tmr_autorest_fnc_createRefPoints = {
 	_model = "TMR_Autorest_GeoRef";
 	//_model = "Sign_Sphere10cm_F";
 
-	tmr_autorest_refPoint1 = _model createVehicle position player; 
-	tmr_autorest_refPoint2 = _model createVehicle position player;  
+	tmr_autorest_refPoint1 = _model createVehicleLocal position player; 
+	tmr_autorest_refPoint2 = _model createVehicleLocal position player;  
 
-	tmr_autorest_refPoint3 = _model createVehicle position player;  
-	tmr_autorest_refPoint4 = _model createVehicle position player;  
+	tmr_autorest_refPoint3 = _model createVehicleLocal position player;  
+	tmr_autorest_refPoint4 = _model createVehicleLocal position player;  
 
-	tmr_autorest_refPoint5 = _model createVehicle position player;  
-	tmr_autorest_refPoint6 = _model createVehicle position player;  
+	tmr_autorest_refPoint5 = _model createVehicleLocal position player;  
+	tmr_autorest_refPoint6 = _model createVehicleLocal position player;  
 
-	tmr_autorest_refPoint7 = _model createVehicle position player;  
-	tmr_autorest_refPoint8 = _model createVehicle position player; 
-	tmr_autorest_refPoint9 = _model createVehicle position player; 
+	tmr_autorest_refPoint7 = _model createVehicleLocal position player;  
+	tmr_autorest_refPoint8 = _model createVehicleLocal position player; 
+	tmr_autorest_refPoint9 = _model createVehicleLocal position player; 
 };
 
 // -------------------------------------------------------------------------------

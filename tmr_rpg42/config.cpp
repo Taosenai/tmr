@@ -231,6 +231,7 @@ class CfgCloudlets {
 
 class CfgAmmo {
 	class MissileBase;
+	class RocketBase;
 
 	class M_RPG32_F : MissileBase {
 		irlock = 0;
@@ -244,13 +245,6 @@ class CfgAmmo {
 		initTime = 0.11;
 		airFriction = 0.47;
 
-		// These settings are for the AI!
-		// Produces a reasonably flat projectile.
-		// maxspeed = 280;
-		// thrust = 550;
-		// thrusttime = 0.45;
-		// airFriction = 0.2;
-
 		maneuvrability = 0;
 		maxcontrolrange = 0;
 		simulationStep = 0.05;
@@ -262,50 +256,72 @@ class CfgAmmo {
 		indirecthitrange = 7;
 
 		// It's backwards!
-		//model = "\A3\weapons_f\launchers\RPG32\rpg32_rocket.p3d";
+		model = "\A3\weapons_f\launchers\RPG32\pg32v_rocket.p3d";
 	};
 
-	class TMR_M_RPG32_TB_F : M_RPG32_F {
+	class R_PG32V_F : RocketBase {
+		hit = 550;
+		indirecthit = 29;
+		indirecthitrange = 7;
+
+		airFriction = 0.075;
+		sideAirFriction = 0.075;
+		maxSpeed = 140;	// max speed on level road, km/h
+		initTime = 0;
+		thrustTime = 0;
+		thrust = 0;
+		fuseDistance = 8;
+		timeToLive = 30;
+		maneuvrability = 0;
+		allowAgainstInfantry = 0;
+	};
+	
+	class R_TBG32V_F : R_PG32V_F {
 		hit = 140;
-		indirecthit = 40;
-		indirecthitrange = 11;
+		indirectHit = 40;
+		indirectHitRange = 11;
 
+		model = "\A3\weapons_f\launchers\RPG32\tbg32v_rocket.p3d";
+
+		CraterEffects = "ATMissileCrater";
 		explosioneffects = "TMR_RPG42ThermobaricExplosionEffects";
+		allowAgainstInfantry = 1;
 	};
 
-	class TMR_M_RPG32_Smoke_F : M_RPG32_F {
+	class TMR_R_DG32V_F : R_PG32V_F {
 		hit = 40;
 		indirecthit = 18;
 		indirecthitrange = 5;
 
 		explosioneffects = "TMR_RPG42SmokeEffects";
+		allowAgainstInfantry = 1;
 	};
 };
 
 class CfgMagazines {
 	class CA_LauncherMagazine;
 	class RPG32_F : CA_LauncherMagazine {
-		ammo = "M_RPG32_F";
+		ammo = "R_PG32V_F";
 		mass = 80;
 
-		displayname = "RPG-42 AT Rocket";
-		displaynameshort = "AT";
-		descriptionshort = "Type: 105mm anti-tank rocket<br />Rounds: 1<br />Used in: RPG-42";
+		displayname = "PG-42V HEAT Rocket";
+		displaynameshort = "HEAT";
+		descriptionshort = "Type: 105mm high explosive anti-tank rocket<br />Rounds: 1<br />Used in: RPG-42";
 
 	};
 
 	class TMR_RPG32_TB_F : RPG32_F {
-		ammo = "TMR_M_RPG32_TB_F";
+		ammo = "R_TBG32V_F";
 
-		displayname = "RPG-42 Thermobaric Rocket";
+		displayname = "TBG-42V Thermobaric Rocket";
 		displaynameshort = "Thermobaric";
 		descriptionshort = "Type: 105mm thermobaric anti-personnel rocket<br />Rounds: 1<br />Used in: RPG-42";
 	};
 
 	class TMR_RPG32_Smoke_F : RPG32_F {
-		ammo = "TMR_M_RPG32_Smoke_F";
+		ammo = "TMR_R_DG32V_F";
 
-		displayname = "RPG-42 Smoke Rocket";
+		displayname = "DG-42V Smoke Rocket";
 		displaynameshort = "Smoke";
 		descriptionshort = "Type: 105mm smoke/marker rocket<br />Used in: RPG-42";
 	};
@@ -327,34 +343,34 @@ class CfgWeapons {
 
 		magazinereloadtime = 16;
 
-		modelOptics = "\tmr_rpg42\data\tmr_reticle_RPG42";
+		// modelOptics = "\tmr_rpg42\data\tmr_reticle_RPG42";
 
 		class WeaponSlotsInfo {
 			allowedslots[] = {901};
 			mass = 100;
 		};
 
-		class OpticsModes {
-			class optic {
-				cameradir = "look";
-				// discretedistance[] = {100, 200, 300, 400, 500, 600, 700, 800};
-				// discretedistanceinitindex = 1;
-				// discretefov[] = {0.0623, 0.0623};
-				// discreteinitindex = 0;
-				// distancezoommax = 120;
-				// distancezoommin = 400;
-				memorypointcamera = "eye";
-				opticsdisableperipherialvision = 1;
-				opticsflare = 1;
-				opticsid = 1;
-				opticsppeffects[] = {"OpticsCHAbera1", "OpticsBlur1"};
-				opticszoominit = 0.26;
-				opticszoommax = 0.26;
-				opticszoommin = 0.26;
-				usemodeloptics = 1;
-				visionmode[] = {"Normal", "NVG"};
-			};
-		};
+		// class OpticsModes {
+		// 	class optic {
+		// 		cameradir = "look";
+		// 		// discretedistance[] = {100, 200, 300, 400, 500, 600, 700, 800};
+		// 		// discretedistanceinitindex = 1;
+		// 		// discretefov[] = {0.0623, 0.0623};
+		// 		// discreteinitindex = 0;
+		// 		// distancezoommax = 120;
+		// 		// distancezoommin = 400;
+		// 		memorypointcamera = "eye";
+		// 		opticsdisableperipherialvision = 1;
+		// 		opticsflare = 1;
+		// 		opticsid = 1;
+		// 		opticsppeffects[] = {"OpticsCHAbera1", "OpticsBlur1"};
+		// 		opticszoominit = 0.26;
+		// 		opticszoommax = 0.26;
+		// 		opticszoommin = 0.26;
+		// 		usemodeloptics = 1;
+		// 		visionmode[] = {"Normal", "NVG"};
+		// 	};
+		// };
 	};
 };
 
