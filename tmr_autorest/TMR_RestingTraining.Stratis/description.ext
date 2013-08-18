@@ -1,4 +1,4 @@
-dev = "Tao Modular Realism";
+dev = "TMR Modular Realism";
 author = "Taosenai";
 briefingName = "Weapon Resting & Bipods";
 onLoadName = "Resting & Bipods";

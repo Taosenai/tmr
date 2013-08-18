@@ -8,8 +8,7 @@
 :: Name of the release
 set releaseFolder=@tmr
 :: Modules to build
-set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts,tmr_aimsway,tmr_autorest,tmr_smallarms,tmr_smallarms_suppressors,tmr_smallarms_recoil,tmr_smallarms_ugl,tmr_language
-:: ,tmr_optics,tmr_core_configwriter,tmr_core_binds
+set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts,tmr_aimsway,tmr_autorest,tmr_smallarms,tmr_smallarms_suppressors,tmr_smallarms_recoil,tmr_smallarms_ugl,tmr_language,tmr_optics,tmr_core_configwriter,tmr_core_binds
 :: Visual Studio solutions to build
 set VSsolutions=dll_configwriter\tmr_configwriter.sln
 :: Visual Studio output files to copy to release
@@ -90,14 +89,14 @@ GOTO :EOF
 :: Sub to make release
 :Release
 ECHO Zipping up release...
-del @tmr-%releaseVersion%.zip
-%Zip% a @tmr-%releaseVersion%.zip .\release\*
+del %releaseFolder%-%releaseVersion%.zip
+%Zip% a %releaseFolder%-%releaseVersion%.zip .\release\*
 GOTO :EOF
 
 :: Sub to copy the build to your Arma 3 folder
 :Test
 ECHO Copying current build to Arma 3...
-robocopy release\@tmr %Arma3Dir%\%releaseFolder% /E /njh /njs /ndl /nc /ns /nfl
+robocopy release\%releaseFolder% %Arma3Dir%\%releaseFolder% /E /njh /njs /ndl /nc /ns /nfl
 GOTO :EOF
 
 :: Sub to sign a package

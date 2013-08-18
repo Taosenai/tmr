@@ -1,4 +1,4 @@
-﻿Tao Modular Realism
+﻿TMR Modular Realism
 README
 -------------------------------
 

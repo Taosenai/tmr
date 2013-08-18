@@ -1,4 +1,4 @@
-﻿name = "TMR";
+﻿name = "TMR Modular Realism";
 picture = "tmr_ca.paa";
 actionName = "Website";
 action = "http://www.ryanschultz.org/tmr/";

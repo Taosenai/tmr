@@ -1,4 +1,4 @@
-﻿Tao Modular Realism: Core Module
+﻿TMR Modular Realism: Core Module
 README
 -------------------------------
 
