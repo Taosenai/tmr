@@ -7,7 +7,6 @@ class CfgPatches {
 		weapons[] = {};
 		requiredVersion = 0.60;
 		requiredAddons[] = {A3_Weapons_F, A3_UI_F, CBA_XEH, CBA_MAIN, tmr_language};
-//		requiredAddons[] = {A3_Weapons_F, A3_UI_F, CBA_XEH, CBA_MAIN, tmr_language, tmr_core_configwriter, tmr_core_binds};
 		version = 0.2.3;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
