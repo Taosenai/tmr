@@ -10,7 +10,7 @@ tmr_autorest_deployIconDisplayed = false;
 tmr_autorest_deployIconTransition = false;
 
 #define TMR_AUTOREST_RESTEDRECOIL 0.66
-#define TMR_AUTOREST_DEPLOYEDRECOIL 0.525
+#define TMR_AUTOREST_DEPLOYEDRECOIL 0.49
 
 // -------------------------------------------------------------------------------
 // Key EH: Deploy the weapon if it has a bipod and there is something to deploy on.
@@ -206,8 +206,8 @@ tmr_autorest_fnc_attachRefPoints = {
 	tmr_autorest_refPoint6 attachTo [player, [-0.145,-0.3,-0.40], "RightHand"]; 
 
 	tmr_autorest_refPoint7 attachTo [player, [0,0.38,-0.02], "RightHand"]; 
-	tmr_autorest_refPoint8 attachTo [player, [0,0.24,-0.5], "RightHand"]; 
-	tmr_autorest_refPoint9 attachTo [player, [0,0.57,-0.5], "RightHand"]; 
+	tmr_autorest_refPoint8 attachTo [player, [0,0.24,-0.57], "RightHand"]; 
+	tmr_autorest_refPoint9 attachTo [player, [0,0.57,-0.57], "RightHand"]; 
 };
 
 // -------------------------------------------------------------------------------

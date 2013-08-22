@@ -42,8 +42,8 @@ class CfgVehicles {
 	};
 };
 
-#define TMR_SWAY_DEPLOY 0.094
-#define TMR_SWAY_DEPLOYPRONE 0.065
+#define TMR_SWAY_DEPLOY 0.084
+#define TMR_SWAY_DEPLOYPRONE 0.045
 #define TMR_DEPLOY_TURNSPEED 0.1
 
 // Arma 3 doesn't respect turnSpeed.
@@ -400,8 +400,7 @@ class CfgWeapons {
 	};
 };
 
-class TMR_RscPicture
-{
+class TMR_RscPicture {
    type = 0;
    style = 48;
    idc = -1;
