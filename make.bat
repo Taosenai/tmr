@@ -8,11 +8,14 @@
 :: Name of the release
 set releaseFolder=@tmr
 :: Modules to build
-set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts,tmr_aimsway,tmr_autorest,tmr_smallarms,tmr_smallarms_suppressors,tmr_smallarms_recoil,tmr_smallarms_ugl,tmr_language,tmr_optics,tmr_core_configwriter,tmr_core_binds
+set modules=tmr_core,tmr_nlaw,tmr_rpg42,tmr_disposable,tmr_u_loadouts,tmr_aimsway,tmr_autorest,tmr_smallarms,tmr_smallarms_suppressors,tmr_smallarms_recoil,tmr_smallarms_ugl,tmr_language,tmr_optics,tmr_ballistics,tmr_optics_nonfree
+:: Disabled: tmr_core_configwriter,tmr_core_binds,
 :: Visual Studio solutions to build
-set VSsolutions=dll_configwriter\tmr_configwriter.sln
+::set VSsolutions=dll_configwriter\tmr_configwriter.sln
+set VSsolutions=
 :: Visual Studio output files to copy to release
-set VSoutputs=dll_configwriter\Release\tmr_configwriter.dll
+::set VSoutputs=dll_configwriter\Release\tmr_configwriter.dll
+set VSoutputs=
 :: BI work drive
 set workPath=P:\
 :: Location of the BinPBO utility.
