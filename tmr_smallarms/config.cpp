@@ -132,6 +132,9 @@ class CfgMagazines {
 		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 200<br />Used in: Mk200 LMG";
 		displayname = "6.5mm 200Rnd Box";
 		displaynameshort = "6.5mm";
+
+		tracersEvery = 5;
+		lastRoundsTracer = 3;
 	};
 	class 200Rnd_65x39_cased_Box_Tracer: 200Rnd_65x39_cased_Box {
 		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Green)<br />Rounds: 200<br />Used in: Mk200 LMG";
