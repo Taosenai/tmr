@@ -54,6 +54,8 @@ tmr_optics_fnc_hideScope = {
 tmr_optics_fnc_scopeRecoil_firedEH = {
 	_this spawn {
 		// [unit, weapon, muzzle, mode, ammo, magazine, projectile]
+		if (_this select 0 != player) exitwith {}; // Sanity check
+			
 		_weaponType = _this select 1;
 
 		_config = configFile >> "CfgWeapons" >> _weaponType;
@@ -62,8 +64,8 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 		if (_recoilMulti == 0) then {
 			_recoilMulti = 1;
 		};
-		if (_recoilMulti > 2.9) then {
-			_recoilMulti = 2.9; // Don't get too high
+		if (_recoilMulti > 2.7) then {
+			_recoilMulti = 2.7; // Don't get too high
 		};
 
 		// Constants which determine how the scope recoils
