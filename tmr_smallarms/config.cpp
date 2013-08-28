@@ -84,7 +84,7 @@ class CfgMagazines {
 	// 6.5mm //////////////////////////////////////////
 
 	class 30Rnd_65x39_caseless_mag : CA_Magazine { // MX!!
-		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 30<br />Used in: MX-1";
+		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 30<br />Used in: MX-1";
 		displayname = "6.5mm 30Rnd MX Mag";
 		displaynameshort = "6.5mm";
 
@@ -93,7 +93,7 @@ class CfgMagazines {
 	};
 
 	class 30Rnd_65x39_caseless_mag_Tracer : 30Rnd_65x39_caseless_mag { // MX!!
-		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Red)<br />Rounds: 30<br />Used in: MX-1";
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Red)<br />Rounds: 30<br />Used in: MX-1";
 		displayname = "6.5mm 30Rnd MX Tracer Mag";
 		displaynameshort = "6.5mm Tracer";
 	};
@@ -114,7 +114,7 @@ class CfgMagazines {
 	};
 
 	class 100Rnd_65x39_caseless_mag : CA_Magazine {
-		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 100<br />Used in: MX-1";
+		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 100<br />Used in: MX-1";
 		displayname = "6.5mm 100Rnd MX Mag";
 		displaynameshort = "6.5mm";
 
@@ -123,13 +123,13 @@ class CfgMagazines {
 	};
 
 	class 100Rnd_65x39_caseless_mag_Tracer : 100Rnd_65x39_caseless_mag {
-		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Red)<br />Rounds: 100<br />Used in: MX-1";
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Red)<br />Rounds: 100<br />Used in: MX-1";
 		displayname = "6.5mm 100Rnd MX Tracer Mag";
 		displaynameshort = "6.5mm Tracer";
 	};
 
 	class 200Rnd_65x39_cased_Box : CA_Magazine {
-		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 200<br />Used in: Mk200 LMG";
+		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 200<br />Used in: Mk200 LMG";
 		displayname = "6.5mm 200Rnd Box";
 		displaynameshort = "6.5mm";
 
@@ -137,7 +137,7 @@ class CfgMagazines {
 		lastRoundsTracer = 3;
 	};
 	class 200Rnd_65x39_cased_Box_Tracer: 200Rnd_65x39_cased_Box {
-		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Green)<br />Rounds: 200<br />Used in: Mk200 LMG";
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 200<br />Used in: Mk200 LMG";
 		displayname = "6.5mm 200Rnd Tracer Box";
 		displaynameshort = "6.5mm Tracer";
 	};
