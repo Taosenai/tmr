@@ -47,8 +47,6 @@ class CfgWeapons {
 
 	class optic_Hamr : ItemCore {
 		displayName = "IHAMR 4x";
-		picture = "\A3\weapons_F\Data\UI\gear_acco_hamr_CA.paa";
-		model = "\A3\weapons_f_beta\acc\acco_hamr_f";
 		descriptionShort = "High Accuracy Multi-Range Optic<br />Magnification: 4x<br />Reticle: CM-RW 6.5mm";
 		scope = 2;
 		weaponinfotype = "";
@@ -118,7 +116,6 @@ class CfgWeapons {
 	class optic_Arco : ItemCore {
 		descriptionshort = "Advanced Rifle Combat Optic<br />Magnification: 4x<br />Reticle: SpecterDR 6.5mm";
 		displayname = "ARCO 4x";
-		model = "\A3\weapons_f_beta\acc\acco_arco_F";
 		picture = "\A3\weapons_F\Data\UI\gear_acco_Arco_CA.paa";
 		scope = 2;
 		weaponinfotype = "";
@@ -169,6 +166,75 @@ class CfgWeapons {
 					memorypointcamera = "opticView";
 					opticsdisableperipherialvision = 0;
 					opticsdisplayname = "ARCO";
+					opticsflare = 1;
+					opticsid = 2;
+					opticsppeffects[] = {};
+					opticszoominit = 0.0872664626;
+					opticszoommax = 0.0872664626;
+					opticszoommin = 0.0872664626;
+					discretefov[] = {0.0872664626};
+					discreteinitindex = 0;
+					usemodeloptics = 1;
+					modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
+					visionmode[] = {"Normal"};
+				};
+			};
+		};
+	};
+
+	class optic_MRCO : ItemCore {
+		displayName = "MRCO 1x/4x";
+		descriptionShort = "Medium Range Combat Optic<br />Magnification: 1x/4x<br />Reticle: Pitbull Gen II 5.56mm";
+		scope = 2;
+		weaponinfotype = "";
+
+		tmr_optics_enhanced = 1;
+
+		tmr_optics_shadow = "\tmr_optics\data\mrco\mrco-scopeshadow_ca.paa";
+		tmr_optics_bodycenter = "\tmr_optics\data\mrco\mrco-center_ca.paa";
+		tmr_optics_bodyleft = "\tmr_optics\data\mrco\mrco-left_ca.paa";
+		tmr_optics_bodyright = "\tmr_optics\data\mrco\mrco-right_ca.paa";
+		tmr_optics_bodycenterNight = "\tmr_optics\data\mrco\mrco-centerNight_ca.paa";
+		tmr_optics_bodyLeftNight = "\tmr_optics\data\mrco\mrco-leftNight_ca.paa";
+		tmr_optics_bodyRightNight = "\tmr_optics\data\mrco\mrco-rightNight_ca.paa";
+		tmr_optics_scopering = "";
+		tmr_optics_scoperingNight = "";
+		
+		class ItemInfo : InventoryOpticsItem_Base_F {
+			opticType = 1;
+			mass = 4;
+			optics = true;
+			modelOptics = "\A3\Weapons_f_beta\acc\reticle_MRCO_F";
+
+			
+			class OpticsModes {
+				class MRCOcq {
+					tmr_optics_enhanced = 0;
+					opticsID = 1;
+					useModelOptics = 0;
+					opticsPPEffects[] = {""};
+					opticsFlare = false;
+					opticsDisablePeripherialVision = false;
+					opticsZoomMin = 0.375;
+					opticsZoomMax = 1;
+					opticsZoomInit = 0.75;
+					memoryPointCamera = "eye";
+					visionMode[] = {};
+					distanceZoomMin = 100;
+					distanceZoomMax = 100;
+				};
+				
+				class MRCOscope {
+					tmr_optics_enhanced = 1;
+					tmr_optics_reticle = "\tmr_optics\data\mrco\mrco-reticle556Gen2_ca.paa";
+					tmr_optics_reticleIllum = "\tmr_optics\data\mrco\mrco-reticleIllum556Gen2_ca.paa";
+
+					cameradir = "";
+					distanceZoomMin = 300;
+					distanceZoomMax = 300;
+					memorypointcamera = "eye";
+					opticsdisableperipherialvision = 0;
+					opticsdisplayname = "MRCO";
 					opticsflare = 1;
 					opticsid = 2;
 					opticsppeffects[] = {};

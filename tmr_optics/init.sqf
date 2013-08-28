@@ -144,13 +144,13 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 		(TMR_SCOPECTRL 3) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4))) - (_recoilScope*1.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
-		(TMR_SCOPECTRL 4) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4))) - (_recoilScope*1.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
+		(TMR_SCOPECTRL 4) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4))) + (_recoilScope*0.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
 		(TMR_SCOPECTRL 5) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34) - (_recoilScope/2) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
 		(TMR_SCOPECTRL 6) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4))) - (_recoilScope*1.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
-		(TMR_SCOPECTRL 7) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4))) + (_recoilScope*0.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
+		(TMR_SCOPECTRL 7) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4))) + (_recoilScope*0.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope];
 
 		// Scoperings move together
 
