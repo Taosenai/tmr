@@ -39,4 +39,8 @@ class CfgWeapons {
 	class optic_Arco : ItemCore {
 		model = "\tmr_optics_nonfree\data\acco_arco_F";
 	};
+
+	class optic_mrco : ItemCore {
+		model = "\tmr_optics_nonfree\data\acco_mrco_F";
+	};
 };
