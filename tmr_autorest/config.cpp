@@ -4,7 +4,7 @@
 class CfgPatches {
 	class tmr_autorest {
 		units[] = {};
-		weapons[] = {};
+		weapons[] = {"TMR_muzzle_bipod"};
 		requiredVersion = 0.60;
 		requiredAddons[] = {A3_Weapons_F, "A3_Anims_F", tmr_core};
 		version = 0.1;
@@ -363,9 +363,104 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 	};
 };
 
+class Mode_SemiAuto;
+class Mode_FullAuto;
+
+class SlotInfo;
+class CowsSlot;	
+class PointerSlot;
+
 class CfgWeapons {
-	class Rifle_Base_F;
-	class arifle_MX_Base_F;
+	class Rifle;
+	
+	class ItemCore;
+	class InventoryItem_Base_F;
+	class InventoryMuzzleItem_Base_F;
+	class InventoryFlashLightItem_Base_F;
+
+	class Rifle_Base_F : Rifle {
+		class WeaponSlotsInfo {
+			class PointerSlot : SlotInfo {
+				compatibleItems[] = {"acc_flashlight", "acc_pointer_IR", "TMR_acc_bipod"};
+				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
+			};
+		};
+	};
+
+	class Rifle_Long_Base_F;
+
+
+	class TMR_acc_bipod : ItemCore {
+		scope = 2;
+		displayName = "Bipod";
+		picture = "\tmr_autorest\data\gear_acc_bipod_ca.paa";
+		model = "";
+
+		descriptionUse = "Mount bipod";
+		descriptionShort = "Rifle bipod suitable for most rail systems.";
+		
+		class ItemInfo : InventoryFlashLightItem_Base_F {
+			mass = 8;
+			
+			class Pointer {
+			};
+			
+			class FlashLight {};
+		};
+	};
+
+
+	class mk20_base_F : Rifle_Base_F {
+		class WeaponSlotsInfo {
+			class PointerSlot : SlotInfo {
+				compatibleItems[] = {"acc_flashlight", "acc_pointer_IR", "TMR_acc_bipod"};
+				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
+			};
+		};
+	};
+
+	class arifle_MX_Base_F : Rifle_Base_F {
+		class WeaponSlotsInfo {
+			class PointerSlot : SlotInfo {
+				compatibleItems[] = {"acc_flashlight", "acc_pointer_IR", "TMR_acc_bipod"};
+				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
+			};
+		};
+	};
+
+	class arifle_Katiba_Base_F : Rifle_Base_F {
+		class WeaponSlotsInfo {
+			class PointerSlot : SlotInfo {
+				compatibleItems[] = {"acc_flashlight", "acc_pointer_IR", "TMR_acc_bipod"};
+				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
+			};
+		};
+	};
+
+	class Tavor_base_F : Rifle_Base_F {
+		class WeaponSlotsInfo {
+			class PointerSlot : SlotInfo {
+				compatibleItems[] = {"acc_flashlight", "acc_pointer_IR", "TMR_acc_bipod"};
+				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
+			};
+		};
+	};
+
+	class EBR_base_F : Rifle_Long_Base_F {
+		tmr_autorest_deployable = 1;
+
+		class WeaponSlotsInfo {
+			class PointerSlot : SlotInfo {
+				compatibleItems[] = {"acc_flashlight", "acc_pointer_IR", "TMR_acc_bipod"};
+				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
+			};
+		};
+	};
+
+
+
+
+	////////////////////////////////////////////////
 
 	class arifle_MX_SW_F : arifle_MX_Base_F {
 		tmr_autorest_deployable = 1;
@@ -377,17 +472,11 @@ class CfgWeapons {
 
 	////////////////////////////////////////////////
 
-	class Rifle_Long_Base_F;
-
 	class LMG_Mk200_F : Rifle_Long_Base_F {
 		tmr_autorest_deployable = 1;
 	};
 
 	class LMG_Zafir_F: Rifle_Long_Base_F {
-		tmr_autorest_deployable = 1;
-	};
-
-	class EBR_base_F : Rifle_Long_Base_F {
 		tmr_autorest_deployable = 1;
 	};
 

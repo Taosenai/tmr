@@ -31,8 +31,9 @@ tmr_autorest_fnc_deployKeyDownEH = {
 
 		// Make sure weapon is deployable (bipod mounted)
 		_config = configFile >> "CfgWeapons" >> currentWeapon player;
-		_canDeploy = getNumber (_config >> "tmr_autorest_deployable"); // 1 for true
-		if (_canDeploy != 1) exitwith {false};
+		_canDeployCfg = getNumber (_config >> "tmr_autorest_deployable"); // 1 for true
+
+		if (_canDeployCfg != 1 || !_canDeployItem) exitwith {false};
 
 		// Make sure it's an anim that can deploy.
 		_allowedAnimStates = ["amovpercmstpsraswrfldnon", "aadjpercmstpsraswrfldup", "aadjpercmstpsraswrflddown", "aadjpercmstpsraswrfldright", "aadjpercmstpsraswrfldleft", "aadjpknlmstpsraswrfldup", "amovpknlmstpsraswrfldnon", "aadjpknlmstpsraswrflddown", "aadjpknlmstpsraswrfldleft", "aadjpknlmstpsraswrfldright", "aadjppnemstpsraswrfldup", "amovppnemstpsraswrfldnon"];
