@@ -46,10 +46,19 @@ class CfgAmmo {
 		// Pretend MX has 1:9 twist barrel
 
 		typicalSpeed = 724; 
-		caliber = 1;
+		caliber = 1; // Default
 		airFriction = -0.000915;
 
 		// This gives closely matching MV out to subsonic; gets bad after that due to Arma's simpler bullet model
+	};
+
+	class B_556x45_Ball : BulletBase {
+		// SS109 bullet steel core light penetrator
+		// M855 load data
+		// Muzzle velocity based on 16" barrel (standard for F2000)
+		typicalSpeed = 911; // http://counterstrikefox.freeservers.com/mv.htm
+		airFriction = -0.001335; 
+		caliber = 0.8; // Default
 	};
 };
 
@@ -58,6 +67,12 @@ class CfgMagazines {
 	
 	class 30Rnd_65x39_caseless_mag : CA_Magazine {
 		initSpeed = 724; // initial MV for 14.5in barrel
+		descriptionshort = "Caliber: 6.5x39mm Caseless 120gr OTM<br />Rounds: 30<br />Used in: MX-1";
+	};
+
+	class 30Rnd_65x39_caseless_green : CA_Magazine {
+		initSpeed = 724; // initial MV for 14.5in barrel
+		descriptionshort = "Caliber: 6.5x38mm Caseless 120gr OTM<br />Rounds: 30<br />Used in: KT-2002";
 	};
 
 	class 100Rnd_65x39_caseless_mag : CA_Magazine {
@@ -67,6 +82,10 @@ class CfgMagazines {
 
 	class 200Rnd_65x39_cased_Box : CA_Magazine {
 		initSpeed = 691; // initial MV for 12.5in barrel (estimated)
+	};
+
+	class 30Rnd_556x45_Stanag : CA_Magazine {
+		initSpeed = 911; // Initial MV for a 16" barrel
 	};
 };
 
@@ -118,6 +137,26 @@ class CfgWeapons {
 		};
 		class manual : Mode_FullAuto {
 			dispersion = 0.00175; // radians. Equal to 6 MOA.
+		};
+	};
+
+	class Tavor_base_F : Rifle_Base_F {
+		class Single : Mode_SemiAuto {
+			dispersion = 0.000727; // radians. Equal to 2.5 MOA, about the limit of mass-produced M855.
+			// 
+		};
+		class FullAuto : Mode_FullAuto {
+			dispersion = 0.00147; // radians. Equal to 5.1 MOA.
+		};
+	};
+
+	class mk20_base_F : Rifle_Base_F {
+		class Single : Mode_SemiAuto {
+			dispersion = 0.0008727; // radians. Equal to 3 MOA, about the limit of mass-produced M855 plus
+			// some extra for these worn out Greek Army service rifles.
+		};
+		class FullAuto : Mode_FullAuto {
+			dispersion = 0.00147; // radians. Equal to 5.1 MOA.
 		};
 	};
 };
