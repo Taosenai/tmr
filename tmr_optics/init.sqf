@@ -11,6 +11,9 @@ tmr_optics_currentOptic = "";
 
 #define TMR_SCOPECTRL (uiNameSpace getVariable "TMR_Optics_Scope") displayCtrl
 #define TMR_SCOPE_RSCLAYER 9138
+#define TMR_SCOPECTRL_CENTERPOSX (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2)
+#define TMR_SCOPECTRL_LEFTPOSX (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2) - (SafeZoneW / (getResolution select 4))
+#define TMR_SCOPECTRL_RIGHTPOSX (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2) + (SafeZoneW / (getResolution select 4))
 
 // -------------------------------------------------------------------------------
 // Instantly hide all scope elements.
@@ -74,44 +77,44 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 		_randomScopeShiftX = 0.005 * _recoilMulti - random 0.011;
 
-		_randomReticleShiftX = -0.002 * _recoilMulti + random 0.0058; // Always tend up and right
-		_randomReticleShiftY = -0.001 * _recoilMulti - random 0.0058;
+		_randomReticleShiftX = -0.002 * _recoilMulti + random 0.0062; // Always tend up and right
+		_randomReticleShiftY = -0.001 * _recoilMulti - random 0.0062;
 
 		/////////
 		// Center everything
 
 		// Scope shadow
-		(TMR_SCOPECTRL 1) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 1) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Body center night
-		(TMR_SCOPECTRL 2) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 2) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Body left night
-		(TMR_SCOPECTRL 3) ctrlSetPosition [(SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 3) ctrlSetPosition [TMR_SCOPECTRL_LEFTPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Body right night
-		(TMR_SCOPECTRL 4) ctrlSetPosition [(SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 4) ctrlSetPosition [TMR_SCOPECTRL_RIGHTPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Body center
-		(TMR_SCOPECTRL 5) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 5) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Body center left
-		(TMR_SCOPECTRL 6) ctrlSetPosition [(SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 6) ctrlSetPosition [TMR_SCOPECTRL_LEFTPOSX - (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Body center right
-		(TMR_SCOPECTRL 7) ctrlSetPosition [(SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 7) ctrlSetPosition [TMR_SCOPECTRL_RIGHTPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Reticle
-		(TMR_SCOPECTRL 15) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 15) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Reticle night
-		(TMR_SCOPECTRL 16) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 16) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Scopering night
-		(TMR_SCOPECTRL 20) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 20) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Scopering
-		(TMR_SCOPECTRL 21) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 21) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 
 		_centerDelay = 0.01;
@@ -132,33 +135,33 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 		// Scope shadow + reticle move together
 
-		(TMR_SCOPECTRL 1) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34) + _randomReticleShiftX, SafeZoneY + _randomReticleShiftY, SafeZoneW / (getResolution select 4), SafeZoneH]; 
+		(TMR_SCOPECTRL 1) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX + _randomReticleShiftX, SafeZoneY + _randomReticleShiftY, SafeZoneW / (getResolution select 4), SafeZoneH]; 
 
-		(TMR_SCOPECTRL 15) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34) + _randomReticleShiftX, SafeZoneY + _randomReticleShiftY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 15) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX + _randomReticleShiftX, SafeZoneY + _randomReticleShiftY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 16) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34) + _randomReticleShiftX, SafeZoneY + _randomReticleShiftY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 16) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX + _randomReticleShiftX, SafeZoneY + _randomReticleShiftY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		// Body & body night move together
 
-		(TMR_SCOPECTRL 2) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34) - (_recoilScope/2) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
+		(TMR_SCOPECTRL 2) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX - (_recoilScope/2) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
-		(TMR_SCOPECTRL 3) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4))) - (_recoilScope*1.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
+		(TMR_SCOPECTRL 3) ctrlSetPosition [TMR_SCOPECTRL_LEFTPOSX - (_recoilScope*1.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
-		(TMR_SCOPECTRL 4) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4))) + (_recoilScope*0.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
+		(TMR_SCOPECTRL 4) ctrlSetPosition [TMR_SCOPECTRL_RIGHTPOSX + (_recoilScope*0.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
-		(TMR_SCOPECTRL 5) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34) - (_recoilScope/2) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
+		(TMR_SCOPECTRL 5) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX - (_recoilScope/2) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
-		(TMR_SCOPECTRL 6) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4))) - (_recoilScope*1.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
+		(TMR_SCOPECTRL 6) ctrlSetPosition [TMR_SCOPECTRL_LEFTPOSX - (_recoilScope*1.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope]; 
 
-		(TMR_SCOPECTRL 7) ctrlSetPosition [((SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4))) + (_recoilScope*0.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope];
+		(TMR_SCOPECTRL 7) ctrlSetPosition [TMR_SCOPECTRL_RIGHTPOSX + (_recoilScope*0.5) + _randomScopeShiftX, SafeZoneY - (_recoilScope/2), SafeZoneW / (getResolution select 4) + _recoilScope, SafeZoneH + _recoilScope];
 
 		// Scoperings move together
 
-		(TMR_SCOPECTRL 20) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34) - ((_recoilScope+_recoilRing)/2) + _randomScopeShiftX, SafeZoneY - ((_recoilScope+_recoilRing)/2), SafeZoneW / (getResolution select 4) + _recoilScope + _recoilRing, SafeZoneH + _recoilScope + _recoilRing]; 
+		(TMR_SCOPECTRL 20) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX - ((_recoilScope+_recoilRing)/2) + _randomScopeShiftX, SafeZoneY - ((_recoilScope+_recoilRing)/2), SafeZoneW / (getResolution select 4) + _recoilScope + _recoilRing, SafeZoneH + _recoilScope + _recoilRing]; 
 
-		(TMR_SCOPECTRL 21) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34) - ((_recoilScope+_recoilRing)/2) + _randomScopeShiftX, SafeZoneY - ((_recoilScope+_recoilRing)/2), SafeZoneW / (getResolution select 4) + _recoilScope + _recoilRing, SafeZoneH + _recoilScope + _recoilRing]; 
+		(TMR_SCOPECTRL 21) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX - ((_recoilScope+_recoilRing)/2) + _randomScopeShiftX, SafeZoneY - ((_recoilScope+_recoilRing)/2), SafeZoneW / (getResolution select 4) + _recoilScope + _recoilRing, SafeZoneH + _recoilScope + _recoilRing]; 
 
-		_recoilDelay = 0.032;
+		_recoilDelay = 0.034;
 		(TMR_SCOPECTRL 1) ctrlCommit _recoilDelay; 
 		(TMR_SCOPECTRL 2) ctrlCommit _recoilDelay; 
 		(TMR_SCOPECTRL 3) ctrlCommit _recoilDelay; 
@@ -180,27 +183,27 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 		//////
 		// Bring them all back
-		(TMR_SCOPECTRL 1) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 1) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 2) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 2) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 3) ctrlSetPosition [(SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 3) ctrlSetPosition [TMR_SCOPECTRL_LEFTPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 4) ctrlSetPosition [(SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 4) ctrlSetPosition [TMR_SCOPECTRL_RIGHTPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 5) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 5) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 6) ctrlSetPosition [(SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 6) ctrlSetPosition [TMR_SCOPECTRL_LEFTPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 7) ctrlSetPosition [(SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4)), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 7) ctrlSetPosition [TMR_SCOPECTRL_RIGHTPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 15) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 15) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 16) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 16) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 20) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 20) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
-		(TMR_SCOPECTRL 21) ctrlSetPosition [SafeZoneX + (SafeZoneW/5.34), SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
+		(TMR_SCOPECTRL 21) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX, SafeZoneY, SafeZoneW / (getResolution select 4), SafeZoneH];
 
 		_recenterDelay = 0.1;
 		(TMR_SCOPECTRL 1) ctrlCommit _recenterDelay; 

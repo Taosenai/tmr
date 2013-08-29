@@ -280,7 +280,7 @@ class RscTitles {
 			colorText[] = {1,1,1,1};
 			fade = 0;
 			text = "";
-			x = SafeZoneX + (SafeZoneW/5.34);
+			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
 			y = SafeZoneY;
 			w = SafeZoneW / (getResolution select 4);
 			h = SafeZoneH;
@@ -289,19 +289,19 @@ class RscTitles {
 		class BodyCenter : Shadow {
 			idc = 5;
 			text = "";
-			x = SafeZoneX + (SafeZoneW/5.34);
+			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
 		};
 
 		class BodyLeft : Shadow {
 			idc = 6;
 			text = "";
-			x = (SafeZoneX + (SafeZoneW/5.34)) - (SafeZoneW / (getResolution select 4));
+			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2) - (SafeZoneW / (getResolution select 4));
 		};
 
 		class BodyRight : Shadow {
 			idc = 7;
 			text = "";
-			x = (SafeZoneX + (SafeZoneW/5.34)) + (SafeZoneW / (getResolution select 4));
+			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2) + (SafeZoneW / (getResolution select 4));
 		};
 
 		class BodyCenterNight : BodyCenter {
@@ -322,7 +322,7 @@ class RscTitles {
 		class Reticle : Shadow {
 			idc = 15;
 			text = "";
-			x = SafeZoneX + (SafeZoneW/5.34);
+			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
 		};
 
 		class ReticleNight : Reticle {
@@ -333,13 +333,13 @@ class RscTitles {
 		class Ring : Shadow {
 			idc = 21;
 			text = "";
-			x = SafeZoneX + (SafeZoneW/5.34);
+			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
 		};
 
 		class RingNight : Shadow {
 			idc = 20;
 			text = "";
-			x = SafeZoneX + (SafeZoneW/5.34);
+			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
 		};
 	};
 };
