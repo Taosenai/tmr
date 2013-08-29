@@ -46,10 +46,10 @@ class CfgWeapons {
 	class InventoryOpticsItem_Base_F;
 
 	class optic_Hamr : ItemCore {
-		displayName = "IHAMR 4x";
+		displayName = "HAMR 4x";
 		descriptionShort = "High Accuracy Multi-Range Optic<br />Magnification: 4x<br />Reticle: CM-RW 6.5mm";
 		scope = 2;
-		weaponinfotype = "";
+		weaponInfoType = "RscWeaponZeroing";
 
 		tmr_optics_enhanced = 1;
 
@@ -118,7 +118,7 @@ class CfgWeapons {
 		displayname = "ARCO 4x";
 		picture = "\A3\weapons_F\Data\UI\gear_acco_Arco_CA.paa";
 		scope = 2;
-		weaponinfotype = "";
+		weaponInfoType = "RscWeaponZeroing";
 
 		tmr_optics_enhanced = 1;
 
@@ -186,7 +186,7 @@ class CfgWeapons {
 		displayName = "MRCO 1x/4x";
 		descriptionShort = "Medium Range Combat Optic<br />Magnification: 1x/4x<br />Reticle: Pitbull Gen II 5.56mm";
 		scope = 2;
-		weaponinfotype = "";
+		weaponInfoType = "RscWeaponZeroing";
 
 		tmr_optics_enhanced = 1;
 
