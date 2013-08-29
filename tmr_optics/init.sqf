@@ -10,10 +10,52 @@ tmr_optics_inScope_FOV = ([] call cba_fnc_getFOV) select 0;
 tmr_optics_currentOptic = "";
 
 #define TMR_SCOPECTRL (uiNameSpace getVariable "TMR_Optics_Scope") displayCtrl
-#define TMR_SCOPE_RSCLAYER 9138
 #define TMR_SCOPECTRL_CENTERPOSX (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2)
 #define TMR_SCOPECTRL_LEFTPOSX (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2) - (SafeZoneW / (getResolution select 4))
 #define TMR_SCOPECTRL_RIGHTPOSX (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2) + (SafeZoneW / (getResolution select 4))
+
+// -------------------------------------------------------------------------------
+// Init the scope resources if they are not already available.
+// -------------------------------------------------------------------------------
+tmr_optics_fnc_initScope = {
+	_initNeeded = false;
+
+	// Make sure we only cutRsc when the resource isn't already available
+	if (isNil {uiNameSpace getVariable "TMR_Optics_Scope"}) then {
+		_initNeeded = true;
+	} else {
+		if (isNull (uiNameSpace getVariable "TMR_Optics_Scope")) then {
+			_initNeeded = true;
+		};
+	};
+
+	if (_initNeeded) then {
+		tmr_optics_scopeRsc cutRsc ["TMR_Optics_Scope","PLAIN",0];
+		(TMR_SCOPECTRL 1) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 2) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 3) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 4) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 5) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 6) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 7) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 15) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 16) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 20) ctrlSetTextColor [1,1,1,0]; 
+		(TMR_SCOPECTRL 21) ctrlSetTextColor [1,1,1,0]; 
+
+		(TMR_SCOPECTRL 1) ctrlCommit 0; 
+		(TMR_SCOPECTRL 2) ctrlCommit 0; 
+		(TMR_SCOPECTRL 3) ctrlCommit 0; 
+		(TMR_SCOPECTRL 4) ctrlCommit 0; 
+		(TMR_SCOPECTRL 5) ctrlCommit 0; 
+		(TMR_SCOPECTRL 6) ctrlCommit 0; 
+		(TMR_SCOPECTRL 7) ctrlCommit 0; 
+		(TMR_SCOPECTRL 15) ctrlCommit 0; 
+		(TMR_SCOPECTRL 16) ctrlCommit 0; 
+		(TMR_SCOPECTRL 20) ctrlCommit 0; 
+		(TMR_SCOPECTRL 21) ctrlCommit 0;
+	};
+};
 
 // -------------------------------------------------------------------------------
 // Instantly hide all scope elements.
@@ -67,8 +109,8 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 		if (_recoilMulti == 0) then {
 			_recoilMulti = 1;
 		};
-		if (_recoilMulti > 2.7) then {
-			_recoilMulti = 2.7; // Don't get too high
+		if (_recoilMulti > 2.6) then {
+			_recoilMulti = 2.6; // Don't get too high
 		};
 
 		// Constants which determine how the scope recoils
@@ -77,8 +119,8 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 		_randomScopeShiftX = 0.005 * _recoilMulti - random 0.011;
 
-		_randomReticleShiftX = -0.002 * _recoilMulti + random 0.0062; // Always tend up and right
-		_randomReticleShiftY = -0.001 * _recoilMulti - random 0.0062;
+		_randomReticleShiftX = -0.0002 * _recoilMulti + random 0.004; // Always tend up and right
+		_randomReticleShiftY = -0.0002 * _recoilMulti - random 0.009;
 
 		/////////
 		// Center everything
@@ -161,7 +203,7 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 		(TMR_SCOPECTRL 21) ctrlSetPosition [TMR_SCOPECTRL_CENTERPOSX - ((_recoilScope+_recoilRing)/2) + _randomScopeShiftX, SafeZoneY - ((_recoilScope+_recoilRing)/2), SafeZoneW / (getResolution select 4) + _recoilScope + _recoilRing, SafeZoneH + _recoilScope + _recoilRing]; 
 
-		_recoilDelay = 0.034;
+		_recoilDelay = 0.036;
 		(TMR_SCOPECTRL 1) ctrlCommit _recoilDelay; 
 		(TMR_SCOPECTRL 2) ctrlCommit _recoilDelay; 
 		(TMR_SCOPECTRL 3) ctrlCommit _recoilDelay; 
@@ -228,6 +270,12 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 // TMR Optics-enhanced weapon, it displays the enhanced optics.
 
 tmr_optics_endPFEH = false;
+
+// Request a resource layer from the game engine.
+tmr_optics_scopeRsc = ["TMR_Optics_Scope"] call BIS_fnc_rscLayer;
+
+// Display the resource layers 
+[] call tmr_optics_fnc_initScope;
 
 // Huge public event handler follows.
 _handle = [
@@ -297,6 +345,9 @@ _handle = [
 					tmr_optics_inScope = true;
 					tmr_optics_inScope_FOV = ([] call cba_fnc_getFOV) select 0;
 
+					// Init the scope (if needed)
+					[] call tmr_optics_fnc_initScope;
+
 					// Get the layer files from config and set them if needed)
 					if (_doUpdateAllLayers) then {
 						(TMR_SCOPECTRL 1) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_shadow");
@@ -326,7 +377,8 @@ _handle = [
 					};
 
 					// Apply lighting and make layers visible
-					
+					we_got_here = true;
+
 					(TMR_SCOPECTRL 1) ctrlSetTextColor [1,1,1,1]; 
 					(TMR_SCOPECTRL 2) ctrlSetTextColor [1,1,1,_nightOpacity]; 
 					(TMR_SCOPECTRL 3) ctrlSetTextColor [1,1,1,_nightOpacity]; 
@@ -386,30 +438,6 @@ _handle = [
 0.05,
 /* Initialization */
 {
-	TMR_SCOPE_RSCLAYER cutRsc ["TMR_Optics_Scope","PLAIN",0];
-	(TMR_SCOPECTRL 1) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 2) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 3) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 4) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 5) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 6) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 7) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 15) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 16) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 20) ctrlSetTextColor [1,1,1,0]; 
-	(TMR_SCOPECTRL 21) ctrlSetTextColor [1,1,1,0]; 
-
-	(TMR_SCOPECTRL 1) ctrlCommit 0; 
-	(TMR_SCOPECTRL 2) ctrlCommit 0; 
-	(TMR_SCOPECTRL 3) ctrlCommit 0; 
-	(TMR_SCOPECTRL 4) ctrlCommit 0; 
-	(TMR_SCOPECTRL 5) ctrlCommit 0; 
-	(TMR_SCOPECTRL 6) ctrlCommit 0; 
-	(TMR_SCOPECTRL 7) ctrlCommit 0; 
-	(TMR_SCOPECTRL 15) ctrlCommit 0; 
-	(TMR_SCOPECTRL 16) ctrlCommit 0; 
-	(TMR_SCOPECTRL 20) ctrlCommit 0; 
-	(TMR_SCOPECTRL 21) ctrlCommit 0; 
 }, 
 /* On exit, do...*/
 {
