@@ -32,6 +32,7 @@ tmr_autorest_fnc_deployKeyDownEH = {
 		// Make sure weapon is deployable (bipod mounted)
 		_config = configFile >> "CfgWeapons" >> currentWeapon player;
 		_canDeployCfg = getNumber (_config >> "tmr_autorest_deployable"); // 1 for true
+		_canDeployItem = "TMR_acc_bipod" in primaryWeaponItems player;
 
 		if (_canDeployCfg != 1 || !_canDeployItem) exitwith {false};
 
