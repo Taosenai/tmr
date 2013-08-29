@@ -468,15 +468,15 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		};
 		class AwopPercMstpSoptWbinDnon_rfl : AmovPercMstpSlowWrflDnon {
-			aimprecision = TMR_SWAY_20;
+			aimprecision = TMR_SWAY_10;
 
 		};
 		class AmovPercMwlkSoptWbinDf_rfl : AwopPercMstpSoptWbinDnon_rfl {
-			aimprecision = TMR_SWAY_25;
+			aimprecision = TMR_SWAY_10;
 
 		};
 		class AwopPknlMstpSoptWbinDnon_rfl : AmovPknlMstpSrasWrflDnon {
-			aimprecision = TMR_SWAY_05;
+			aimprecision = TMR_SWAY_03;
 
 		};
 		class AmovPknlMwlkSoptWbinDf_rfl : AwopPknlMstpSoptWbinDnon_rfl {
@@ -492,7 +492,7 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		};
 		class AwopPercMstpSoptWbinDnon_pst : AmovPercMstpSlowWrflDnon {
-			aimprecision = TMR_SWAY_20;
+			aimprecision = TMR_SWAY_10;
 
 		};
 		class AmovPercMwlkSoptWbinDf_pst : AwopPercMstpSoptWbinDnon_pst {
@@ -500,7 +500,7 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		};
 		class AwopPknlMstpSoptWbinDnon_pst : AmovPknlMstpSrasWpstDnon {
-			aimprecision = TMR_SWAY_05;
+			aimprecision = TMR_SWAY_03;
 
 		};
 		class AmovPknlMwlkSoptWbinDf_pst : AwopPknlMstpSoptWbinDnon_pst {
@@ -516,7 +516,7 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		};
 		class AwopPercMstpSoptWbinDnon_lnr : AmovPercMstpSlowWrflDnon {
-			aimprecision = TMR_SWAY_20;
+			aimprecision = TMR_SWAY_10;
 
 		};
 		class AmovPercMwlkSoptWbinDf_lnr : AwopPercMstpSoptWbinDnon_lnr {
@@ -524,7 +524,7 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		};
 		class AwopPknlMstpSoptWbinDnon_lnr : AmovPknlMstpSrasWlnrDnon {
-			aimprecision = TMR_SWAY_05;
+			aimprecision = TMR_SWAY_03;
 
 		};
 		class AmovPknlMwlkSoptWbinDf_lnr : AwopPknlMstpSoptWbinDnon_lnr {
@@ -539,7 +539,7 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		};
 		class AwopPercMstpSoptWbinDnon_non : AmovPercMstpSlowWrflDnon {
-			aimprecision = TMR_SWAY_20;
+			aimprecision = TMR_SWAY_10;
 
 		};
 		class AmovPercMwlkSoptWbinDf_non : AwopPercMstpSoptWbinDnon_non {
@@ -547,7 +547,7 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 		};
 		class AwopPknlMstpSoptWbinDnon_non : AmovPknlMstpSrasWpstDnon {
-			aimprecision = TMR_SWAY_05;
+			aimprecision = TMR_SWAY_03;
 
 		};
 		class AmovPknlMwlkSoptWbinDf_non : AwopPknlMstpSoptWbinDnon_non {
