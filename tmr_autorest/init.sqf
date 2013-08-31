@@ -34,7 +34,7 @@ tmr_autorest_fnc_deployKeyDownEH = {
 		_canDeployCfg = getNumber (_config >> "tmr_autorest_deployable"); // 1 for true
 		_canDeployItem = "TMR_acc_bipod" in primaryWeaponItems player;
 
-		if (_canDeployCfg != 1 || !_canDeployItem) exitwith {false};
+		if !(_canDeployCfg == 1 || _canDeployItem) exitwith {false};
 
 		// Make sure it's an anim that can deploy.
 		_allowedAnimStates = ["amovpercmstpsraswrfldnon", "aadjpercmstpsraswrfldup", "aadjpercmstpsraswrflddown", "aadjpercmstpsraswrfldright", "aadjpercmstpsraswrfldleft", "aadjpknlmstpsraswrfldup", "amovpknlmstpsraswrfldnon", "aadjpknlmstpsraswrflddown", "aadjpknlmstpsraswrfldleft", "aadjpknlmstpsraswrfldright", "aadjppnemstpsraswrfldup", "amovppnemstpsraswrfldnon"];
