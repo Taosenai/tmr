@@ -34,7 +34,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_FiredBIS_EventHandlers {
 	class CAManBase {
 		class tmr_optics {
-			clientFiredBIS = "if (_this select 0 == player) then {_this call tmr_optics_fnc_scopeRecoil_firedEH};";
+			clientFiredBISPlayer = "_this call tmr_optics_fnc_scopeRecoil_firedEH;";
 		};
 	};
 };
@@ -67,7 +67,7 @@ class CfgWeapons {
 			mass = 4;
 			optics = 1;
 			optictype = 2;
-			rmbhint = "IHAMR";
+			rmbhint = "HAMR";
 
 			class OpticsModes {	
 				class Hamr2Collimator {

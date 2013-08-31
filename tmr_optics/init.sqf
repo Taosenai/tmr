@@ -5,9 +5,10 @@ tmr_optics = false;
 
 // Set global variables
 
-tmr_optics_inScope = false;
-tmr_optics_inScope_FOV = ([] call cba_fnc_getFOV) select 0;
-tmr_optics_currentOptic = "";
+tmr_optics_inScope = false; // Is the scope up?
+tmr_optics_inScope_FOV = ([] call cba_fnc_getFOV) select 0; // What is the current FOV +- 0.01?
+tmr_optics_currentOptic = ""; // What optic is attached right now?
+tmr_optics_currentOpticIsEnhanced = false; // Is the current optic a TMR enhanced optic?
 
 #define TMR_SCOPECTRL (uiNameSpace getVariable "TMR_Optics_Scope") displayCtrl
 #define TMR_SCOPECTRL_CENTERPOSX (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2)
@@ -262,8 +263,6 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 	};
 };
 
-
-
 /////////////////////////////////////////////////////////////////////////////////
 
 // This PFEH monitors the camera state. When the player is in the optics of a 
@@ -281,36 +280,32 @@ tmr_optics_scopeRsc = ["TMR_Optics_Scope"] call BIS_fnc_rscLayer;
 _handle = [
 /* Code */
 {
-	_sanityCheck = alive player && canMove player && canFire player && vehicle player == player;
-	_weaponCheck = currentWeapon player == primaryWeapon player;
-	_camCheck = cameraView == "GUNNER" && !visibleMap && cameraOn == player;
+	_check = cameraView == "GUNNER" && !visibleMap && cameraOn == player;
 
-	if ( _camCheck && _weaponCheck && _sanityCheck) then {
+	if (_check) then {
 		// See if we have an enhanced optic attached
-		_items = primaryWeaponItems player;
-		_hasTMRoptic = false;
-		_optic = '';
-		{
-			if (getNumber (configFile >> "CfgWeapons" >> _x >> "tmr_optics_enhanced") == 1) exitwith {
-				_hasTMRoptic = true;
-				_optic = _x;
-			};
-		} foreach _items;
-
-		// Stop processing if not an enhanced optic
-		if (!_hasTMRoptic) exitwith {};
+		_optic = (primaryWeaponItems player) select 2; 
 
 		// Check if the optic has changed
 		_doUpdateAllLayers = false;
 		if (tmr_optics_currentOptic != _optic) then {
 			tmr_optics_currentOptic = _optic;
-			// If it has, we'll need to redraw all layers
-			_doUpdateAllLayers = true;
+
+			// Is the new optic a TMR enhanced optic?
+			if (getNumber (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_enhanced") == 1) then {
+				tmr_optics_currentOpticIsEnhanced = true;
+				// Graphics layers will need updated for the new scope
+				_doUpdateAllLayers = true;
+			};
 		};
+
+		// Stop processing immediately if not an enhanced optic
+		if (!tmr_optics_currentOpticIsEnhanced) exitwith {false};
 
 		// Make sure the FOV hasn't changed
 		_doUpdateFOV = false;
 		if (abs (tmr_optics_inScope_FOV - (([] call cba_fnc_getFOV) select 0)) >= 0.01) then {
+			// If FOV changed, redraw graphics
 			_doUpdateFOV = true;
 			_doUpdateAllLayers = true;
 		};
@@ -336,7 +331,7 @@ _handle = [
 
 				// Account for slight inaccuracy in cba_fnc_getFOV
 				_diff = abs(_modeFOV - _curFOV);
-				if (_diff <= 0.011) exitwith {
+				if (_diff <= 0.011) exitwith { ///////////// EXIT
 					// Okay, this is the mode we're in, and it is an enhanced mode. 
 					_foundMode = true;
 					// Finish the search loop and set stuff up.
@@ -377,8 +372,6 @@ _handle = [
 					};
 
 					// Apply lighting and make layers visible
-					we_got_here = true;
-
 					(TMR_SCOPECTRL 1) ctrlSetTextColor [1,1,1,1]; 
 					(TMR_SCOPECTRL 2) ctrlSetTextColor [1,1,1,_nightOpacity]; 
 					(TMR_SCOPECTRL 3) ctrlSetTextColor [1,1,1,_nightOpacity]; 
@@ -414,8 +407,8 @@ _handle = [
 			};
 		};
 
-		// If we didn't exit inside the loop, then we're not in an enhanced mode
-		// Cancel out of the inscope view (in a CQB sight now)
+		// If we didn't exit inside the loop, then we're in the CQB red dot sight
+		// Cancel out of the inscope view
 		if (!_foundMode) then {
 			tmr_optics_inScope = false;
 			tmr_optics_inScope_FOV = ([] call cba_fnc_getFOV) select 0;
@@ -423,6 +416,7 @@ _handle = [
 			[] call tmr_optics_fnc_hideScope;
 		};
 	} else {
+		// Failed the state check, hide the scope if it's up
 		if (tmr_optics_inScope) then {
 			// Hide the scope
 			tmr_optics_inScope = false;
@@ -435,7 +429,7 @@ _handle = [
 /* Parameters */
 [],
 /* Delay */
-0.05,
+0.03,
 /* Initialization */
 {
 }, 
