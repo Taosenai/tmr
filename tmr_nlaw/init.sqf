@@ -391,7 +391,7 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 				_pastIntersects = _pastIntersects + (lineIntersectsWith [_pastPosASL, [_pastPosASL select 0, _pastPosASL select 1, (_pastPosASL select 2) - 7], _missile]);
 			} foreach _lagCompArray;
 
-			// Get all targets from lag compensation check.
+			// Get all targets from lag compensation check. Hooray for dreadful O(n^2) function!
 			_pastTargets = [];
 			{
 				_obj = _x;

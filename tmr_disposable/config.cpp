@@ -34,7 +34,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_FiredBIS_EventHandlers {
 	class CAManBase {
 		class tmr_disposable {
-			clientFiredBISPlayer = "_this call tmr_disposable_fnc_firedEH";
+			clientFiredBIS = "_this call tmr_disposable_fnc_firedEH";
 		};
 	};
 };
