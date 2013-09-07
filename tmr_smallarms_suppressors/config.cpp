@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core};
+		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core, tmr_smallarms};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -40,27 +40,28 @@ class CfgWeapons {
 	class SlotInfo;
 	class Rifle_Base_F;
 
+
 	///////////////////////////////////////////////////////////////////////////////
 	//////////// SUPPRESSORS        ///////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////
 
-	// What to modify for each suppressor
-	// 1. Modify suppressor strings to match the TMR standard.
-	// 2. Increase cyclic rate on full-auto and burst weapons when using a suppressor (slightly, weapon-dependent).
-	// 3. Prevent BLUFOR and OPFOR from using the same suppressor on same-caliber rifles
-	// 4. Prevent pistols and SMGs from sharing the same suppressors.
-	// (3-4, Why? Different threaded barrels. Are you going to be swapping a suppressor from your pistol to your SMG in the field?
-	// No. And you're certainly not going to be changing the thread adaptor. Open to feedback on this, though.)
-	// 5. Add appropriate firing modes for suppressors with sounds.
+	// Suppressor updates:
+	// 1. Do strings update.
+	// 2. Set weights and properties.
 
-	// Recoils are set in tmr_smallarms_recoil config.
+	// Recoils are set in tmr_smallarms_suppressors_recoil config.
 
 	class ItemCore;
 	class InventoryItem_Base_F;
 	class InventoryMuzzleItem_Base_F;
 
-	class muzzle_snds_H : ItemCore { // 6.5mm suppressor threaded for MX
+	class muzzle_snds_H : ItemCore { // 6.5mm suppressor
+		displayName = "Suppressor (6.5mm)";
+		descriptionShort = "Threaded for 6.5mm rifle barrels.";
+
 		class ItemInfo : InventoryMuzzleItem_Base_F {
+			mass = 5;
+
 			class MagazineCoef {
 				initSpeed = 1;
 			};
@@ -86,7 +87,10 @@ class CfgWeapons {
 		};
 	};
 
-	class tmr_muzzle_snds_H_katiba : muzzle_snds_H { // 6.5mm suppressor threaded for Katiba
+	class tmr_muzzle_snds_H_katiba : muzzle_snds_H { // 6.5mm suppressor threaded for Katiba (enable with tmr_smallarms_suppressors_unique
+		displayName = "Suppressor (6.5mm Katiba)";
+		descriptionShort = "Threaded for 6.5mm Katiba rifle barrels.";
+
 		class ItemInfo : ItemInfo {
 			class Single : Single {
 				reloadTime = 0.071; // Cyclic rate increased due to higher backpressure: default 0.075
@@ -99,7 +103,11 @@ class CfgWeapons {
 	};
 	
 	class muzzle_snds_L : muzzle_snds_H { // 9mm pistol suppressor
+		displayName = "Suppressor (9mm)";
+		descriptionShort = "Threaded for 9mm barrels.";
+
 		class ItemInfo : ItemInfo {
+			mass = 4;
 			class MagazineCoef {
 				initSpeed = 1;
 			};
@@ -181,11 +189,22 @@ class CfgWeapons {
 	};
 	
 	class tmr_muzzle_snds_L_smg : muzzle_snds_L { // 9mm SMG suppressor (scorpion)
+		displayName = "Suppressor (9mm SMG)";
+		descriptionShort = "Threaded for 9mm SMG barrels.";
+
+		class ItemInfo : ItemInfo {
+			mass = 4.5;
+		};
+
 		// Fire modes are inherited.
 	};
 
 	class muzzle_snds_M : muzzle_snds_H { // 5.56 suppressor
+		displayName = "Suppressor (5.56mm)";
+		descriptionShort = "Threaded for 5.56mm barrels.";
+
 		class ItemInfo : ItemInfo {
+			mass = 5;
 			class MagazineCoef {
 				initSpeed = 1;
 			};
@@ -212,7 +231,11 @@ class CfgWeapons {
 	};
 	
 	class muzzle_snds_B : muzzle_snds_H { // 7.62mm suppressor
+		displayName = "Suppressor (7.62mm)";
+		descriptionShort = "Threaded for 7.62mm barrels.";
+
 		class ItemInfo : ItemInfo {
+			mass = 5.5;
 			class MagazineCoef {
 				initSpeed = 1;
 			};
@@ -239,7 +262,11 @@ class CfgWeapons {
 	};
 	
 	class muzzle_snds_H_MG : muzzle_snds_H { // 6.5 LMG suppressor
+		displayName = "Suppressor (6.5mm MG)";
+		descriptionShort = "Threaded for 6.5mm heavy MG barrels.";
+
 		class ItemInfo : ItemInfo {
+			mass = 5.5;
 			class MagazineCoef {
 				initSpeed = 1;
 			};
@@ -287,7 +314,12 @@ class CfgWeapons {
 	};
 
 	class muzzle_snds_acp : muzzle_snds_H { // .45 pistol suppressor
+		displayName = "Suppressor (.45 ACP)";
+		descriptionShort = "Threaded for .45 ACP barrels.";
+
 		class ItemInfo : ItemInfo {
+			mass = 4;
+
 			class MagazineCoef {
 				initSpeed = 1;
 			};
@@ -322,6 +354,13 @@ class CfgWeapons {
 	};
 
 	class tmr_muzzle_snds_acp_smg : muzzle_snds_acp {
+		displayName = "Suppressor (.45 ACP SMG)";
+		descriptionShort = "Threaded for .45 ACP SMG barrels.";
+
+		class ItemInfo : ItemInfo {
+			mass = 4.5;
+		};
+
 		// Fire modes are inherited.
 	};
 };

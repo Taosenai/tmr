@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core, tmr_smallarms_suppressors, tmr_smallarms_recoil};
+		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -99,7 +99,7 @@ class CfgMagazines {
 	};
 
 	class 30Rnd_65x39_caseless_green : 30Rnd_65x39_caseless_mag { // Katiba!!
-		descriptionshort = "Caliber: 6.5x38mm Caseless<br />Rounds: 100<br />Used in: Katiba KT-2002";
+		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 100<br />Used in: Katiba KT-2002";
 		displayname = "6.5mm 30Rnd Katiba Mag";
 		displaynameshort = "6.5mm";
 
@@ -108,7 +108,7 @@ class CfgMagazines {
 	};
 
 	class 30Rnd_65x39_caseless_green_Tracer : 30Rnd_65x39_caseless_green { // Katiba!!
-		descriptionshort = "Caliber: 6.5x38mm Caseless Tracer (Green)<br />Rounds: 100<br />Used in: Katiba KT-2002";
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 100<br />Used in: Katiba KT-2002";
 		displayname = "6.5mm 30Rnd Katiba Tracer Magazine";
 		displaynameshort = "6.5mm Tracer";
 	};
@@ -129,7 +129,7 @@ class CfgMagazines {
 	};
 
 	class 200Rnd_65x39_cased_Box : CA_Magazine {
-		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 200<br />Used in: Mk200 LMG";
+		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 200<br />Used in: Mk200 MG";
 		displayname = "6.5mm 200Rnd Box";
 		displaynameshort = "6.5mm";
 
@@ -137,7 +137,7 @@ class CfgMagazines {
 		lastRoundsTracer = 3;
 	};
 	class 200Rnd_65x39_cased_Box_Tracer: 200Rnd_65x39_cased_Box {
-		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 200<br />Used in: Mk200 LMG";
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 200<br />Used in: Mk200 MG";
 		displayname = "6.5mm 200Rnd Tracer Box";
 		displaynameshort = "6.5mm Tracer";
 	};
@@ -244,27 +244,27 @@ class CfgWeapons {
 		magazines[] = {"30Rnd_65x39_caseless_mag", "30Rnd_65x39_caseless_mag_Tracer", "100Rnd_65x39_caseless_mag", "100Rnd_65x39_caseless_mag_Tracer"};
 
 		displayName = "MX";
-		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
 
 		class Single : Mode_SemiAuto {};
 	};
 
 	class arifle_MX_F : arifle_MX_Base_F {
 		displayName = "MX";
-		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
 
 
 	};
 
 	class arifle_MXC_F : arifle_MX_Base_F {
 		displayName = "MXC";
-		descriptionShort = "Carbine<br />Caliber: 6.5x38mm";
+		descriptionShort = "Carbine<br />Caliber: 6.5x39mm";
 	};
 
 
 	class arifle_MX_GL_F : arifle_MX_Base_F {
 		displayName = "MX 3GL-H";
-		descriptionShort = "Assault Rifle<br />Caliber: 6.5x38mm";
+		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
 
 		// class GL_3GL_F : UGL_F {
 		// 	displayName = "3GL-H";
@@ -274,7 +274,7 @@ class CfgWeapons {
 
 	class arifle_MX_SW_F : arifle_MX_Base_F {
 		displayName = "MX LSW";
-		descriptionShort = "Light Support Weapon<br />Caliber: 6.5x38mm";
+		descriptionShort = "Light Support Weapon<br />Caliber: 6.5x39mm";
 
 		modes[] = {"single", "manual", "close", "short", "medium", "far_optic1", "far_optic2"};
 
@@ -283,7 +283,7 @@ class CfgWeapons {
 
 	class arifle_MXM_F : arifle_MX_Base_F {
 		displayName = "MXM";
-		descriptionShort = "Marksman Rifle<br />Caliber: 6.5x38mm";
+		descriptionShort = "Marksman Rifle<br />Caliber: 6.5x39mm";
 	};
 
 	// Katibas ////////////////////////////////////////////////////
@@ -291,12 +291,6 @@ class CfgWeapons {
 	class arifle_katiba_Base_F : Rifle_Base_F {
 		displayName = "Katiba KT-2002";
 		descriptionShort = "Assault Rifle<br />Caliber: 6.5x39mm";
-
-		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class MuzzleSlot : SlotInfo {
-				compatibleItems[] = {"tmr_muzzle_snds_h_katiba"};
-			};
-		};
 	};
 
 	class arifle_Katiba_F : arifle_katiba_Base_F {
@@ -317,42 +311,6 @@ class CfgWeapons {
 	class arifle_Katiba_C_F : arifle_katiba_Base_F {
 		displayName = "Katiba KT-2002C";
 		descriptionShort = "Carbine<br />Caliber: 6.5x39mm";
-	};
-
-	class arifle_Katiba_GL_ACO_pointer_snds_F : arifle_Katiba_GL_F {
-		class LinkedItems {	
-			class LinkedItemsMuzzle {
-				slot = "MuzzleSlot";
-				item = "tmr_muzzle_snds_h_katiba";
-			};
-		};
-	};
-
-	class arifle_Katiba_C_ACO_pointer_snds_F : arifle_Katiba_C_F {
-		class LinkedItems {
-			class LinkedItemsMuzzle {
-				slot = "MuzzleSlot";
-				item = "tmr_muzzle_snds_h_katiba";
-			};
-		};
-	};
-	
-	class arifle_Katiba_ACO_pointer_snds_F : arifle_Katiba_F {
-		class LinkedItems {
-			class LinkedItemsMuzzle {
-				slot = "MuzzleSlot";
-				item = "tmr_muzzle_snds_h_katiba";
-			};
-		};
-	};
-	
-	class arifle_Katiba_ARCO_pointer_snds_F : arifle_Katiba_F {
-		class LinkedItems {
-			class LinkedItemsMuzzle {
-				slot = "MuzzleSlot";
-				item = "tmr_muzzle_snds_h_katiba";
-			};
-		};
 	};
 
 	// SDAR //////////////////////////////////////////////////
@@ -430,11 +388,6 @@ class CfgWeapons {
 		class Burst : Mode_Burst {
 			burst = 2;
 		};
-		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class MuzzleSlot : SlotInfo {
-				compatibleItems[] = {"tmr_muzzle_snds_acp_smg"};
-			};
-		};
 	};
 
 	class SMG_01_F : SMG_01_Base {
@@ -443,26 +396,11 @@ class CfgWeapons {
 		
 	};
 
-	class SMG_01_Holo_pointer_snds_F : SMG_01_F {
-		class LinkedItems {			
-			class LinkedItemsMuzzle {
-				slot = "MuzzleSlot";
-				item = "tmr_muzzle_snds_acp_smg";
-			};
-		};
-	};
-
 	// SMG Scorpion ////////////////////////////////////////////////////
 
 	class SMG_02_base_F : Rifle_Base_F {
 		displayName = "Scorpion EVO-4";
 		descriptionShort = "Submachine Gun<br />Caliber: 9x19mm";
-			
-		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class MuzzleSlot : SlotInfo {
-				compatibleItems[] = {"tmr_muzzle_snds_L_smg"};
-			};
-		};
 	};	
 
 	class SMG_02_F : SMG_02_base_F {
@@ -493,8 +431,8 @@ class CfgWeapons {
 	class Rifle_Long_Base_F;
 
 	class LMG_Mk200_F : Rifle_Long_Base_F {
-		displayName = "Mk200 LMG";
-		descriptionShort = "Light Machine Gun<br />Caliber: 6.5x38mm";
+		displayName = "Mk200 MG";
+		descriptionShort = "Machine Gun<br />Caliber: 6.5x39mm";
 
 		modes[] = {"manual", "single", "close", "short", "medium", "far_optic1", "far_optic2"};
 		class Single : Mode_SemiAuto {
@@ -523,8 +461,8 @@ class CfgWeapons {
 	};
 
 	class LMG_Zafir_F: Rifle_Long_Base_F {
-		displayName = "Zafir ZG7 GPMG";
-		descriptionShort = "General Purpose Machine Gun<br />Caliber: 7.62x51mm";
+		displayName = "Zafir ZG7 MG";
+		descriptionShort = "Machine Gun<br />Caliber: 7.62x51mm";
 
 		modes[] = {"FullAuto", "Single",  "close", "short", "medium", "far_optic1", "far_optic2"};
 	};
@@ -569,91 +507,4 @@ class CfgWeapons {
 	class InventoryItem_Base_F;
 	class InventoryMuzzleItem_Base_F;
 
-	// Suppressor updates:
-	// 1. Do strings update.
-	// 2. Set weights and properties.
-
-	// See tmr_smallarms_suppressors for the rest.
-	//   (e.g., cyclic rate, firing modes)
-
-	class muzzle_snds_H : ItemCore { // 6.5mm suppressor threaded for MX
-		displayName = "Suppressor (6.5mm MX)";
-		descriptionShort = "Threaded for 6.5mm MX rifle barrels.";
-
-		class ItemInfo : InventoryMuzzleItem_Base_F {
-			mass = 5;
-		};
-	};
-
-	class tmr_muzzle_snds_H_katiba : muzzle_snds_H { // 6.5mm suppressor threaded for Katiba
-		displayName = "Suppressor (6.5mm Katiba)";
-		descriptionShort = "Threaded for 6.5mm Katiba rifle barrels.";
-
-		class ItemInfo : ItemInfo {
-			mass = 5;
-		};
-	};
-	
-	class muzzle_snds_L : muzzle_snds_H { // 9mm pistol suppressor
-		displayName = "Suppressor (9mm Pistol)";
-		descriptionShort = "Threaded for 9mm pistol barrels.";
-
-		class ItemInfo : ItemInfo {
-			mass = 4;
-		};
-	};
-	
-	class tmr_muzzle_snds_L_smg : muzzle_snds_L { // 9mm SMG suppressor (scorpion)
-		displayName = "Suppressor (9mm SMG)";
-		descriptionShort = "Threaded for 9mm SMG barrels.";
-
-		class ItemInfo : ItemInfo {
-			mass = 4.5;
-		};
-	};
-
-	class muzzle_snds_M : muzzle_snds_H { // 5.56 suppressor
-		displayName = "Suppressor (5.56mm Rifle)";
-		descriptionShort = "Threaded for rifle barrels.";
-
-		class ItemInfo : ItemInfo {
-			mass = 5;
-		};
-	};
-	
-	class muzzle_snds_B : muzzle_snds_H { // 7.62mm suppressor
-		displayName = "Suppressor (7.62mm Rifle)";
-		descriptionShort = "Threaded for 7.62mm rifle barrels.";
-
-		class ItemInfo : ItemInfo {
-			mass = 5.5;
-		};
-	};
-	
-	class muzzle_snds_H_MG : muzzle_snds_H { // 6.5 LMG suppressor
-		displayName = "Suppressor (6.5mm LMG)";
-		descriptionShort = "Threaded for 6.5mm LMG heavy barrels.";
-
-		class ItemInfo : ItemInfo {
-			mass = 5.5;
-		};
-	};
-
-	class muzzle_snds_acp : muzzle_snds_H { // .45 pistol suppressor
-		displayName = "Suppressor (.45 ACP Pistol)";
-		descriptionShort = "Threaded for .45 ACP pistol barrels.";
-
-		class ItemInfo : ItemInfo {
-			mass = 4;
-		};
-	};
-
-	class tmr_muzzle_snds_acp_smg : muzzle_snds_acp {
-		displayName = "Suppressor (.45 ACP SMG)";
-		descriptionShort = "Threaded for .45 ACP SMG barrels.";
-
-		class ItemInfo : ItemInfo {
-			mass = 4.5;
-		};
-	};
 };
