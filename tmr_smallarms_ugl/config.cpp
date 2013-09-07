@@ -16,7 +16,7 @@ class CfgPatches {
 class CfgMods {
 	class tmr_smallarms_ugl {
 		dir = "tmr_smallarms_ugl";
-		name = "TMR: Small Arms - Underslung Grenade Launcher Module";
+		name = "TMR: Small Arms - Underbarrel Grenade Launcher Module";
 		picture = "";
 		hidePicture = "true";
 		hideName = "true";
