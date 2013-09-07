@@ -62,6 +62,8 @@ class CfgWeapons {
 		tmr_optics_bodyrightNight = "\tmr_optics\data\hamr\hamr-rightNight_ca.paa";
 		tmr_optics_scopering = "";
 		tmr_optics_scoperingNight = "";
+
+		model = "\A3\weapons_f\acc\acco_hamr_F";
 		
 		class ItemInfo : InventoryOpticsItem_Base_F {
 			mass = 4;
@@ -119,6 +121,8 @@ class CfgWeapons {
 		picture = "\A3\weapons_F\Data\UI\gear_acco_Arco_CA.paa";
 		scope = 2;
 		weaponInfoType = "RscWeaponZeroing";
+
+		model = "\A3\weapons_f\acc\acco_Arco_F";
 
 		tmr_optics_enhanced = 1;
 
