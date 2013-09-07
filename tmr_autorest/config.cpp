@@ -40,6 +40,36 @@ class CfgVehicles {
 		model = "\A3\Weapons_F\empty.p3d";
 		scope = 2;
 	};
+
+	class EAST_Box_Base;
+	class Box_EAST_Support_F: EAST_Box_Base {
+		class TransportItems {
+			class _xx_TMR_acc_bipod {
+				count = 2;
+				name = "TMR_acc_bipod";
+			};
+		};
+	};
+
+	class NATO_Box_Base;
+	class Box_NATO_Support_F: NATO_Box_Base {
+		class TransportItems {
+			class _xx_TMR_acc_bipod {
+				count = 2;
+				name = "TMR_acc_bipod";
+			};
+		};
+	};
+
+	class IND_Box_Base;
+	class Box_IND_Support_F: IND_Box_Base {
+		class TransportItems {
+			class _xx_TMR_acc_bipod {
+				count = 2;
+				name = "TMR_acc_bipod";
+			};
+		};
+	};
 };
 
 #define TMR_SWAY_DEPLOY 0.084
@@ -556,7 +586,6 @@ class CfgSounds {
 		titles[] = {};
 	};
 };
-
 
 class CfgMissions {
 	class Missions {
