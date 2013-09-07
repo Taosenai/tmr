@@ -26,8 +26,8 @@ tmr_autorest_fnc_deployKeyDownEH = {
 
 	// Key press to deploy
 	if (_dikCode in actionKeys "LockTargets") then {
-		// Player must be on foot, with primary out, able to fire.
-		if !(alive player && speed player < 1 && vehicle player == player && currentWeapon player == primaryWeapon player && canFire player && canMove player) exitWith {false};
+		// Player must be on foot, with primary out, able to fire. Can't be UAV (cameraOn)
+		if !(alive player && speed player < 1 && vehicle player == player && currentWeapon player == primaryWeapon player && canFire player && canMove player && cameraOn == player) exitWith {false};
 
 		// Make sure weapon is deployable (bipod mounted)
 		_config = configFile >> "CfgWeapons" >> currentWeapon player;
@@ -93,7 +93,7 @@ tmr_autorest_fnc_deployWeapon = {
 	if (!tmr_autorest_deployIconDisplayed) then {
 		tmr_autorest_deployIconDisplayed = true;
 		1599 cutRsc ["TMR_Autorest_Deployed", "PLAIN"];
-		((uiNameSpace getVariable "TMR_Autorest_Deployed") displayCtrl 1) ctrlSetFade 0.5;
+		((uiNameSpace getVariable "TMR_Autorest_Deployed") displayCtrl 1) ctrlSetFade 0.3;
 		((uiNameSpace getVariable "TMR_Autorest_Deployed") displayCtrl 1) ctrlCommit 0.5;
 	};
 	
@@ -137,7 +137,7 @@ tmr_autorest_fnc_restWeapon = {
 	if (!tmr_autorest_restIconDisplayed) then {
 		tmr_autorest_restIconDisplayed = true;
 		1598 cutRsc ["TMR_Autorest_Rested", "PLAIN"];
-		((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlSetFade 0.5;
+		((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlSetFade 0.3;
 		((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlCommit 0.5;
 	};
 	player setUnitRecoilCoefficient TMR_AUTOREST_RESTEDRECOIL ;
@@ -255,9 +255,9 @@ _handle = [
 	// Update the current player unit tracker.
 	_unit = format ["%1", player];
 
-	// Player can't be moving very much, must have rifle or launcher, and must be able to fire.
+	// Player can't be moving very much, must have rifle or launcher, and must be able to fire. Can't be in UAV (cameraOn)
 	
-	_otherChecks = (alive player && vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player);
+	_otherChecks = (alive player && vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player && cameraOn == player);
 
 	// Also can't be deployed.
 	if (_otherChecks && !(player getVariable ["tmr_autorest_deployed", false])) then {
