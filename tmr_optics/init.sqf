@@ -20,14 +20,14 @@ tmr_optics_currentOpticIsEnhanced = false; // Is the current optic a TMR enhance
 // -------------------------------------------------------------------------------
 tmr_optics_fnc_initScope = {
 	_initNeeded = false;
+	_return = false;
 
 	// Make sure we only cutRsc when the resource isn't already available
 	if (isNil {uiNameSpace getVariable "TMR_Optics_Scope"}) then {
 		_initNeeded = true;
-	} else {
-		if (isNull (uiNameSpace getVariable "TMR_Optics_Scope")) then {
-			_initNeeded = true;
-		};
+	};
+	if (isNull (uiNameSpace getVariable "TMR_Optics_Scope")) then {
+		_initNeeded = true;
 	};
 
 	if (_initNeeded) then {
@@ -55,7 +55,9 @@ tmr_optics_fnc_initScope = {
 		(TMR_SCOPECTRL 16) ctrlCommit 0; 
 		(TMR_SCOPECTRL 20) ctrlCommit 0; 
 		(TMR_SCOPECTRL 21) ctrlCommit 0;
+		_return = true;
 	};
+	_return;
 };
 
 // -------------------------------------------------------------------------------
@@ -86,10 +88,10 @@ tmr_optics_fnc_hideScope = {
 	(TMR_SCOPECTRL 20) ctrlCommit 0; 
 	(TMR_SCOPECTRL 21) ctrlCommit 0; 
 
-	"Radialblur" ppeffectenable true;
+	"Radialblur" ppeffectenable false;
 	"Radialblur" ppEffectAdjust [0, 0, 0.24, 0.24];
 	"Radialblur" ppEffectCommit 0;
-	"ChromAberration" ppeffectenable true;
+	"ChromAberration" ppeffectenable false;
 	"ChromAberration" ppEffectAdjust [0, 0, true];
 	"ChromAberration" ppEffectCommit 0;
 };
@@ -268,7 +270,7 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 // This PFEH monitors the camera state. When the player is in the optics of a 
 // TMR Optics-enhanced weapon, it displays the enhanced optics.
 
-tmr_optics_endPFEH = false;
+tmr_optics_loop = true;
 
 // Request a resource layer from the game engine.
 tmr_optics_scopeRsc = ["TMR_Optics_Scope"] call BIS_fnc_rscLayer;
@@ -276,10 +278,10 @@ tmr_optics_scopeRsc = ["TMR_Optics_Scope"] call BIS_fnc_rscLayer;
 // Display the resource layers 
 [] call tmr_optics_fnc_initScope;
 
-// Huge public event handler follows.
-_handle = [
-/* Code */
-{
+[] spawn {
+while {tmr_optics_loop} do {
+	sleep 0.03;
+
 	_check = cameraView == "GUNNER" && !visibleMap && cameraOn == player;
 
 	if (_check) then {
@@ -313,6 +315,19 @@ _handle = [
 		// Show the optic layers
 		//////////////////////////////////////
 
+		// Draw the correct layers (don't show them)
+		if (_doUpdateAllLayers) then { 
+			(TMR_SCOPECTRL 1) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_shadow");
+			(TMR_SCOPECTRL 2) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_bodyCenterNight");
+			(TMR_SCOPECTRL 3) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_bodyLeftNight");
+			(TMR_SCOPECTRL 4) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_bodyRightNight");
+			(TMR_SCOPECTRL 5) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_bodyCenter");
+			(TMR_SCOPECTRL 6) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_bodyLeft");
+			(TMR_SCOPECTRL 7) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_bodyRight");
+			(TMR_SCOPECTRL 20) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_scoperingNight");
+			(TMR_SCOPECTRL 21) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_scopeRing");
+		};
+
 		// Stop processing if already in the scope view and FOV hasn't changed
 		if (!_doUpdateFOV && tmr_optics_inScope) exitwith {};
 
@@ -341,10 +356,11 @@ _handle = [
 					tmr_optics_inScope_FOV = ([] call cba_fnc_getFOV) select 0;
 
 					// Init the scope (if needed)
-					[] call tmr_optics_fnc_initScope;
+					_didUpdate = [] call tmr_optics_fnc_initScope;
+					_doUpdateAllLayers = true;
 
-					// Get the layer files from config and set them if needed)
-					if (_doUpdateAllLayers) then {
+					// Get the layer files from config and set them if needed
+					if (_doUpdateAllLayers) then { 
 						(TMR_SCOPECTRL 1) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_shadow");
 						(TMR_SCOPECTRL 2) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_bodyCenterNight");
 						(TMR_SCOPECTRL 3) ctrlSetText getText (configFile >> "CfgWeapons" >> _optic >> "tmr_optics_bodyLeftNight");
@@ -425,24 +441,8 @@ _handle = [
 			[] call tmr_optics_fnc_hideScope;
 		};
 	};
-}, 
-/* Parameters */
-[],
-/* Delay */
-0.03,
-/* Initialization */
-{
-}, 
-/* On exit, do...*/
-{
-}, 
-/* Run condition */
-{true},
-/* Exit condition */
-{tmr_optics_endPFEH}, 
-/* Private variables */
-["_unit"]
-] call cba_common_fnc_addPerFrameHandlerLogic;
+};
+};
 
 /////////////////////////////////////////////////////////////////////////////////
 
