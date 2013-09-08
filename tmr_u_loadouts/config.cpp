@@ -65,8 +65,8 @@ class CfgVehicles {
 		};
 	};
 
-	class B_FieldPack_cbr;
-	class B_FieldPack_cbr_LAT : B_FieldPack_cbr {
+	class B_FieldPack_ocamo;
+	class B_FieldPack_cbr_LAT : B_FieldPack_ocamo {
 		class TransportMagazines {
 			class _xx_RPG32_F {
 				count = 1;
@@ -79,7 +79,7 @@ class CfgVehicles {
 		};
 	};
 
-	class B_FieldPack_cbr_RPG_AT : B_FieldPack_cbr {
+	class B_FieldPack_cbr_RPG_AT : B_FieldPack_ocamo {
 		class TransportMagazines {
 			class _xx_RPG32_F {
 				count = 1;

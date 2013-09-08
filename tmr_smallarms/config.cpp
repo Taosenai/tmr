@@ -128,7 +128,7 @@ class CfgMagazines {
 		displaynameshort = "6.5mm Tracer";
 	};
 
-	class 200Rnd_65x39_cased_Box : CA_Magazine {
+	class 200Rnd_65x39_cased_Box : 100Rnd_65x39_caseless_mag {
 		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 200<br />Used in: Mk200 MG";
 		displayname = "6.5mm 200Rnd Box";
 		displaynameshort = "6.5mm";

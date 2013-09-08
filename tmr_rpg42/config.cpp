@@ -345,10 +345,10 @@ class CfgWeapons {
 
 		// modelOptics = "\tmr_rpg42\data\tmr_reticle_RPG42";
 
-		class WeaponSlotsInfo {
-			allowedslots[] = {901};
-			mass = 100;
-		};
+		//class WeaponSlotsInfo {
+		//	allowedslots[] = {901};
+		//	mass = 100;
+		//};
 
 		// class OpticsModes {
 		// 	class optic {

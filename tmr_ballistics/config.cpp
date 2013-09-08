@@ -70,7 +70,7 @@ class CfgMagazines {
 		descriptionshort = "Caliber: 6.5x39mm Caseless 120gr OTM<br />Rounds: 30<br />Used in: MX-1";
 	};
 
-	class 30Rnd_65x39_caseless_green : CA_Magazine {
+	class 30Rnd_65x39_caseless_green : 30Rnd_65x39_caseless_mag {
 		initSpeed = 724; // initial MV for 14.5in barrel
 		descriptionshort = "Caliber: 6.5x38mm Caseless 120gr OTM<br />Rounds: 30<br />Used in: KT-2002";
 	};
@@ -80,7 +80,7 @@ class CfgMagazines {
 		// TODO: the MX SW has a longer barrel so should have a higher initial MV
 	};
 
-	class 200Rnd_65x39_cased_Box : CA_Magazine {
+	class 200Rnd_65x39_cased_Box : 100Rnd_65x39_caseless_mag {
 		initSpeed = 691; // initial MV for 12.5in barrel (estimated)
 	};
 
