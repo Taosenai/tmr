@@ -55,55 +55,58 @@ class Extended_FiredBIS_EventHandlers {
 //    time since fired   rear movement of gun   camera climb
 
 // Global muzzle climb increase over base. (For easy tuning.)
-#define TMR_MC 0.0002755
-			// 0.01572
+#define TMR_MC 0.0003855
+			// 0.0002755
 
-// Global recovery sequence duration increase when suppressed. (For easy tuning.)
-#define TMR_RSD 0.015
+// Global initial muzzle climb time from base. (For easy tuning.)
+#define TMR_IMCT -0.05
+
+// Global recovery sequence duration increase (For easy tuning.)
+#define TMR_RSD 0.021
              // 0.134
 
 class CfgRecoils {
-	tmr_smallarms_recoil_single_mx[] = 				{0, 0, 0,		0.020, 0.0115, 0.01572+TMR_MC,		0.134+TMR_RSD, 0, -0.0065,		0.143+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_mx[] = 				{0, 0, 0,		0.020, 0.0115, 0.01622+TMR_MC,		0.134+TMR_RSD, 0, -0.0065,		0.143+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_mx[] = 		{0, 0, 0,		0.020, 0.0104, 0.01002+TMR_MC,		0.134+TMR_RSD, 0, -0.0044,		0.143+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_mx[] = 			{0, 0, 0,		0.020, 0.0104, 0.01007+TMR_MC,		0.134+TMR_RSD, 0, -0.0044,		0.143+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_mx[] = 				{0, 0, 0,		0.020+TMR_IMCT, 0.0115, 0.01622+TMR_MC,		0.134+TMR_RSD, 0, -0.0065,		0.143+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_mx[] = 				{0, 0, 0,		0.020+TMR_IMCT, 0.0115, 0.01622+TMR_MC,		0.134+TMR_RSD, 0, -0.0065,		0.143+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_mx[] = 		{0, 0, 0,		0.020+TMR_IMCT, 0.0104, 0.01002+TMR_MC,		0.134+TMR_RSD, 0, -0.0044,		0.143+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_mx[] = 			{0, 0, 0,		0.020+TMR_IMCT, 0.0104, 0.01007+TMR_MC,		0.134+TMR_RSD, 0, -0.0044,		0.143+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_single_katiba[] = 			{0, 0, 0,		0.020, 0.0115, 0.01552+TMR_MC,		0.134+TMR_RSD, 0, -0.0065,		0.143+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_katiba[] = 			{0, 0, 0,		0.020, 0.0115, 0.01592+TMR_MC,		0.134+TMR_RSD, 0, -0.0065,		0.143+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_katiba[] = 	{0, 0, 0,		0.020, 0.0104, 0.00972+TMR_MC,		0.134+TMR_RSD, 0, -0.0044,		0.143+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_katiba[] = 		{0, 0, 0,		0.020, 0.0104, 0.00972+TMR_MC,		0.134+TMR_RSD, 0, -0.0044,		0.143+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_katiba[] = 			{0, 0, 0,		0.020+TMR_IMCT, 0.0115, 0.01552+TMR_MC,		0.134+TMR_RSD, 0, -0.0065,		0.143+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_katiba[] = 			{0, 0, 0,		0.020+TMR_IMCT, 0.0115, 0.01592+TMR_MC,		0.134+TMR_RSD, 0, -0.0065,		0.143+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_katiba[] = 	{0, 0, 0,		0.020+TMR_IMCT, 0.0104, 0.00972+TMR_MC,		0.134+TMR_RSD, 0, -0.0044,		0.143+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_katiba[] = 		{0, 0, 0,		0.020+TMR_IMCT, 0.0104, 0.00972+TMR_MC,		0.134+TMR_RSD, 0, -0.0044,		0.143+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_single_mk20[] = 			{0, 0, 0,		0.020, 0.0110, 0.01514+TMR_MC,		0.132+TMR_RSD, 0, -0.0065,		0.141+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_mk20[] = 				{0, 0, 0,		0.020, 0.0110, 0.01519+TMR_MC,		0.132+TMR_RSD, 0, -0.0065,		0.141+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_mk20[] = 		{0, 0, 0,		0.020, 0.0102, 0.00900+TMR_MC,		0.132+TMR_RSD, 0, -0.0044,		0.141+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_mk20[] = 		{0, 0, 0,		0.020, 0.0102, 0.00905+TMR_MC,		0.132+TMR_RSD, 0, -0.0044,		0.141+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_mk20[] = 			{0, 0, 0,		0.020+TMR_IMCT, 0.0110, 0.01514+TMR_MC,		0.132+TMR_RSD, 0, -0.0065,		0.141+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_mk20[] = 				{0, 0, 0,		0.020+TMR_IMCT, 0.0110, 0.01519+TMR_MC,		0.132+TMR_RSD, 0, -0.0065,		0.141+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_mk20[] = 		{0, 0, 0,		0.020+TMR_IMCT, 0.0102, 0.00900+TMR_MC,		0.132+TMR_RSD, 0, -0.0044,		0.141+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_mk20[] = 		{0, 0, 0,		0.020+TMR_IMCT, 0.0102, 0.00905+TMR_MC,		0.132+TMR_RSD, 0, -0.0044,		0.141+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_single_vermin[] = 			{0, 0, 0,		0.040, 0.0120, 0.01300+TMR_MC,		0.129+TMR_RSD, 0, -0.0055,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_vermin[] = 			{0, 0, 0,		0.040, 0.0120, 0.01300+TMR_MC,		0.129+TMR_RSD, 0, -0.0055,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_vermin[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_MC,		0.129+TMR_RSD, 0, -0.0034,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_vermin[] = 		{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_MC,		0.129+TMR_RSD, 0, -0.0034,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_vermin[] = 			{0, 0, 0,		0.040+TMR_IMCT, 0.0120, 0.01300+TMR_MC,		0.129+TMR_RSD, 0, -0.0055,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_vermin[] = 			{0, 0, 0,		0.040+TMR_IMCT, 0.0120, 0.01300+TMR_MC,		0.129+TMR_RSD, 0, -0.0055,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_vermin[] = 	{0, 0, 0,		0.040+TMR_IMCT, 0.0097, 0.00800+TMR_MC,		0.129+TMR_RSD, 0, -0.0034,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_vermin[] = 		{0, 0, 0,		0.040+TMR_IMCT, 0.0097, 0.00800+TMR_MC,		0.129+TMR_RSD, 0, -0.0034,		0.138+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_single_scorpion[] = 		{0, 0, 0,		0.040, 0.0109, 0.01460+TMR_MC,		0.129+TMR_RSD, 0, -0.0055,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_scorpion[] = 			{0, 0, 0,		0.040, 0.0109, 0.01460+TMR_MC,		0.129+TMR_RSD, 0, -0.0055,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_scorpion[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_MC,		0.129+TMR_RSD, 0, -0.0034,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_scorpion[] = 	{0, 0, 0,		0.040, 0.0097, 0.00800+TMR_MC,		0.129+TMR_RSD, 0, -0.0034,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_scorpion[] = 		{0, 0, 0,		0.040+TMR_IMCT, 0.0109, 0.01460+TMR_MC,		0.129+TMR_RSD, 0, -0.0055,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_scorpion[] = 			{0, 0, 0,		0.040+TMR_IMCT, 0.0109, 0.01460+TMR_MC,		0.129+TMR_RSD, 0, -0.0055,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_scorpion[] = 	{0, 0, 0,		0.040+TMR_IMCT, 0.0097, 0.00800+TMR_MC,		0.129+TMR_RSD, 0, -0.0034,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_scorpion[] = 	{0, 0, 0,		0.040+TMR_IMCT, 0.0097, 0.00800+TMR_MC,		0.129+TMR_RSD, 0, -0.0034,		0.138+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_auto_mk200[] = 			{0, 0, 0,		0.043, 0.0120, 0.01690+TMR_MC,		0.112+TMR_RSD, 0, -0.0065,		0.121+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_mk200[] = 		{0, 0, 0,		0.043, 0.0104, 0.00960+TMR_MC,		0.112+TMR_RSD, 0, -0.0044,		0.121+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_mk200[] = 			{0, 0, 0,		0.043+TMR_IMCT, 0.0120, 0.01690+TMR_MC,		0.112+TMR_RSD, 0, -0.0065,		0.121+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_mk200[] = 		{0, 0, 0,		0.043+TMR_IMCT, 0.0104, 0.00960+TMR_MC,		0.112+TMR_RSD, 0, -0.0044,		0.121+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_auto_zafir[] = 			{0, 0, 0,		0.040, 0.0140, 0.02570+TMR_MC,		0.122+TMR_RSD, 0, -0.0065,		0.131+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_zafir[] = 		{0, 0, 0,		0.040, 0.0120, 0.01230+TMR_MC,		0.122+TMR_RSD, 0, -0.0044,		0.131+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_zafir[] = 			{0, 0, 0,		0.040+TMR_IMCT, 0.0140, 0.02570+TMR_MC,		0.122+TMR_RSD, 0, -0.0065,		0.131+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_zafir[] = 		{0, 0, 0,		0.040+TMR_IMCT, 0.0120, 0.01230+TMR_MC,		0.122+TMR_RSD, 0, -0.0044,		0.131+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_single_ebr[] = 			{0, 0, 0,		0.040, 0.0140, 0.02600+TMR_MC,		0.132+TMR_RSD, 0, -0.0065,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_ebr[] = 				{0, 0, 0,		0.040, 0.0140, 0.02750+TMR_MC,		0.132+TMR_RSD, 0, -0.0065,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_ebr[] = 		{0, 0, 0,		0.040, 0.0120, 0.01150+TMR_MC,		0.132+TMR_RSD, 0, -0.0044,		0.138+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_ebr[] = 		{0, 0, 0,		0.040, 0.0120, 0.01350+TMR_MC,		0.132+TMR_RSD, 0, -0.0044,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_ebr[] = 			{0, 0, 0,		0.040+TMR_IMCT, 0.0140, 0.02600+TMR_MC,		0.132+TMR_RSD, 0, -0.0065,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_ebr[] = 				{0, 0, 0,		0.040+TMR_IMCT, 0.0140, 0.02750+TMR_MC,		0.132+TMR_RSD, 0, -0.0065,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_ebr[] = 		{0, 0, 0,		0.040+TMR_IMCT, 0.0120, 0.01150+TMR_MC,		0.132+TMR_RSD, 0, -0.0044,		0.138+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_ebr[] = 		{0, 0, 0,		0.040+TMR_IMCT, 0.0120, 0.01350+TMR_MC,		0.132+TMR_RSD, 0, -0.0044,		0.138+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_single_lrr[] = 			{0, 0, 0,		0.010, 0.0350, 0.10000+TMR_MC,										0.430+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_lrr[] = 		{0, 0, 0,		0.010, 0.0310, 0.03300+TMR_MC,		0.360+TMR_RSD, 0, -0.0090,		0.430+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_lrr[] = 			{0, 0, 0,		0.010+TMR_IMCT, 0.0350, 0.10200+TMR_MC,										0.430+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_lrr[] = 		{0, 0, 0,		0.010+TMR_IMCT, 0.0310, 0.03300+TMR_MC,		0.360+TMR_RSD, 0, -0.0100,		0.430+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_single_gm6[] = 			{0, 0, 0,		0.010, 0.0350, 0.10000+TMR_MC,										0.430+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_gm6[] = 		{0, 0, 0,		0.010, 0.0310, 0.03300+TMR_MC,		0.360+TMR_RSD, 0, 0,			0.430+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_gm6[] = 			{0, 0, 0,		0.010+TMR_IMCT, 0.0350, 0.10200+TMR_MC,										0.430+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_gm6[] = 		{0, 0, 0,		0.010+TMR_IMCT, 0.0310, 0.03300+TMR_MC,		0.360+TMR_RSD, 0, 0,			0.430+TMR_RSD, 0, 0};
 };
 
 class CfgCameraShake {
