@@ -73,7 +73,9 @@ class CfgVehicles {
 };
 
 #define TMR_SWAY_DEPLOY 0.084
-#define TMR_SWAY_DEPLOYPRONE 0.045
+#define TMR_SWAY_DEPLOYPRONE 0.042
+#define TMR_SWAY_RESTED 0.3
+#define TMR_SWAY_RESTEDPRONE 0.25
 #define TMR_DEPLOY_TURNSPEED 0.1
 
 // Arma 3 doesn't respect turnSpeed.
@@ -203,6 +205,121 @@ class CfgMovesBasic {
 			default = "aadjppnemstpsraswrfldup_tmr_deploy";
 			turnL = "aadjppnemstpsraswrfldup_tmr_deploy";
 			turnR = "aadjppnemstpsraswrfldup_tmr_deploy";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		//////////////////////////////////////////////////////////////////////
+
+		class RifleStandActions_tmr_rested : RifleStandActions {
+			stop =    "AmovPercMstpSrasWrflDnon_tmr_rested";
+			default = "AmovPercMstpSrasWrflDnon_tmr_rested";
+			turnL = "AmovPercMstpSrasWrflDnon_tmr_rested";
+			turnR = "AmovPercMstpSrasWrflDnon_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustLStandActions_tmr_rested : RifleAdjustLStandActions {
+			stop =    "AadjPercMstpSrasWrflDleft_tmr_rested";
+			default = "AadjPercMstpSrasWrflDleft_tmr_rested";
+			AdjustL = "AadjPercMstpSrasWrflDleft_tmr_rested";
+			turnL = "AadjPercMstpSrasWrflDleft_tmr_rested";
+			turnR = "AadjPercMstpSrasWrflDleft_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustRStandActions_tmr_rested : RifleAdjustRStandActions {
+			stop =    "AadjPercMstpSrasWrflDright_tmr_rested";
+			default = "AadjPercMstpSrasWrflDright_tmr_rested";
+			AdjustRight = "AadjPercMstpSrasWrflDright_tmr_rested";
+			turnL = "AadjPercMstpSrasWrflDright_tmr_rested";
+			turnR = "AadjPercMstpSrasWrflDright_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustFStandActions_tmr_rested : RifleAdjustFStandActions {
+			stop =    "AadjPercMstpSrasWrflDup_tmr_rested";
+			default = "AadjPercMstpSrasWrflDup_tmr_rested";
+			AdjustF = "AadjPercMstpSrasWrflDup_tmr_rested";
+			turnL = "AadjPercMstpSrasWrflDup_tmr_rested";
+			turnR = "AadjPercMstpSrasWrflDup_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustBStandActions_tmr_rested : RifleAdjustBStandActions {
+			stop =    "AadjPercMstpSrasWrflDdown_tmr_rested";
+			default = "AadjPercMstpSrasWrflDdown_tmr_rested";
+			AdjustB = "AadjPercMstpSrasWrflDdown_tmr_rested";
+			turnR = "AadjPercMstpSrasWrflDdown_tmr_rested";
+			turnL = "AadjPercMstpSrasWrflDdown_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustLKneelActions_tmr_rested : RifleAdjustLKneelActions {
+			stop =    "AadjPknlMstpSrasWrflDleft_tmr_rested";
+			default = "AadjPknlMstpSrasWrflDleft_tmr_rested";
+			turnL = "AadjPknlMstpSrasWrflDleft_tmr_rested";
+			turnR = "AadjPknlMstpSrasWrflDleft_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustRKneelActions_tmr_rested : RifleAdjustRKneelActions {
+			stop =    "AadjPknlMstpSrasWrflDright_tmr_rested";
+			default = "AadjPknlMstpSrasWrflDright_tmr_rested";
+			turnL = "AadjPknlMstpSrasWrflDright_tmr_rested";
+			turnR = "AadjPknlMstpSrasWrflDright_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustFKneelActions_tmr_rested : RifleAdjustFKneelActions {
+			stop =    "AadjPknlMstpSrasWrflDup_tmr_rested";
+			default = "AadjPknlMstpSrasWrflDup_tmr_rested";
+			turnL = "AadjPknlMstpSrasWrflDup_tmr_rested";
+			turnR = "AadjPknlMstpSrasWrflDup_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustBKneelActions_tmr_rested : RifleAdjustBKneelActions {
+			stop =    "AadjPknlMstpSrasWrflDdown_tmr_rested";
+			default = "AadjPknlMstpSrasWrflDdown_tmr_rested";
+			turnL = "AadjPknlMstpSrasWrflDdown_tmr_rested";
+			turnR = "AadjPknlMstpSrasWrflDdown_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleKneelActions_tmr_rested : RifleKneelActions {
+			stop = "AmovPknlMstpSrasWrflDnon_tmr_rested";
+			default = "AmovPknlMstpSrasWrflDnon_tmr_rested";
+			crouch = "AmovPknlMstpSrasWrflDnon_tmr_rested";
+			turnL = "AmovPknlMstpSrasWrflDnon_tmr_rested";
+			turnR = "AmovPknlMstpSrasWrflDnon_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleProneActions_tmr_rested : RifleProneActions {
+			stop = "AmovPpneMstpSrasWrflDnon_tmr_rested";
+			default = "AmovPpneMstpSrasWrflDnon_tmr_rested";
+			turnL = "AmovPpneMstpSrasWrflDnon_tmr_rested";
+			turnR = "AmovPpneMstpSrasWrflDnon_tmr_rested";
+			turnSpeed = TMR_DEPLOY_TURNSPEED;
+			limitFast = 1;
+		};
+
+		class RifleAdjustFProneActions_tmr_rested : RifleAdjustFProneActions {
+			stop = "aadjppnemstpsraswrfldup_tmr_rested";
+			default = "aadjppnemstpsraswrfldup_tmr_rested";
+			turnL = "aadjppnemstpsraswrfldup_tmr_rested";
+			turnR = "aadjppnemstpsraswrfldup_tmr_rested";
 			turnSpeed = TMR_DEPLOY_TURNSPEED;
 			limitFast = 1;
 		};
@@ -387,6 +504,176 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 
 			ConnectTo[] = {"amovppnemstpsraswrfldnon_tmr_deploy", 0.02};
 			ConnectFrom[] = {"amovppnemstpsraswrfldnon_tmr_deploy", 0.02};
+			InterpolateFrom[] = {"amovppnemstpsraswrfldnon", 0.02};
+			InterpolateTo[] = {"amovppnemstpsraswrfldnon", 0.02};
+		};
+
+		/////////////////////////////////////////////////////////////////////////////
+
+				class AmovPercMstpSrasWrflDnon_tmr_rested : AmovPercMstpSrasWrflDnon {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleStandActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"AmovPercMstpSrasWrflDnon_tmr_rested", 0.02};
+			ConnectFrom[] = {"AmovPercMstpSrasWrflDnon_tmr_rested", 0.02};
+			InterpolateFrom[] = {"AmovPercMstpSrasWrflDnon", 0.02};
+			InterpolateTo[] = {"AmovPercMstpSrasWrflDnon", 0.02};
+		};
+
+		class aadjpercmstpsraswrfldup_tmr_rested : aadjpercmstpsraswrfldup {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleAdjustFStandActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjpercmstpsraswrfldup_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjpercmstpsraswrfldup_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aadjpercmstpsraswrfldup", 0.02};
+			InterpolateTo[] = {"aadjpercmstpsraswrfldup", 0.02};
+		};
+
+		class aadjpercmstpsraswrflddown_tmr_rested : aadjpercmstpsraswrflddown {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleAdjustBStandActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjpercmstpsraswrflddown_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjpercmstpsraswrflddown_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aadjpercmstpsraswrflddown", 0.02};
+			InterpolateTo[] = {"aadjpercmstpsraswrflddown", 0.02};
+		};
+
+		class aadjpercmstpsraswrfldright_tmr_rested : aadjpercmstpsraswrfldright {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleAdjustRStandActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjpercmstpsraswrfldright_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjpercmstpsraswrfldright_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aadjpercmstpsraswrfldright", 0.02};
+			InterpolateTo[] = {"aadjpercmstpsraswrfldright", 0.02};
+		};
+
+		class aadjpercmstpsraswrfldleft_tmr_rested : aadjpercmstpsraswrfldleft {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleAdjustLStandActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjpercmstpsraswrfldleft_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjpercmstpsraswrfldleft_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aadjpercmstpsraswrfldleft", 0.02};
+			InterpolateTo[] = {"aadjpercmstpsraswrfldleft", 0.02};
+		};
+
+		class aadjpknlmstpsraswrfldup_tmr_rested : aadjpknlmstpsraswrfldup {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleAdjustFKneelActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjpknlmstpsraswrfldup_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjpknlmstpsraswrfldup_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aadjpknlmstpsraswrfldup", 0.02};
+			InterpolateTo[] = {"aadjpknlmstpsraswrfldup", 0.02};
+		};
+
+		class amovpknlmstpsraswrfldnon_tmr_rested : amovpknlmstpsraswrfldnon {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleKneelActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"amovpknlmstpsraswrfldnon_tmr_rested", 0.02};
+			ConnectFrom[] = {"amovpknlmstpsraswrfldnon_tmr_rested", 0.02};
+			InterpolateFrom[] = {"amovpknlmstpsraswrfldnon", 0.02};
+			InterpolateTo[] = {"amovpknlmstpsraswrfldnon", 0.02};
+		};
+
+		class aadjpknlmstpsraswrflddown_tmr_rested : aadjpknlmstpsraswrflddown {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleAdjustBKneelActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjpknlmstpsraswrflddown_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjpknlmstpsraswrflddown_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aaadjpknlmstpsraswrflddown", 0.02};
+			InterpolateTo[] = {"aadjpknlmstpsraswrflddown", 0.02};
+		};
+
+		class aadjpknlmstpsraswrfldleft_tmr_rested : aadjpknlmstpsraswrfldleft {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleAdjustLKneelActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjpknlmstpsraswrfldleft_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjpknlmstpsraswrfldleft_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aadjpknlmstpsraswrfldleft", 0.02};
+			InterpolateTo[] = {"aadjpknlmstpsraswrfldleft", 0.02};
+		};
+
+		class aadjpknlmstpsraswrfldright_tmr_rested : aadjpknlmstpsraswrfldright {
+			aimPrecision = TMR_SWAY_RESTED;
+			actions = "RifleAdjustRKneelActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjpknlmstpsraswrfldright_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjpknlmstpsraswrfldright_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aadjpknlmstpsraswrfldright", 0.02};
+			InterpolateTo[] = {"aadjpknlmstpsraswrfldright", 0.02};
+		};
+
+		class aadjppnemstpsraswrfldup_tmr_rested : aadjppnemstpsraswrfldup {
+			aimPrecision = TMR_SWAY_RESTEDPRONE;
+			actions = "RifleAdjustFProneActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"aadjppnemstpsraswrfldup_tmr_rested", 0.02};
+			ConnectFrom[] = {"aadjppnemstpsraswrfldup_tmr_rested", 0.02};
+			InterpolateFrom[] = {"aadjppnemstpsraswrfldup", 0.02};
+			InterpolateTo[] = {"aadjppnemstpsraswrfldup", 0.02};
+		};
+
+		class amovppnemstpsraswrfldnon_tmr_rested : amovppnemstpsraswrfldnon {
+			aimPrecision = TMR_SWAY_RESTEDPRONE;
+			actions = "RifleProneActions_tmr_rested";
+			aiming = "aimingLying";
+			speed = 0.01;
+			onLandEnd = true;
+			onLandBeg = true;
+
+			ConnectTo[] = {"amovppnemstpsraswrfldnon_tmr_rested", 0.02};
+			ConnectFrom[] = {"amovppnemstpsraswrfldnon_tmr_rested", 0.02};
 			InterpolateFrom[] = {"amovppnemstpsraswrfldnon", 0.02};
 			InterpolateTo[] = {"amovppnemstpsraswrfldnon", 0.02};
 		};
@@ -583,6 +870,11 @@ class CfgSounds {
 	class tmr_autorest_bipodClose {
 		name = "tmr_autorest_bipodClose";
 		sound[] = {"tmr_autorest\data\tmr_autorest_bipodclose.wss", db-0, 1};
+		titles[] = {};
+	};
+	class tmr_autorest_hardrest {
+		name = "tmr_autorest_hardrest";
+		sound[] = {"tmr_autorest\data\tmr_autorest_hardrest.wss", db-0, 1};
 		titles[] = {};
 	};
 };

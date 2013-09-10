@@ -9,8 +9,10 @@ tmr_autorest_restIconTransition = false;
 tmr_autorest_deployIconDisplayed = false;
 tmr_autorest_deployIconTransition = false;
 
-#define TMR_AUTOREST_RESTEDRECOIL 0.66
+#define TMR_AUTOREST_RESTEDRECOIL 0.7
 #define TMR_AUTOREST_DEPLOYEDRECOIL 0.49
+
+#define TMR_AUTOREST_CAMSHAKE [0.7,0.7,6]
 
 // -------------------------------------------------------------------------------
 // Key EH: Deploy the weapon if it has a bipod and there is something to deploy on.
@@ -29,54 +31,79 @@ tmr_autorest_fnc_deployKeyDownEH = {
 		// Player must be on foot, with primary out, able to fire. Can't be UAV (cameraOn)
 		if !(alive player && speed player < 1 && vehicle player == player && currentWeapon player == primaryWeapon player && canFire player && canMove player && cameraOn == player) exitWith {false};
 
-		// Make sure weapon is deployable (bipod mounted)
+		// Make sure weapon is deployable (bipod mounted) or is rested on something
 		_config = configFile >> "CfgWeapons" >> currentWeapon player;
 		_canDeployCfg = getNumber (_config >> "tmr_autorest_deployable"); // 1 for true
 		_canDeployItem = "TMR_acc_bipod" in primaryWeaponItems player;
+		_isRested = player getVariable ["tmr_autorest_rested", false];
 
-		if !(_canDeployCfg == 1 || _canDeployItem) exitwith {false};
+		if !(_canDeployCfg == 1 || _canDeployItem || _isRested) exitwith {false};
 
 		// Make sure it's an anim that can deploy.
 		_allowedAnimStates = ["amovpercmstpsraswrfldnon", "aadjpercmstpsraswrfldup", "aadjpercmstpsraswrflddown", "aadjpercmstpsraswrfldright", "aadjpercmstpsraswrfldleft", "aadjpknlmstpsraswrfldup", "amovpknlmstpsraswrfldnon", "aadjpknlmstpsraswrflddown", "aadjpknlmstpsraswrfldleft", "aadjpknlmstpsraswrfldright", "aadjppnemstpsraswrfldup", "amovppnemstpsraswrfldnon"];
 		_playerAnimState = animationState player;
 		if !(_playerAnimState in _allowedAnimStates) exitWith {false};
 
-		// Check if the bipod area intersects with something or the ground.
-		_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
-		_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
-		_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
-		_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
+		if (_canDeployCfg == 1 || _canDeployItem) then {
+			// Check if the bipod area intersects with something or the ground.
+			_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
+			_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
+			_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
+			_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
 
-		if (count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck) then {
-			_return = true;
+			if (count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck) then {
+				_return = true;
 
-			// End rest state before deploying.
-			if (player getVariable ["tmr_autorest_rested", false]) then {
-				[] call tmr_autorest_fnc_unrestWeapon;
-			};
+				// End rest state before deploying.
+				if (player getVariable ["tmr_autorest_rested", false]) then {
+					[] call tmr_autorest_fnc_unrestWeapon;
+				};
 
-			// Deploy the weapon
-			[] call tmr_autorest_fnc_deployWeapon;
+				// Deploy the weapon
+				[] call tmr_autorest_fnc_deployWeapon;
 
-			// Spawn a watcher to undeploy if we're no longer aligned or if we move
-			[] spawn {
-				while {player getVariable ["tmr_autorest_deployed", false]} do {
-					sleep 0.5;
-					_playerAnimState = animationState player;
+				// Spawn a watcher to undeploy if we're no longer aligned or if we move
+				[] spawn {
+					while {player getVariable ["tmr_autorest_deployed", false]} do {
+						sleep 0.5;
+						_playerAnimState = animationState player;
 
-					// Check if the bipod area intersects with something or the ground.
-					_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
-					_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
-					_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
-					_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
+						// Check if the bipod area intersects with something or the ground.
+						_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
+						_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
+						_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
+						_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
 
-					_intersectCheck = (count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck);
+						_intersectCheck = (count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck);
 
-					// If we intersect with nothing or if we left the deploy animation
-					if (!_intersectCheck || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
-						// Undeploy the weapon.
-						[] call tmr_autorest_fnc_undeployWeapon;
+						// If we intersect with nothing or if we left the deploy animation
+						if (!_intersectCheck || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
+							// Undeploy the weapon.
+							[] call tmr_autorest_fnc_undeployWeapon;
+						};
 					};
+				};
+			};
+		} else {
+			// Player has no bipod, see if he's rested
+			if (_isRested) then {
+				// 'Hard rest' the weapon
+				[] call tmr_autorest_fnc_hardRestWeapon;
+
+				// Spawn a watcher to end hard rest if we're no longer rested
+				[] spawn {
+					while {player getVariable ["tmr_autorest_rested", false]} do {
+						sleep 0.5;
+						_playerAnimState = animationState player;
+
+						// If we intersect with nothing or if we left the deploy animation
+						if (!(["_tmr_rested", _playerAnimState] call bis_fnc_inString)) then {
+							// Unhard-rest the weapon.
+							[] call tmr_autorest_fnc_unHardRestWeapon;
+						};
+					};
+					// Unhard-rest the weapon since we're out of rested state.
+					[] call tmr_autorest_fnc_unHardRestWeapon;
 				};
 			};
 		};
@@ -98,6 +125,7 @@ tmr_autorest_fnc_deployWeapon = {
 	};
 	
 	playSound "tmr_autorest_bipodOpen";
+	addCamShake TMR_AUTOREST_CAMSHAKE;
 
 	player setVariable ["tmr_autorest_deployed", true, false];
 
@@ -128,6 +156,30 @@ tmr_autorest_fnc_undeployWeapon = {
 			tmr_autorest_deployIconTransition = false;
 		};
 	};
+};
+
+// -------------------------------------------------------------------------------
+// Apply the 'hard rest' weapon rest characteristics to the player.
+// -------------------------------------------------------------------------------
+tmr_autorest_fnc_hardrestWeapon = {	
+	playSound "tmr_autorest_hardrest";
+
+	addCamShake TMR_AUTOREST_CAMSHAKE;
+
+	((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlSetText "\tmr_autorest\data\hardrestWeapon_ca.paa";
+
+	_playerAnimState = animationState player;
+	player switchMove format ["%1_tmr_rested", _playerAnimState];
+};
+
+// -------------------------------------------------------------------------------
+// Remove the 'hard rest' weapon rest characteristics from the player.
+// -------------------------------------------------------------------------------
+tmr_autorest_fnc_unHardRestWeapon = {
+	((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlSetText "\tmr_autorest\data\restedWeapon_ca.paa";
+
+	_playerAnimState = animationState player;
+	player switchMove format ["%1", [_playerAnimState, "_tmr_rested", ""] call CBA_fnc_replace];
 };
 
 // -------------------------------------------------------------------------------
