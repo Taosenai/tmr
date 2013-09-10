@@ -285,6 +285,9 @@ while {tmr_optics_loop} do {
 	_check = cameraView == "GUNNER" && !visibleMap && cameraOn == player;
 
 	if (_check) then {
+		// Stop processing immediately if not a primary weapon
+		if (currentWeapon player != primaryWeapon player) exitwith {false};
+			
 		// See if we have an enhanced optic attached
 		_optic = (primaryWeaponItems player) select 2; 
 
