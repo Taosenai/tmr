@@ -12,7 +12,7 @@ tmr_autorest_deployIconTransition = false;
 #define TMR_AUTOREST_RESTEDRECOIL 0.7
 #define TMR_AUTOREST_DEPLOYEDRECOIL 0.49
 
-#define TMR_AUTOREST_CAMSHAKE [0.7,0.7,6]
+#define TMR_AUTOREST_CAMSHAKE [1,0.5,6]
 
 // -------------------------------------------------------------------------------
 // Key EH: Deploy the weapon if it has a bipod and there is something to deploy on.
