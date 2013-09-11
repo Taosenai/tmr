@@ -75,7 +75,7 @@ class CfgVehicles {
 #define TMR_SWAY_DEPLOY 0.084
 #define TMR_SWAY_DEPLOYPRONE 0.042
 #define TMR_SWAY_RESTED 0.3
-#define TMR_SWAY_RESTEDPRONE 0.25
+#define TMR_SWAY_RESTEDPRONE 0.08
 #define TMR_DEPLOY_TURNSPEED 0.1
 
 // Arma 3 doesn't respect turnSpeed.
