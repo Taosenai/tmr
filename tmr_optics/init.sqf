@@ -122,8 +122,8 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 		_randomScopeShiftX = 0.005 * _recoilMulti - random 0.011;
 
-		_randomReticleShiftX = -0.0002 * _recoilMulti + random 0.004; // Always tend up and right
-		_randomReticleShiftY = -0.0002 * _recoilMulti - random 0.009;
+		_randomReticleShiftX = -0.00011 * _recoilMulti + random 0.0049; // Always tend up and right
+		_randomReticleShiftY = -0.00011 * _recoilMulti - random 0.0099;
 
 		/////////
 		// Center everything
