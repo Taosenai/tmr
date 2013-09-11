@@ -44,48 +44,48 @@ tmr_autorest_fnc_deployKeyDownEH = {
 		_playerAnimState = animationState player;
 		if !(_playerAnimState in _allowedAnimStates) exitWith {false};
 
-		if (_canDeployCfg == 1 || _canDeployItem) then {
-			// Check if the bipod area intersects with something or the ground.
-			_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
-			_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
-			_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
-			_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
+		// Check if the bipod area intersects with something or the ground.
+		_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
+		_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
+		_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
+		_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
 
-			if (count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck) then {
-				_return = true;
+		_bipodAligned = count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck;
 
-				// End rest state before deploying.
-				if (player getVariable ["tmr_autorest_rested", false]) then {
-					[] call tmr_autorest_fnc_unrestWeapon;
-				};
+		if (_canDeployCfg == 1 || _canDeployItem && _bipodAligned) then {
+			_return = true;
 
-				// Deploy the weapon
-				[] call tmr_autorest_fnc_deployWeapon;
+			// End rest state before deploying.
+			if (player getVariable ["tmr_autorest_rested", false]) then {
+				[] call tmr_autorest_fnc_unrestWeapon;
+			};
 
-				// Spawn a watcher to undeploy if we're no longer aligned or if we move
-				[] spawn {
-					while {player getVariable ["tmr_autorest_deployed", false]} do {
-						sleep 0.5;
-						_playerAnimState = animationState player;
+			// Deploy the weapon
+			[] call tmr_autorest_fnc_deployWeapon;
 
-						// Check if the bipod area intersects with something or the ground.
-						_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
-						_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
-						_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
-						_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
+			// Spawn a watcher to undeploy if we're no longer aligned or if we move
+			[] spawn {
+				while {player getVariable ["tmr_autorest_deployed", false]} do {
+					sleep 0.5;
+					_playerAnimState = animationState player;
 
-						_intersectCheck = (count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck);
+					// Check if the bipod area intersects with something or the ground.
+					_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
+					_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
+					_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
+					_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
 
-						// If we intersect with nothing or if we left the deploy animation
-						if (!_intersectCheck || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
-							// Undeploy the weapon.
-							[] call tmr_autorest_fnc_undeployWeapon;
-						};
+					_intersectCheck = (count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck);
+
+					// If we intersect with nothing or if we left the deploy animation
+					if (!_intersectCheck || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
+						// Undeploy the weapon.
+						[] call tmr_autorest_fnc_undeployWeapon;
 					};
 				};
 			};
 		} else {
-			// Player has no bipod, see if he's rested
+			// Player has no bipod or bipod isn't aligned, see if he's rested
 			if (_isRested) then {
 				// 'Hard rest' the weapon
 				[] call tmr_autorest_fnc_hardRestWeapon;
