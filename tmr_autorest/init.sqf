@@ -90,21 +90,20 @@ tmr_autorest_fnc_deployKeyDownEH = {
 				// 'Hard rest' the weapon
 				[] call tmr_autorest_fnc_hardRestWeapon;
 
-				// Spawn a watcher to end hard rest if we're no longer rested
+				// Spawn a watcher to undeploy if we're no longer aligned or if we move
 				[] spawn {
-					while {player getVariable ["tmr_autorest_rested", false]} do {
+					while {player getVariable ["tmr_autorest_hardrested", false]} do {
 						sleep 0.5;
 						_playerAnimState = animationState player;
 
-						// If we intersect with nothing or if we left the deploy animation
-						if (!(["_tmr_rested", _playerAnimState] call bis_fnc_inString)) then {
-							// Unhard-rest the weapon.
-							[] call tmr_autorest_fnc_unHardRestWeapon;
+						// If we are no longer rested or if we left the deploy animation
+						if (!(player getVariable ["tmr_autorest_rested", false]) || !(["_tmr_rested", _playerAnimState] call bis_fnc_inString)) then {
+							// Un-hardrest the weapon.
+							[] call tmr_autorest_fnc_unhardRestWeapon;
 						};
 					};
-					// Unhard-rest the weapon since we're out of rested state.
-					[] call tmr_autorest_fnc_unHardRestWeapon;
 				};
+
 			};
 		};
 	};
@@ -168,6 +167,8 @@ tmr_autorest_fnc_hardrestWeapon = {
 
 	((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlSetText "\tmr_autorest\data\hardrestWeapon_ca.paa";
 
+	player setVariable ["tmr_autorest_hardrested", true, false];
+
 	_playerAnimState = animationState player;
 	player switchMove format ["%1_tmr_rested", _playerAnimState];
 };
@@ -177,6 +178,8 @@ tmr_autorest_fnc_hardrestWeapon = {
 // -------------------------------------------------------------------------------
 tmr_autorest_fnc_unHardRestWeapon = {
 	((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlSetText "\tmr_autorest\data\restedWeapon_ca.paa";
+
+	player setVariable ["tmr_autorest_hardrested", false, false];
 
 	_playerAnimState = animationState player;
 	player switchMove format ["%1", [_playerAnimState, "_tmr_rested", ""] call CBA_fnc_replace];
@@ -311,8 +314,8 @@ _handle = [
 	
 	_otherChecks = (alive player && vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player && cameraOn == player);
 
-	// Also can't be deployed.
-	if (_otherChecks && !(player getVariable ["tmr_autorest_deployed", false])) then {
+	// Also can't be deployed or hard rested.
+	if (_otherChecks && !(player getVariable ["tmr_autorest_deployed", false]) && !(player getVariable ["tmr_autorest_hardrested", false])) then {
 
 		// Check if the weapon geo references intersect with something.
 		_centerCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint1, getposASL tmr_autorest_refPoint2, tmr_autorest_refPoint1, tmr_autorest_refPoint2];
@@ -327,7 +330,7 @@ _handle = [
 			[] call tmr_autorest_fnc_unrestWeapon;
 		};
 	} else {
-		if (player getVariable ["tmr_autorest_rested", false]) then {
+		if ((player getVariable ["tmr_autorest_rested", false]) && !(player getVariable ["tmr_autorest_hardrested", false])) then {
 			// Unrest the weapon
 			[] call tmr_autorest_fnc_unrestWeapon;
 		};
