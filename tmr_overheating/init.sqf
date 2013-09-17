@@ -36,7 +36,7 @@ tmr_overheating_fnc_fireWeaponEH = {
 	// Add temp.
 	tmr_overheating_currentBarrelTemp = tmr_overheating_currentBarrelTemp + ((tmr_overheating_currentAtmosphericTemp / 100) * 2);
 
-	_unit sideChat format["PJam: %1 - Jam: %2",tmr_overheating_chanceOfJam, tmr_overheating_weaponJammed];
+	_unit sideChat format["PJam: %1",tmr_overheating_chanceOfJam];
 	_unit sideChat format["Cur: %1 - Max: %2 - Min: %3 - Time: %4",tmr_overheating_currentBarrelTemp, tmr_overheating_maxBarrelTemp, tmr_overheating_minBarrelTemp, _timeElapsed];
 
 	// Show heat warnings
@@ -71,7 +71,16 @@ tmr_overheating_fnc_setWeaponValues = {
 	_unit = _this select 0;
 
 	tmr_overheating_currentWeapon = primaryWeapon _unit;
-	// tmr_overheating_currentBarrelWeight = configFile >> "CfgWeapons" >> currentWeapon >> barrelWeight;
+
+	/* 
+	Temporarily removed until config values are added, or different solution is found.
+	*/
+
+	// tmr_overheating_currentBarrelWeight = configFile >> "CfgWeapons" >> currentWeapon >> "barrelWeight";
+	
+
+	// tmr_overheating_currentBarrelWeight = "thin";
+	// tmr_overheating_currentBarrelWeight = "mid";
 	tmr_overheating_currentBarrelWeight = "heavy";
 
 	tmr_overheating_maxBarrelTemp =
@@ -80,7 +89,7 @@ tmr_overheating_fnc_setWeaponValues = {
 	 
 	  case "thin": {70};
 	  case "mid": {60};
-	  case "heavy": {50};
+	  case "heavy": {55};
 
 	};
 
@@ -125,23 +134,19 @@ tmr_overheating_fnc_jamWeapon = {
 
 		tmr_overheating_weaponJammed = true;
 
+		// Needs to be replaced with GUI warning.
+		_unit sideChat "Weapon jammed";
+
 		_previousAmmoCount = _unit ammo _weapon;
 
 		// Remove magazine from weapon to force a reload.
 		_unit setAmmo [_weapon, 0];
 
-		/*
-		Throws error: Generic exp
-		*/
 		// Wait for player to reload.
 		waitUntil{(needReload _unit) < 1};
 
-
 		// Add back the ammo we took away.
 		_unit addMagazine [(currentMagazine _unit), _previousAmmoCount];
-
-		// Needs to be replaced with GUI warning.
-		_unit sideChat "Weapon jammed";
 
 		tmr_overheating_weaponJammed = false;
 
