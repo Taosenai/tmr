@@ -18,9 +18,6 @@ tmr_overheating_fnc_fireWeaponEH = {
 
 	_unit = _this select 0;
 
-	_unit sideChat format["PJam: %1 - Jam: %2",tmr_overheating_chanceOfJam, tmr_overheating_weaponJammed];
-	_unit sideChat format["Cur: %1 - Max: %2 - Min: %3",tmr_overheating_currentBarrelTemp, tmr_overheating_maxBarrelTemp, tmr_overheating_minBarrelTemp];
-
 	// Re-establish weapon values.
 	if(primaryWeapon _unit != tmr_overheating_currentWeapon) then {
 		[_unit] call tmr_overheating_fnc_setWeaponValues;
@@ -32,10 +29,15 @@ tmr_overheating_fnc_fireWeaponEH = {
 	// Reduce temp according to atmospheric temp.
 	if(tmr_overheating_currentBarrelTemp > tmr_overheating_minBarrelTemp) then {
 		tmr_overheating_currentBarrelTemp = tmr_overheating_currentBarrelTemp - (_timeElapsed * (0.25 * sqrt(tmr_overheating_currentAtmosphericTemp)) );
+	} else {
+		tmr_overheating_currentBarrelTemp = tmr_overheating_minBarrelTemp;
 	};
 
 	// Add temp.
 	tmr_overheating_currentBarrelTemp = tmr_overheating_currentBarrelTemp + ((tmr_overheating_currentAtmosphericTemp / 100) * 2);
+
+	_unit sideChat format["PJam: %1 - Jam: %2",tmr_overheating_chanceOfJam, tmr_overheating_weaponJammed];
+	_unit sideChat format["Cur: %1 - Max: %2 - Min: %3 - Time: %4",tmr_overheating_currentBarrelTemp, tmr_overheating_maxBarrelTemp, tmr_overheating_minBarrelTemp, _timeElapsed];
 
 	// Show heat warnings
 	if(tmr_overheating_currentBarrelTemp > (tmr_overheating_maxBarrelTemp - 15)) then {
@@ -54,13 +56,8 @@ tmr_overheating_fnc_fireWeaponEH = {
 	};
 
 	// Jam weapon
-	if((random 1) < tmr_overheating_chanceOfJam) && (!tmr_overheating_weaponJammed)) then {
+	if(((random 1) < tmr_overheating_chanceOfJam) && (!tmr_overheating_weaponJammed)) then {
 		[_unit, tmr_overheating_currentWeapon] call tmr_overheating_fnc_jamWeapon;
-	};
-
-	// Un-jam if wep jammed
-	if(tmr_overheating_weaponJammed) then {
-		[_unit, tmr_overheating_currentWeapon] call tmr_overheating_fnc_unJamWeapon;
 	};
 
 };
@@ -107,6 +104,7 @@ tmr_overheating_fnc_showWarning = {
 	
 	_type = _this select 0;
 
+	// Need to be replaced with GUI warnings.
 	switch (_type) do {
 		case "Med": {hint "Medium heat."};
 		case "High": {hint "High heat."};
@@ -119,28 +117,35 @@ tmr_overheating_fnc_showWarning = {
 // --------------------------------------------------------------------------------------
 
 tmr_overheating_fnc_jamWeapon = {
-	
-	_unit = _this select 0;
-	_weapon = _this select 1;
 
-	tmr_overheating_weaponJammed = true;
+	_this spawn {
 
-	_unit sideChat "Weapon jammed";
+		_unit = _this select 0;
+		_weapon = _this select 1;
 
-};
+		tmr_overheating_weaponJammed = true;
 
-// --------------------------------------------------------------------------------------
-// Function: Un-jam weapon.
-// --------------------------------------------------------------------------------------
+		_previousAmmoCount = _unit ammo _weapon;
 
-tmr_overheating_fnc_unJamWeapon = {
-	
-	_type = _this select 0;
-	_weapon = _this select 1;
+		// Remove magazine from weapon to force a reload.
+		_unit setAmmo [_weapon, 0];
 
-	tmr_overheating_weaponJammed = false;
+		/*
+		Throws error: Generic exp
+		*/
+		// Wait for player to reload.
+		waitUntil{(needReload _unit) < 1};
 
-	_unit sideChat "Weapon un-jammed";
+
+		// Add back the ammo we took away.
+		_unit addMagazine [(currentMagazine _unit), _previousAmmoCount];
+
+		// Needs to be replaced with GUI warning.
+		_unit sideChat "Weapon jammed";
+
+		tmr_overheating_weaponJammed = false;
+
+	};
 
 };
 
