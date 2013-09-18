@@ -52,7 +52,7 @@ tmr_autorest_fnc_deployKeyDownEH = {
 
 		_bipodAligned = count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck;
 
-		if (_canDeployCfg == 1 || _canDeployItem && _bipodAligned) then {
+		if ((_canDeployCfg == 1 || _canDeployItem) && _bipodAligned) then {
 			_return = true;
 
 			// End rest state before deploying.
