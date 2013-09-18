@@ -282,7 +282,7 @@ tmr_optics_scopeRsc = ["TMR_Optics_Scope"] call BIS_fnc_rscLayer;
 while {tmr_optics_loop} do {
 	sleep 0.03;
 
-	_check = cameraView == "GUNNER" && !visibleMap && cameraOn == player;
+	_check = cameraView == "GUNNER" && !visibleMap && cameraOn == player && alive player;
 
 	if (_check) then {
 		// Stop processing immediately if not a primary weapon
