@@ -19,7 +19,7 @@ tmr_overheating_fnc_fireWeaponEH = {
 	_unit = _this select 0;
 
 	// Re-establish weapon values.
-	if(primaryWeapon _unit != tmr_overheating_currentWeapon) then {
+	if( (currentWeapon  (vehicle _unit)) != tmr_overheating_currentWeapon ) then {
 		[_unit] call tmr_overheating_fnc_setWeaponValues;
 	};
 
@@ -36,8 +36,8 @@ tmr_overheating_fnc_fireWeaponEH = {
 	// Add temp.
 	tmr_overheating_currentBarrelTemp = tmr_overheating_currentBarrelTemp + ((tmr_overheating_currentAtmosphericTemp / 100) * 2);
 
-	_unit sideChat format["PJam: %1",tmr_overheating_chanceOfJam];
-	_unit sideChat format["Cur: %1 - Max: %2 - Min: %3 - Time: %4",tmr_overheating_currentBarrelTemp, tmr_overheating_maxBarrelTemp, tmr_overheating_minBarrelTemp, _timeElapsed];
+	// _unit sideChat format["PJam: %1 - Bar: %2",tmr_overheating_chanceOfJam,tmr_overheating_currentBarrelWeight];
+	// _unit sideChat format["Cur: %1 - Max: %2 - Min: %3 - Time: %4",tmr_overheating_currentBarrelTemp, tmr_overheating_maxBarrelTemp, tmr_overheating_minBarrelTemp, _timeElapsed];
 
 	// Show heat warnings
 	if(tmr_overheating_currentBarrelTemp > (tmr_overheating_maxBarrelTemp - 15)) then {
@@ -70,18 +70,9 @@ tmr_overheating_fnc_setWeaponValues = {
 	
 	_unit = _this select 0;
 
-	tmr_overheating_currentWeapon = primaryWeapon _unit;
+	tmr_overheating_currentWeapon = (currentWeapon  (vehicle _unit));
 
-	/* 
-	Temporarily removed until config values are added, or different solution is found.
-	*/
-
-	// tmr_overheating_currentBarrelWeight = configFile >> "CfgWeapons" >> currentWeapon >> "barrelWeight";
-	
-
-	// tmr_overheating_currentBarrelWeight = "thin";
-	// tmr_overheating_currentBarrelWeight = "mid";
-	tmr_overheating_currentBarrelWeight = "heavy";
+	tmr_overheating_currentBarrelWeight = format["%1",getText(configFile >> "CfgWeapons" >> (currentWeapon  (vehicle _unit)) >> "tmr_overheating_barrelWeight")];
 
 	tmr_overheating_maxBarrelTemp =
 	switch (tmr_overheating_currentBarrelWeight) do
@@ -97,8 +88,8 @@ tmr_overheating_fnc_setWeaponValues = {
 	switch (tmr_overheating_currentBarrelWeight) do
 	{
 	 
-	  case "thin": {10};
-	  case "mid": {20};
+	  case "thin": {15};
+	  case "mid": {25};
 	  case "heavy": {30};
 
 	};
