@@ -51,10 +51,10 @@ class CfgMods {
 #define TMR_SWAY_05 0.47
 #define TMR_SWAY_055 0.53
 #define TMR_SWAY_07 0.67
-#define TMR_SWAY_10 0.97
-#define TMR_SWAY_105 1.01
-#define TMR_SWAY_12 1.1
-#define TMR_SWAY_15 1.4
+#define TMR_SWAY_10 1.02
+#define TMR_SWAY_105 1.07
+#define TMR_SWAY_12 1.13
+#define TMR_SWAY_15 1.43
 #define TMR_SWAY_165 1.5
 #define TMR_SWAY_17 1.6
 #define TMR_SWAY_20 1.8
