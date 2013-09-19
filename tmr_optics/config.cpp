@@ -39,6 +39,14 @@ class Extended_FiredBIS_EventHandlers {
 	};
 };
 
+class CfgOpticsEffect {
+	class TMR_OpticsRadBlur1 {
+		type = "radialblur";
+		params[] = {0.019, 0.019, 0.16, 0.70};
+		priority = 950;
+	};
+};
+
 class CfgWeapons {
 	class ItemCore;
 	class InventoryItem_Base_F;
@@ -49,19 +57,13 @@ class CfgWeapons {
 		displayName = "HAMR 4x";
 		descriptionShort = "High Accuracy Multi-Range Optic<br />Magnification: 4x<br />Reticle: CM-RW 6.5mm";
 		scope = 2;
-		weaponInfoType = "RscWeaponZeroing";
+		weaponInfoType = "RscWeaponTMR";
 
 		tmr_optics_enhanced = 1;
-
-		tmr_optics_shadow = "\tmr_optics\data\hamr\hamr-scopeshadow_ca.paa";
-		tmr_optics_bodycenter = "\tmr_optics\data\hamr\hamr-center_ca.paa";
-		tmr_optics_bodyleft = "\tmr_optics\data\hamr\hamr-left_ca.paa";
-		tmr_optics_bodyright = "\tmr_optics\data\hamr\hamr-right_ca.paa";
-		tmr_optics_bodycenterNight = "\tmr_optics\data\hamr\hamr-centerNight_ca.paa";
-		tmr_optics_bodyleftNight = "\tmr_optics\data\hamr\hamr-leftNight_ca.paa";
-		tmr_optics_bodyrightNight = "\tmr_optics\data\hamr\hamr-rightNight_ca.paa";
-		tmr_optics_scopering = "";
-		tmr_optics_scoperingNight = "";
+		tmr_optics_reticle = "\tmr_optics\data\hamr\hamr-reticle65_ca.paa";
+		tmr_optics_reticleIllum = "\tmr_optics\data\hamr\hamr-reticle65Illum_ca.paa";
+		tmr_optics_body = "\tmr_optics\data\hamr\hamr-body_ca.paa";
+		tmr_optics_bodyNight = "\tmr_optics\data\hamr\hamr-bodyNight_ca.paa";
 
 		model = "\A3\weapons_f\acc\acco_hamr_F";
 		
@@ -89,10 +91,6 @@ class CfgWeapons {
 				};
 				
 				class Hamr2Scope {
-					tmr_optics_enhanced = 1;
-					tmr_optics_reticle = "\tmr_optics\data\hamr\hamr-reticle65_ca.paa";
-					tmr_optics_reticleIllum = "\tmr_optics\data\hamr\hamr-reticle65Illum_ca.paa";
-
 					cameradir = "";
 					distanceZoomMin = 300;
 					distanceZoomMax = 300;
@@ -101,7 +99,7 @@ class CfgWeapons {
 					opticsdisplayname = "IHAMR";
 					opticsflare = 1;
 					opticsid = 2;
-					opticsppeffects[] = {};
+					opticsppeffects[] = {"OpticsCHAbera2", "OpticsBlur1", "TMR_OpticsRadBlur1"};
 					opticszoominit = 0.0872664626;
 					opticszoommax = 0.0872664626;
 					opticszoommin = 0.0872664626;
@@ -120,21 +118,15 @@ class CfgWeapons {
 		displayname = "ARCO 4x";
 		picture = "\A3\weapons_F\Data\UI\gear_acco_Arco_CA.paa";
 		scope = 2;
-		weaponInfoType = "RscWeaponZeroing";
+		weaponInfoType = "RscWeaponTMR";
 
 		model = "\A3\weapons_f\acc\acco_Arco_F";
 
 		tmr_optics_enhanced = 1;
-
-		tmr_optics_shadow = "\tmr_optics\data\arco\arco-scopeshadow_ca.paa";
-		tmr_optics_bodycenter = "\tmr_optics\data\arco\arco-center_ca.paa";
-		tmr_optics_bodyleft = "\tmr_optics\data\arco\arco-left_ca.paa";
-		tmr_optics_bodyright = "\tmr_optics\data\arco\arco-right_ca.paa";
-		tmr_optics_bodycenterNight = "\tmr_optics\data\arco\arco-centerNight_ca.paa";
-		tmr_optics_bodyleftNight = "\tmr_optics\data\arco\arco-leftNight_ca.paa";
-		tmr_optics_bodyrightNight = "\tmr_optics\data\arco\arco-rightNight_ca.paa";
-		tmr_optics_scopering = "\tmr_optics\data\arco\arco-scopering_ca.paa";
-		tmr_optics_scoperingNight = "\tmr_optics\data\arco\arco-scoperingNight_ca.paa";
+		tmr_optics_reticle = "\tmr_optics\data\arco\arco-reticle65_ca.paa";
+		tmr_optics_reticleIllum = "\tmr_optics\data\arco\arco-reticle65Illum_ca.paa";
+		tmr_optics_body = "\tmr_optics\data\arco\arco-body_ca.paa";
+		tmr_optics_bodyNight = "\tmr_optics\data\arco\arco-bodyNight_ca.paa";
 
 		class ItemInfo: InventoryOpticsItem_Base_F {
 			mass = 4;
@@ -150,6 +142,7 @@ class CfgWeapons {
 					distancezoommin = 300;
 					memorypointcamera = "eye";
 					opticsdisableperipherialvision = 0;
+					opticsdisplayname = "CQB";
 					opticsflare = 0;
 					opticsid = 1;
 					opticsppeffects[] = {""};
@@ -160,10 +153,6 @@ class CfgWeapons {
 					visionmode[] = {};
 				};
 				class ARCO2scope: ARCO2collimator {
-					tmr_optics_enhanced = 1;
-					tmr_optics_reticle = "\tmr_optics\data\arco\arco-reticle65_ca.paa";
-					tmr_optics_reticleIllum = "\tmr_optics\data\arco\arco-reticle65Illum_ca.paa";
-
 					cameradir = "";
 					distanceZoomMin = 300;
 					distanceZoomMax = 300;
@@ -172,7 +161,7 @@ class CfgWeapons {
 					opticsdisplayname = "ARCO";
 					opticsflare = 1;
 					opticsid = 2;
-					opticsppeffects[] = {};
+					opticsppeffects[] = {"OpticsCHAbera2", "OpticsBlur1", "TMR_OpticsRadBlur1"};
 					opticszoominit = 0.0872664626;
 					opticszoommax = 0.0872664626;
 					opticszoommin = 0.0872664626;
@@ -190,19 +179,13 @@ class CfgWeapons {
 		displayName = "MRCO 1x/4x";
 		descriptionShort = "Medium Range Combat Optic<br />Magnification: 1x/4x<br />Reticle: Pitbull Gen II 5.56mm";
 		scope = 2;
-		weaponInfoType = "RscWeaponZeroing";
+		weaponInfoType = "RscWeaponTMR";
 
 		tmr_optics_enhanced = 1;
-
-		tmr_optics_shadow = "\tmr_optics\data\mrco\mrco-scopeshadow_ca.paa";
-		tmr_optics_bodycenter = "\tmr_optics\data\mrco\mrco-center_ca.paa";
-		tmr_optics_bodyleft = "\tmr_optics\data\mrco\mrco-left_ca.paa";
-		tmr_optics_bodyright = "\tmr_optics\data\mrco\mrco-right_ca.paa";
-		tmr_optics_bodycenterNight = "\tmr_optics\data\mrco\mrco-centerNight_ca.paa";
-		tmr_optics_bodyLeftNight = "\tmr_optics\data\mrco\mrco-leftNight_ca.paa";
-		tmr_optics_bodyRightNight = "\tmr_optics\data\mrco\mrco-rightNight_ca.paa";
-		tmr_optics_scopering = "";
-		tmr_optics_scoperingNight = "";
+		tmr_optics_reticle = "\tmr_optics\data\mrco\mrco-reticle556_ca.paa";
+		tmr_optics_reticleIllum = "\tmr_optics\data\mrco\mrco-reticle556Illum_ca.paa";
+		tmr_optics_body = "\tmr_optics\data\mrco\mrco-body_ca.paa";
+		tmr_optics_bodyNight = "\tmr_optics\data\mrco\mrco-bodyNight_ca.paa";
 		
 		class ItemInfo : InventoryOpticsItem_Base_F {
 			opticType = 1;
@@ -210,7 +193,6 @@ class CfgWeapons {
 			optics = true;
 			modelOptics = "\A3\Weapons_f_beta\acc\reticle_MRCO_F";
 
-			
 			class OpticsModes {
 				class MRCOcq {
 					tmr_optics_enhanced = 0;
@@ -229,10 +211,6 @@ class CfgWeapons {
 				};
 				
 				class MRCOscope {
-					tmr_optics_enhanced = 1;
-					tmr_optics_reticle = "\tmr_optics\data\mrco\mrco-reticle556Gen2_ca.paa";
-					tmr_optics_reticleIllum = "\tmr_optics\data\mrco\mrco-reticleIllum556Gen2_ca.paa";
-
 					cameradir = "";
 					distanceZoomMin = 300;
 					distanceZoomMax = 300;
@@ -241,7 +219,7 @@ class CfgWeapons {
 					opticsdisplayname = "MRCO";
 					opticsflare = 1;
 					opticsid = 2;
-					opticsppeffects[] = {};
+					opticsppeffects[] = {"OpticsCHAbera2", "OpticsBlur2", "TMR_OpticsRadBlur1"};
 					opticszoominit = 0.0872664626;
 					opticszoommax = 0.0872664626;
 					opticszoommin = 0.0872664626;
@@ -252,6 +230,30 @@ class CfgWeapons {
 					visionmode[] = {"Normal"};
 				};
 			};
+		};
+	};
+};
+
+class RscControlsGroup;
+class RscOpticsText;
+class RscOpticsValue;
+class RscInGameUI {
+	class RscUnitInfo;
+	class RscWeaponZeroing;
+	class RscWeaponTMR : RscWeaponZeroing {
+		idd = -1;
+		controls[] = {"CA_Zeroing",  "CA_FOVMode"};
+
+		onLoad ="with uiNameSpace do { TMR_OpticsIGUI = _this select 0 }";
+		
+		class CA_FOVMode : RscOpticsValue {
+			idc = 154;
+			style = 2;
+			colorText[] = {0, 0, 0, 0};
+			x = 0;
+			y = 0;
+			w = 0;
+			h = 0;
 		};
 	};
 };
@@ -275,9 +277,9 @@ class RscTitles {
 		onUnload = "";
 		movingEnable = 1;
 		duration = 10000;
-		controls[] = {"Reticle", "ReticleNight", "Shadow", "BodyCenterNight", "BodyLeftNight", "BodyRightNight", "BodyCenter", "BodyLeft", "BodyRight", "RingNight", "Ring"};
+		controls[] = {"Reticle", "ReticleNight", "BodyNight", "Body"};
 
-		class Shadow : TMR_RscPicture {
+		class Reticle : TMR_RscPicture {
 			idc = 1;
 			movingEnable = 1;
 			colorBackground[] = {0, 0, 0, 0};
@@ -290,60 +292,46 @@ class RscTitles {
 			h = SafeZoneH;
 		};
 
-		class BodyCenter : Shadow {
-			idc = 5;
-			text = "";
-			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
-		};
-
-		class BodyLeft : Shadow {
-			idc = 6;
-			text = "";
-			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2) - (SafeZoneW / (getResolution select 4));
-		};
-
-		class BodyRight : Shadow {
-			idc = 7;
-			text = "";
-			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2) + (SafeZoneW / (getResolution select 4));
-		};
-
-		class BodyCenterNight : BodyCenter {
+		class ReticleNight : Reticle {
 			idc = 2;
 			text = "";
 		};
 
-		class BodyLeftNight : BodyLeft {
-			idc = 3;
+		class BodyNight : Reticle {
+			idc = 5;
 			text = "";
+			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4)));
+			y = SafeZoneY - (SafeZoneH/2);
+			w = SafeZoneW / (getResolution select 4) * 2;
+			h = SafeZoneH * 2;
 		};
 
-		class BodyRightNight : BodyRight {
-			idc = 4;
+		class Body : BodyNight {
+			idc = 6;
 			text = "";
 		};
+	};
+};
 
-		class Reticle : Shadow {
-			idc = 15;
-			text = "";
-			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
+class PreloadTextures {
+	class CfgWeapons {
+		class optic_hamr {
+			tmr_optics_body= "*";
+			tmr_optics_bodyNight = "*";
+			tmr_optics_reticle = "*";
+			tmr_optics_reticleIllum = "*";
 		};
-
-		class ReticleNight : Reticle {
-			idc = 16;
-			text = "";
+		class optic_arco {
+			tmr_optics_body= "*";
+			tmr_optics_bodyNight = "*";
+			tmr_optics_reticle = "*";
+			tmr_optics_reticleIllum = "*";
 		};
-
-		class Ring : Shadow {
-			idc = 21;
-			text = "";
-			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
-		};
-
-		class RingNight : Shadow {
-			idc = 20;
-			text = "";
-			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
+		class optic_mrco {
+			tmr_optics_body= "*";
+			tmr_optics_bodyNight = "*";
+			tmr_optics_reticle = "*";
+			tmr_optics_reticleIllum = "*";
 		};
 	};
 };

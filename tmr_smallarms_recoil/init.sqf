@@ -41,7 +41,7 @@ tmr_smallarms_recoil_fnc_firedEH = {
 		};
 
 		// Reduce camshake if the player is rested (tmr_autorest).
-		if (player getVariable ["tmr_autorest_rested", false]) then {
+		if (player getVariable ["tmr_autorest_rested", false] || player getVariable ["tmr_autorest_hardrested", false]) then {
 			_powerMod = _powerMod - 0.10;
 		};
 
