@@ -66,6 +66,9 @@ tmr_smallarms_recoil_fnc_firedEH = {
 
 		// Start dispersing from this size of burst
 		_startDisperse = 3;
+		if (cameraView != "GUNNER") then { // Immediately begin to disperse when not using sights
+			_startDisperse = 1;
+		};
 
 		if (_burst > _startDisperse) then { 
 			_vel = velocity _round;
@@ -82,7 +85,7 @@ tmr_smallarms_recoil_fnc_firedEH = {
 			// Increase dispersion cap if player is not using sights
 			_sightsBurst = 0;
 			if (cameraView != "GUNNER") then {
-				_sightsBurst = 13;
+				_sightsBurst = 30;
 			};
 
 			// Increase initial dispersion and cap if player is moving
