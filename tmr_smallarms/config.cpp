@@ -287,9 +287,10 @@ class CfgWeapons {
 		displayName = "MX LSW";
 		descriptionShort = "Light Support Weapon<br />Caliber: 6.5x39mm";
 
-		modes[] = {"single", "manual", "close", "short", "medium", "far_optic1", "far_optic2"};
+		modes[] = {"Single", "manual", "close", "short", "medium", "far_optic1", "far_optic2"};
 
 		class Single : Single {};
+		class manual : FullAuto {};
 	};
 
 	class arifle_MXM_F : arifle_MX_Base_F {

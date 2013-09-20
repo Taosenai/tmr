@@ -99,10 +99,10 @@ class CfgRecoils {
 	tmr_smallarms_recoil_single_prone_mk200[] = 	{0, 0.014, 0.002+TMR_MC,		0.048+TMR_RSD, 0, 0,		0.077+TMR_RSD, 0, -0.0037+TMR_RCT, 		0.135+TMR_RSD, 0, 0};
 	tmr_smallarms_recoil_auto_prone_mk200[] = 		{0, 0.014, 0.002+TMR_MC,		0.048+TMR_RSD, 0, 0,		0.077+TMR_RSD, 0, -0.0041+TMR_RCT, 		0.135+TMR_RSD, 0, 0};
 
-	tmr_smallarms_recoil_single_zafir[] = 			{0, 0.015, 0.026+TMR_MC,		0.046+TMR_RSD, 0, 0,		0.082+TMR_RSD, 0, -0.0072+TMR_RCT,		0.135+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_zafir[] = 			{0, 0.015, 0.026+TMR_MC,		0.046+TMR_RSD, 0, 0,		0.082+TMR_RSD, 0, -0.0147+TMR_RCT,		0.135+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_single_prone_zafir[] = 	{0, 0.015, 0.004+TMR_MC,		0.046+TMR_RSD, 0, 0,		0.080+TMR_RSD, 0, -0.0017+TMR_RCT, 		0.135+TMR_RSD, 0, 0};
-	tmr_smallarms_recoil_auto_prone_zafir[] = 		{0, 0.015, 0.004+TMR_MC,		0.046+TMR_RSD, 0, 0,		0.080+TMR_RSD, 0, -0.0070+TMR_RCT, 		0.135+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_zafir[] = 			{0, 0.015, 0.026+TMR_MC,		0.045+TMR_RSD, 0, 0,		0.088+TMR_RSD, 0, -0.0072+TMR_RCT,		0.135+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_zafir[] = 			{0, 0.015, 0.026+TMR_MC,		0.045+TMR_RSD, 0, 0,		0.088+TMR_RSD, 0, -0.0147+TMR_RCT,		0.135+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_single_prone_zafir[] = 	{0, 0.015, 0.004+TMR_MC,		0.045+TMR_RSD, 0, 0,		0.080+TMR_RSD, 0, -0.0017+TMR_RCT, 		0.135+TMR_RSD, 0, 0};
+	tmr_smallarms_recoil_auto_prone_zafir[] = 		{0, 0.015, 0.004+TMR_MC,		0.045+TMR_RSD, 0, 0,		0.080+TMR_RSD, 0, -0.0070+TMR_RCT, 		0.135+TMR_RSD, 0, 0};
 
 	tmr_smallarms_recoil_single_ebr[] = 			{0, 0.014, 0.028+TMR_MC,		0.045+TMR_RSD, 0, 0,		0.084+TMR_RSD, 0, -0.0074+TMR_RCT,		0.135+TMR_RSD, 0, 0};
 	tmr_smallarms_recoil_auto_ebr[] = 				{0, 0.014, 0.028+TMR_MC,		0.045+TMR_RSD, 0, 0,		0.084+TMR_RSD, 0, -0.0077+TMR_RCT, 		0.135+TMR_RSD, 0, 0};
@@ -226,7 +226,7 @@ class CfgWeapons {
 
 	class arifle_MX_SW_F : arifle_MX_Base_F {
 		tmr_smallarms_recoil_shakeMultiplier = 0.95;
-		class Single : Mode_SemiAuto {
+		class Single : Single {
 			recoil = "tmr_smallarms_recoil_single_mx";
 			recoilProne = "tmr_smallarms_recoil_single_prone_mx";
 		};

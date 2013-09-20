@@ -195,6 +195,16 @@ class CfgWeapons {
 		};
 	};
 
+	class arifle_MX_SW_Base_F : arifle_MX_Base_F {
+		class Single : Single {
+			dispersion = 0.000800; // radians. Equal to 2.75 MOA.
+			// Based on widely cited 2 MOA figure for new 5.56 ACR.
+		};
+		class manual : FullAuto {
+			dispersion = 0.00147; // radians. Equal to 5.1 MOA.
+		};
+	};
+
 	class arifle_MXM_Base_F : arifle_MX_Base_F {
 		class Single : Single {
 			dispersion = 0.00029; // radians. Equal to 1 MOA.
@@ -226,10 +236,10 @@ class CfgWeapons {
 	};
 
 	class LMG_Zafir_F : Rifle_Long_Base_F {
-		class manual : Mode_FullAuto {
+		class FullAuto : Mode_FullAuto {
 			dispersion = 0.00175; // radians. Equal to 6 MOA.
 		};
-		class Single : manual {
+		class Single : Mode_SemiAuto {
 			dispersion = 0.00175; // radians. Equal to 6 MOA.
 		};
 	};
