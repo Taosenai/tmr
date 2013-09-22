@@ -1,7 +1,7 @@
 def target2px(range_m, width_cm):
-	# number of pixels across scope view / number of angular mils subtended by view
-	milsPerPx = 835/106.6666666667
-	mils = (width_cm/100) / (range_m/1000)
+	# number of pixels across scope view / number of mils subtended by view
+	milsPerPx = 835.0/14.0
+	mils = (width_cm/100.0) / (range_m/1000.0)
 	return mils * milsPerPx
 
 w = float(input('Target width in cm (48.26 is 19"): '))

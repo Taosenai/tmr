@@ -162,9 +162,9 @@ class CfgWeapons {
 					opticsflare = 1;
 					opticsid = 2;
 					opticsppeffects[] = {"OpticsCHAbera2", "OpticsBlur1", "TMR_OpticsRadBlur1"};
-					opticszoominit = 0.0872664626;
-					opticszoommax = 0.0872664626;
-					opticszoommin = 0.0872664626;
+					opticszoominit = 0.0872664626; // 0.0872664626 rad = 5 degrees
+					opticszoommax = 0.0872664626; // SpecterDR 4x is 6 degrees
+					opticszoommin = 0.0872664626; // Scope graphic in game covers 1 degree
 					discretefov[] = {0.0872664626};
 					discreteinitindex = 0;
 					usemodeloptics = 1;
@@ -228,6 +228,86 @@ class CfgWeapons {
 					usemodeloptics = 1;
 					modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
 					visionmode[] = {"Normal"};
+				};
+			};
+		};
+	};
+
+	class optic_SOS: ItemCore {
+		descriptionshort = "Sniper Optical Sight<br />Magnification: 5.5-22x";
+		displayname = "SOS 5.5-22x";
+		weaponinfotype = "RscWeaponTMR";
+
+		tmr_optics_enhanced = 1;
+		tmr_optics_reticle = "\tmr_optics\data\sos\sos-reticleMLR_ca.paa";
+		tmr_optics_reticleIllum = "\tmr_optics\data\sos\sos-reticleMLRIllum_ca.paa";
+		tmr_optics_body = "\tmr_optics\data\sos\sos-body_ca.paa";
+		tmr_optics_bodyNight = "\tmr_optics\data\sos\sos-bodyNight_ca.paa";
+
+		class ItemInfo: InventoryOpticsItem_Base_F {
+			modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
+			weaponinfotype = "RscWeaponRangeZeroingFOV";
+
+			class OpticsModes {
+				// Based on Nightforce NXS 5.5-22 scope
+				class Snip {
+					cameradir = "";
+					discretedistance[] = {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300};
+					discretedistanceinitindex = 0;
+					discreteinitindex = 0;
+					distancezoommax = 2300;
+					distancezoommin = 100;
+					memorypointcamera = "opticView";
+					modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
+					opticsdisableperipherialvision = 1;
+					opticsdisplayname = "SOS";
+					opticsflare = 1;
+					opticsid = 1;
+					opticsppeffects[] = {"OpticsCHAbera1", "OpticsBlur1", "TMR_OpticsRadBlur1"};
+					// How to determine opticszoom
+					// First do the basic math based on the listed FOV of the scope to 
+					// get a baseline FOV
+					// 0.1 meter at 100 meters = 1 mrad
+					//
+					// 5.5x FOV -- 5.3 m at 100 m = 53 mrad
+					// = 0.053 rad = 3.037 deg FOV
+
+					// 22x FOV -- 1.4 m at 100m = 14 mrad
+					// = 0.014 rad = 0.802 deg
+
+					// The FOV you give the engine is based on a rather larger scope outline, so we
+					// have to do this extra work ourselves.
+
+					// At 1680x1050
+					// The width of a TMR optic viewfield is 864px
+					// The engine viewport width (which is what the below FOV is based on) is 980
+					// (864/980) = (FOV to give engine / true FOV of optic)
+					// 864/980 * 0.053 = 0.04673
+					// 864/980 * 0.014 = 0.01234
+
+					// Measured experimentally, these values seem quite right.
+					// Certainly they're close enough after you account for pixel density, etc.
+
+					opticszoominit = 0.01234; 
+					opticszoommax = 0.01234;
+					opticszoommin = 0.04673;
+					discretefov[] = {};
+					usemodeloptics = 1;
+					visionmode[] = {"Normal"};
+				};
+				class Iron: Snip {
+					discretefov[] = {};
+					memorypointcamera = "eye";
+					opticsdisableperipherialvision = 0;
+					opticsdisplayname = "";
+					opticsflare = 0;
+					opticsid = 2;
+					opticszoominit = 0.75;
+					opticszoommax = 1.1;
+					opticszoommin = 0.375;
+					usemodeloptics = 0;
+					visionmode[] = {};
+					opticsppeffects[] = {};
 				};
 			};
 		};
