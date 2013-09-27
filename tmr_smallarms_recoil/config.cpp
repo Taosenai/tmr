@@ -56,16 +56,13 @@ class Extended_FiredBIS_EventHandlers {
 
 // Global muzzle climb increase over base. (For easy tuning.)
 #define TMR_MC 0.0089
-			// 0.0002755 // 3855
-
-// Global initial muzzle climb time from base. (For easy tuning.)
-#define TMR_IMCT -0.020
 
 // Global recovery sequence duration increase (For easy tuning.)
 #define TMR_RSD 0.06031
-             // 0.134
 
+// Global recovery downward muzzle movement.
 #define TMR_RCT -0.0028
+
 
  // 0.114 +tmr_RSD
 class CfgRecoils {
