@@ -290,8 +290,8 @@ class CfgWeapons {
 					// Certainly they're close enough after you account for pixel density, etc.
 
 					opticszoominit = 0.01234; 
-					opticszoommax = 0.01234;
-					opticszoommin = 0.04673;
+					opticszoommax = 0.04673;
+					opticszoommin = 0.01234;
 					discretefov[] = {};
 					usemodeloptics = 1;
 					visionmode[] = {"Normal"};
@@ -409,6 +409,12 @@ class PreloadTextures {
 			tmr_optics_reticleIllum = "*";
 		};
 		class optic_mrco {
+			tmr_optics_body= "*";
+			tmr_optics_bodyNight = "*";
+			tmr_optics_reticle = "*";
+			tmr_optics_reticleIllum = "*";
+		};
+		class optic_SOS {
 			tmr_optics_body= "*";
 			tmr_optics_bodyNight = "*";
 			tmr_optics_reticle = "*";
