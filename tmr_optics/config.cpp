@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core};
+		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_gamma, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -70,7 +70,7 @@ class CfgWeapons {
 		class ItemInfo : InventoryOpticsItem_Base_F {
 			mass = 4;
 			optics = 1;
-			optictype = 2;
+			optictype = 1;
 			rmbhint = "HAMR";
 
 			class OpticsModes {	
@@ -131,7 +131,7 @@ class CfgWeapons {
 		class ItemInfo: InventoryOpticsItem_Base_F {
 			mass = 4;
 			optics = 1;
-			optictype = 2;
+			optictype = 1;
 			rmbhint = "ARCO";
 
 			class OpticsModes {
@@ -247,6 +247,7 @@ class CfgWeapons {
 		class ItemInfo: InventoryOpticsItem_Base_F {
 			modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
 			weaponinfotype = "RscWeaponRangeZeroingFOV";
+			opticType = 2; // Sniper optics
 
 			class OpticsModes {
 				// Based on Nightforce NXS 5.5-22 scope
