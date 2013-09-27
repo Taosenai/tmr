@@ -334,7 +334,7 @@ class CfgWeapons {
 		descriptionshort = "Rocket-propelled grenade launcher";
 		displayname = "RPG-42";
 
-		magazines[] = {"RPG32_F", "TMR_RPG32_Smoke_F", "TMR_RPG32_TB_F"};
+		magazines[] = {"RPG32_F", "RPG32_HE_F", "TMR_RPG32_Smoke_F", "TMR_RPG32_TB_F"};
 
 		irlock = 0;
 		canLock = 0;
