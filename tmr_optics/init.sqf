@@ -211,9 +211,13 @@ tmr_optics_loop = true;
 			_doUpdateAllLayers = false;
 			if (tmr_optics_currentOptic != _optic) then {
 				tmr_optics_currentOptic = _optic;
-
 				// Graphics layers will need updated for the new scope
 				_doUpdateAllLayers = true;
+			};
+
+			// Check if Splendid Camera, unit switch, etc. has blanked out our displays for no good reason (grrr)
+			if (ctrlText (TMR_SCOPECTRL 1) == "") then {
+					_doUpdateAllLayers = true;
 			};
 
 			// Init the scope (if needed)
