@@ -113,13 +113,13 @@ class CfgWeapons {
 	class muzzle_snds_H : ItemCore { // 6.5mm suppressor threaded for MX
 		class ItemInfo : InventoryMuzzleItem_Base_F {
 			class Single : Mode_SemiAuto {
-				recoil = "tmr_recoil_single_mxSup";
-				recoilProne = "tmr_recoil_single_prone_mxSup";
+				recoil = "tmr_smallarms_recoil_single_mxSup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_mxSup";
 			};
 			
 			class FullAuto : Mode_FullAuto {
-				recoil = "tmr_recoil_auto_mxSup";
-				recoilProne = "tmr_recoil_auto_prone_mxSup";
+				recoil = "tmr_smallarms_recoil_auto_mxSup";
+				recoilProne = "tmr_smallarms_recoil_auto_prone_mxSup";
 			};
 		};
 	};
@@ -127,13 +127,13 @@ class CfgWeapons {
 	class tmr_muzzle_snds_H_katiba : muzzle_snds_H { // 6.5mm suppressor threaded for Katiba
 		class ItemInfo : ItemInfo {
 			class Single : Single {
-				recoil = "tmr_recoil_single_katibaSup";
-				recoilProne = "tmr_recoil_single_prone_katibaSup";
+				recoil = "tmr_smallarms_recoil_single_katibaSup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_katibaSup";
 			};
 			
 			class FullAuto : FullAuto {
-				recoil = "tmr_recoil_auto_katibaSup";
-				recoilProne = "tmr_recoil_auto_prone_katibaSup";
+				recoil = "tmr_smallarms_recoil_auto_katibaSup";
+				recoilProne = "tmr_smallarms_recoil_auto_prone_katibaSup";
 			};
 		};
 	};
@@ -141,18 +141,18 @@ class CfgWeapons {
 	class muzzle_snds_L : muzzle_snds_H { // 9mm pistol suppressor
 		class ItemInfo : ItemInfo {
 			class Single : Mode_SemiAuto {
-				recoil = "tmr_recoil_single_scorpionSup";
-				recoilProne = "tmr_recoil_single_prone_scorpionSup";
+				recoil = "tmr_smallarms_recoil_single_scorpionSup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_scorpionSup";
 			};
 
 			class Burst : Mode_Burst {
-				recoil = "tmr_recoil_single_scorpionSup";
-				recoilProne = "tmr_recoil_single_prone_scorpionSup";
+				recoil = "tmr_smallarms_recoil_single_scorpionSup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_scorpionSup";
 			};
 			
 			class FullAuto : Mode_FullAuto {
-				recoil = "tmr_recoil_single_scorpionSup";
-				recoilProne = "tmr_recoil_single_prone_scorpionSup";
+				recoil = "tmr_smallarms_recoil_single_scorpionSup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_scorpionSup";
 			};
 		};
 	};
@@ -164,13 +164,13 @@ class CfgWeapons {
 	class muzzle_snds_M : muzzle_snds_H { // 5.56 suppressor
 		class ItemInfo : ItemInfo {
 			class Single : Mode_SemiAuto {
-				recoil = "tmr_recoil_single_mk20Sup";
-				recoilProne = "tmr_recoil_single_prone_mk20Sup";
+				recoil = "tmr_smallarms_recoil_single_mk20Sup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_mk20Sup";
 			};
 			
 			class FullAuto : Mode_FullAuto {
-				recoil = "tmr_recoil_auto_mxSup";
-				recoilProne = "tmr_recoil_auto_prone_mxSup";
+				recoil = "tmr_smallarms_recoil_auto_mxSup";
+				recoilProne = "tmr_smallarms_recoil_auto_prone_mxSup";
 			};
 		};
 	};
@@ -178,13 +178,13 @@ class CfgWeapons {
 	class muzzle_snds_B : muzzle_snds_H { // 7.62mm suppressor
 		class ItemInfo : ItemInfo {
 			class Single : Mode_SemiAuto {
-				recoil = "tmr_recoil_single_ebrSup";
-				recoilProne = "tmr_recoil_single_prone_ebrSup";
+				recoil = "tmr_smallarms_recoil_single_ebrSup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_ebrSup";
 			};
 			
 			class FullAuto : Mode_FullAuto {
-				recoil = "tmr_recoil_auto_ebrSup";
-				recoilProne = "tmr_recoil_auto_prone_ebrSup";
+				recoil = "tmr_smallarms_recoil_auto_ebrSup";
+				recoilProne = "tmr_smallarms_recoil_auto_prone_ebrSup";
 			};
 		};
 	};
@@ -192,13 +192,13 @@ class CfgWeapons {
 	class muzzle_snds_H_MG : muzzle_snds_H { // 6.5 LMG suppressor
 		class ItemInfo : ItemInfo {
 			class Single : Mode_SemiAuto {
-				recoil = "tmr_recoil_single_mk200Sup";
-				recoilProne = "tmr_recoil_single_prone_mk200Sup";
+				recoil = "tmr_smallarms_recoil_single_mk200Sup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_mk200Sup";
 			};
 			
 			class manual : Mode_FullAuto {
-				recoil = "tmr_recoil_auto_mk200Sup";
-				recoilProne = "tmr_recoil_auto_prone_mk200Sup";
+				recoil = "tmr_smallarms_recoil_auto_mk200Sup";
+				recoilProne = "tmr_smallarms_recoil_auto_prone_mk200Sup";
 			};
 		};
 	};
@@ -206,18 +206,18 @@ class CfgWeapons {
 	class muzzle_snds_acp : muzzle_snds_H { // .45 pistol suppressor
 		class ItemInfo : ItemInfo {
 			class Single : Mode_SemiAuto {
-				recoil = "tmr_recoil_single_verminSup";
-				recoilProne = "tmr_recoil_single_prone_verminSup";
+				recoil = "tmr_smallarms_recoil_single_verminSup";
+				recoilProne = "tmr_smallarms_recoil_single_prone_verminSup";
 			};
 			
 			class Burst : Mode_Burst {
-				recoil = "tmr_recoil_auto_verminSup";
-				recoilProne = "tmr_recoil_auto_prone_verminSup";
+				recoil = "tmr_smallarms_recoil_auto_verminSup";
+				recoilProne = "tmr_smallarms_recoil_auto_prone_verminSup";
 			};
 			
 			class FullAuto : Mode_FullAuto {
-				recoil = "tmr_recoil_auto_verminSup";
-				recoilProne = "tmr_recoil_auto_prone_verminSup";
+				recoil = "tmr_smallarms_recoil_auto_verminSup";
+				recoilProne = "tmr_smallarms_recoil_auto_prone_verminSup";
 			};
 		};
 	};
