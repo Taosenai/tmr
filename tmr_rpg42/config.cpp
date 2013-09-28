@@ -239,15 +239,15 @@ class CfgAmmo {
 
 		fuseDistance = 7;
 
-		maxspeed = 270;
-		thrust = 155;
-		thrusttime = 0.4;
-		initTime = 0.11;
-		airFriction = 0.47;
+		// maxspeed = 270;
+		// thrust = 155;
+		// thrusttime = 0.4;
+		// initTime = 0.11;
+		// airFriction = 0.47;
 
-		maneuvrability = 0;
-		maxcontrolrange = 0;
-		simulationStep = 0.05;
+		// maneuvrability = 0;
+		// maxcontrolrange = 0;
+		// simulationStep = 0.05;
 
 		timetolive = 20;
 
@@ -264,16 +264,16 @@ class CfgAmmo {
 		indirecthit = 29;
 		indirecthitrange = 7;
 
-		airFriction = 0.075;
-		sideAirFriction = 0.075;
-		maxSpeed = 140;	// max speed on level road, km/h
-		initTime = 0;
-		thrustTime = 0;
-		thrust = 0;
-		fuseDistance = 8;
-		timeToLive = 30;
-		maneuvrability = 0;
-		allowAgainstInfantry = 0;
+		// airFriction = 0.075;
+		// sideAirFriction = 0.075;
+		// maxSpeed = 140;	// max speed on level road, km/h
+		// initTime = 0;
+		// thrustTime = 0;
+		// thrust = 0;
+		// fuseDistance = 8;
+		// timeToLive = 30;
+		// maneuvrability = 0;
+		// allowAgainstInfantry = 0;
 	};
 	
 	class R_TBG32V_F : R_PG32V_F {
