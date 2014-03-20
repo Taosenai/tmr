@@ -38,11 +38,51 @@ import platform
 import glob
 import subprocess
 import hashlib
-import ConfigParser
+import configparser
 import json
+import traceback
 
 if sys.platform == "win32":
 	import winreg
+
+
+# http://akiscode.com/articles/sha-1directoryhash.shtml
+# Copyright (c) 2009 Stephen Akiki
+# MIT License (Means you can do whatever you want with this)
+#  See http://www.opensource.org/licenses/mit-license.php
+# Error Codes:
+#   -1 -> Directory does not exist
+#   -2 -> General error (see stack traceback)
+def  get_directory_hash(directory):
+	directory_hash = hashlib.sha1()
+	if not os.path.exists (directory):
+		return -1
+	
+	try:
+		for root, dirs, files in os.walk(directory):
+			for names in files:
+				path = os.path.join(root, names)
+				try:
+					f = open(path, 'rb')
+				except:
+					# You can't open the file for some reason
+					f.close()
+					continue
+
+				while 1:
+					# Read file in as little chunks
+					buf = f.read(4096)
+					if not buf: break
+					new = hashlib.sha1(buf)
+					directory_hash.update(new.digest())
+				f.close()
+
+	except:
+		# Print the stack traceback
+		traceback.print_exc()
+		return -2
+
+	return directory_hash.hexdigest()
 
 # Colors code
 # Copyright (c) André Burgaud
@@ -57,25 +97,25 @@ if sys.platform == "win32":
 	class COORD(Structure):
 	  """struct in wincon.h."""
 	  _fields_ = [
-	    ("X", SHORT),
-	    ("Y", SHORT)]
+		("X", SHORT),
+		("Y", SHORT)]
 
 	class SMALL_RECT(Structure):
 	  """struct in wincon.h."""
 	  _fields_ = [
-	    ("Left", SHORT),
-	    ("Top", SHORT),
-	    ("Right", SHORT),
-	    ("Bottom", SHORT)]
+		("Left", SHORT),
+		("Top", SHORT),
+		("Right", SHORT),
+		("Bottom", SHORT)]
 
 	class CONSOLE_SCREEN_BUFFER_INFO(Structure):
 	  """struct in wincon.h."""
 	  _fields_ = [
-	    ("dwSize", COORD),
-	    ("dwCursorPosition", COORD),
-	    ("wAttributes", WORD),
-	    ("srWindow", SMALL_RECT),
-	    ("dwMaximumWindowSize", COORD)]
+		("dwSize", COORD),
+		("dwCursorPosition", COORD),
+		("wAttributes", WORD),
+		("srWindow", SMALL_RECT),
+		("dwMaximumWindowSize", COORD)]
 
 	# winbase.h
 	STD_INPUT_HANDLE = -10
@@ -161,7 +201,7 @@ def color(color):
 def main(argv):
 	"""Build an Arma addon suite in a directory."""
 	color("blue")
-	print ("\nmake.py for Arma, v" + __version__)
+	print(("\nmake.py for Arma, v" + __version__))
 	color("reset")
 
 	# if sys.platform != "win32":
@@ -210,7 +250,7 @@ If module names are specified, only those modules will be built.
 	os.chdir(make_root)
 
 	# Read the make file
-	cfg = ConfigParser.ConfigParser();
+	cfg = configparser.ConfigParser();
 	try:
 		cfg.read(os.path.join(make_root, "make.cfg"))
 
@@ -223,7 +263,7 @@ If module names are specified, only those modules will be built.
 		# Manual list of modules to build for a complete build
 		modules = cfg.get("Make", "modules").split(',')
 		# Strip out whitespaces for each element if we got a list
-		if not isinstance(modules, basestring):
+		if not isinstance(modules, str):
 			for i, module in enumerate(modules):
 				modules[i] = module.strip()
 		else:
@@ -234,7 +274,7 @@ If module names are specified, only those modules will be built.
 		ignore = cfg.get("Make", "ignore")
 
 		# Strip out whitespaces for each element if we got a list
-		if not isinstance(ignore, basestring):
+		if not isinstance(ignore, str):
 			for i, module in enumerate(ignore):
 				ignore[i] = module.strip()
 		else:
@@ -276,13 +316,13 @@ If module names are specified, only those modules will be built.
 	# Try to open and deserialize build cache file
 	try:
 		cache = {}
-		with open(os.path.join(make_root, "make.cache"), 'rb') as f:
+		with open(os.path.join(make_root, "make.cache"), 'r') as f:
 			cache_raw = f.read()
 
 		cache = json.loads(cache_raw)
 
 	except:
-		print "No cache found."
+		print ("No cache found!")
 		cache = {}
 
 	# Get list of subdirs in make root
@@ -307,7 +347,7 @@ If module names are specified, only those modules will be built.
 	# For each module, prep files and run BinPBO
 	for module in modules:
 		color("green")
-		print ("\nMaking " + module + "-"*(30-len(module)))
+		print(("\nMaking " + module + "-"*(30-len(module))))
 		color("reset")
 
 		# Cache check
@@ -317,18 +357,13 @@ If module names are specified, only those modules will be built.
 			old_sha = ""
 
 		# Hash the module
-		m = hashlib.sha1()
-		for root, dirs, files in os.walk(os.path.join(make_root, module)):
-			for file_read in files:
-				full_path = os.path.join(root, file_read)
-				for line in open(full_path).readlines():
-					m.update(line)
-		new_sha = m.hexdigest()
+		new_sha = get_directory_hash(os.path.join(make_root, module))
 
 		# Check if it needs rebuilt
+		print (new_sha)
 		if old_sha == new_sha:
 			if not force_build:
-				print "Module has not changed."
+				print ("Module has not changed.")
 				continue
 		else:
 			cache[module] = new_sha
@@ -356,7 +391,7 @@ If module names are specified, only those modules will be built.
 			print ("ERROR: Could not copy module to work drive.")
 			raise
 			color("reset")
-			input("Press Enter to continue...")
+			eval(input("Press Enter to continue..."))
 			print ("Resuming build...")
 			continue
 		
@@ -367,8 +402,8 @@ If module names are specified, only those modules will be built.
 
 			if sys.platform == "win32":
 				color("blue")
-				print ("Building: " + os.path.join(work_drive, module))
-				print ("Destination: " + os.path.join(make_root, release_dir, project, "Addons"))
+				print(("Building: " + os.path.join(work_drive, module)))
+				print(("Destination: " + os.path.join(make_root, release_dir, project, "Addons")))
 				color ("reset")
 				# Make destination folder
 				try:
@@ -388,8 +423,8 @@ If module names are specified, only those modules will be built.
 				win_make_root = subprocess.check_output(["cygpath","-w", make_root]).rstrip()
 
 				color("blue")
-				print ("Building: " + work_drive + module)
-				print ("Destination: " + win_make_root + '\\' + release_dir + '\\' + project + '\\' + "Addons")
+				print(("Building: " + work_drive + module))
+				print(("Destination: " + win_make_root + '\\' + release_dir + '\\' + project + '\\' + "Addons"))
 				color("reset")
 
 				# Make destination folder
@@ -409,13 +444,13 @@ If module names are specified, only those modules will be built.
 			print ("ERROR: Could not run BinPBO.")
 			raise
 			color("reset")
-			input("Press Enter to continue...")
+			eval(input("Press Enter to continue..."))
 			print ("Resuming build...")
 			continue
 
 	# Write out the cache state
 	cache_out = json.dumps(cache)
-	with open(os.path.join(make_root, "make.cache"), 'wb') as f:
+	with open(os.path.join(make_root, "make.cache"), 'w') as f:
 		f.write(cache_out)
 
 	color("green")
@@ -424,7 +459,7 @@ If module names are specified, only those modules will be built.
 
 	if make_release:
 		color("blue")
-		print ("\nMaking release: " + project + "-" + release_version + ".zip")
+		print(("\nMaking release: " + project + "-" + release_version + ".zip"))
 		color("reset")
 		# Create a zip with the contents of release/ in it
 		try:
@@ -460,4 +495,4 @@ If module names are specified, only those modules will be built.
 				print ("ERROR: Could not copy files. Is Arma 3 running?")
 
 if __name__ == "__main__":
-    main(sys.argv)
+	main(sys.argv)
