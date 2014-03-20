@@ -164,14 +164,15 @@ if sys.platform == "win32":
 
 def findtools():
 	"""Use registry entries to find BI tools."""
-	reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+	reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
 	try:
-		k = winreg.OpenKey(reg, r"SOFTWARE\Wow6432Node\Bohemia Interactive\BinPBO Personal Edition")
-		binpbo_path = winreg.EnumValue(k, 0)[1]
-		binpbo_path = os.path.join(binpbo_path, 'BinPBO.exe')
+		k = winreg.OpenKey(reg, r"Software\Bohemia Interactive\p drive")
+		binpbo_path = winreg.QueryValueEx(k, "path")[0]
+		binpbo_path = os.path.join(binpbo_path, 'AddonBuilder.exe')
 		winreg.CloseKey(k)
+		print ("Found Addon Builder at:", binpbo_path)
 	except:
-		print ("ERROR: Could not find BinPBO. Please reinstall BI Tools!")
+		print ("ERROR: Could not find Addon Builder. Please reinstall BI Tools!")
 		sys.exit(1)
 
 	return [binpbo_path]
