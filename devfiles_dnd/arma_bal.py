@@ -21,7 +21,7 @@ while tt < 0.5:
 		lastaccelcalc = dtrav
 		accel = af * v * v
 		drop = 0.5 * 9.80665 * tt * tt * 100
-		print(dtrav, v, drop)
+		print((dtrav, v, drop))
 
 	#print(tt, dtrav, v)
 
