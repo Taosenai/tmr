@@ -223,20 +223,19 @@ tmr_autorest_fnc_unrestWeapon = {
 // -------------------------------------------------------------------------------
 tmr_autorest_fnc_createRefPoints = {
 	_model = "TMR_Autorest_GeoRef";
-	//_model = "Sign_Sphere10cm_F";
 
-	tmr_autorest_refPoint1 = _model createVehicleLocal position player; 
-	tmr_autorest_refPoint2 = _model createVehicleLocal position player;  
+	tmr_autorest_refPoint1 = _model createVehicle position player; 
+	tmr_autorest_refPoint2 = _model createVehicle position player;  
 
-	tmr_autorest_refPoint3 = _model createVehicleLocal position player;  
-	tmr_autorest_refPoint4 = _model createVehicleLocal position player;  
+	tmr_autorest_refPoint3 = _model createVehicle position player;  
+	tmr_autorest_refPoint4 = _model createVehicle position player;  
 
-	tmr_autorest_refPoint5 = _model createVehicleLocal position player;  
-	tmr_autorest_refPoint6 = _model createVehicleLocal position player;  
+	tmr_autorest_refPoint5 = _model createVehicle position player;  
+	tmr_autorest_refPoint6 = _model createVehicle position player;  
 
-	tmr_autorest_refPoint7 = _model createVehicleLocal position player;  
-	tmr_autorest_refPoint8 = _model createVehicleLocal position player; 
-	tmr_autorest_refPoint9 = _model createVehicleLocal position player; 
+	tmr_autorest_refPoint7 = _model createVehicle position player;  
+	tmr_autorest_refPoint8 = _model createVehicle position player; 
+	tmr_autorest_refPoint9 = _model createVehicle position player; 
 };
 
 // -------------------------------------------------------------------------------
@@ -353,7 +352,7 @@ _handle = [
 }, 
 /* On exit, do...*/
 {
-	deletevehicle tmr_autorest_refPoint1; deletevehicle tmr_autorest_refPoint2; deletevehicle tmr_autorest_refPoint3; deletevehicle tmr_autorest_refPoint4; deletevehicle tmr_autorest_refPoint5; deletevehicle tmr_autorest_refPoint6;tmr_autorest_refPoint7; deletevehicle tmr_autorest_refPoint8; deletevehicle tmr_autorest_refPoint9;
+	deletevehicle tmr_autorest_refPoint1; deletevehicle tmr_autorest_refPoint2; deletevehicle tmr_autorest_refPoint3; deletevehicle tmr_autorest_refPoint4; deletevehicle tmr_autorest_refPoint5; deletevehicle tmr_autorest_refPoint6; deletevehicle tmr_autorest_refPoint7; deletevehicle tmr_autorest_refPoint8; deletevehicle tmr_autorest_refPoint9;
 }, 
 /* Run condition */
 {true},
@@ -363,8 +362,9 @@ _handle = [
 ["_unit"]
 ] call cba_common_fnc_addPerFrameHandlerLogic;
 
+
 /////////////////////////////////////////////////////////////////////////////////
- 
+
 // Add key handler. 
 [] spawn {
 	waituntil {!isNull (findDisplay 46)};
