@@ -317,14 +317,14 @@ class CfgWeapons {
 		// Regarding the EBR:
 		// M14 Rifle History and Development Fifth Edition by Lee Emerson
 		// "The acceptance criteria was a maximum of 1.5 MOA with the result averaging 0.89 MOA for the first 5,000 built."
-		class Single : Single {
+		class Single : Mode_SemiAuto {
 			dispersion = 0.00029; // radians. Equal to 1 MOA.
 		};
 	};
 
 	class DMR_01_base_F: Rifle_Long_Base_F {
 		// VS-121: Who knows? Some Spetsnaz dude and Izhmash plant testers.
-		class Single : Single {
+		class Single : Mode_SemiAuto {
 			dispersion = 0.00029; // radians. Equal to 1 MOA.
 		};
 	};

@@ -93,13 +93,13 @@ class CfgMagazines {
 	};
 
 	class 30Rnd_65x39_caseless_mag_Tracer : 30Rnd_65x39_caseless_mag { // MX!!
-		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Red)<br />Rounds: 30<br />Type: KT2002";
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Red)<br />Rounds: 30<br />Type: MX";
 		displayname = "6.5mm 30Rnd Tracer Mag";
 		displaynameshort = "6.5mm Tracer";
 	};
 
 	class 30Rnd_65x39_caseless_green : 30Rnd_65x39_caseless_mag { // Katiba!!
-		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 100<br />Type: KT2002";
+		descriptionshort = "Caliber: 6.5x39mm Caseless<br />Rounds: 30<br />Type: KT2002";
 		displayname = "6.5mm 30Rnd Mag";
 		displaynameshort = "6.5mm";
 
@@ -107,8 +107,8 @@ class CfgMagazines {
 		lastRoundsTracer = 0;
 	};
 
-	class 30Rnd_65x39_caseless_green_Tracer : 30Rnd_65x39_caseless_green { // Katiba!!
-		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 100<br />Type: KT2002";
+	class 30Rnd_65x39_caseless_green_mag_Tracer : 30Rnd_65x39_caseless_green { // Katiba!!
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 30<br />Type: KT2002";
 		displayname = "6.5mm 30Rnd Tracer Magazine";
 		displaynameshort = "6.5mm Tracer";
 	};
@@ -136,10 +136,26 @@ class CfgMagazines {
 		tracersEvery = 5;
 		lastRoundsTracer = 3;
 	};
-	class 200Rnd_65x39_cased_Box_Tracer: 200Rnd_65x39_cased_Box {
-		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 200<br />Type: M20 link";
+	class 200Rnd_65x39_cased_Box_Tracer : 200Rnd_65x39_cased_Box {
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Red)<br />Rounds: 200<br />Type: M20 link";
 		displayname = "6.5mm 200Rnd Tracer Box";
 		displaynameshort = "6.5mm Tracer";
+
+		// Change default tracer color to red
+		ammo = "B_65x39_Caseless_red";
+		picture = "\A3\Weapons_F\Data\UI\m_200rnd_65x39_red_ca.paa";
+	};
+	class TMR_200Rnd_65x39_cased_Box_Tracer_Green: 200Rnd_65x39_cased_Box_Tracer {
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 200<br />Type: M20 link";
+
+		ammo = "B_65x39_Caseless_green";
+		picture = "\A3\Weapons_F\Data\UI\m_200rnd_65x39_green_ca.paa";
+	};
+	class TMR_200Rnd_65x39_cased_Box_Tracer_Yellow: 200Rnd_65x39_cased_Box_Tracer {
+		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Yellow)<br />Rounds: 200<br />Type: M20 link";
+
+		ammo = "B_65x39_Caseless_yellow";
+		picture = "\A3\Weapons_F\Data\UI\m_200rnd_65x39_yellow_ca.paa";
 	};
 
 	// 7.62mm //////////////////////////////////////////
@@ -191,7 +207,7 @@ class CfgMagazines {
 		lastRoundsTracer = 0;
 	};
 
-	class 16Rnd_9x21_Mag: 30Rnd_9x21_Mag {
+	class 16Rnd_9x21_Mag : 30Rnd_9x21_Mag {
 		descriptionshort = "Caliber: 9x19mm<br />Rounds: 17<br />Type: Glock";
 		displayname = "9mm 17Rnd Mag";
 		displaynameshort = "9mm";
@@ -199,7 +215,7 @@ class CfgMagazines {
 		count = 17;
 	};
 
-	class 11Rnd_45ACP_Mag: CA_Magazine {
+	class 11Rnd_45ACP_Mag : CA_Magazine {
 		descriptionshort = "Caliber: .45 ACP<br />Rounds: 15<br />Type: FNX-45";
 		displayname = ".45 15Rnd Mag";
 		displaynameshort = ".45";
@@ -207,7 +223,7 @@ class CfgMagazines {
 		count = 15;
 	};
 
-	class class 6Rnd_45ACP_Cylinder: 11Rnd_45ACP_Mag {
+	class 6Rnd_45ACP_Cylinder : 11Rnd_45ACP_Mag {
 		descriptionshort = "Caliber: .357 Magnum<br />Rounds: 6<br />Type: Moon clip";
 		displayname = ".357 6Rnd Moon Clip";
 		displaynameshort = ".357";
@@ -538,7 +554,7 @@ class CfgWeapons {
 
 	class hgun_Pistol_heavy_02_F: Pistol_Base_F {
 		displayName = "Rhino 60DS";
-		descriptionShort = "Revolver<br />Caliber: .45 ACP";
+		descriptionShort = "Revolver<br />Caliber: .357 Magnum";
 	};
 
 	// LMGs //////////////////////////////////////////////
