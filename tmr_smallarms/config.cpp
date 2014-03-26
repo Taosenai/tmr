@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_gamma, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core};
+		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_gamma, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core, tmr_smallarms_ballistics};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -150,6 +150,12 @@ class CfgMagazines {
 		displaynameshort = "7.62mm";
 	};
 
+	class 10Rnd_762x51_Mag: 20Rnd_762x51_Mag {
+		descriptionshort = "Caliber: 7.62x51mm<br />Rounds: 10<br />Type: VS-121";
+		displayname = "7.62mm 10Rnd Mag";
+		displaynameshort = "7.62mm";
+	};
+
 	class 150Rnd_762x51_Box : CA_Magazine {
 		descriptionshort = "Caliber: 7.62x51mm<br/>Rounds: 150<br />Type: M13 link";
 		displayname = "7.62mm 150Rnd Box";
@@ -159,7 +165,7 @@ class CfgMagazines {
 	};
 
 	class 150Rnd_762x51_Box_Tracer : 150Rnd_762x51_Box {
-		descriptionshort = "Caliber: 7.62x51mm Tracer (Green)<br/>Rounds: 150<br />Used in: Zafir ZG7";
+		descriptionshort = "Caliber: 7.62x51mm Tracer (Green)<br/>Rounds: 150<br />Type: M13 link";
 		displayname = "7.62mm 150Rnd Tracer Box";
 	};
 
@@ -191,6 +197,22 @@ class CfgMagazines {
 		displaynameshort = "9mm";
 
 		count = 17;
+	};
+
+	class 11Rnd_45ACP_Mag: CA_Magazine {
+		descriptionshort = "Caliber: .45 ACP<br />Rounds: 15<br />Type: FNX-45";
+		displayname = ".45 15Rnd Mag";
+		displaynameshort = ".45";
+
+		count = 15;
+	};
+
+	class class 6Rnd_45ACP_Cylinder: 11Rnd_45ACP_Mag {
+		descriptionshort = "Caliber: .357 Magnum<br />Rounds: 6<br />Type: Moon clip";
+		displayname = ".357 6Rnd Moon Clip";
+		displaynameshort = ".357";
+
+		count = 6;
 	};
 
 	class 30Rnd_45ACP_Mag_SMG_01 : 30Rnd_9x21_Mag {
@@ -509,6 +531,16 @@ class CfgWeapons {
 		descriptionShort = "Handgun<br />Caliber: .45 ACP";
 	};
 
+	class hgun_Pistol_heavy_01_F: Pistol_Base_F {
+		displayName = "FNX-45 Tactical";
+		descriptionShort = "Handgun<br />Caliber: .45 ACP";
+	};
+
+	class hgun_Pistol_heavy_02_F: Pistol_Base_F {
+		displayName = "Rhino 60DS";
+		descriptionShort = "Revolver<br />Caliber: .45 ACP";
+	};
+
 	// LMGs //////////////////////////////////////////////
 
 	class Rifle_Long_Base_F;
@@ -584,6 +616,11 @@ class CfgWeapons {
 	class srifle_GM6_F : GM6_base_F {
 		displayName = "GM6 Lynx";
 		descriptionShort = "Anti-materiel Rifle<br />Caliber: 12.7x108mm";
+	};
+
+	class DMR_01_base_F: Rifle_Long_Base_F {
+		displayName = "VS-121";
+		descriptionShort = "Marksman/Battle Rifle<br />Caliber: 7.62x51mm";
 	};
 
 	///////////////////////////////////////////////////////////////////////////////
