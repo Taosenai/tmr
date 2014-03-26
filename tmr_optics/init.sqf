@@ -111,9 +111,13 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 		/////////
 		// Center everything
 
-		_reticleX = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
+		// getResolution select 4 should return the aspect ratio, but it's totally wrong
+		// for triple head displays. We'll compute it manually.
+		_aspectRatio = (getResolution select 0) / (getResolution select 1);
+
+		_reticleX = (SafeZoneXAbs + SafeZoneWAbs/2 - (SafeZoneWAbs / _aspectRatio)/2);
 		_reticleY = SafeZoneY;
-		_reticleW = SafeZoneW / (getResolution select 4);
+		_reticleW = SafeZoneWAbs / _aspectRatio;
 		_reticleH = SafeZoneH;
 
 		// Reticle
@@ -121,9 +125,9 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 		// Reticle night (illum)
 		(TMR_SCOPECTRL 2) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
 
-		_bodyX = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4)));
+		_bodyX = (SafeZoneXAbs + SafeZoneWAbs/2 - (SafeZoneWAbs / _aspectRatio));
 		_bodyY = SafeZoneY - (SafeZoneH/2);
-		_bodyW = SafeZoneW / (getResolution select 4) * 2;
+		_bodyW = SafeZoneWAbs / _aspectRatio * 2;
 		_bodyH = SafeZoneH * 2; 
 
 		// Body night
@@ -164,7 +168,7 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 		//////////////
 
-		waituntil {ctrlCommitted (TMR_SCOPECTRL 6)};
+		waituntil {sleep 0.01; ctrlCommitted (TMR_SCOPECTRL 6)};
 
 		//////////////
 

@@ -55,16 +55,16 @@ class Extended_FiredBIS_EventHandlers {
 //    time since fired   rear movement of gun   camera climb
 
 // Global muzzle climb increase over base. (For easy tuning.)
-#define TMR_MC 0.0090
+#define TMR_MC 0.0089
 
 // Global recovery sequence duration increase (For easy tuning.)
-#define TMR_RSD 0.06031
+#define TMR_RSD 0.06029
 
 // Global recovery downward muzzle movement.
 #define TMR_RCT -0.00285
 
 // Global rearward movement mod
-#define TMR_RWD 0.002
+#define TMR_RWD 0.004
 
 
  // 0.114 +tmr_RSD

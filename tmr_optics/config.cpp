@@ -34,7 +34,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_FiredBIS_EventHandlers {
 	class CAManBase {
 		class tmr_optics {
-			clientFiredBISPlayer = "_this call tmr_optics_fnc_scopeRecoil_firedEH;";
+			clientFiredBIS = "_this call tmr_optics_fnc_scopeRecoil_firedEH;";
 		};
 	};
 };
@@ -367,9 +367,9 @@ class RscTitles {
 			colorText[] = {1,1,1,1};
 			fade = 0;
 			text = "";
-			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4))/2);
+			x = (SafeZoneXAbs + SafeZoneWAbs/2 - (SafeZoneWAbs / ((getResolution select 0) / (getResolution select 1)))/2);
 			y = SafeZoneY;
-			w = SafeZoneW / (getResolution select 4);
+			w = SafeZoneWAbs / ((getResolution select 0) / (getResolution select 1));
 			h = SafeZoneH;
 		};
 
@@ -381,9 +381,9 @@ class RscTitles {
 		class BodyNight : Reticle {
 			idc = 5;
 			text = "";
-			x = (SafeZoneX + SafeZoneW/2 - (SafeZoneW / (getResolution select 4)));
+			x = (SafeZoneXAbs + SafeZoneWAbs/2 - (SafeZoneWAbs / ((getResolution select 0) / (getResolution select 1))));
 			y = SafeZoneY - (SafeZoneH/2);
-			w = SafeZoneW / (getResolution select 4) * 2;
+			w = SafeZoneWAbs / ((getResolution select 0) / (getResolution select 1)) * 2;
 			h = SafeZoneH * 2;
 		};
 

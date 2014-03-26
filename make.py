@@ -164,7 +164,7 @@ if sys.platform == "win32":
 
 def findtools():
 	"""Use registry entries to find BI tools."""
-	reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
+	"""reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
 	try:
 		k = winreg.OpenKey(reg, r"Software\Bohemia Interactive\p drive")
 		binpbo_path = winreg.QueryValueEx(k, "path")[0]
@@ -175,7 +175,9 @@ def findtools():
 		print ("ERROR: Could not find Addon Builder. Please reinstall BI Tools!")
 		sys.exit(1)
 
-	return [binpbo_path]
+	return [binpbo_path]"""
+
+	return ["P:\AddonBuilder.exe"]
 
 def color(color):
 	"""Set the color. Works on Win32 and normal terminals."""
@@ -262,25 +264,10 @@ If module names are specified, only those modules will be built.
 		module_autodetect = cfg.getboolean("Make", "module_autodetect")
 
 		# Manual list of modules to build for a complete build
-		modules = cfg.get("Make", "modules").split(',')
-		# Strip out whitespaces for each element if we got a list
-		if not isinstance(modules, str):
-			for i, module in enumerate(modules):
-				modules[i] = module.strip()
-		else:
-			# Didn't get a list, so make it one
-			modules = [modules]
-
+		modules = [x.strip() for x in cfg.get("Make", "modules").split(',')]
+		
 		# List of directories to ignore when detecting
-		ignore = cfg.get("Make", "ignore")
-
-		# Strip out whitespaces for each element if we got a list
-		if not isinstance(ignore, str):
-			for i, module in enumerate(ignore):
-				ignore[i] = module.strip()
-		else:
-			# Didn't get a list, so make it one
-			ignore = [ignore]
+		ignore = [x.strip() for x in cfg.get("Make", "ignore").split(',')]
 
 		# Prefix for the addon
 		prefix = cfg.get("Make", "prefix")
@@ -335,20 +322,13 @@ If module names are specified, only those modules will be built.
 		for path in dirs:
 			# Any dir that has a config.cpp in its root is an addon to build
 			config_path = os.path.join(path, 'config.cpp')
-			if os.path.isfile(config_path):
+			if os.path.isfile(config_path) and not path in ignore:
 				modules.append(path)
-
-		# Remove ignored
-		for module in ignore:
-			try:
-				modules.remove(module)
-			except:
-				pass
 
 	# For each module, prep files and run BinPBO
 	for module in modules:
 		color("green")
-		print(("\nMaking " + module + "-"*(30-len(module))))
+		print(("\nMaking " + module + "-"*max(1, (60-len(module)))))
 		color("reset")
 
 		# Cache check
@@ -361,7 +341,7 @@ If module names are specified, only those modules will be built.
 		new_sha = get_directory_hash(os.path.join(make_root, module))
 
 		# Check if it needs rebuilt
-		print (new_sha)
+		print ("Hash:", new_sha)
 		if old_sha == new_sha:
 			if not force_build:
 				print ("Module has not changed.")
@@ -413,10 +393,12 @@ If module names are specified, only those modules will be built.
 					pass
 
 				# Call binpbo
+				os.chdir("P:\\")
 				if prefix == "none":	
 					subprocess.call([binpbo, os.path.join(work_drive, module), "-CLEAR", os.path.join(make_root, release_dir, project, "Addons")])
 				else:
 					subprocess.call([binpbo, os.path.join(work_drive, module), "-PREFIX", module_prefix, "-CLEAR", os.path.join(make_root, release_dir, project, "Addons")])
+				os.chdir(make_root)
 
 			else:
 				# Cygwin
