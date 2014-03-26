@@ -2,7 +2,7 @@
 #define false	0
 
 class CfgPatches {
-	class tmr_ballistics {
+	class tmr_smallarms_ballistics {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
@@ -14,9 +14,9 @@ class CfgPatches {
 };
 
 class CfgMods {
-	class tmr_ballistics {
-		dir = "tmr_ballistics";
-		name = "TMR: Ballistics Module";
+	class tmr_smallarms_ballistics {
+		dir = "tmr_smallarms_ballistics";
+		name = "TMR: Small Arms Ballistics Module";
 		picture = "";
 		hidePicture = "true";
 		hideName = "true";
@@ -26,8 +26,8 @@ class CfgMods {
 };
 
 //class Extended_PostInit_EventHandlers {
-	//class tmr_ballistics {
-		//clientInit = "call compile preProcessFileLineNumbers '\tmr_ballistics\init.sqf'";
+	//class tmr_smallarms_ballistics {
+		//clientInit = "call compile preProcessFileLineNumbers '\tmr_smallarms_ballistics\init.sqf'";
 	//};
 //};
 
@@ -103,6 +103,23 @@ class CfgAmmo {
 		// Determined with armabal.py (close ballistic match at 100 meters)
 		airfriction = -0.0009;
 	};
+
+	class TMR_B_357Magnum_Ball: BulletBase {
+		// This is fudgey -- I don't own a .357 mag pistol
+		// 6" barrel, same as Chiappa Rhino 60DS (zubr)
+		// http://www.ballisticsbytheinch.com/357mag.html
+		// 125gr Cor-bon JHP    1715 ft/s 523 m/s
+
+		// No idea what kind of bullet it uses
+		// Let's try
+		// https://www.hornady.com/store/357-Mag-125-gr-Critical-Defense/
+		// Ballistic Coefficient (G1)	0.150
+		// Sectional Density	0.140
+		typicalSpeed = 523;
+
+		// Determined with armabal.py (close ballistic match at 100 meters)
+		airfriction = -0.0028;
+	};
 };
 
 class CfgMagazines {
@@ -130,8 +147,12 @@ class CfgMagazines {
 	};
 
 	class 20Rnd_762x51_Mag: CA_Magazine {
-		descriptionshort = "Caliber: 7.62x51mm M118LR<br />Rounds: 20<br />Type: M14";
 		initSpeed = 792; // 18" M14 EBR barrel
+		ammo = "TMR_B_762x51_M118LR"; // Use M118LR
+	};
+
+	class 10Rnd_762x51_Mag: CA_Magazine {
+		initSpeed = 850; // VS-121 24" barrel
 		ammo = "TMR_B_762x51_M118LR"; // Use M118LR
 	};
 
@@ -152,6 +173,14 @@ class CfgMagazines {
 		ammo = "B_9x19_Ball";
 		// M9 initial MV. Close enough for horseshoes and handguns.
 		initSpeed = 381;
+	};
+
+	class 11Rnd_45ACP_Mag: CA_Magazine {
+		initSpeed = 260; // 1911 + a little for the 0.3in on the FNX-45
+	};
+
+	class 6Rnd_45ACP_Cylinder: 11Rnd_45ACP_Mag {
+		initSpeed = 523; // 6" Rhino 60DS .357
 	};
 
 	class 30Rnd_45ACP_Mag_SMG_01 : CA_Magazine {
@@ -182,8 +211,12 @@ class Mode_SemiAuto;
 class Mode_FullAuto;
 
 class CfgWeapons {
+	class Pistol_Base_F;
 	class Rifle_Base_F;
 	class Rifle_Long_Base_F;
+
+	//////////////////////////////////////////////////
+	// Assault rifles
 
 	class arifle_MX_Base_F : Rifle_Base_F {
 		class Single : Mode_SemiAuto {
@@ -226,24 +259,6 @@ class CfgWeapons {
 		};
 	};
 
-	class LMG_Mk200_F : Rifle_Long_Base_F {
-		class manual : Mode_FullAuto {
-			dispersion = 0.00175; // radians. Equal to 6 MOA.
-		};
-		class Single : manual {
-			dispersion = 0.00175; // radians. Equal to 6 MOA.
-		};
-	};
-
-	class LMG_Zafir_F : Rifle_Long_Base_F {
-		class FullAuto : Mode_FullAuto {
-			dispersion = 0.00175; // radians. Equal to 6 MOA.
-		};
-		class Single : Mode_SemiAuto {
-			dispersion = 0.00175; // radians. Equal to 6 MOA.
-		};
-	};
-
 	class Tavor_base_F : Rifle_Base_F {
 		class Single : Mode_SemiAuto {
 			dispersion = 0.000727; // radians. Equal to 2.5 MOA, about the limit of mass-produced M855.
@@ -273,5 +288,67 @@ class CfgWeapons {
 			dispersion = 0.00147; // radians. Equal to 5.1 MOA.
 		};
 	};
-		
+
+	//////////////////////////////////////////////////
+	// Machine guns
+
+	class LMG_Mk200_F : Rifle_Long_Base_F {
+		class manual : Mode_FullAuto {
+			dispersion = 0.00175; // radians. Equal to 6 MOA.
+		};
+		class Single : manual {
+			dispersion = 0.00175; // radians. Equal to 6 MOA.
+		};
+	};
+
+	class LMG_Zafir_F : Rifle_Long_Base_F {
+		class FullAuto : Mode_FullAuto {
+			dispersion = 0.00175; // radians. Equal to 6 MOA.
+		};
+		class Single : Mode_SemiAuto {
+			dispersion = 0.00175; // radians. Equal to 6 MOA.
+		};
+	};
+
+	//////////////////////////////////////////////////
+	// Marksman/sniper rifles
+
+	class EBR_base_F : Rifle_Long_Base_F {
+		// Regarding the EBR:
+		// M14 Rifle History and Development Fifth Edition by Lee Emerson
+		// "The acceptance criteria was a maximum of 1.5 MOA with the result averaging 0.89 MOA for the first 5,000 built."
+		class Single : Single {
+			dispersion = 0.00029; // radians. Equal to 1 MOA.
+		};
+	};
+
+	class DMR_01_base_F: Rifle_Long_Base_F {
+		// VS-121: Who knows? Some Spetsnaz dude and Izhmash plant testers.
+		class Single : Single {
+			dispersion = 0.00029; // radians. Equal to 1 MOA.
+		};
+	};
+
+	//////////////////////////////////////////////////
+	// Pistols
+	
+	class hgun_P07_F : Pistol_Base_F {
+		dispersion = 0.000727; // radians. Equal to 2.5 MOA. This is optimistic.
+	};
+
+	class hgun_Rook40_F : Pistol_Base_F {
+		dispersion = 0.000727; // radians. Equal to 2.5 MOA. This is optimistic.
+	};
+
+	class hgun_ACPC2_F : Pistol_Base_F {
+		dispersion = 0.000727; // radians. Equal to 2.5 MOA. This is optimistic.
+	};
+
+	class hgun_Pistol_heavy_01_F: Pistol_Base_F {
+		dispersion = 0.000727; // radians. Equal to 2.5 MOA. This is optimistic.
+	};
+
+	class hgun_Pistol_heavy_02_F: Pistol_Base_F {
+		dispersion = 0.00029; // radians. Equal to 1 MOA. Not a problem with a scoped revolver.
+	};	
 };
