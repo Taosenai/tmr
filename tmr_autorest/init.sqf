@@ -93,17 +93,31 @@ tmr_autorest_fnc_deployKeyDownEH = {
 				// Spawn a watcher to undeploy if we're no longer aligned or if we move
 				[] spawn {
 					while {player getVariable ["tmr_autorest_hardrested", false]} do {
+						_oldDirection = direction player;
 						sleep 0.5;
 						_playerAnimState = animationState player;
 
-						// If we are no longer rested or if we left the deploy animation
-						if (!(player getVariable ["tmr_autorest_rested", false]) || !(["_tmr_rested", _playerAnimState] call bis_fnc_inString)) then {
+						// Recheck rest possibility if player direction changed by more than
+						// 2 degrees (This is a lazy check which fails at 0<->360 transition)
+						_dirChanged = false;
+						if (abs (direction player - _oldDirection) > 2) then {
+							// Check if the weapon geo references intersect with something.
+							_centerCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint1, getposASL tmr_autorest_refPoint2, tmr_autorest_refPoint1, tmr_autorest_refPoint2];
+							_leftCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint3, getposASL tmr_autorest_refPoint4, tmr_autorest_refPoint3, tmr_autorest_refPoint4];
+							_rightCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint5, getposASL tmr_autorest_refPoint6, tmr_autorest_refPoint5, tmr_autorest_refPoint6];
+
+							if (count _centerCheck > 0 || count _leftCheck > 0 || count _rightCheck > 0) then {
+								_dirChanged = true;
+							}
+						};
+
+						// If we are no longer rested or if we left the deploy animation or weapon shouldn't be rested at all
+						if (!(player getVariable ["tmr_autorest_rested", false]) || !(["_tmr_rested", _playerAnimState] call bis_fnc_inString) || _dirChanged) then {
 							// Un-hardrest the weapon.
 							[] call tmr_autorest_fnc_unhardRestWeapon;
 						};
 					};
 				};
-
 			};
 		};
 	};
@@ -277,15 +291,11 @@ tmr_autorest_fnc_respawnEH = {
 
 	// When the player is alive, update the ref points to his new guy.
 	[] call tmr_autorest_fnc_attachRefPoints;
-
-	// Readd the event handler.
-	player addEventHandler ["Respawn", {_this spawn tmr_autorest_fnc_respawnEH}];
 };
 
 /////////////////////////////////////////////////////////////////////////////////
 
 // This local EH updates the reference points when the player respawns.
-// It is readded afterwards.
 player addEventHandler ["Respawn", {_this spawn tmr_autorest_fnc_respawnEH}];
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -361,7 +371,6 @@ _handle = [
 /* Private variables */
 ["_unit"]
 ] call cba_common_fnc_addPerFrameHandlerLogic;
-
 
 /////////////////////////////////////////////////////////////////////////////////
 
