@@ -273,7 +273,7 @@ class CfgAmmo {
 		// fuseDistance = 8;
 		// timeToLive = 30;
 		// maneuvrability = 0;
-		// allowAgainstInfantry = 0;
+		allowAgainstInfantry = 0;
 	};
 	
 	class R_TBG32V_F : R_PG32V_F {
@@ -343,12 +343,7 @@ class CfgWeapons {
 
 		magazinereloadtime = 16;
 
-		// modelOptics = "\tmr_rpg42\data\tmr_reticle_RPG42";
-
-		//class WeaponSlotsInfo {
-		//	allowedslots[] = {901};
-		//	mass = 100;
-		//};
+		modelOptics = "\tmr_rpg42\data\reticle_RPG_F_clean";
 
 		// class OpticsModes {
 		// 	class optic {
@@ -371,52 +366,5 @@ class CfgWeapons {
 		// 		visionmode[] = {"Normal", "NVG"};
 		// 	};
 		// };
-	};
-};
-
-
-class CfgMissions {
-	class Missions {
-		class TMRTraining {
-			class RPG42Reticle {
-				briefingName = "RPG42Reticle";
-				// It's critical that this not begin with '\' !!
-				directory = "tmr_rpg42\TMR_RPG42Training.Stratis";
-			};
-		};
-	};
-};
-
-class CfgHints {
-	class TMR {
-		displayName = "TMR Tutorials";
-		class RPG42Init {
-			arguments[] = {};
-			description = "TMR RPG-42 changes the RPG-42 to be an unguided soft-launch RPG with a fully-calibrated reticle.<br/><br/>This tutorial will teach you how to employ the new version.<br/>%1%2Take an RPG-42 from the box ahead of you and ready it. You may want to carry extra rockets in your pack.<br/>";
-			displayName = "RPG-42 Operation";
-			image = "";
-			tip = "";
-		};
-		class RPG42Rangefinding {
-			arguments[] = {};
-			description = "The reticle has three functions: rangefinding, drop compensation, and leading.<br/><br/>Study the diagram. Select 'Ready!' from the action menu when you're ready.<br/>%1%2The points where the horizontal lines intersect the main vertical line correspond to the appropriate drop compensation for a target at that range. %1%2The length of each horizontal line indicates the approximate length of an armored vehicle viewed from the side at the corresponding range. %1%2The small verticle marks indicate an approximate lead for an armored vehicle at the corresponding range moving at roughly 10 km/h.<br/>";
-			displayName = "Using the Reticle";
-			image = "";
-			tip = "Red areas are illuminated for nighttime use.<br/>";
-		};
-		class RPG42Engagement {
-			arguments[] = {};
-			description = "There are six targets ahead of you at various ranges. Engage and destroy them.";
-			displayName = "Practice";
-			image = "";
-			tip = "The RPG-42 is most effective against targets less than 200m away.<br/>";
-		};
-		class RPG42GoodWork {
-			arguments[] = {};
-			description = "Good work. You've mastered the RPG-42!<br/><br/>You can leave the mission when you're ready.";
-			displayName = "Good Work";
-			image = "";
-			tip = "You can find more RPG-42 rockets in the crate behind you.<br/>";
-		};
 	};
 };
