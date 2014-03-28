@@ -34,7 +34,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_FiredBIS_EventHandlers {
 	class CAManBase {
 		class tmr_optics {
-			clientFiredBIS = "_this call tmr_optics_fnc_scopeRecoil_firedEH;";
+			clientFiredBIS = "_this spawn tmr_optics_fnc_scopeRecoil_firedEH;";
 		};
 	};
 };

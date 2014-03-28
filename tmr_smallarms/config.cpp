@@ -263,9 +263,15 @@ class Mode_Burst;
 class Mode_FullAuto;
 
 class CfgWeapons {
-	class WeaponSlotsInfo;
 	class SlotInfo;
-	class Rifle_Base_F;
+
+	class Rifle;
+	class Rifle_Base_F : Rifle {
+		class WeaponSlotsInfo;
+	};
+	class Rifle_Long_Base_F : Rifle_Base_F {
+		class WeaponSlotsInfo : WeaponSlotsInfo {};
+	};
 
 	///////////////////////////////////////////////////////////////////////////////
 	//////////// SMALL ARMS WEAPONS ///////////////////////////////////////////////
@@ -309,7 +315,6 @@ class CfgWeapons {
 		displayName = "MXC";
 		descriptionShort = "Carbine<br />Caliber: 6.5x39mm";
 	};
-
 
 	class arifle_MX_GL_F : arifle_MX_Base_F {
 		displayName = "MX 3GL";
@@ -559,8 +564,6 @@ class CfgWeapons {
 
 	// LMGs //////////////////////////////////////////////
 
-	class Rifle_Long_Base_F;
-
 	class LMG_Mk200_F : Rifle_Long_Base_F {
 		displayName = "Mk200 LMG";
 		descriptionShort = "Machine Gun<br />Caliber: 6.5x39mm";
@@ -622,7 +625,6 @@ class CfgWeapons {
 	class GM6_base_F : Rifle_Long_Base_F {
 		cursor = "arifle";
 
-		// Fuck your balancing, BI.
 		class Single : Mode_SemiAuto {
 			// 250 rpm is probably the limit of the finger on a heavy bullpup trigger like this thing must have.
 			reloadTime = 0.24;
@@ -634,7 +636,9 @@ class CfgWeapons {
 		descriptionShort = "Anti-materiel Rifle<br />Caliber: 12.7x108mm";
 	};
 
-	class DMR_01_base_F: Rifle_Long_Base_F {
+	class DMR_01_base_F;
+
+	class srifle_DMR_01_F : DMR_01_base_F {
 		displayName = "VS-121";
 		descriptionShort = "Marksman/Battle Rifle<br />Caliber: 7.62x51mm";
 	};

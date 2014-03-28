@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {"TMR_muzzle_bipod"};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, "A3_Anims_F", tmr_core};
+		requiredAddons[] = {"A3_Weapons_F", "A3_Anims_F", tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -683,35 +683,32 @@ class CfgMovesMaleSdr : CfgMovesBasic {
 class Mode_SemiAuto;
 class Mode_FullAuto;
 
-class SlotInfo;
-class CowsSlot;	
-class PointerSlot;
-
 // Bipod config.
 // Add bipod accessory to all weapons config.
 // For weapons with a bipod in the 3D model:
 // Add     tmr_autorest_deployable = 1;
 
+class TMR_SlotInfo;
+
+class TMR_AccessoryRail_Rifle : TMR_SlotInfo {
+	class compatibleItems {
+		TMR_acc_bipod = 1;
+	};
+};
+
 class CfgWeapons {
 	class Rifle;
+	class Rifle_Base_F : Rifle {
+		class WeaponSlotsInfo;
+	};
+	class Rifle_Long_Base_F : Rifle_Base_F {
+		class WeaponSlotsInfo : WeaponSlotsInfo {};
+	};
 	
 	class ItemCore;
 	class InventoryItem_Base_F;
 	class InventoryMuzzleItem_Base_F;
 	class InventoryFlashLightItem_Base_F;
-
-	class Rifle_Base_F : Rifle {
-		class WeaponSlotsInfo {
-			class PointerSlot : SlotInfo {
-				class compatibleItems {
-					TMR_acc_bipod = 1;
-				};
-				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
-			};
-		};
-	};
-
-	class Rifle_Long_Base_F;
 
 	class TMR_acc_bipod : ItemCore {
 		scope = 2;
@@ -725,81 +722,22 @@ class CfgWeapons {
 		class ItemInfo : InventoryFlashLightItem_Base_F {
 			mass = 8;
 			
-			class Pointer {
-			};
+			class Pointer {};
 			
 			class FlashLight {};
 		};
 	};
 
-
-	class mk20_base_F : Rifle_Base_F {
-		class WeaponSlotsInfo {
-			class PointerSlot : SlotInfo {
-				class compatibleItems {
-					TMR_acc_bipod = 1;
-				};
-				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
-			};
-		};
-	};
+	////////////////////////////////////////////////
+	// Define this value for weapons with a pre-modeled bipod.
+	// tmr_autorest_deployable = 1;
+	////////////////////////////////////////////////
 
 	class arifle_MX_Base_F : Rifle_Base_F {
-		class WeaponSlotsInfo {
-			class PointerSlot : SlotInfo {
-				class compatibleItems {
-					TMR_acc_bipod = 1;
-				};
-				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
-			};
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			class TMR_AccessoryRail_Rifle_Base;
 		};
 	};
-
-	class arifle_Katiba_Base_F : Rifle_Base_F {
-		class WeaponSlotsInfo {
-			class PointerSlot : SlotInfo {
-				class compatibleItems {
-					TMR_acc_bipod = 1;
-				};
-				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
-			};
-		};
-	};
-
-	class Tavor_base_F : Rifle_Base_F {
-		class WeaponSlotsInfo {
-			class PointerSlot : SlotInfo {
-				class compatibleItems {
-					TMR_acc_bipod = 1;
-				};
-				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
-			};
-		};
-	};
-
-	class EBR_base_F : Rifle_Long_Base_F {
-		class WeaponSlotsInfo {
-			class PointerSlot : SlotInfo {
-				class compatibleItems {
-					TMR_acc_bipod = 1;
-				};
-				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
-			};
-		};
-	};
-
-	class DMR_01_base_F: Rifle_Long_Base_F {
-		class WeaponSlotsInfo {
-			class PointerSlot : SlotInfo {
-				class compatibleItems {
-					TMR_acc_bipod = 1;
-				};
-				linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
-			};
-		};
-	};
-
-	////////////////////////////////////////////////
 
 	class arifle_MX_SW_F : arifle_MX_Base_F {
 		tmr_autorest_deployable = 1;
@@ -807,6 +745,16 @@ class CfgWeapons {
 
 	class arifle_MXM_F : arifle_MX_Base_F {
 		tmr_autorest_deployable = 1;
+	};
+
+	class arifle_MX_GL_F : arifle_MX_Base_F {
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			class TMR_AccessoryRail_Rifle_Base : TMR_AccessoryRail_Rifle_Base {
+				class compatibleItems {
+					TMR_acc_bipod = 0;
+				};
+			};
+		};
 	};
 
 	////////////////////////////////////////////////
