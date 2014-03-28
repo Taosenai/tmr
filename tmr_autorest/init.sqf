@@ -9,6 +9,9 @@ tmr_autorest_restIconTransition = false;
 tmr_autorest_deployIconDisplayed = false;
 tmr_autorest_deployIconTransition = false;
 
+// If weapon has an item with one of these !substrings!, can hardrest
+tmr_autorest_bipodItems = ["TMR_acc_bipod", "ASDG_Atlis"];
+
 #define TMR_AUTOREST_RESTEDRECOIL 0.7
 #define TMR_AUTOREST_DEPLOYEDRECOIL 0.49
 
@@ -34,7 +37,24 @@ tmr_autorest_fnc_deployKeyDownEH = {
 		// Make sure weapon is deployable (bipod mounted) or is rested on something
 		_config = configFile >> "CfgWeapons" >> currentWeapon player;
 		_canDeployCfg = getNumber (_config >> "tmr_autorest_deployable"); // 1 for true
-		_canDeployItem = "TMR_acc_bipod" in primaryWeaponItems player;
+
+		// Go through all attached items and see if they contain a substring from the bipodItems array.
+		// Also detect if we are using any mod's physical bipods so they can have their state changed later.
+		_canDeployItem = false;
+		_bipodName = "";
+		{
+			scopeName "itemsearch";
+			_item = _x;
+			{
+				if ([_x, _item] call bis_fnc_inString) then {
+					_canDeployItem = true;
+					_bipodName = _item;
+					breakOut "itemsearch";
+				};
+			} foreach tmr_autorest_bipodItems;
+
+		} foreach primaryWeaponItems player;
+
 		_isRested = player getVariable ["tmr_autorest_rested", false];
 
 		if !(_canDeployCfg == 1 || _canDeployItem || _isRested) exitwith {false};
@@ -61,10 +81,11 @@ tmr_autorest_fnc_deployKeyDownEH = {
 			};
 
 			// Deploy the weapon
-			[] call tmr_autorest_fnc_deployWeapon;
+			[_bipodName] call tmr_autorest_fnc_deployWeapon;
 
 			// Spawn a watcher to undeploy if we're no longer aligned or if we move
-			[] spawn {
+			[_bipodName] spawn {
+				_bipodName = _this select 0;
 				while {player getVariable ["tmr_autorest_deployed", false]} do {
 					sleep 0.5;
 					_playerAnimState = animationState player;
@@ -80,7 +101,7 @@ tmr_autorest_fnc_deployKeyDownEH = {
 					// If we intersect with nothing or if we left the deploy animation
 					if (!_intersectCheck || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
 						// Undeploy the weapon.
-						[] call tmr_autorest_fnc_undeployWeapon;
+						[_bipodName] call tmr_autorest_fnc_undeployWeapon;
 					};
 				};
 			};
@@ -130,11 +151,28 @@ tmr_autorest_fnc_deployKeyDownEH = {
 // Apply the deployed weapon rest characteristics to the player.
 // -------------------------------------------------------------------------------
 tmr_autorest_fnc_deployWeapon = {
+	_bipodName = "";
+	if (count _this != 0) then {
+		_bipodName = _this select 0;
+	};
+
 	if (!tmr_autorest_deployIconDisplayed) then {
 		tmr_autorest_deployIconDisplayed = true;
 		1599 cutRsc ["TMR_Autorest_Deployed", "PLAIN"];
 		((uiNameSpace getVariable "TMR_Autorest_Deployed") displayCtrl 1) ctrlSetFade 0.3;
 		((uiNameSpace getVariable "TMR_Autorest_Deployed") displayCtrl 1) ctrlCommit 0.5;
+	};
+
+	// If we received a bipod name, do any custom behavior associated with it
+	if (_bipodName != "") then {
+		// ASDG Atlas bipod
+		if (["ASDG_Atlis", _bipodName] call bis_fnc_inString) then {
+			// Change it to the deployed model
+			_bipodBaseName = [_bipodName, 0, -2] call bis_fnc_trimString;
+			_bipodDeployedName = format ["%1%2", _bipodBaseName, "_D"];
+			player removePrimaryWeaponItem _bipodName;
+			player addPrimaryWeaponItem _bipodDeployedName;
+		};
 	};
 	
 	playSound "tmr_autorest_bipodOpen";
@@ -151,6 +189,23 @@ tmr_autorest_fnc_deployWeapon = {
 // Remove the deployed weapon rest characteristics from the player.
 // -------------------------------------------------------------------------------
 tmr_autorest_fnc_undeployWeapon = {
+	_bipodName = "";
+	if (count _this != 0) then {
+		_bipodName = _this select 0;
+	};
+
+	// If we received a bipod name, do any custom behavior associated with it
+	if (_bipodName != "") then {
+		// ASDG Atlas bipod
+		if (["ASDG_Atlis", _bipodName] call bis_fnc_inString) then {
+			// Change it to the secured model
+			_bipodBaseName = [_bipodName, 0, -2] call bis_fnc_trimString;
+			_bipodSecuredName = format ["%1%2", _bipodBaseName, "_S"];
+			player removePrimaryWeaponItem _bipodName;
+			player addPrimaryWeaponItem _bipodSecuredName;
+		};
+	};
+
 	playSound "tmr_autorest_bipodClose";
 
 	player setVariable ["tmr_autorest_deployed", false, false];
