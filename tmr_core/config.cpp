@@ -13,7 +13,6 @@ class CfgPatches {
 	};
 };
 
-
 class CfgMods {
 	class tmr_core {
 		dir = "tmr_core";
@@ -26,58 +25,30 @@ class CfgMods {
 	};
 };
 
+class CfgAddons {
+	class PreloadAddons {
+		class tmr_core {
+			list[] = {"tmr_core"};
+		};
+	};
+};
+
 class Extended_PostInit_EventHandlers {
 	class tmr_core {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_core\init.sqf'";
 	};
 };
 
-/////////////////////////////////////////////////////////
-// Weapon slots for cross-mod compatibility.
-// Based on the implementation in ASDG Joint Rails.
-////////////////////////////////////////////////////////
-
-class TMR_SlotInfo {
-	access = 0;
-	scope = 0;
-	linkProxy = "defaultProxy";
-};
-
-class TMR_AccessoryRail_Rifle : TMR_SlotInfo {
-	linkProxy = "\A3\data_f\proxies\weapon_slots\SIDE";
-	displayName = "$STR_A3_PointerSlot0";
-
-	class compatibleItems {};
-};
-
-class TMR_OpticsRail_Rifle: TMR_SlotInfo {
-	linkProxy = "\A3\data_f\proxies\weapon_slots\TOP";
-	displayName = "$STR_A3_CowsSlot0";
-
-	class compatibleItems {};
-};
-
-class TMR_OpticsRail_Pistol: TMR_SlotInfo {
-	linkProxy = "\A3\data_f\proxies\weapon_slots\TOP";
-	displayName = "$STR_A3_CowsSlot0";
-
-	class compatibleItems {};
-};
-
 class CfgWeapons {
-	class RifleCore;
-	class Rifle : RifleCore {
-		class WeaponSlotsInfo {
-			class TMR_AccessoryRail_Rifle_Base : TMR_AccessoryRail_Rifle {};
-			class TMR_OpticsRail_Rifle_Base : TMR_OpticsRail_Rifle {};
-		};
+	class Rifle;
+	class Rifle_Base_F: Rifle
+	{
+		class WeaponSlotsInfo;
 	};
-	// class Rifle_Base_F : Rifle {
-	// 	class WeaponSlotsInfo : WeaponSlotsInfo {
-	// 		class TMR_AccessoryRail_Rifle_Base : TMR_AccessoryRail_Rifle {};
-	// 		class TMR_OpticsRail_Rifle_Base : TMR_OpticsRail_Rifle {};
-	// 	};
-	// };
+	class Rifle_Long_Base_F: Rifle_Base_F
+	{
+		class WeaponSlotsInfo;
+	};
 };
 
 //////////////////////////////////

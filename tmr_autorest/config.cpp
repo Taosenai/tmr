@@ -4,9 +4,9 @@
 class CfgPatches {
 	class tmr_autorest {
 		units[] = {};
-		weapons[] = {"TMR_muzzle_bipod"};
+		weapons[] = {"TMR_acc_bipod"};
 		requiredVersion = 0.60;
-		requiredAddons[] = {"A3_Weapons_F", "A3_Weapons_F","A3_Weapons_F_EBR","A3_Weapons_F_LongRangeRifles_GM6","A3_Weapons_F_LongRangeRifles_M320","A3_Weapons_F_Machineguns_M200","A3_Weapons_F_Rifles_Khaybar","A3_Weapons_F_Rifles_MX","A3_Weapons_F_Rifles_TRG20","A3_Weapons_F_beta","A3_Weapons_F_beta_EBR","A3_Weapons_F_Machineguns_Zafir","A3_Weapons_F_Rifles_Mk20","A3_Weapons_F_Rifles_Vector","a3_weapons_f_rifles_SMG_02","A3_Weapons_F_gamma","A3_Weapons_F_Pistols_PDW2000","A3_Weapons_F_EPA","A3_Weapons_F_EPA_LongRangeRifles_DMR_01","A3_Weapons_F_EPB","A3_Weapons_F_EPB_Acc", "A3_Data_F", "A3_Anims_F", "A3_Anims_F_Config_Sdr", tmr_core};
+		requiredAddons[] = {tmr_core}; // asdg_jointrails
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -685,12 +685,13 @@ class Mode_FullAuto;
 
 // Bipod config.
 // Add bipod accessory to all weapons config.
+// !! Only works if ASDG_JointRails is available !!
 // For weapons with a bipod in the 3D model:
 // Add     tmr_autorest_deployable = 1;
 
-class TMR_SlotInfo;
+class asdg_SlotInfo;
 
-class TMR_AccessoryRail_Rifle : TMR_SlotInfo {
+class asdg_FrontSideRail : asdg_SlotInfo {
 	class compatibleItems {
 		TMR_acc_bipod = 1;
 	};
@@ -704,8 +705,7 @@ class CfgWeapons {
 
 	class Rifle_Base_F : Rifle {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class TMR_AccessoryRail_Rifle_Base;
-			class TMR_OpticsRail_Rifle_Base;
+			class asdg_FrontSideRail;
 		};
 	};
 	
@@ -771,12 +771,23 @@ class CfgWeapons {
 	};
 
 	///////////////////////////////////////////////////
-	// Disable the TMR bipod accessory for models with grenade launchers.
+	// Disable the TMR bipod accessory for models with grenade launchers
+	// or no forward rails.
 	///////////////////////////////////////////////////
 
 	class arifle_MX_GL_F : arifle_MX_Base_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class TMR_AccessoryRail_Rifle_Base : TMR_AccessoryRail_Rifle {
+			class asdg_FrontSideRail_MX : asdg_FrontSideRail {
+				class compatibleItems {
+					TMR_acc_bipod = 0;
+				};
+			};
+		};
+	};
+
+	class arifle_MXC_F : arifle_MX_Base_F {
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			class asdg_FrontSideRail_MX : asdg_FrontSideRail {
 				class compatibleItems {
 					TMR_acc_bipod = 0;
 				};
@@ -789,7 +800,7 @@ class CfgWeapons {
 	};
 	class arifle_Katiba_GL_F : arifle_Katiba_Base_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class TMR_AccessoryRail_Rifle_Base {
+			class asdg_FrontSideRail_Katiba : asdg_FrontSideRail {
 				class compatibleItems {
 					TMR_acc_bipod = 0;
 				};
@@ -808,7 +819,7 @@ class CfgWeapons {
 	};
 	class arifle_TRG21_GL_F : arifle_TRG21_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class TMR_AccessoryRail_Rifle_Base {
+			class asdg_FrontSideRail_Tavor : asdg_FrontSideRail {
 				class compatibleItems {
 					TMR_acc_bipod = 0;
 				};
@@ -821,7 +832,7 @@ class CfgWeapons {
 	};
 	class arifle_Mk20_GL_F : mk20_base_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class TMR_AccessoryRail_Rifle_Base {
+			class asdg_FrontSideRail_MK20 : asdg_FrontSideRail {
 				class compatibleItems {
 					TMR_acc_bipod = 0;
 				};
