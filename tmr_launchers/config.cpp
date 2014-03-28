@@ -16,7 +16,7 @@ class CfgPatches {
 class CfgMods {
 	class tmr_launchers {
 		dir = "tmr_launchers";
-		name = "TMR: Launchers Tweak Module";
+		name = "TMR: Launchers Module";
 		picture = "";
 		hidePicture = "true";
 		hideName = "true";
