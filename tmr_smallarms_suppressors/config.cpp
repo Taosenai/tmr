@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core, tmr_smallarms};
+		requiredAddons[] = {tmr_core, tmr_smallarms};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -35,16 +35,11 @@ class Mode_SemiAuto;
 class Mode_Burst;
 class Mode_FullAuto;
 
-class CfgWeapons {
-	class SlotInfo;
+class SlotInfo;
 
-	class Rifle;
-	class Rifle_Base_F : Rifle {
-		class WeaponSlotsInfo;
-	};
-	class Rifle_Long_Base_F : Rifle_Base_F {
-		class WeaponSlotsInfo : WeaponSlotsInfo {};
-	};
+class CfgWeapons {
+	class Rifle_Base_F;
+	class Rifle_Long_Base_F;
 
 
 	///////////////////////////////////////////////////////////////////////////////

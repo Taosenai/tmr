@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core};
+		requiredAddons[] = {tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -146,12 +146,12 @@ class CfgMagazines {
 		initSpeed = 911; // Initial MV for a 16" barrel
 	};
 
-	class 20Rnd_762x51_Mag: CA_Magazine {
+	class 20Rnd_762x51_Mag : CA_Magazine {
 		initSpeed = 792; // 18" M14 EBR barrel
 		ammo = "TMR_B_762x51_M118LR"; // Use M118LR
 	};
 
-	class 10Rnd_762x51_Mag: CA_Magazine {
+	class 10Rnd_762x51_Mag : 20Rnd_762x51_Mag {
 		initSpeed = 850; // VS-121 24" barrel
 		ammo = "TMR_B_762x51_M118LR"; // Use M118LR
 	};
@@ -169,7 +169,7 @@ class CfgMagazines {
 		// Maybe they are shooting some heavier bullet and not saying.
 	};
 
-	class 16Rnd_9x21_Mag : CA_Magazine {
+	class 16Rnd_9x21_Mag : 30Rnd_9x21_Mag {
 		ammo = "B_9x19_Ball";
 		// M9 initial MV. Close enough for horseshoes and handguns.
 		initSpeed = 381;
@@ -183,7 +183,7 @@ class CfgMagazines {
 		initSpeed = 523; // 6" Rhino 60DS .357
 	};
 
-	class 30Rnd_45ACP_Mag_SMG_01 : CA_Magazine {
+	class 30Rnd_45ACP_Mag_SMG_01 : 30Rnd_9x21_Mag {
 		initSpeed = 259; // From Vector manual (5.5" barrel)
 	};
 

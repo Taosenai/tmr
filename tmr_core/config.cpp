@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_UI_F, CBA_XEH, CBA_MAIN, tmr_language};
+		requiredAddons[] = {"A3_Weapons_F", "A3_Data_F", "A3_UI_F", CBA_XEH, CBA_MAIN, tmr_language};
 		version = 0.2.3;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -67,19 +67,17 @@ class TMR_OpticsRail_Pistol: TMR_SlotInfo {
 class CfgWeapons {
 	class RifleCore;
 	class Rifle : RifleCore {
-		class WeaponSlotsInfo;
-	};
-
-	class Rifle_Base_F : Rifle {
-		class WeaponSlotsInfo : WeaponSlotsInfo {
+		class WeaponSlotsInfo {
 			class TMR_AccessoryRail_Rifle_Base : TMR_AccessoryRail_Rifle {};
 			class TMR_OpticsRail_Rifle_Base : TMR_OpticsRail_Rifle {};
 		};
 	};
-
-	class Rifle_Long_Base_F : Rifle_Base_F {
-		class WeaponSlotsInfo : WeaponSlotsInfo {};
-	};
+	// class Rifle_Base_F : Rifle {
+	// 	class WeaponSlotsInfo : WeaponSlotsInfo {
+	// 		class TMR_AccessoryRail_Rifle_Base : TMR_AccessoryRail_Rifle {};
+	// 		class TMR_OpticsRail_Rifle_Base : TMR_OpticsRail_Rifle {};
+	// 	};
+	// };
 };
 
 //////////////////////////////////

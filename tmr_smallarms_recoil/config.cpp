@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, "A3_Anims_F", tmr_core, tmr_smallarms};
+		requiredAddons[] = {tmr_core, tmr_smallarms};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -226,7 +226,7 @@ class CfgWeapons {
 
 	class arifle_MX_SW_F : arifle_MX_Base_F {
 		tmr_smallarms_recoil_shakeMultiplier = 0.95;
-		class Single : Single {
+		class Single : Mode_SemiAuto {
 			recoil = "tmr_smallarms_recoil_single_mx";
 			recoilProne = "tmr_smallarms_recoil_single_prone_mx";
 		};
@@ -265,12 +265,12 @@ class CfgWeapons {
 
 	class arifle_Mk20C_F : mk20_base_F {
 		tmr_smallarms_recoil_shakeMultiplier = 0.9;
-		class Single : Mode_SemiAuto {
+		class Single : Single {
 			recoil = "tmr_smallarms_recoil_single_mk20";
 			recoilProne = "tmr_smallarms_recoil_single_prone_mk20";
 		};
 		
-		class FullAuto : Mode_FullAuto {
+		class FullAuto : FullAuto {
 			recoil = "tmr_smallarms_recoil_auto_mk20";
 			recoilProne = "tmr_smallarms_recoil_auto_prone_mk20";
 		};
