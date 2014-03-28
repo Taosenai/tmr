@@ -64,130 +64,128 @@ tmr_optics_fnc_hideScope = {
 // Fired EH: Animate the scope and reticle on firing.
 // -------------------------------------------------------------------------------
 tmr_optics_fnc_scopeRecoil_firedEH = {
-	_this spawn {
-		// [unit, weapon, muzzle, mode, ammo, magazine, projectile]
-		if (_this select 0 != player) exitwith {}; // Sanity check
-			
-		_weaponType = _this select 1;
+	// [unit, weapon, muzzle, mode, ammo, magazine, projectile]
+	if (_this select 0 != player) exitwith {}; // Sanity check
+		
+	_weaponType = _this select 1;
 
-		_config = configFile >> "CfgWeapons" >> _weaponType;
-		_recoilMulti = getNumber (_config >> "tmr_smallarms_recoil_shakeMultiplier"); // Will be 0 if undefined
+	_config = configFile >> "CfgWeapons" >> _weaponType;
+	_recoilMulti = getNumber (_config >> "tmr_smallarms_recoil_shakeMultiplier"); // Will be 0 if undefined
 
-		if (_recoilMulti == 0) then {
-			_recoilMulti = 1;
-		};
-		if (_recoilMulti > 2.6) then {
-			_recoilMulti = 2.6; // Don't get too high
-		};
-
-		// Reduce the reticle movement as the player drops into lower, supported stances.
-		_detectStance = (player selectionPosition "Neck" select 2);
-		if (_detectStance < 1.3) then {
-			_recoilMulti = _recoilMulti - 0.10;
-		};
-		if (_detectStance < 0.7) then {
-			_recoilMulti = _recoilMulti - 0.20;
-		};
-
-		// Reduce reticle movement if the player is rested (tmr_autorest).
-		if (player getVariable ["tmr_autorest_rested", false]) then {
-			_recoilMulti = _recoilMulti - 0.20;
-		};
-
-		// Reduce reticle movement if the player is deployed (tmr_autorest).
-		if (player getVariable ["tmr_autorest_deployed", false]) then {
-			_recoilMulti = _recoilMulti - 0.30;
-		};	
-
-		// Constants which determine how the scope recoils
-		_recoilScope = 0.03 * _recoilMulti + random 0.0015;
-		_recoilRing = 0.03 * _recoilMulti + random 0.0015;
-
-		_randomScopeShiftX = 0.005 * _recoilMulti - random 0.011;
-
-		_randomReticleShiftX = 0.0036 * _recoilMulti + random 0.0045; // Always tend up and right;
-		_randomReticleShiftY = -0.0046 * _recoilMulti - random 0.0055;
-
-		/////////
-		// Center everything
-
-		// getResolution select 4 should return the aspect ratio, but it's totally wrong
-		// for triple head displays. We'll compute it manually.
-		_aspectRatio = (getResolution select 0) / (getResolution select 1);
-
-		_reticleX = (SafeZoneXAbs + SafeZoneWAbs/2 - (SafeZoneWAbs / _aspectRatio)/2);
-		_reticleY = SafeZoneY;
-		_reticleW = SafeZoneWAbs / _aspectRatio;
-		_reticleH = SafeZoneH;
-
-		// Reticle
-		(TMR_SCOPECTRL 1) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
-		// Reticle night (illum)
-		(TMR_SCOPECTRL 2) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
-
-		_bodyX = (SafeZoneXAbs + SafeZoneWAbs/2 - (SafeZoneWAbs / _aspectRatio));
-		_bodyY = SafeZoneY - (SafeZoneH/2);
-		_bodyW = SafeZoneWAbs / _aspectRatio * 2;
-		_bodyH = SafeZoneH * 2; 
-
-		// Body night
-		(TMR_SCOPECTRL 5) ctrlSetPosition [_bodyX, _bodyY, _bodyW, _bodyH];
-		// Body
-		(TMR_SCOPECTRL 6) ctrlSetPosition [_bodyX, _bodyY, _bodyW, _bodyH];
-
-		_centerDelay = 0.01;
-		(TMR_SCOPECTRL 1) ctrlCommit _centerDelay; 
-		(TMR_SCOPECTRL 2) ctrlCommit _centerDelay; 
-		(TMR_SCOPECTRL 5) ctrlCommit _centerDelay; 
-		(TMR_SCOPECTRL 6) ctrlCommit _centerDelay; 
-
-		/////////
-		// Create and commit recoil effect
-
-		// Move reticle
-
-		(TMR_SCOPECTRL 1) ctrlSetPosition [_reticleX - (_recoilScope/2) + _randomReticleShiftX, _reticleY - (_recoilScope/2) + _randomReticleShiftY, _reticleW + _recoilScope, _reticleH + _recoilScope]; 
-		(TMR_SCOPECTRL 2) ctrlSetPosition [_reticleX - (_recoilScope/2) + _randomReticleShiftX, _reticleY - (_recoilScope/2) + _randomReticleShiftY, _reticleW + _recoilScope, _reticleH + _recoilScope]; 
-
-		// Move body
-
-		(TMR_SCOPECTRL 5) ctrlSetPosition [_bodyX - (_recoilScope/2) + _randomScopeShiftX, _bodyY - (_recoilScope/2), _bodyW + _recoilScope, _bodyH + _recoilScope]; 
-		(TMR_SCOPECTRL 6) ctrlSetPosition [_bodyX - (_recoilScope/2) + _randomScopeShiftX, _bodyY - (_recoilScope/2), _bodyW + _recoilScope, _bodyH + _recoilScope]; 
-
-		_recoilDelay = 0.036;
-		_fa = false;
-		_cwm = currentWeaponMode player;
-		if (_cwm == "FullAuto" || _cwm == "manual" || _cwm == "Burst") then {
-			_recoilDelay =  getNumber (_config >> _cwm >> "reloadTime")/2.2;
-			_fa = true;
-		};
-		(TMR_SCOPECTRL 1) ctrlCommit _recoilDelay; 
-		(TMR_SCOPECTRL 2) ctrlCommit _recoilDelay; 
-		(TMR_SCOPECTRL 5) ctrlCommit _recoilDelay; 
-		(TMR_SCOPECTRL 6) ctrlCommit _recoilDelay; 
-
-		//////////////
-
-		waituntil {sleep 0.01; ctrlCommitted (TMR_SCOPECTRL 6)};
-
-		//////////////
-
-		//////
-		// Bring them all back
-		(TMR_SCOPECTRL 1) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
-		(TMR_SCOPECTRL 2) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
-		(TMR_SCOPECTRL 5) ctrlSetPosition [_bodyX, _bodyY, _bodyW, _bodyH];
-		(TMR_SCOPECTRL 6) ctrlSetPosition [_bodyX, _bodyY, _bodyW, _bodyH];	
-
-		_recenterDelay = 0.09;
-		if (_fa) then {
-			_recenterDelay =  getNumber (_config >> _cwm >> "reloadTime")/2.2;
-		};
-		(TMR_SCOPECTRL 1) ctrlCommit _recenterDelay; 
-		(TMR_SCOPECTRL 2) ctrlCommit _recenterDelay;
-		(TMR_SCOPECTRL 5) ctrlCommit _recenterDelay;
-		(TMR_SCOPECTRL 6) ctrlCommit _recenterDelay;
+	if (_recoilMulti == 0) then {
+		_recoilMulti = 1;
 	};
+	if (_recoilMulti > 2.6) then {
+		_recoilMulti = 2.6; // Don't get too high
+	};
+
+	// Reduce the reticle movement as the player drops into lower, supported stances.
+	_detectStance = (player selectionPosition "Neck" select 2);
+	if (_detectStance < 1.3) then {
+		_recoilMulti = _recoilMulti - 0.10;
+	};
+	if (_detectStance < 0.7) then {
+		_recoilMulti = _recoilMulti - 0.20;
+	};
+
+	// Reduce reticle movement if the player is rested (tmr_autorest).
+	if (player getVariable ["tmr_autorest_rested", false]) then {
+		_recoilMulti = _recoilMulti - 0.20;
+	};
+
+	// Reduce reticle movement if the player is deployed (tmr_autorest).
+	if (player getVariable ["tmr_autorest_deployed", false]) then {
+		_recoilMulti = _recoilMulti - 0.30;
+	};	
+
+	// Constants which determine how the scope recoils
+	_recoilScope = 0.03 * _recoilMulti + random 0.0015;
+	_recoilRing = 0.03 * _recoilMulti + random 0.0015;
+
+	_randomScopeShiftX = 0.005 * _recoilMulti - random 0.011;
+
+	_randomReticleShiftX = 0.0036 * _recoilMulti + random 0.0045; // Always tend up and right;
+	_randomReticleShiftY = -0.0046 * _recoilMulti - random 0.0055;
+
+	/////////
+	// Center everything
+
+	// getResolution select 4 should return the aspect ratio, but it's totally wrong
+	// for triple head displays. We'll compute it manually.
+	_aspectRatio = (getResolution select 0) / (getResolution select 1);
+
+	_reticleX = (SafeZoneXAbs + SafeZoneWAbs/2 - (SafeZoneWAbs / _aspectRatio)/2);
+	_reticleY = SafeZoneY;
+	_reticleW = SafeZoneWAbs / _aspectRatio;
+	_reticleH = SafeZoneH;
+
+	// Reticle
+	(TMR_SCOPECTRL 1) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
+	// Reticle night (illum)
+	(TMR_SCOPECTRL 2) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
+
+	_bodyX = (SafeZoneXAbs + SafeZoneWAbs/2 - (SafeZoneWAbs / _aspectRatio));
+	_bodyY = SafeZoneY - (SafeZoneH/2);
+	_bodyW = SafeZoneWAbs / _aspectRatio * 2;
+	_bodyH = SafeZoneH * 2; 
+
+	// Body night
+	(TMR_SCOPECTRL 5) ctrlSetPosition [_bodyX, _bodyY, _bodyW, _bodyH];
+	// Body
+	(TMR_SCOPECTRL 6) ctrlSetPosition [_bodyX, _bodyY, _bodyW, _bodyH];
+
+	_centerDelay = 0.01;
+	(TMR_SCOPECTRL 1) ctrlCommit _centerDelay; 
+	(TMR_SCOPECTRL 2) ctrlCommit _centerDelay; 
+	(TMR_SCOPECTRL 5) ctrlCommit _centerDelay; 
+	(TMR_SCOPECTRL 6) ctrlCommit _centerDelay; 
+
+	/////////
+	// Create and commit recoil effect
+
+	// Move reticle
+
+	(TMR_SCOPECTRL 1) ctrlSetPosition [_reticleX - (_recoilScope/2) + _randomReticleShiftX, _reticleY - (_recoilScope/2) + _randomReticleShiftY, _reticleW + _recoilScope, _reticleH + _recoilScope]; 
+	(TMR_SCOPECTRL 2) ctrlSetPosition [_reticleX - (_recoilScope/2) + _randomReticleShiftX, _reticleY - (_recoilScope/2) + _randomReticleShiftY, _reticleW + _recoilScope, _reticleH + _recoilScope]; 
+
+	// Move body
+
+	(TMR_SCOPECTRL 5) ctrlSetPosition [_bodyX - (_recoilScope/2) + _randomScopeShiftX, _bodyY - (_recoilScope/2), _bodyW + _recoilScope, _bodyH + _recoilScope]; 
+	(TMR_SCOPECTRL 6) ctrlSetPosition [_bodyX - (_recoilScope/2) + _randomScopeShiftX, _bodyY - (_recoilScope/2), _bodyW + _recoilScope, _bodyH + _recoilScope]; 
+
+	_recoilDelay = 0.036;
+	_fa = false;
+	_cwm = currentWeaponMode player;
+	if (_cwm == "FullAuto" || _cwm == "manual" || _cwm == "Burst") then {
+		_recoilDelay =  getNumber (_config >> _cwm >> "reloadTime")/2.2;
+		_fa = true;
+	};
+	(TMR_SCOPECTRL 1) ctrlCommit _recoilDelay; 
+	(TMR_SCOPECTRL 2) ctrlCommit _recoilDelay; 
+	(TMR_SCOPECTRL 5) ctrlCommit _recoilDelay; 
+	(TMR_SCOPECTRL 6) ctrlCommit _recoilDelay; 
+
+	//////////////
+
+	waituntil {sleep 0.01; ctrlCommitted (TMR_SCOPECTRL 6)};
+
+	//////////////
+
+	//////
+	// Bring them all back
+	(TMR_SCOPECTRL 1) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
+	(TMR_SCOPECTRL 2) ctrlSetPosition [_reticleX, _reticleY, _reticleW, _reticleH];
+	(TMR_SCOPECTRL 5) ctrlSetPosition [_bodyX, _bodyY, _bodyW, _bodyH];
+	(TMR_SCOPECTRL 6) ctrlSetPosition [_bodyX, _bodyY, _bodyW, _bodyH];	
+
+	_recenterDelay = 0.09;
+	if (_fa) then {
+		_recenterDelay =  getNumber (_config >> _cwm >> "reloadTime")/2.2;
+	};
+	(TMR_SCOPECTRL 1) ctrlCommit _recenterDelay; 
+	(TMR_SCOPECTRL 2) ctrlCommit _recenterDelay;
+	(TMR_SCOPECTRL 5) ctrlCommit _recenterDelay;
+	(TMR_SCOPECTRL 6) ctrlCommit _recenterDelay;
 };
 
 
