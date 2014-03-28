@@ -36,13 +36,17 @@ class Mode_Burst;
 class Mode_FullAuto;
 
 class CfgWeapons {
-	class WeaponSlotsInfo;
 	class SlotInfo;
-	class Rifle_Base_F;
+
+	class Rifle;
+	class Rifle_Base_F : Rifle {
+		class WeaponSlotsInfo;
+	};
+	class Rifle_Long_Base_F : Rifle_Base_F {
+		class WeaponSlotsInfo : WeaponSlotsInfo {};
+	};
 
 	class ItemCore;
-	class InventoryItem_Base_F;
-	class InventoryMuzzleItem_Base_F;
 
 	class muzzle_snds_H : ItemCore { // 6.5mm suppressor
 		displayName = "Suppressor (6.5mm MX)";
@@ -55,8 +59,8 @@ class CfgWeapons {
 	};
 
 	class muzzle_snds_acp : muzzle_snds_H { // .45 pistol suppressor
-		displayName = "Suppressor (.45 ACP Pistol)";
-		descriptionShort = "Threaded for .45 ACP pistol barrels.";
+		displayName = "Suppressor (.45 Pistol)";
+		descriptionShort = "Threaded for .45 pistol barrels.";
 	};
 
 	// Katiba gets its own threading ----------------------
@@ -134,6 +138,15 @@ class CfgWeapons {
 	// EVO gets its own threading ----------------------
 
 	class SMG_02_base_F : Rifle_Base_F {			
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			class MuzzleSlot : SlotInfo {
+				compatibleItems[] = {"tmr_muzzle_snds_L_smg"};
+			};
+		};
+	};	
+	
+	// CPW uses the SMG threading ----------------------
+	class pdw2000_base_F : Rifle_Base_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
 			class MuzzleSlot : SlotInfo {
 				compatibleItems[] = {"tmr_muzzle_snds_L_smg"};

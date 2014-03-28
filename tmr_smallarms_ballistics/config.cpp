@@ -16,7 +16,7 @@ class CfgPatches {
 class CfgMods {
 	class tmr_smallarms_ballistics {
 		dir = "tmr_smallarms_ballistics";
-		name = "TMR: Small Arms Ballistics Module";
+		name = "TMR: Small Arms - Ballistics Module";
 		picture = "";
 		hidePicture = "true";
 		hideName = "true";
@@ -322,7 +322,7 @@ class CfgWeapons {
 		};
 	};
 
-	class DMR_01_base_F: Rifle_Long_Base_F {
+	class DMR_01_base_F : Rifle_Long_Base_F {
 		// VS-121: Who knows? Some Spetsnaz dude and Izhmash plant testers.
 		class Single : Mode_SemiAuto {
 			dispersion = 0.00029; // radians. Equal to 1 MOA.

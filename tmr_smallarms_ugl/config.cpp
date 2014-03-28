@@ -195,7 +195,6 @@ class Mode_Burst;
 class Mode_FullAuto;
 
 // class CfgWeapons {
-// 	class WeaponSlotsInfo;
 // 	class SlotInfo;
 // 	class Rifle_Base_F;
 

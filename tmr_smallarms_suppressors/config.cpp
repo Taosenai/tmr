@@ -36,9 +36,15 @@ class Mode_Burst;
 class Mode_FullAuto;
 
 class CfgWeapons {
-	class WeaponSlotsInfo;
 	class SlotInfo;
-	class Rifle_Base_F;
+
+	class Rifle;
+	class Rifle_Base_F : Rifle {
+		class WeaponSlotsInfo;
+	};
+	class Rifle_Long_Base_F : Rifle_Base_F {
+		class WeaponSlotsInfo : WeaponSlotsInfo {};
+	};
 
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -130,60 +136,14 @@ class CfgWeapons {
 
 			class Single : Mode_SemiAuto {
 				reloadTime = 0.0541; // Default 0.0545
-
-				// SOUND MOD ALERT
-				begin1[] = {"A3\sounds_f\weapons\silenced\silent-07", 1.0, 1, 600};
-				begin2[] = {"A3\sounds_f\weapons\silenced\silent-08", 1.0, 1, 600};
-				soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
-				closure1[] = {"A3\sounds_f\weapons\closure\closure_rifle_7", 1.0, 1, 200};
-				closure2[] = {"A3\sounds_f\weapons\closure\closure_rifle_6", 1.0, 1, 200};
-				soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
-				weaponSoundEffect = "DefaultHandgun";
 			};
 
 			class Burst : Mode_Burst {
 				reloadTime = 0.0541; // Default 0.0545
-
-				// SOUND MOD ALERT
-				begin1[] = {"A3\sounds_f\weapons\silenced\silent-07", 1.0, 1, 600};
-				begin2[] = {"A3\sounds_f\weapons\silenced\silent-08", 1.0, 1, 600};
-				soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
-				closure1[] = {"A3\sounds_f\weapons\closure\closure_rifle_7", 1.0, 1, 200};
-				closure2[] = {"A3\sounds_f\weapons\closure\closure_rifle_6", 1.0, 1, 200};
-				soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
-				weaponSoundEffect = "DefaultHandgun";
-
-				minRange = 10;
-				minRangeProbab = 0.3;
-				midRange = 20;
-				midRangeProbab = 0.7;
-				maxRange = 40;
-				maxRangeProbab = 0.05;
-				aiRateOfFire = 1.0;	
-				aiRateOfFireDistance = 80;
 			};
 			
 			class FullAuto : Mode_FullAuto {
 				reloadTime = 0.0541; // Default 0.0545
-
-
-				// SOUND MOD ALERT
-				begin1[] = {"A3\sounds_f\weapons\silenced\silent-07", 1.0, 1, 600};
-				begin2[] = {"A3\sounds_f\weapons\silenced\silent-08", 1.0, 1, 600};
-				soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
-				closure1[] = {"A3\sounds_f\weapons\closure\closure_rifle_7", 1.0, 1, 200};
-				closure2[] = {"A3\sounds_f\weapons\closure\closure_rifle_6", 1.0, 1, 200};
-				soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
-				weaponSoundEffect = "DefaultHandgun";
-
-				minRange = 0;
-				minRangeProbab = 0.3;
-				midRange = 10;
-				midRangeProbab = 0.7;
-				maxRange = 20;
-				maxRangeProbab = 0.05;
-				aiRateOfFire = 0.3;
-				aiRateOfFireDistance = 40;
 			};
 		};
 	};
@@ -267,6 +227,7 @@ class CfgWeapons {
 
 		class ItemInfo : ItemInfo {
 			mass = 5.5;
+
 			class MagazineCoef {
 				initSpeed = 1;
 			};
@@ -282,40 +243,27 @@ class CfgWeapons {
 				airFriction = 1.0;
 			};
 
-			modes[] = {"manual", "single", "close", "short", "medium", "far_optic1", "far_optic2"};
+			modes[] = {"manual", "Single", "close", "short", "medium", "far_optic1", "far_optic2"};
 
-
-			class Single : Mode_SemiAuto {
-				reloadTime = 0.071; // Default 0.075
-				dispersion = 0.00093;
-				// SOUND MOD ALERT
-				begin1[] = {"A3\sounds_f\weapons\silenced\silent-25", 1.0, 1, 600};
-				begin2[] = {"A3\sounds_f\weapons\silenced\silent-26", 1.0, 1, 600};
-				soundBegin[] = {"begin1", 0.5, "begin2", 0.5};
-				closure1[] = {"A3\sounds_f\weapons\closure\closure_rifle_2", 1.0, 1, 200};
-				closure2[] = {"A3\sounds_f\weapons\closure\closure_rifle_3", 1.0, 1, 200};
-				soundClosure[] = {"closure1", 0.5, "closure2", 0.5};
-				weaponSoundEffect = "DefaultRifle";
-				soundContinuous = 0;
-				soundBurst = 0;
-				minRange = 0;
-				minRangeProbab = 0.3;
-				midRange = 5;
-				midRangeProbab = 0.7;
-				maxRange = 10;
-				maxRangeProbab = 0.04;
-				showToPlayer = true;
-			};
-			
 			class manual : Mode_FullAuto {
-				reloadTime = 0.071;// Default 0.075
+				reloadTime = 0.109;
+			};
+
+			class Single : manual {
+				reloadTime = 0.109;
+				dispersion = 0.00175; // radians. Equal to 6 MOA.
+				autofire = 0;
+				burst = 1;
+				displayname = "Semi";
+				texturetype = "semi";
+				showToPlayer = true;
 			};
 		};
 	};
 
 	class muzzle_snds_acp : muzzle_snds_H { // .45 pistol suppressor
-		displayName = "Suppressor (.45 ACP)";
-		descriptionShort = "Threaded for .45 ACP barrels.";
+		displayName = "Suppressor (.45)";
+		descriptionShort = "Threaded for .45 barrels.";
 
 		class ItemInfo : ItemInfo {
 			mass = 4;
@@ -354,8 +302,8 @@ class CfgWeapons {
 	};
 
 	class tmr_muzzle_snds_acp_smg : muzzle_snds_acp {
-		displayName = "Suppressor (.45 ACP SMG)";
-		descriptionShort = "Threaded for .45 ACP SMG barrels.";
+		displayName = "Suppressor (.45 SMG)";
+		descriptionShort = "Threaded for .45 SMG barrels.";
 
 		class ItemInfo : ItemInfo {
 			mass = 4.5;
