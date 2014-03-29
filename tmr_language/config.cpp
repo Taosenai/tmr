@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {"A3_Language_F", tmr_core};
+		requiredAddons[] = {"A3_Language_F"};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";

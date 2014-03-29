@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {"TMR_acc_bipod"};
 		requiredVersion = 0.60;
-		requiredAddons[] = {tmr_core}; // asdg_jointrails
+		requiredAddons[] = {"A3_Weapons_F", "A3_Data_F", "A3_Characters_F", "A3_UI_F", tmr_core}; // asdg_jointrails
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
