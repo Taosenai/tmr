@@ -6,7 +6,7 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_Weapons_F_beta, A3_Weapons_F_gamma, A3_Weapons_F_Acc, A3_Weapons_F_Beta_Acc, A3_Characters_F, tmr_core};
+		requiredAddons[] = {tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
@@ -32,6 +32,14 @@ class CfgOpticsEffect {
 		type = "radialblur";
 		params[] = {0.019, 0.019, 0.16, 0.70};
 		priority = 950;
+	};
+};
+
+// Use ASDG Joint Rails for new optics.
+class asdg_OpticRail;
+
+class asdg_OpticRail1913 : asdg_OpticRail {
+	class compatibleItems {
 	};
 };
 
@@ -221,9 +229,34 @@ class CfgWeapons {
 		};
 	};
 
-	class optic_SOS: ItemCore {
-		descriptionshort = "Sniper Optical Sight<br />Magnification: 5.5-22x";
-		displayname = "SOS 5.5-22x";
+	class optic_Nightstalker : ItemCore {
+		class ItemInfo: InventoryOpticsItem_Base_F {
+			class OpticsModes {
+				class NCTALKEP {};
+				class Iron : NCTALKEP {
+					opticsppeffects[] = {}; // Fix Arma 3 bug
+				};
+			};
+		};
+	};
+
+	class optic_SOS : ItemCore {
+	};
+
+	class optic_DMS : ItemCore {
+		class ItemInfo: InventoryOpticsItem_Base_F {
+			class OpticsModes {
+				class Snip {};
+				class Iron : Snip {
+					opticsppeffects[] = {}; // Fix Arma 3 bug
+				};
+			};
+		};
+	};
+
+	class optic_LRPS : ItemCore {
+		descriptionshort = "Nightforce NXS Riflescope<br />Magnification: 5.5-22x";
+		displayname = "NXS 5.5-22x";
 		weaponinfotype = "RscWeaponTMR";
 
 		tmr_optics_enhanced = 1;
@@ -284,22 +317,31 @@ class CfgWeapons {
 					usemodeloptics = 1;
 					visionmode[] = {"Normal"};
 				};
-				class Iron: Snip {
-					discretefov[] = {};
-					memorypointcamera = "eye";
-					opticsdisableperipherialvision = 0;
-					opticsdisplayname = "";
-					opticsflare = 0;
-					opticsid = 2;
-					opticszoominit = 0.75;
-					opticszoommax = 1.1;
-					opticszoommin = 0.375;
-					usemodeloptics = 0;
-					visionmode[] = {};
-					opticsppeffects[] = {};
-				};
 			};
 		};
+	};
+
+	class optic_Yorris : ItemCore {
+		descriptionshort = "Burris FastFire II Red Dot Sight<br />Magnification: 1x";
+		displayname = "FastFire II";
+	};
+
+	class optic_MRD : ItemCore {
+		descriptionshort = "Eotech MRDS Red Dot Sight<br />Magnification: 1x";
+		displayname = "MRDS";
+	};
+
+	class optic_Holosight : ItemCore {
+		descriptionshort = "Eotech XPS3 Holographic Sight<br />Magnification: 1x";
+		displayname = "XPS3 Holo";
+	};
+
+	class Default;
+	class Binocular : Default {
+		// http://www.steiner-optics.com/binoculars/tactical/t42r-tactical-10x42-r
+		// descriptionshort = "Binoculars.";
+		// descriptionuse = "<t color='#9cf953'>Use: </t>Toggle Binoculars";
+		// displayname = "Binoculars";
 	};
 };
 
