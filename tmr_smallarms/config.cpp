@@ -122,7 +122,7 @@ class CfgMagazines {
 		displaynameshort = "6.5mm";
 
 		// Change default tracer color to red
-		ammo = "B_65x39_Caseless_red";
+		ammo = "B_65x39_Caseless";
 		picture = "\A3\Weapons_F\Data\UI\m_200rnd_65x39_red_ca.paa";
 
 		tracersEvery = 5;
@@ -134,7 +134,7 @@ class CfgMagazines {
 		displaynameshort = "6.5mm Tracer";
 
 		// Change default tracer color to red
-		ammo = "B_65x39_Caseless_red";
+		ammo = "B_65x39_Caseless";
 		picture = "\A3\Weapons_F\Data\UI\m_200rnd_65x39_red_ca.paa";
 
 		tracersEvery = 5;
