@@ -20,15 +20,6 @@ class Extended_PostInit_EventHandlers {
 };
 
 class CfgVehicles {
-	class Helper_Base_F;
-	class TMR_Autorest_GeoRef: Helper_Base_F {
-		accuracy = 1000;
-		displayname = "";
-		icon = "";
-		model = "\A3\Weapons_F\empty.p3d";
-		scope = 2;
-	};
-
 	class EAST_Box_Base;
 	class Box_EAST_Support_F: EAST_Box_Base {
 		class TransportItems {
@@ -686,15 +677,9 @@ class asdg_FrontSideRail : asdg_SlotInfo {
 };
 
 class CfgWeapons {
-	class RifleCore;
-	class Rifle : RifleCore {
-		class WeaponSlotsInfo;
-	};
-
+	class Rifle;
 	class Rifle_Base_F : Rifle {
-		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class asdg_FrontSideRail;
-		};
+		class WeaponSlotsInfo;
 	};
 	
 	class Rifle_Long_Base_F;
@@ -763,10 +748,11 @@ class CfgWeapons {
 	// or no forward rails.
 	///////////////////////////////////////////////////
 
+	// MX
 	class arifle_MX_GL_F : arifle_MX_Base_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
 			class asdg_FrontSideRail_MX : asdg_FrontSideRail {
-				class compatibleItems {
+				class compatibleItems : compatibleItems {
 					TMR_acc_bipod = 0;
 				};
 			};
@@ -776,52 +762,60 @@ class CfgWeapons {
 	class arifle_MXC_F : arifle_MX_Base_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
 			class asdg_FrontSideRail_MX : asdg_FrontSideRail {
-				class compatibleItems {
+				class compatibleItems : compatibleItems {
 					TMR_acc_bipod = 0;
 				};
 			};
 		};
 	};
 
+	// Katiba
 	class arifle_Katiba_Base_F : Rifle_Base_F {
 		class WeaponSlotsInfo;
 	};
 	class arifle_Katiba_GL_F : arifle_Katiba_Base_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
 			class asdg_FrontSideRail_Katiba : asdg_FrontSideRail {
-				class compatibleItems {
+				class compatibleItems : compatibleItems {
+					TMR_acc_bipod = 0;
+				};
+			};
+		};
+	};
+	class arifle_Katiba_C_F : arifle_Katiba_Base_F {
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			class asdg_FrontSideRail_Katiba : asdg_FrontSideRail {
+				class compatibleItems : compatibleItems {
 					TMR_acc_bipod = 0;
 				};
 			};
 		};
 	};
 
-	// class Tavor_base_F : Rifle_Base_F {
-	// 	class WeaponSlotsInfo;
-	// };
+	// Tavor
+	class Tavor_base_F;
+	class arifle_TRG21_F : Tavor_base_F {
+		class WeaponSlotsInfo;
+	};
 
-	// class arifle_TRG21_F : Tavor_base_F {
-	// 	class WeaponSlotsInfo : WeaponSlotsInfo {
-	// 		class TMR_AccessoryRail_Rifle_Base;
-	// 	};
-	// };
-	// class arifle_TRG21_GL_F : arifle_TRG21_F {
-	// 	class WeaponSlotsInfo : WeaponSlotsInfo {
-	// 		class asdg_FrontSideRail_Tavor : asdg_FrontSideRail {
-	// 			class compatibleItems {
-	// 				TMR_acc_bipod = 0;
-	// 			};
-	// 		};
-	// 	};
-	// };
+	class arifle_TRG21_GL_F : arifle_TRG21_F {
+		class WeaponSlotsInfo : WeaponSlotsInfo {
+			class asdg_FrontSideRail_Tavor : asdg_FrontSideRail {
+				class compatibleItems : compatibleItems {
+					TMR_acc_bipod = 0;
+				};
+			};
+		};
+	};
 
+	// Mk20
 	class mk20_base_F : Rifle_Base_F {
 		class WeaponSlotsInfo;
 	};
 	class arifle_Mk20_GL_F : mk20_base_F {
 		class WeaponSlotsInfo : WeaponSlotsInfo {
 			class asdg_FrontSideRail_MK20 : asdg_FrontSideRail {
-				class compatibleItems {
+				class compatibleItems : compatibleItems {
 					TMR_acc_bipod = 0;
 				};
 			};

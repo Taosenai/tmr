@@ -3,6 +3,10 @@
 
 tmr_autorest = false;
 
+// Get rsc layers
+tmr_autorest_rscLayer_rested = ["TMR_Autorest_Rested"] call BIS_fnc_rscLayer;
+tmr_autorest_rscLayer_deployed = ["TMR_Autorest_Deployed"] call BIS_fnc_rscLayer;
+
 // Set global variables
 tmr_autorest_restIconDisplayed = false;
 tmr_autorest_restIconTransition = false;
@@ -13,7 +17,7 @@ tmr_autorest_deployIconTransition = false;
 tmr_autorest_bipodItems = ["TMR_acc_bipod", "ASDG_Atlis"];
 
 #define TMR_AUTOREST_RESTEDRECOIL 0.7
-#define TMR_AUTOREST_DEPLOYEDRECOIL 0.49
+#define TMR_AUTOREST_DEPLOYEDRECOIL 0.5
 
 #define TMR_AUTOREST_CAMSHAKE [1,0.5,6]
 
@@ -65,14 +69,11 @@ tmr_autorest_fnc_deployKeyDownEH = {
 		if !(_playerAnimState in _allowedAnimStates) exitWith {false};
 
 		// Check if the bipod area intersects with something or the ground.
-		_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
-		_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
-		_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
-		_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
+		_checkRests = [true] call tmr_autorest_fnc_canRest;
+		_canRest = _checkRests select 0;
+		_canBipod = _checkRests select 1;
 
-		_bipodAligned = count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck;
-
-		if ((_canDeployCfg == 1 || _canDeployItem) && _bipodAligned) then {
+		if ((_canDeployCfg == 1 || _canDeployItem) && _canBipod) then {
 			_return = true;
 
 			// End rest state before deploying.
@@ -87,19 +88,14 @@ tmr_autorest_fnc_deployKeyDownEH = {
 			[_bipodName] spawn {
 				_bipodName = _this select 0;
 				while {player getVariable ["tmr_autorest_deployed", false]} do {
-					sleep 0.5;
+					sleep 0.6;
 					_playerAnimState = animationState player;
 
 					// Check if the bipod area intersects with something or the ground.
-					_frontCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint8, tmr_autorest_refPoint7, tmr_autorest_refPoint8];
-					_rearCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint8, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint8, tmr_autorest_refPoint9];
-					_bottomCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9, tmr_autorest_refPoint7, tmr_autorest_refPoint9];
-					_terrainCheck  = terrainIntersectASL [getposASL tmr_autorest_refPoint7, getposASL tmr_autorest_refPoint9];
-
-					_intersectCheck = (count _frontCheck > 0 || count _rearCheck > 0 || count _bottomCheck > 0 || _terrainCheck);
+					_canBipod = ([true] call tmr_autorest_fnc_canRest) select 1;
 
 					// If we intersect with nothing or if we left the deploy animation
-					if (!_intersectCheck || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
+					if (!_canBipod || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
 						// Undeploy the weapon.
 						[_bipodName] call tmr_autorest_fnc_undeployWeapon;
 					};
@@ -115,7 +111,7 @@ tmr_autorest_fnc_deployKeyDownEH = {
 				[] spawn {
 					while {player getVariable ["tmr_autorest_hardrested", false]} do {
 						_oldDirection = direction player;
-						sleep 0.5;
+						sleep 0.6;
 						_playerAnimState = animationState player;
 
 						// Recheck rest possibility if player direction changed by more than
@@ -123,11 +119,9 @@ tmr_autorest_fnc_deployKeyDownEH = {
 						_dirChanged = false;
 						if (abs (direction player - _oldDirection) > 2) then {
 							// Check if the weapon geo references intersect with something.
-							_centerCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint1, getposASL tmr_autorest_refPoint2, tmr_autorest_refPoint1, tmr_autorest_refPoint2];
-							_leftCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint3, getposASL tmr_autorest_refPoint4, tmr_autorest_refPoint3, tmr_autorest_refPoint4];
-							_rightCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint5, getposASL tmr_autorest_refPoint6, tmr_autorest_refPoint5, tmr_autorest_refPoint6];
+							_canRest = ([] call tmr_autorest_fnc_canRest) select 0;
 
-							if (count _centerCheck > 0 || count _leftCheck > 0 || count _rightCheck > 0) then {
+							if (!_canRest) then {
 								_dirChanged = true;
 							}
 						};
@@ -158,7 +152,7 @@ tmr_autorest_fnc_deployWeapon = {
 
 	if (!tmr_autorest_deployIconDisplayed) then {
 		tmr_autorest_deployIconDisplayed = true;
-		1599 cutRsc ["TMR_Autorest_Deployed", "PLAIN"];
+		tmr_autorest_rscLayer_deployed cutRsc ["TMR_Autorest_Deployed", "PLAIN"];
 		((uiNameSpace getVariable "TMR_Autorest_Deployed") displayCtrl 1) ctrlSetFade 0.3;
 		((uiNameSpace getVariable "TMR_Autorest_Deployed") displayCtrl 1) ctrlCommit 0.5;
 	};
@@ -260,7 +254,7 @@ tmr_autorest_fnc_unHardRestWeapon = {
 tmr_autorest_fnc_restWeapon = {
 	if (!tmr_autorest_restIconDisplayed) then {
 		tmr_autorest_restIconDisplayed = true;
-		1598 cutRsc ["TMR_Autorest_Rested", "PLAIN"];
+		tmr_autorest_rscLayer_rested cutRsc ["TMR_Autorest_Rested", "PLAIN"];
 		((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlSetFade 0.3;
 		((uiNameSpace getVariable "TMR_Autorest_Rested") displayCtrl 1) ctrlCommit 0.5;
 	};
@@ -268,13 +262,13 @@ tmr_autorest_fnc_restWeapon = {
 	player setVariable ["tmr_autorest_rested", true, false];
 };
 
-
 // -------------------------------------------------------------------------------
 // Remove the weapon rest characteristics from the player.
 // -------------------------------------------------------------------------------
 tmr_autorest_fnc_unrestWeapon = {
 	player setUnitRecoilCoefficient 1;
 	player setVariable ["tmr_autorest_rested", false, false];
+
 	if (tmr_autorest_restIconDisplayed && !tmr_autorest_restIconTransition) then {
 		[] spawn {
 			tmr_autorest_restIconTransition = true;
@@ -288,70 +282,95 @@ tmr_autorest_fnc_unrestWeapon = {
 };
 
 // -------------------------------------------------------------------------------
-// Create our geometry references.
+// Test
 // -------------------------------------------------------------------------------
-tmr_autorest_fnc_createRefPoints = {
-	_model = "TMR_Autorest_GeoRef";
+// tmr_autorest_fnc_debugPoints = {
+// 	if (isNil "tmr_autorest_debug1") then {
+// 		tmr_autorest_debug1 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 		tmr_autorest_debug2 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 		tmr_autorest_debug3 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 		tmr_autorest_debug4 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 		tmr_autorest_debug5 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 		tmr_autorest_debug6 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 		tmr_autorest_debug7 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 		tmr_autorest_debug8 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 		tmr_autorest_debug9 = createVehicle ["Sign_Sphere25cm_F", position player, [], 0, "NONE"];
+// 	};
 
-	tmr_autorest_refPoint1 = _model createVehicle position player; 
-	tmr_autorest_refPoint2 = _model createVehicle position player;  
+// 	_lh = player selectionPosition "LeftHand";
+// 	_rh = player selectionPosition "RightHand";
+// 	// Weapon ref points
+// 	_refPoint1 = player modelToWorld [(_lh select 0), (_lh select 1) + 0.52, (_lh select 2) - 0.135];
+// 	_refPoint2 = player modelToWorld [(_rh select 0), (_rh select 1) - 0.3, (_rh select 2) - 0.4];
+// 	_refPoint3 = player modelToWorld [(_lh select 0) + 0.17, (_lh select 1) + 0.52, (_lh select 2) - 0.135];
+// 	_refPoint4 = player modelToWorld [(_rh select 0) + 0.17, (_rh select 1) - 0.3, (_rh select 2) - 0.4];
+// 	_refPoint5 = player modelToWorld [(_lh select 0) - 0.17, (_lh select 1) + 0.52, (_lh select 2) - 0.135];
+// 	_refPoint6 = player modelToWorld [(_rh select 0) - 0.17, (_rh select 1) - 0.3, (_rh select 2) - 0.4];
+// 	_refPoint7 = player modelToWorld  [(_rh select 0), (_rh select 1) + 0.45, (_rh select 2) - 0.02];
+// 	_refPoint8 = player modelToWorld  [(_rh select 0), (_rh select 1) + 0.1, (_rh select 2) - 0.57];
+// 	_refPoint9 = player modelToWorld  [(_rh select 0), (_rh select 1) + 0.65, (_rh select 2) - 0.57];
 
-	tmr_autorest_refPoint3 = _model createVehicle position player;  
-	tmr_autorest_refPoint4 = _model createVehicle position player;  
+// 	tmr_autorest_debug1 setPos _refPoint1;
+// 	tmr_autorest_debug2 setPos _refPoint2;
+// 	tmr_autorest_debug3 setPos _refPoint3;
+// 	tmr_autorest_debug4 setPos _refPoint4;
+// 	tmr_autorest_debug5 setPos _refPoint5;
+// 	tmr_autorest_debug6 setPos _refPoint6;
+// 	tmr_autorest_debug7 setPos _refPoint7;
+// 	tmr_autorest_debug8 setPos _refPoint8;
+// 	tmr_autorest_debug9 setPos _refPoint9;
 
-	tmr_autorest_refPoint5 = _model createVehicle position player;  
-	tmr_autorest_refPoint6 = _model createVehicle position player;  
+// };
 
-	tmr_autorest_refPoint7 = _model createVehicle position player;  
-	tmr_autorest_refPoint8 = _model createVehicle position player; 
-	tmr_autorest_refPoint9 = _model createVehicle position player; 
+// -------------------------------------------------------------------------------
+// Check if weapon is rested. Returns an array [canRest?, canBipod?]
+// Bipod is only tested if called with a parameter.
+// -------------------------------------------------------------------------------
+tmr_autorest_fnc_canRest = {
+	_bipodCheck = false;
+	if (count _this > 0) then { _bipodCheck = true };
+
+	// This works, but let's make it more performant!
+	// _lh = player selectionPosition "LeftHand";
+	// _rh = player selectionPosition "RightHand";
+	// // Weapon ref points
+	// _canRest = false;
+	// _refPoint1 = ATLtoASL (player modelToWorld [(_lh select 0), (_lh select 1) + 0.52, (_lh select 2) - 0.135]);
+	// _refPoint2 = ATLtoASL (player modelToWorld [(_rh select 0), (_rh select 1) - 0.3, (_rh select 2) - 0.4]);
+	// _refPoint3 = ATLtoASL (player modelToWorld [(_lh select 0) + 0.17, (_lh select 1) + 0.52, (_lh select 2) - 0.135]);
+	// _refPoint4 = ATLtoASL (player modelToWorld [(_rh select 0) + 0.17, (_rh select 1) - 0.3, (_rh select 2) - 0.4]);
+	// _refPoint5 = ATLtoASL (player modelToWorld [(_lh select 0) - 0.17, (_lh select 1) + 0.52, (_lh select 2) - 0.135]);
+	// _refPoint6 = ATLtoASL (player modelToWorld [(_rh select 0) - 0.17, (_rh select 1) - 0.3, (_rh select 2) - 0.4]);
+
+	// _canRest = (count (lineIntersectsWith [_refPoint1, _refPoint2]) > 0 || count (lineIntersectsWith [_refPoint3, _refPoint4]) > 0 || count (lineIntersectsWith [_refPoint5, _refPoint6]) > 0);
+
+
+	// Saves 0.006 ms per check!
+	_lh = ATLtoASL (player modelToWorld (player selectionPosition "LeftHand"));
+	_rh = ATLtoASL (player modelToWorld (player selectionPosition "LeftHand"));
+
+	_refPoint1 = [(_lh select 0), (_lh select 1) + 0.52, (_lh select 2) - 0.135];
+	_refPoint2 = [(_rh select 0), (_rh select 1) - 0.3, (_rh select 2) - 0.4];
+	_refPoint3 = [(_lh select 0) + 0.17, (_lh select 1) + 0.52, (_lh select 2) - 0.135];
+	_refPoint4 = [(_rh select 0) + 0.17, (_rh select 1) - 0.3, (_rh select 2) - 0.4];
+	_refPoint5 = [(_lh select 0) - 0.17, (_lh select 1) + 0.52, (_lh select 2) - 0.135];
+	_refPoint6 = [(_rh select 0) - 0.17, (_rh select 1) - 0.3, (_rh select 2) - 0.4];
+
+	_canRest = (count (lineIntersectsWith [_refPoint1, _refPoint2]) > 0 || count (lineIntersectsWith [_refPoint3, _refPoint4]) > 0 || count (lineIntersectsWith [_refPoint5, _refPoint6]) > 0);
+
+	// Bipod refpoints
+	_canBipod = objNull;
+	if (_bipodCheck) then {
+		_refPoint7 = [(_rh select 0), (_rh select 1) + 0.45, (_rh select 2) - 0.02];
+		_refPoint8 = [(_rh select 0), (_rh select 1) + 0.1, (_rh select 2) - 0.57];
+		_refPoint9 = [(_rh select 0), (_rh select 1) + 0.65, (_rh select 2) - 0.57];
+
+		_canBipod = (count (lineIntersectsWith [_refPoint7, _refPoint8]) > 0 || count (lineIntersectsWith [_refPoint8, _refPoint9]) > 0 || count (lineIntersectsWith [_refPoint7, _refPoint9]) > 0 || terrainIntersectASL [_refPoint7, _refPoint9]);
+	};
+
+	// Return array
+	[_canRest, _canBipod];
 };
-
-// -------------------------------------------------------------------------------
-// Attach our geometry references.
-// -------------------------------------------------------------------------------
-tmr_autorest_fnc_attachRefPoints = {
-	detach tmr_autorest_refPoint1;
-	detach tmr_autorest_refPoint2;
-	detach tmr_autorest_refPoint3;
-	detach tmr_autorest_refPoint4;
-	detach tmr_autorest_refPoint5;
-	detach tmr_autorest_refPoint6;
-	detach tmr_autorest_refPoint7;
-	detach tmr_autorest_refPoint8;
-	detach tmr_autorest_refPoint9;
-
-	tmr_autorest_refPoint1 attachTo [player, [0,0.52,-0.135], "LeftHand"]; 
-	tmr_autorest_refPoint2 attachTo [player, [0,-0.3,-0.40], "RightHand"]; 
-
-	tmr_autorest_refPoint3 attachTo [player, [0.145,0.52,-0.135], "LeftHand"]; 
-	tmr_autorest_refPoint4 attachTo [player, [0.145,-0.3,-0.40], "RightHand"]; 
-
-	tmr_autorest_refPoint5 attachTo [player, [-0.145,0.52,-0.135], "LeftHand"]; 
-	tmr_autorest_refPoint6 attachTo [player, [-0.145,-0.3,-0.40], "RightHand"]; 
-
-	tmr_autorest_refPoint7 attachTo [player, [0,0.38,-0.02], "RightHand"]; 
-	tmr_autorest_refPoint8 attachTo [player, [0,0.24,-0.57], "RightHand"]; 
-	tmr_autorest_refPoint9 attachTo [player, [0,0.57,-0.57], "RightHand"]; 
-};
-
-// -------------------------------------------------------------------------------
-// EH for respawning players.
-// -------------------------------------------------------------------------------
-tmr_autorest_fnc_respawnEH = {
-	_unit = _this select 0;
-	_corpse = _this select 1;
-
-	waituntil {sleep 0.2; alive player};
-
-	// When the player is alive, update the ref points to his new guy.
-	[] call tmr_autorest_fnc_attachRefPoints;
-};
-
-/////////////////////////////////////////////////////////////////////////////////
-
-// This local EH updates the reference points when the player respawns.
-player addEventHandler ["Respawn", {_this spawn tmr_autorest_fnc_respawnEH}];
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -364,29 +383,16 @@ tmr_autorest_endPEH = false;
 // Huge public event handler follows.
 _handle = [
 /* Code */
-{
-	// If the player unit has changed, reattach all the ref points to the new unit.
-	if (_unit != format ["%1", player]) then {
-		//player sidechat 'player changed';
-		[] call tmr_autorest_fnc_attachRefPoints;		
-	};
+{	
+	// _otherChecks = (alive player && vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player && cameraOn == player);
 
-	// Update the current player unit tracker.
-	_unit = format ["%1", player];
-
-	// Player can't be moving very much, must have rifle or launcher, and must be able to fire. Can't be in UAV (cameraOn)
-	
-	_otherChecks = (alive player && vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player && cameraOn == player);
-
+	// Player can't be moving very much, must have rifle or launcher, and must be able to fire. Can't be in UAV (cameraOn)	
 	// Also can't be deployed or hard rested.
-	if (_otherChecks && !(player getVariable ["tmr_autorest_deployed", false]) && !(player getVariable ["tmr_autorest_hardrested", false])) then {
+	if (alive player && vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player && cameraOn == player && !(player getVariable ["tmr_autorest_deployed", false]) && !(player getVariable ["tmr_autorest_hardrested", false])) then {
 
-		// Check if the weapon geo references intersect with something.
-		_centerCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint1, getposASL tmr_autorest_refPoint2, tmr_autorest_refPoint1, tmr_autorest_refPoint2];
-		_leftCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint3, getposASL tmr_autorest_refPoint4, tmr_autorest_refPoint3, tmr_autorest_refPoint4];
-		_rightCheck = lineIntersectsWith [getposASL tmr_autorest_refPoint5, getposASL tmr_autorest_refPoint6, tmr_autorest_refPoint5, tmr_autorest_refPoint6];
-
-		if (count _centerCheck > 0 || count _leftCheck > 0 || count _rightCheck > 0) then {
+		// Check restable
+		// _canRest = ([] call tmr_autorest_fnc_canRest) select 0;
+		if (([] call tmr_autorest_fnc_canRest) select 0) then {
 			// Rest the weapon
 			[] call tmr_autorest_fnc_restWeapon;
 		} else {
@@ -407,17 +413,9 @@ _handle = [
 0.6,
 /* Initialization */
 {
-	// Get the string of the player
-	// There must be a better way to do this.
-	// Wish I could dereference player.
-	_unit = format ["%1", player];
-
-	[] call tmr_autorest_fnc_createRefPoints;
-	[] call tmr_autorest_fnc_attachRefPoints;
 }, 
 /* On exit, do...*/
 {
-	deletevehicle tmr_autorest_refPoint1; deletevehicle tmr_autorest_refPoint2; deletevehicle tmr_autorest_refPoint3; deletevehicle tmr_autorest_refPoint4; deletevehicle tmr_autorest_refPoint5; deletevehicle tmr_autorest_refPoint6; deletevehicle tmr_autorest_refPoint7; deletevehicle tmr_autorest_refPoint8; deletevehicle tmr_autorest_refPoint9;
 }, 
 /* Run condition */
 {true},
