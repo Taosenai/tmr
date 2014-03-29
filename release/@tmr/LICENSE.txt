@@ -1,5 +1,5 @@
 ﻿http://www.gnu.org/licenses/gpl-2.0.html
-Copyright (c) 2012-2013, Ryan Schultz
+Copyright (c) 2012-2014, Ryan Schultz
 All rights reserved.
 
 This program is free software; you can redistribute it and/or
