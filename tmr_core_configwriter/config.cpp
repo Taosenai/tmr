@@ -6,23 +6,10 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_UI_F, CBA_XEH, CBA_MAIN};
+		requiredAddons[] = {"A3_UI_F", tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
-
-class CfgMods {
-	class tmr_core_configwriter {
-		dir = "tmr_core_configwriter";
-		name = "TMR: Core Config Writer Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
 	};
 };
 

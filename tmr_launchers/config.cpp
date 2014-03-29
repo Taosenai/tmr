@@ -13,18 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_launchers {
-		dir = "tmr_launchers";
-		name = "TMR: Launchers Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
 class CfgMovesBasic;
 
 class CfgMovesMaleSdr: CfgMovesBasic {

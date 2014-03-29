@@ -6,22 +6,10 @@ class CfgPatches {
 		units[] = {};
 		weapons[] = {};
 		requiredVersion = 0.60;
-		requiredAddons[] = {A3_Weapons_F, A3_UI_F, tmr_core};
+		requiredAddons[] = {"A3_Weapons_F", "A3_UI_F", tmr_core};
 		version = 0.1;
 		author[] = {"Taosenai"};
 		authorUrl = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
-class CfgMods {
-	class tmr_disposable {
-		dir = "tmr_disposable";
-		name = "TMR: Disposable Launchers";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
 	};
 };
 

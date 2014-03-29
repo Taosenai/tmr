@@ -13,19 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_aimsway {
-		dir = "tmr_aimsway";
-		name = "TMR: Aim Sway Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
-
 // aimprecision=TMR_SWAY_005;
 // aimPrecision=TMR_SWAY_01;
 // aimPrecision=TMR_SWAY_03;

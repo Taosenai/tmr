@@ -13,18 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_nlaw {
-		dir = "tmr_nlaw";
-		name = "TMR: NLAW Attack & Guidance Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
 class Extended_PostInit_EventHandlers {
 	class tmr_nlaw {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_nlaw\init.sqf'";

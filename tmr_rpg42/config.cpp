@@ -13,18 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_rpg42 {
-		dir = "tmr_rpg42";
-		name = "TMR: RPG-42 Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
 class Extended_PostInit_EventHandlers {
 	class tmr_rpg42 {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_rpg42\init.sqf'";

@@ -13,18 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_smallarms_recoil {
-		dir = "tmr_smallarms_recoil";
-		name = "TMR: Small Arms - Recoil Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
 class Extended_PostInit_EventHandlers {
 	class tmr_smallarms_recoil {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_smallarms_recoil\init.sqf'";

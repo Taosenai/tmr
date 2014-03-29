@@ -13,18 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_optics {
-		dir = "tmr_optics";
-		name = "TMR: Optics Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
 class Extended_PostInit_EventHandlers {
 	class tmr_optics {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_optics\init.sqf'";

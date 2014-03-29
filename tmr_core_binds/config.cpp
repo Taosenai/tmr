@@ -13,19 +13,6 @@ class CfgPatches {
 	};
 };
 
-
-class CfgMods {
-	class tmr_core_binds {
-		dir = "tmr_core_binds";
-		name = "TMR: Core Keybinding Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
 class Extended_PostInit_EventHandlers {
 	class tmr_core_binds {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_core_binds\init.sqf'";

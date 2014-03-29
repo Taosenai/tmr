@@ -13,26 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_core {
-		dir = "tmr_core";
-		name = "TMR: Core Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
-class CfgAddons {
-	class PreloadAddons {
-		class tmr_core {
-			list[] = {"tmr_core"};
-		};
-	};
-};
-
 class Extended_PostInit_EventHandlers {
 	class tmr_core {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_core\init.sqf'";

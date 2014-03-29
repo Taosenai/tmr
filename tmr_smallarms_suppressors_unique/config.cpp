@@ -13,18 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_smallarms_suppressors_unique {
-		dir = "tmr_smallarms_suppressors_unique";
-		name = "TMR: Small Arms - Suppressors (Unique) Module";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
 class SlotInfo;
 
 class CfgWeapons {

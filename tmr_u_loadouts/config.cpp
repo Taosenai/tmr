@@ -13,19 +13,6 @@ class CfgPatches {
 	};
 };
 
-class CfgMods {
-	class tmr_u_loadouts {
-		dir = "tmr_u_loadouts";
-		name = "TMR: Unified Loadouts";
-		picture = "";
-		hidePicture = "true";
-		hideName = "true";
-		actionName = "Website";
-		action = "http://www.ryanschultz.org/tmr/";
-	};
-};
-
-
 class CfgVehicles {
 
 	/////////////////////////////////////////////////////////////////
