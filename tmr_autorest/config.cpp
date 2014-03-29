@@ -796,24 +796,24 @@ class CfgWeapons {
 		};
 	};
 
-	class Tavor_base_F : Rifle_Base_F {
-		class WeaponSlotsInfo;
-	};
+	// class Tavor_base_F : Rifle_Base_F {
+	// 	class WeaponSlotsInfo;
+	// };
 
-	class arifle_TRG21_F : Tavor_base_F {
-		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class TMR_AccessoryRail_Rifle_Base;
-		};
-	};
-	class arifle_TRG21_GL_F : arifle_TRG21_F {
-		class WeaponSlotsInfo : WeaponSlotsInfo {
-			class asdg_FrontSideRail_Tavor : asdg_FrontSideRail {
-				class compatibleItems {
-					TMR_acc_bipod = 0;
-				};
-			};
-		};
-	};
+	// class arifle_TRG21_F : Tavor_base_F {
+	// 	class WeaponSlotsInfo : WeaponSlotsInfo {
+	// 		class TMR_AccessoryRail_Rifle_Base;
+	// 	};
+	// };
+	// class arifle_TRG21_GL_F : arifle_TRG21_F {
+	// 	class WeaponSlotsInfo : WeaponSlotsInfo {
+	// 		class asdg_FrontSideRail_Tavor : asdg_FrontSideRail {
+	// 			class compatibleItems {
+	// 				TMR_acc_bipod = 0;
+	// 			};
+	// 		};
+	// 	};
+	// };
 
 	class mk20_base_F : Rifle_Base_F {
 		class WeaponSlotsInfo;
