@@ -5,7 +5,7 @@ class CfgMovesBasic {
 	class HealBaseRfl : HealBase {};
 	class StandBase : Default {
 	class DefaultDie : Default {
-	class ManActions {
+	class ManActions { 
 	class Actions {
 		class NoActions : ManActions {
 		class DeadActions : NoActions {
