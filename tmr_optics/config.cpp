@@ -444,7 +444,7 @@ class PreloadTextures {
 			tmr_optics_reticle = "*";
 			tmr_optics_reticleIllum = "*";
 		};
-		class optic_SOS {
+		class optic_LRPS {
 			tmr_optics_body= "*";
 			tmr_optics_bodyNight = "*";
 			tmr_optics_reticle = "*";
