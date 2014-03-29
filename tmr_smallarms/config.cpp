@@ -121,6 +121,10 @@ class CfgMagazines {
 		displayname = "6.5mm 200Rnd Box";
 		displaynameshort = "6.5mm";
 
+		// Change default tracer color to red
+		ammo = "B_65x39_Caseless_red";
+		picture = "\A3\Weapons_F\Data\UI\m_200rnd_65x39_red_ca.paa";
+
 		tracersEvery = 5;
 		lastRoundsTracer = 3;
 	};
@@ -132,6 +136,9 @@ class CfgMagazines {
 		// Change default tracer color to red
 		ammo = "B_65x39_Caseless_red";
 		picture = "\A3\Weapons_F\Data\UI\m_200rnd_65x39_red_ca.paa";
+
+		tracersEvery = 5;
+		lastRoundsTracer = 3;
 	};
 	class TMR_200Rnd_65x39_cased_Box_Tracer_Green: 200Rnd_65x39_cased_Box_Tracer {
 		descriptionshort = "Caliber: 6.5x39mm Caseless Tracer (Green)<br />Rounds: 200<br />Type: M20 link";
@@ -501,7 +508,10 @@ class CfgWeapons {
 	class pdw2000_base_F: Rifle_Base_F {
 		magazines[] = {"30Rnd_9x21_Mag"};
 
-		modes[] = {"Single", "FullAuto"}; // No burst on this thing
+		modes[] = {"Single", "Burst", "FullAuto"}; 
+		// There's no burst on this thing, but if we leave it off here, it messes up
+		// when used with a suppressor and doesn't allow full auto.
+		// Grrr, suppressor config design is ridiculous...
 
 		class Single : Mode_SemiAuto {
 			// http://www.stengg.com/upload/915fGdhTi3ggnnGQGGL.pdf

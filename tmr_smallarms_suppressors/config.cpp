@@ -139,6 +139,10 @@ class CfgWeapons {
 			mass = 4.5;
 		};
 
+		class Single;
+		class Burst;
+		class FullAuto;
+
 		// Fire modes are inherited.
 	};
 
