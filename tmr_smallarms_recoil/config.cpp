@@ -22,7 +22,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_FiredBIS_EventHandlers {
 	class CAManBase {
 		class tmr_smallarms_recoil {
-			clientFiredBISPlayer = "_this call tmr_smallarms_recoil_fnc_firedEH";
+			clientFiredBIS = "_this call tmr_smallarms_recoil_fnc_firedEH";
 		};
 	};
 };

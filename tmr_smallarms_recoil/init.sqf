@@ -19,8 +19,8 @@ tmr_smallarms_recoil_fnc_firedEH = {
 	// Cam shake values for rifles and MGs
 	if (_weaponType == primaryWeapon player) then {
 		// Base camshake values.
-		_basePower = 0.35;
-		_baseTime = 0.18;
+		_basePower = 0.40;
+		_baseTime = 0.19;
 		_baseFreq = 13;
 
 		// Modifiers.
@@ -42,12 +42,12 @@ tmr_smallarms_recoil_fnc_firedEH = {
 
 		// Reduce camshake if the player is rested (tmr_autorest).
 		if (player getVariable ["tmr_autorest_rested", false] || player getVariable ["tmr_autorest_hardrested", false]) then {
-			_powerMod = _powerMod - 0.10;
+			_powerMod = _powerMod - 0.13;
 		};
 
 		// Reduce camshake if the player is deployed (tmr_autorest).
 		if (player getVariable ["tmr_autorest_deployed", false]) then {
-			_powerMod = _powerMod - 0.10;
+			_powerMod = _powerMod - 0.21;
 		};
 
 		// Add cam shake. Make sure no values are negative.
