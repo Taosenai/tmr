@@ -3,8 +3,10 @@
 
 tmr_optics = false;
 
-// Set global variables
+// Request a resource layer from the game engine.
+tmr_optics_scopeRsc = ["TMR_Optics_Scope"] call BIS_fnc_rscLayer;
 
+// Set global variables
 tmr_optics_inScope = false; // Is the scope up?
 tmr_optics_currentOptic = ""; // What optic is attached right now?
 
@@ -191,17 +193,21 @@ tmr_optics_fnc_scopeRecoil_firedEH = {
 
 /////////////////////////////////////////////////////////////////////////////////
 
-// Request a resource layer from the game engine.
-tmr_optics_scopeRsc = ["TMR_Optics_Scope"] call BIS_fnc_rscLayer;
+// This function initializes autorest key handlers and PFHL.
+// Uses a watchdog do ensure it is reloaded -- must survive a game load.
+tmr_optics_fnc_init = {
+	disableSerialization; // Reinit handled by watchdog. The game kills it anyway. Might as well say this.
+	waituntil {!isNull (findDisplay 46)};
 
-// Display the resource layers 
-[] call tmr_optics_fnc_initScope;
+	// Display the resource layers 
+	[] call tmr_optics_fnc_initScope;
+	tmr_optics_loop = true;
 
-// This loop monitors the RscInGameUI tied to TMR-enhanced optics and
-// displays the overlays when needed.
-tmr_optics_loop = true;
+	// Add a watchdog
+	["tmr_optics_monitor", "tmr_optics_fnc_init"] call tmr_savemonitor_fnc_addWatchdog;
 
-[] spawn {
+	// This loop monitors the RscInGameUI tied to TMR-enhanced optics and
+	// displays the overlays when needed.
 	while {tmr_optics_loop} do {
 		sleep 0.03;
 
@@ -276,6 +282,11 @@ tmr_optics_loop = true;
 		};
 	};
 };
+
+/////////////////////////////////////////////////////////////////////////////////
+
+// Initialize the monitor
+tmr_optics_monitor = [] spawn tmr_optics_fnc_init;
 
 /////////////////////////////////////////////////////////////////////////////////
 
