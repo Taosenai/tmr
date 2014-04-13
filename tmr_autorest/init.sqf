@@ -44,7 +44,7 @@ tmr_autorest_fnc_deployKeyDownEH = {
 	// Key press to deploy
 	if (_dikCode in actionKeys "LockTargets") then {
 		// Player must be on foot, with primary out, able to fire. Can't be UAV (cameraOn)
-		if !(alive player && speed player < 1 && vehicle player == player && currentWeapon player == primaryWeapon player && canFire player && canMove player && cameraOn == player) exitWith {false};
+		if !(alive player && {speed player < 1} && {vehicle player == player} && {currentWeapon player == primaryWeapon player} && {canFire player} && {canMove player} && {cameraOn == player}) exitWith {false};
 
 		// Make sure weapon is deployable (bipod mounted) or is rested on something
 		_config = configFile >> "CfgWeapons" >> currentWeapon player;
@@ -147,7 +147,6 @@ tmr_autorest_fnc_deployKeyDownEH = {
 
 	_return;
 };
-
 
 // -------------------------------------------------------------------------------
 // Apply the deployed weapon rest characteristics to the player.
@@ -405,24 +404,13 @@ tmr_autorest_fnc_canRest = {
 	[_canRestRifle || _canRestBipod, _canDeployBipod];
 };
 
-/////////////////////////////////////////////////////////////////////////////////
-
-// This PFEH monitors the position of the geometry references, determines if the
-// lines between them intersect with an object, then applies the 'rested' state.
-// It also handles unit changes and updates the geo refs.
-
-tmr_autorest_endPEH = false;
-
-// Huge public event handler follows.
-_handle = [
-/* Code */
-{	
-	// Player can't be moving very much, must have rifle or launcher, and must be able to fire. Can't be in UAV (cameraOn)	
-	// Also can't be deployed or hard rested.
-	if (alive player && vehicle player == player && speed player < 1 && (currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player) && canFire player && cameraOn == player && !(player getVariable ["tmr_autorest_deployed", false]) && !(player getVariable ["tmr_autorest_hardrested", false])) then {
+// -------------------------------------------------------------------------------
+// Per frame handler to softrest weapon
+// -------------------------------------------------------------------------------
+tmr_autorest_fnc_attemptRest = {
+	if (alive player && {vehicle player == player} && {speed player < 1} && {(currentWeapon player == primaryWeapon player || currentWeapon player == secondaryWeapon player)} && {canFire player} && {cameraOn == player} && {!(player getVariable ["tmr_autorest_deployed", false])} && {!(player getVariable ["tmr_autorest_hardrested", false])}) then {
 
 		// Check restable
-		// _canRest = ([] call tmr_autorest_fnc_canRest) select 0;
 		if (([] call tmr_autorest_fnc_canRest) select 0) then {
 			// Rest the weapon
 			[] call tmr_autorest_fnc_restWeapon;
@@ -436,33 +424,28 @@ _handle = [
 			[] call tmr_autorest_fnc_unrestWeapon;
 		};
 	};
-
-}, 
-/* Parameters */
-[],
-/* Delay */
-0.6,
-/* Initialization */
-{
-}, 
-/* On exit, do...*/
-{
-}, 
-/* Run condition */
-{true},
-/* Exit condition */
-{tmr_autorest_endPEH}, 
-/* Private variables */
-["_unit"]
-] call cba_common_fnc_addPerFrameHandlerLogic;
+};
 
 /////////////////////////////////////////////////////////////////////////////////
 
-// Add key handler. 
-[] spawn {
+// This function initializes autorest key handlers and PFHL.
+// USES WATCHDOG.
+tmr_autorest_fnc_init = {
 	waituntil {!isNull (findDisplay 46)};
-	(findDisplay 46) displayAddEventHandler ["KeyDown", "_this call tmr_autorest_fnc_deployKeyDownEH"];
+
+	// Add key handler
+	tmr_autorest_deh = ["KeyDown", "_this call tmr_autorest_fnc_deployKeyDownEH"] call cba_fnc_addDisplayHandler;
+
+	// Add PFH which handles softresting and unsoftresting.
+	if (isNil "tmr_autorest_pfhHandle") then {
+		tmr_autorest_pfhHandle = [tmr_autorest_fnc_attemptRest, 0.6, []] call cba_fnc_addPerFrameHandler;
+	};
 };
+
+/////////////////////////////////////////////////////////////////////////////////
+
+// Run the init function.
+[] spawn tmr_autorest_fnc_init;
 
 /////////////////////////////////////////////////////////////////////////////////
 
