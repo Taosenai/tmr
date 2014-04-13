@@ -664,18 +664,17 @@ tmr_nlaw_fnc_track = {
 /////////////////////////////////////////////////////////////////////////////////
  
 // Initialize NLAW module
-tmr_nlaw_fnc_init = { 
-	waituntil {!isNull (findDisplay 46)};
-
-	// Add key handlers
-	tmr_nlaw_dehKeyDown = ["KeyDown", "_this call tmr_nlaw_fnc_trackingKeyDownEH"] call cba_fnc_addDisplayHandler;
-	tmr_nlaw_dehKeyUp = ["KeyUp", "_this call tmr_nlaw_fnc_trackingKeyUpEH"] call cba_fnc_addDisplayHandler;
-};
+// tmr_nlaw_fnc_init = { 
+// 	waituntil {!isNull (findDisplay 46)};
+// };
 
 /////////////////////////////////////////////////////////////////////////////////
 
 // Run the init function.
-[] spawn tmr_nlaw_fnc_init;
+// tmr_nlaw_monitor = [] spawn tmr_nlaw_fnc_init;
+// Add key handlers.
+tmr_nlaw_dehKeyDown = ["KeyDown", "_this call tmr_nlaw_fnc_trackingKeyDownEH"] call cba_fnc_addDisplayHandler;
+tmr_nlaw_dehKeyUp = ["KeyUp", "_this call tmr_nlaw_fnc_trackingKeyUpEH"] call cba_fnc_addDisplayHandler;
 
 /////////////////////////////////////////////////////////////////////////////////
 
