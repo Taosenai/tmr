@@ -83,7 +83,6 @@ tmr_nlaw_fnc_trackingKeyUpEH = {
 	_return;
 };
 
-
 // -------------------------------------------------------------------------------
 // Fired EH for PCML. Calls guidance code and sets missile behavior characteristics.
 // -------------------------------------------------------------------------------
@@ -600,7 +599,6 @@ tmr_nlaw_fnc_track = {
 			};
 		};*/
 		
-
 		// Average into current data for whole tracking sequence
 		tmr_nlaw_deltaXOverTAverage = (tmr_nlaw_deltaXOverTAverage + _deltaXOverT) / 2;
 		tmr_nlaw_deltaYOverTAverage = (tmr_nlaw_deltaYOverTAverage + _deltaYOverT) / 2;
@@ -665,12 +663,19 @@ tmr_nlaw_fnc_track = {
 
 /////////////////////////////////////////////////////////////////////////////////
  
-// Add key handler. 
-[] spawn {
+// Initialize NLAW module
+tmr_nlaw_fnc_init = { 
 	waituntil {!isNull (findDisplay 46)};
-	(findDisplay 46) displayAddEventHandler ["KeyDown", "_this call tmr_nlaw_fnc_trackingKeyDownEH"];
-	(findDisplay 46) displayAddEventHandler ["KeyUp", "_this call tmr_nlaw_fnc_trackingKeyUpEH"];
+
+	// Add key handlers
+	tmr_nlaw_dehKeyDown = ["KeyDown", "_this call tmr_nlaw_fnc_trackingKeyDownEH"] call cba_fnc_addDisplayHandler;
+	tmr_nlaw_dehKeyUp = ["KeyUp", "_this call tmr_nlaw_fnc_trackingKeyUpEH"] call cba_fnc_addDisplayHandler;
 };
+
+/////////////////////////////////////////////////////////////////////////////////
+
+// Run the init function.
+[] spawn tmr_nlaw_fnc_init;
 
 /////////////////////////////////////////////////////////////////////////////////
 
