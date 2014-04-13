@@ -218,6 +218,7 @@ def main(argv):
 	arg_modules = False # Only build modules on command line?
 	make_release = False # Make zip file from the release?
 	release_version = 0 # Version of release
+	make_target = "Make" # Which section in make.cfg to use for the build
 
 	# Parse arguments
 	if "help" in argv or "-h" in argv or "--help" in argv:
@@ -226,6 +227,7 @@ make.py [help] [test] [force] [release <version>] [module name] [module name] [.
 test -- Copy result to Arma 3.
 release <version> -- Make archive with <version>.
 force -- Ignore cache and build all.
+target <name> -- Use rules in make.cfg under heading [<name>] rather than default [Make]
 
 If module names are specified, only those modules will be built.
 """)
@@ -243,8 +245,15 @@ If module names are specified, only those modules will be built.
 
 	if "release" in argv:
 		make_release = True
+		release_version = argv[argv.index("release") + 1]
+		argv.remove(release_version)
 		argv.remove("release")
-		release_version = argv[1]
+
+	if "target" in argv:
+		make_target = argv[argv.index("target") + 1]
+		argv.remove("target")
+		argv.remove(make_target)
+		force_build = True
 
 	# Get the directory the make script is in
 	make_root = os.path.dirname(os.path.realpath(__file__))
@@ -258,30 +267,33 @@ If module names are specified, only those modules will be built.
 		cfg.read(os.path.join(make_root, "make.cfg"))
 
 		# Project name (with @ symbol)
-		project = cfg.get("Make", "project")
+		project = cfg.get(make_target, "project")
+
+		# Private key path
+		key = cfg.get(make_target, "key")
 
 		# Should we autodetect modules on a complete build?
-		module_autodetect = cfg.getboolean("Make", "module_autodetect")
+		module_autodetect = cfg.getboolean(make_target, "module_autodetect")
 
 		# Manual list of modules to build for a complete build
-		modules = [x.strip() for x in cfg.get("Make", "modules").split(',')]
+		modules = [x.strip() for x in cfg.get(make_target, "modules").split(',')]
 		
 		# List of directories to ignore when detecting
-		ignore = [x.strip() for x in cfg.get("Make", "ignore").split(',')]
+		ignore = [x.strip() for x in cfg.get(make_target, "ignore").split(',')]
 
 		# Prefix for the addon
-		prefix = cfg.get("Make", "prefix")
+		prefix = cfg.get(make_target, "prefix")
 
 		# BI Tools work drive on Windows
-		work_drive = cfg.get("Make", "work_drive")
+		work_drive = cfg.get(make_target, "work_drive")
 
 		# Release/build directory, relative to script dir
-		release_dir = cfg.get("Make", "release_dir")
+		release_dir = cfg.get(make_target, "release_dir")
 
 		# Special configuration needed only for users building from Cygwin
-		cygwin_work_drive = cfg.get("Make", "cygwin_work_drive")
-		cygwin_binpbo = cfg.get("Make", "cygwin_binpbo")
-		cygwin_a3path = cfg.get("Make", "cygwin_a3path")
+		cygwin_work_drive = cfg.get(make_target, "cygwin_work_drive")
+		cygwin_binpbo = cfg.get(make_target, "cygwin_binpbo")
+		cygwin_a3path = cfg.get(make_target, "cygwin_a3path")
 	except:
 		color("red")
 		print ("ERROR: Could not read make.cfg.")
@@ -395,9 +407,9 @@ If module names are specified, only those modules will be built.
 				# Call binpbo
 				os.chdir("P:\\")
 				if prefix == "none":	
-					subprocess.call([binpbo, os.path.join(work_drive, module), "-CLEAR", os.path.join(make_root, release_dir, project, "Addons")])
+					subprocess.call([binpbo, os.path.join(work_drive, module), "-SIGN", key, "-CLEAR", os.path.join(make_root, release_dir, project, "Addons")])
 				else:
-					subprocess.call([binpbo, os.path.join(work_drive, module), "-PREFIX", module_prefix, "-CLEAR", os.path.join(make_root, release_dir, project, "Addons")])
+					subprocess.call([binpbo, os.path.join(work_drive, module), "-SIGN", key, "-PREFIX", module_prefix, "-CLEAR", os.path.join(make_root, release_dir, project, "Addons")])
 				os.chdir(make_root)
 
 			else:
@@ -444,8 +456,15 @@ If module names are specified, only those modules will be built.
 		color("blue")
 		print(("\nMaking release: " + project + "-" + release_version + ".zip"))
 		color("reset")
-		# Create a zip with the contents of release/ in it
+		
 		try:
+			# Delete all log files
+			for root, dirs, files in os.walk(os.path.join(make_root, release_dir, project, "Addons")):
+				for currentFile in files:
+					if currentFile.lower().endswith("log"):
+						os.remove(os.path.join(root, currentFile))
+
+			# Create a zip with the contents of release/ in it
 			shutil.make_archive(project + "-" + release_version, "zip", os.path.join(make_root, release_dir))
 		except:
 			color("red")
