@@ -1,0 +1,6 @@
+﻿TMR Modular Realism CLIENT SIDE ONLY (TMR-CSO)
+QUICK INSTALL
+-------------------------------
+
+Copy the @tmr-cso and Keys folders to your Arma 3 directory. Launch Arma 3, open the Extensions menu, and select 'TMR Modular Realism'. Click the Enable button and restart Arma 3.
+
