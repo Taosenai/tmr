@@ -429,23 +429,27 @@ tmr_autorest_fnc_attemptRest = {
 /////////////////////////////////////////////////////////////////////////////////
 
 // This function initializes autorest key handlers and PFHL.
-// USES WATCHDOG.
+// Uses a watchdog do ensure it is reloaded -- must survive a game load.
 tmr_autorest_fnc_init = {
+	disableSerialization; // Reinit handled by watchdog. The game kills it anyway. Might as well say this.
 	waituntil {!isNull (findDisplay 46)};
 
-	// Add key handler
-	tmr_autorest_deh = ["KeyDown", "_this call tmr_autorest_fnc_deployKeyDownEH"] call cba_fnc_addDisplayHandler;
+	// Add a watchdog
+	["tmr_autorest_monitor", "tmr_autorest_fnc_init"] call tmr_savemonitor_fnc_addWatchdog;
 
-	// Add PFH which handles softresting and unsoftresting.
-	if (isNil "tmr_autorest_pfhHandle") then {
-		tmr_autorest_pfhHandle = [tmr_autorest_fnc_attemptRest, 0.6, []] call cba_fnc_addPerFrameHandler;
+	// This loop handles softresting and unsoftresting.
+	while {true} do {
+		sleep 0.6;
+		[] call tmr_autorest_fnc_attemptRest;
 	};
 };
 
 /////////////////////////////////////////////////////////////////////////////////
 
-// Run the init function.
-[] spawn tmr_autorest_fnc_init;
+// Initialize the monitor.
+tmr_autorest_monitor = [] spawn tmr_autorest_fnc_init;
+// Add key handler.
+tmr_autorest_deh = ["KeyDown", "_this call tmr_autorest_fnc_deployKeyDownEH"] call cba_fnc_addDisplayHandler;
 
 /////////////////////////////////////////////////////////////////////////////////
 
