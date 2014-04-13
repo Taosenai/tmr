@@ -8,59 +8,73 @@ tmr_savemonitor = false;
 tmr_savemonitor_watched = [];
 
 // -------------------------------------------------------------------------------
-// Creates a watchdog for the passed init function. If the internal watchdog dies,
+// Creates a watchdog for the passed script handle and init function. If the internal watchdog dies,
 // the savemonitor will run the init function again.
+//
+// Arguments must be the string names of the handle and init, NOT actual refs.
 // -------------------------------------------------------------------------------
 tmr_savemonitor_fnc_addWatchdog = {
-	_init = _this select 0;
-	_tickTime = diag_tickTime;
+	_handle = _this select 0;
+	_init = _this select 1;
 
-	tmr_savemonitor_watched set [count tmr_savemonitor_watched, [_tickTime, _init]];
+	tmr_savemonitor_watched set [count tmr_savemonitor_watched, [_handle, _init]];
 };
 
 // -------------------------------------------------------------------------------
-// Checks watchdogs to see if ticktime has changed by more than check time (meaning save/load likely)
+// If the canary died, checks watchdogs to see if script handle has terminated.
 // If so, removes the dead watchdog from the monitor and runs the associated function 
-// (which should add a new watchdog). If not, updates the ticktime on the watchdog.
+// (which should add a new watchdog).
+//
+// I sure kill a lot of animals here. Mixed metaphors!
 // -------------------------------------------------------------------------------
-tmr_savemonitor_fnc_watchdog = {
-	while {true} do {
-		_checkTime = 10;
+tmr_savemonitor_fnc_checkWatchdogs = {
+	if (scriptDone tmr_savemonitor_canary) then {
+		// Canary lives again!
+		tmr_savemonitor_canary = [] spawn tmr_savemonitor_fnc_canary;
+
+		// New array
+		_updateWatched = [];
 
 		for [{_i = 0}, {_i < count tmr_savemonitor_watched}, {_i = _i + 1}] do {
 			_watchdog = tmr_savemonitor_watched select _i;
-			_tickTime = _watchdog select 0;
-			_init = _watchdog select 1;
+			_handleStr = _watchdog select 0;
+			_handle = call compile format ["%1", _handleStr];
+			_initStr = _watchdog select 1;
 
-			if (abs (diag_tickTime - _tickTime) > _checkTime + 5) then {
-				player sideChat format ["TMR: Save Monitor Watchdog reinitialized"];
-				diag_log format ["TMR: Save Monitor Watchdog reinitialized"];
-				[] spawn _init;
+			if (scriptDone _handle) then {
+				(format ["TMR: Watchdog reinitialized %1", _handleStr]) call cba_fnc_systemChat;
+				diag_log format ["TMR: Watchdog reinitialized %1", _handleStr];
 
-				// Can't subtract nested arrays because SQF
-				tmr_savemonitor_watched set [_i, "r"];
-				tmr_savemonitor_watched = tmr_savemonitor_watched - ["r"];
+				// Self-writing code is the best!
+				call compile format ["%1 = [] spawn %2;", _handleStr, _initStr];
 			} else {
-				tmr_savemonitor_watched set [_i, [diag_tickTime, _init]];
+				// Keep it in the array for now
+				_updatedWatched set [count _updatedWatched, [_handleStr, _initStr]];
 			};
-
-			sleep 1;
 		};
 
-		sleep _checkTime;
+		tmr_savemonitor_watched = _updateWatched;
 	};
+};
+
+// -------------------------------------------------------------------------------
+// Simple loop that just sleeps forever.
+// -------------------------------------------------------------------------------
+tmr_savemonitor_fnc_canary = {
+	waituntil {sleep 1000};
 };
 
 /////////////////////////////////////////////////////////
 
-// Who watches the watchdog? Well, it pickles just fine. Watchdogs are 
-// only for init functions which contain actions that don't pickle,
-// such as displayAddEventHandler.
-
 // Only needed for singleplayer.
 if (!isMultiplayer) then {
-	// Disabled until a module requires this functionality.
-	// tmr_savemonitor_watchdog = [] spawn tmr_savemonitor_fnc_watchdog;
+	// Create canary. This will be <NULL-script> after a load.
+	tmr_savemonitor_canary = [] spawn tmr_savemonitor_fnc_canary;
+
+	// CBA key handlers are restored by save automatically.
+	// We'll piggyback off that fact by allowing the player's
+	// input to be what checks the state of the canary.
+	tmr_savemonitor_deh = ["KeyUp", "_this call tmr_savemonitor_fnc_checkWatchdogs"] call cba_fnc_addDisplayHandler;
 };
 
 tmr_savemonitor = true;
