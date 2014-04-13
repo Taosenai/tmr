@@ -16,6 +16,7 @@ class CfgPatches {
 class Extended_PostInit_EventHandlers {
 	class tmr_smallarms_recoil {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_smallarms_recoil\init.sqf'";
+		disableModuload = true;
 	};
 };
 

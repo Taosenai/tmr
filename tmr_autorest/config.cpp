@@ -16,6 +16,7 @@ class CfgPatches {
 class Extended_PostInit_EventHandlers {
 	class tmr_autorest {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_autorest\init.sqf'";
+		disableModuload = true;
 	};
 };
 
