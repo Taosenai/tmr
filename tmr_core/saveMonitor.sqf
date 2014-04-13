@@ -3,33 +3,64 @@
 
 tmr_savemonitor = false;
 
-// This array stores 2 element arrays with the name of uiNamespace variable to watch
-// for a null condition, and a corresponding function to call should that variable be
-// null (as it will be after a save load).
-// Example: [ ["TMR_Optics_Scope", tmr_optics_fnc_initScope] ]
+// This array stores 2 element arrays with the name of script handle to watch for 
+// competion, and a corresponding function to call when that script ends.
 tmr_savemonitor_watched = [];
 
 // -------------------------------------------------------------------------------
-// Periodically checks if UI elements are null due to savegame load and reinits them.
+// Creates a watchdog for the passed init function. If the internal watchdog dies,
+// the savemonitor will run the init function again.
+// -------------------------------------------------------------------------------
+tmr_savemonitor_fnc_addWatchdog = {
+	_init = _this select 0;
+	_tickTime = diag_tickTime;
+
+	tmr_savemonitor_watched set [count tmr_savemonitor_watched, [_tickTime, _init]];
+};
+
+// -------------------------------------------------------------------------------
+// Checks watchdogs to see if ticktime has changed by more than check time (meaning save/load likely)
+// If so, removes the dead watchdog from the monitor and runs the associated function 
+// (which should add a new watchdog). If not, updates the ticktime on the watchdog.
 // -------------------------------------------------------------------------------
 tmr_savemonitor_fnc_watchdog = {
-	sleep 5;
+	while {true} do {
+		_checkTime = 10;
 
-	{
-		_var = _x select 0;
-		_reinit = _x select 1;
+		for [{_i = 0}, {_i < count tmr_savemonitor_watched}, {_i = _i + 1}] do {
+			_watchdog = tmr_savemonitor_watched select _i;
+			_tickTime = _watchdog select 0;
+			_init = _watchdog select 1;
 
-		if (isNull _var) then {
-			[] spawn _reinit;
+			if (abs (diag_tickTime - _tickTime) > _checkTime + 5) then {
+				player sideChat format ["TMR: Save Monitor Watchdog reinitialized"];
+				diag_log format ["TMR: Save Monitor Watchdog reinitialized"];
+				[] spawn _init;
+
+				// Can't subtract nested arrays because SQF
+				tmr_savemonitor_watched set [_i, "r"];
+				tmr_savemonitor_watched = tmr_savemonitor_watched - ["r"];
+			} else {
+				tmr_savemonitor_watched set [_i, [diag_tickTime, _init]];
+			};
+
+			sleep 1;
 		};
 
-		sleep 1;
-	} foreach tmr_savemonitor_watched;
+		sleep _checkTime;
+	};
 };
 
 /////////////////////////////////////////////////////////
 
-// Disabled for now until a module actually needs it. 
-// tmr_savemonitor_watchdog = [] spawn tmr_savemonitor_watchdog;
+// Who watches the watchdog? Well, it pickles just fine. Watchdogs are 
+// only for init functions which contain actions that don't pickle,
+// such as displayAddEventHandler.
+
+// Only needed for singleplayer.
+if (!isMultiplayer) then {
+	// Disabled until a module requires this functionality.
+	// tmr_savemonitor_watchdog = [] spawn tmr_savemonitor_fnc_watchdog;
+};
 
 tmr_savemonitor = true;
