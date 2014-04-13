@@ -205,7 +205,7 @@ tmr_optics_loop = true;
 	while {tmr_optics_loop} do {
 		sleep 0.03;
 
-		if (cameraon == player && alive player && ctrlShown ((uinamespace getVariable "TMR_OpticsIGUI") displayCtrl 154)) then {	
+		if (cameraon == player && {alive player} && {ctrlShown ((uinamespace getVariable "TMR_OpticsIGUI") displayCtrl 154)} && {!visibleMap}) then {	
 			// Get the name of the attached optic
 			_optic = (primaryWeaponItems player) select 2; 
 
