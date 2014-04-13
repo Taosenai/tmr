@@ -298,6 +298,13 @@ class CfgMagazines {
 
 	};
 
+	class RPG32_HE_F : RPG32_F {
+		displayname = "OG-42V HE Rocket";
+		displaynameshort = "HE";
+		descriptionshort = "Type: 105mm high explosive anti-personnel rocket<br />Rounds: 1<br />Used in: RPG-42";
+
+	};
+
 	class TMR_RPG32_TB_F : RPG32_F {
 		ammo = "R_TBG32V_F";
 
