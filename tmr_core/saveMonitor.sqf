@@ -61,6 +61,7 @@ tmr_savemonitor_fnc_checkWatchdogs = {
 // Simple loop that just sleeps forever.
 // -------------------------------------------------------------------------------
 tmr_savemonitor_fnc_canary = {
+	disableSerialization;
 	waituntil {sleep 1000};
 };
 
