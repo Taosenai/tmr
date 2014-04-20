@@ -836,6 +836,8 @@ class TMR_RscPicture {
    lineSpacing = 1.0; 
 };
 
+#define ICON_WIDTH 0.09
+
 class RscTitles {
 	class TMR_Autorest_Rested {
 		idd = -1;
@@ -851,10 +853,10 @@ class RscTitles {
 			colorBackground[] = {0, 0, 0, 0};
 			text = "\tmr_autorest\data\restedWeapon_ca.paa";
 			colorText[] = {1,1,1,1};
-			x = (SafeZoneW + SafeZoneX) - (1 - 0.1100);
-			y = (SafeZoneY + SafeZoneH) - (1 - 0.6474);
-			w = 0.061;
-			h = 0.061 / (getResolution select 5);
+			x = (SafeZoneX + SafeZoneW/2) - (ICON_WIDTH * 3/4)/2;
+			y = SafeZoneY + (SafeZoneH * 0.75);
+			w = ICON_WIDTH * 3/4;
+			h = ICON_WIDTH;
 		};
 	};
 	class TMR_Autorest_Deployed {
@@ -871,10 +873,10 @@ class RscTitles {
 			colorBackground[] = {0, 0, 0, 0};
 			text = "\tmr_autorest\data\deployWeapon_ca.paa";
 			colorText[] = {1,1,1,1};
-			x = (SafeZoneW + SafeZoneX) - (1 - 0.1100);
-			y = (SafeZoneY + SafeZoneH) - (1 - 0.6474);
-			w = 0.061;
-			h = 0.061 / (getResolution select 5);
+			x = (SafeZoneX + SafeZoneW/2) - (ICON_WIDTH * 3/4)/2;
+			y = SafeZoneY + (SafeZoneH * 0.75);
+			w = ICON_WIDTH * 3/4;
+			h = ICON_WIDTH;
 		};
 	};
 };
