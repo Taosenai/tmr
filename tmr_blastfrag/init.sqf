@@ -3,7 +3,10 @@
 
 tmr_blastfrag = false;
 
-tmr_blastfrag_createFrags = {
+// -------------------------------------------------------------------------------
+// Create a fragmentation pattern at a position.
+// -------------------------------------------------------------------------------
+tmr_blastfrag_fnc_createFrags = {
 	_position = _this select 0;
 	_fragV = _this select 1;
 	_fragCount = _this select 2;
@@ -25,8 +28,8 @@ tmr_blastfrag_createFrags = {
 	_fragCount = round (_fragCount + (random _fragCount / 5 - (random _fragCount / 10)));
 
 	// Don't create shrapnel that will just go right into the ground
-	if (_fragPattern == "sphere" && (_position select 2) < 0.2) then {
-		_position = [_position select 0, _position select 1, 0.2];
+	if (_fragPattern == "sphere" && {(_position select 2) < 0.4}) then {
+		_position = [_position select 0, _position select 1, 0.4];
 	};
 
 	for "_i" from 1 to _fragCount do {
@@ -77,5 +80,64 @@ tmr_blastfrag_createFrags = {
 		};
 	};
 };
+
+// -------------------------------------------------------------------------------
+// Fired EH for blast fragmentation. Monitors round then creates frags when it dies.
+// -------------------------------------------------------------------------------
+tmr_blastfrag_fnc_firedEH = {
+	_unit = _this select 0;
+	if (!local _unit) exitwith {};
+
+	//_weaponType = _this select 1;
+	_ammoType = _this select 4;
+	//_magazine = _this select 5;
+	_round = _this select 6;
+
+	_check = getNumber (configFile >> "CfgAmmo" >> _ammoType >> "tmr_blastfrag_isFrag");
+
+	player sidechat format ["%1 %2", _ammotype, _check];
+
+	// Add monitor PFEH with config info to round
+	if (_check == 1) then {
+		player sidechat 'boom';
+		// Add PFEH logic for round
+		_handle = [
+		/* Code */
+		{
+			if (alive _round) then {
+				_pos = getPos _round;
+			};
+		}, 
+		/* Parameters */
+		[_ammoType, _round],
+		/* Delay */
+		0.05,
+		/* Initialization */
+		{
+			_ammoType = _this select 0;
+			_round = _this select 1;
+
+			_v = getNumber (configFile >> "CfgAmmo" >> _ammoType >> "tmr_blastfrag_fragVelocity");
+			_count = getNumber (configFile >> "CfgAmmo" >> _ammoType >> "tmr_blastfrag_fragCount");
+			_size = getText (configFile >> "CfgAmmo" >> _ammoType >> "tmr_blastfrag_fragMaxSize");
+			_pattern = getText (configFile >> "CfgAmmo" >> _ammoType >> "tmr_blastfrag_fragPattern");
+
+			_pos = getPos _round;
+		}, 
+		/* On exit, do...*/
+		{
+			[_pos, _v, _count, _size, _pattern] call tmr_blastfrag_fnc_createFrags;
+		}, 
+		/* Run condition */
+		{alive _round},
+		/* Exit condition */
+		{!alive _round}, 
+		/* Private variables */
+		["_round", "_pos", "_v", "_count", "_size", "_pattern"]
+		] call cba_common_fnc_addPerFrameHandlerLogic;
+	};
+};
+
+// Initialization complete.
 
 tmr_blastfrag = true;
