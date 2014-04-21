@@ -20,7 +20,7 @@ class Extended_PostInit_EventHandlers {
 };
 
 class Extended_FiredBIS_EventHandlers {
-	class CAManBase {
+	class AllVehicles {
 		class tmr_blastfrag {
 			clientFiredBIS = "_this call tmr_blastfrag_fnc_firedEH";
 		};
@@ -36,7 +36,7 @@ class CfgAmmo {
 	class G_40mm_HE : GrenadeBase {
 		tmr_blastfrag_isFrag = true;
 		tmr_blastfrag_fragVelocity = 1200;
-		tmr_blastfrag_fragCount = 100;
+		tmr_blastfrag_fragCount = 65;
 		tmr_blastfrag_fragMaxSize = "light";
 		tmr_blastfrag_fragPattern = "sphere"; 
 	};
