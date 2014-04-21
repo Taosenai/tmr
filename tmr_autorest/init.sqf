@@ -14,7 +14,7 @@ tmr_autorest_deployIconDisplayed = false;
 tmr_autorest_deployIconTransition = false;
 
 // If weapon has an item with one of these !substrings!, can hardrest
-tmr_autorest_bipodItems = ["TMR_acc_bipod", "ASDG_Atlis"];
+tmr_autorest_bipodItems = ["TMR_acc_bipod", "ASDG_Atlis", "Kae_Bipod"];
 
 // Objects with these substrings cannot be rested on
 // Use clever substrings to keep the size of this array MINIMAL.
@@ -166,8 +166,8 @@ tmr_autorest_fnc_deployWeapon = {
 
 	// If we received a bipod name, do any custom behavior associated with it
 	if (_bipodName != "") then {
-		// ASDG Atlas bipod
-		if (["ASDG_Atlis", _bipodName] call bis_fnc_inString) then {
+		// ASDG Atlas bipod and Kae's bipod
+		if (["ASDG_Atlis", _bipodName] call bis_fnc_inString || {["Kae_Bipod", _bipodName] call bis_fnc_inString}) then {
 			// Change it to the deployed model
 			_bipodBaseName = [_bipodName, 0, -2] call bis_fnc_trimString;
 			_bipodDeployedName = format ["%1%2", _bipodBaseName, "_D"];
@@ -197,8 +197,8 @@ tmr_autorest_fnc_undeployWeapon = {
 
 	// If we received a bipod name, do any custom behavior associated with it
 	if (_bipodName != "") then {
-		// ASDG Atlas bipod
-		if (["ASDG_Atlis", _bipodName] call bis_fnc_inString) then {
+		// ASDG Atlas bipod and Kae's bipod
+		if (["ASDG_Atlis", _bipodName] call bis_fnc_inString || {["Kae_Bipod", _bipodName] call bis_fnc_inString}) then {
 			// Change it to the secured model
 			_bipodBaseName = [_bipodName, 0, -2] call bis_fnc_trimString;
 			_bipodSecuredName = format ["%1%2", _bipodBaseName, "_S"];
