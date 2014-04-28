@@ -33,7 +33,7 @@ tmr_autorest_excludedObjects = [
 // Key EH: Deploy the weapon if it has a bipod and there is something to deploy on.
 // -------------------------------------------------------------------------------
 tmr_autorest_fnc_deployKeyDownEH = {
-	// _displayCtrl = _this select 0;
+	// _display = _this select 0;
 	_dikCode = _this select 1;
 	_shift = _this select 2;
 	_ctrl = _this select 3;
@@ -41,104 +41,101 @@ tmr_autorest_fnc_deployKeyDownEH = {
 
 	_return = false;
 
-	// Key press to deploy
-	if (_dikCode in actionKeys "LockTargets") then {
-		// Player must be on foot, with primary out, able to fire. Can't be UAV (cameraOn)
-		if !(alive player && {speed player < 1} && {vehicle player == player} && {currentWeapon player == primaryWeapon player} && {canFire player} && {canMove player} && {cameraOn == player}) exitWith {false};
+	// Player must be on foot, with primary out, able to fire. Can't be UAV (cameraOn)
+	if !(alive player && {speed player < 1} && {vehicle player == player} && {currentWeapon player == primaryWeapon player} && {canFire player} && {canMove player} && {cameraOn == player}) exitWith {false};
 
-		// Make sure weapon is deployable (bipod mounted) or is rested on something
-		_config = configFile >> "CfgWeapons" >> currentWeapon player;
-		_canDeployCfg = getNumber (_config >> "tmr_autorest_deployable"); // 1 for true
+	// Make sure weapon is deployable (bipod mounted) or is rested on something
+	_config = configFile >> "CfgWeapons" >> currentWeapon player;
+	_canDeployCfg = getNumber (_config >> "tmr_autorest_deployable"); // 1 for true
 
-		// Go through all attached items and see if they contain a substring from the bipodItems array.
-		// Also detect if we are using any mod's physical bipods so they can have their state changed later.
-		_canDeployItem = false;
-		_bipodName = "";
+	// Go through all attached items and see if they contain a substring from the bipodItems array.
+	// Also detect if we are using any mod's physical bipods so they can have their state changed later.
+	_canDeployItem = false;
+	_bipodName = "";
+	{
+		scopeName "itemsearch";
+		_item = _x;
 		{
-			scopeName "itemsearch";
-			_item = _x;
-			{
-				if ([_x, _item] call bis_fnc_inString) then {
-					_canDeployItem = true;
-					_bipodName = _item;
-					breakOut "itemsearch";
-				};
-			} foreach tmr_autorest_bipodItems;
-
-		} foreach primaryWeaponItems player;
-
-		_isRested = player getVariable ["tmr_autorest_rested", false];
-
-		if !(_canDeployCfg == 1 || _canDeployItem || _isRested) exitwith {false};
-
-		// Make sure it's an anim that can deploy.
-		_allowedAnimStates = ["amovpercmstpsraswrfldnon", "aadjpercmstpsraswrfldup", "aadjpercmstpsraswrflddown", "aadjpercmstpsraswrfldright", "aadjpercmstpsraswrfldleft", "aadjpknlmstpsraswrfldup", "amovpknlmstpsraswrfldnon", "aadjpknlmstpsraswrflddown", "aadjpknlmstpsraswrfldleft", "aadjpknlmstpsraswrfldright", "aadjppnemstpsraswrfldup", "amovppnemstpsraswrfldnon"];
-		_playerAnimState = animationState player;
-		if !(_playerAnimState in _allowedAnimStates) exitWith {false};
-
-		// Check if the bipod area intersects with something or the ground.
-		_checkRests = [true] call tmr_autorest_fnc_canRest; // true = do the filtered check
-		_canRest = _checkRests select 0;
-		_canBipod = _checkRests select 1;
-
-		if ((_canDeployCfg == 1 || _canDeployItem) && _canBipod) then {
-			_return = true;
-
-			// End rest state before deploying.
-			if (player getVariable ["tmr_autorest_rested", false]) then {
-				[] call tmr_autorest_fnc_unrestWeapon;
+			if ([_x, _item] call bis_fnc_inString) then {
+				_canDeployItem = true;
+				_bipodName = _item;
+				breakOut "itemsearch";
 			};
+		} foreach tmr_autorest_bipodItems;
 
-			// Deploy the weapon
-			[_bipodName] call tmr_autorest_fnc_deployWeapon;
+	} foreach primaryWeaponItems player;
+
+	_isRested = player getVariable ["tmr_autorest_rested", false];
+
+	if !(_canDeployCfg == 1 || _canDeployItem || _isRested) exitwith {false};
+
+	// Make sure it's an anim that can deploy.
+	_allowedAnimStates = ["amovpercmstpsraswrfldnon", "aadjpercmstpsraswrfldup", "aadjpercmstpsraswrflddown", "aadjpercmstpsraswrfldright", "aadjpercmstpsraswrfldleft", "aadjpknlmstpsraswrfldup", "amovpknlmstpsraswrfldnon", "aadjpknlmstpsraswrflddown", "aadjpknlmstpsraswrfldleft", "aadjpknlmstpsraswrfldright", "aadjppnemstpsraswrfldup", "amovppnemstpsraswrfldnon"];
+	_playerAnimState = animationState player;
+	if !(_playerAnimState in _allowedAnimStates) exitWith {false};
+
+	// Check if the bipod area intersects with something or the ground.
+	_checkRests = [true] call tmr_autorest_fnc_canRest; // true = do the filtered check
+	_canRest = _checkRests select 0;
+	_canBipod = _checkRests select 1;
+
+	if ((_canDeployCfg == 1 || _canDeployItem) && _canBipod) then {
+		_return = true;
+
+		// End rest state before deploying.
+		if (player getVariable ["tmr_autorest_rested", false]) then {
+			[] call tmr_autorest_fnc_unrestWeapon;
+		};
+
+		// Deploy the weapon
+		[_bipodName] call tmr_autorest_fnc_deployWeapon;
+
+		// Spawn a watcher to undeploy if we're no longer aligned or if we move
+		[_bipodName] spawn {
+			_bipodName = _this select 0;
+			while {player getVariable ["tmr_autorest_deployed", false]} do {
+				sleep 0.6;
+				_playerAnimState = animationState player;
+
+				// Check if the bipod area intersects with something or the ground.
+				_canBipod = ([] call tmr_autorest_fnc_canRest) select 1;
+
+				// If we intersect with nothing or if we left the deploy animation
+				if (!_canBipod || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
+					// Undeploy the weapon.
+					[_bipodName] call tmr_autorest_fnc_undeployWeapon;
+				};
+			};
+		};
+	} else {
+		// Player has no bipod or bipod isn't aligned, see if can rest (filtered)
+		if (_canRest) then {
+			// 'Hard rest' the weapon
+			[] call tmr_autorest_fnc_hardRestWeapon;
 
 			// Spawn a watcher to undeploy if we're no longer aligned or if we move
-			[_bipodName] spawn {
-				_bipodName = _this select 0;
-				while {player getVariable ["tmr_autorest_deployed", false]} do {
+			[] spawn {
+				while {player getVariable ["tmr_autorest_hardrested", false]} do {
+					_oldDirection = direction player;
 					sleep 0.6;
 					_playerAnimState = animationState player;
 
-					// Check if the bipod area intersects with something or the ground.
-					_canBipod = ([] call tmr_autorest_fnc_canRest) select 1;
+					// Recheck rest possibility if player direction changed by more than
+					// 2 degrees (This is a lazy check which fails at 0<->360 transition)
+					_dirChanged = false;
+					if (abs (direction player - _oldDirection) > 2) then {
+						// Check if the weapon geo references intersect with something.
+						_canRest = ([] call tmr_autorest_fnc_canRest) select 0;
 
-					// If we intersect with nothing or if we left the deploy animation
-					if (!_canBipod || !(["_tmr_deploy", _playerAnimState] call bis_fnc_inString)) then {
-						// Undeploy the weapon.
-						[_bipodName] call tmr_autorest_fnc_undeployWeapon;
+						if (!_canRest) then {
+							_dirChanged = true;
+						}
 					};
-				};
-			};
-		} else {
-			// Player has no bipod or bipod isn't aligned, see if can rest (filtered)
-			if (_canRest) then {
-				// 'Hard rest' the weapon
-				[] call tmr_autorest_fnc_hardRestWeapon;
 
-				// Spawn a watcher to undeploy if we're no longer aligned or if we move
-				[] spawn {
-					while {player getVariable ["tmr_autorest_hardrested", false]} do {
-						_oldDirection = direction player;
-						sleep 0.6;
-						_playerAnimState = animationState player;
-
-						// Recheck rest possibility if player direction changed by more than
-						// 2 degrees (This is a lazy check which fails at 0<->360 transition)
-						_dirChanged = false;
-						if (abs (direction player - _oldDirection) > 2) then {
-							// Check if the weapon geo references intersect with something.
-							_canRest = ([] call tmr_autorest_fnc_canRest) select 0;
-
-							if (!_canRest) then {
-								_dirChanged = true;
-							}
-						};
-
-						// If we are no longer rested or if we left the deploy animation or weapon shouldn't be rested at all
-						if (!(player getVariable ["tmr_autorest_rested", false]) || !(["_tmr_rested", _playerAnimState] call bis_fnc_inString) || _dirChanged) then {
-							// Un-hardrest the weapon.
-							[] call tmr_autorest_fnc_unhardRestWeapon;
-						};
+					// If we are no longer rested or if we left the deploy animation or weapon shouldn't be rested at all
+					if (!(player getVariable ["tmr_autorest_rested", false]) || !(["_tmr_rested", _playerAnimState] call bis_fnc_inString) || _dirChanged) then {
+						// Un-hardrest the weapon.
+						[] call tmr_autorest_fnc_unhardRestWeapon;
 					};
 				};
 			};
@@ -448,8 +445,9 @@ tmr_autorest_fnc_init = {
 
 // Initialize the monitor.
 tmr_autorest_monitor = [] spawn tmr_autorest_fnc_init;
-// Add key handler.
-tmr_autorest_deh = ["KeyDown", "_this call tmr_autorest_fnc_deployKeyDownEH"] call cba_fnc_addDisplayHandler;
+
+// Register key binding.
+["TMR", "Rest/deploy weapon", "tmr_autorest_fnc_deployKeyDownEH", [15, false, false, false], false] call tmr_core_binds_fnc_registerKeyHandler;
 
 /////////////////////////////////////////////////////////////////////////////////
 

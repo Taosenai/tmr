@@ -13,7 +13,7 @@ class CfgPatches {
 	};
 };
 
-class Extended_PostInit_EventHandlers {
+class Extended_PreInit_EventHandlers {
 	class tmr_core_configwriter {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_core_configwriter\init.sqf'";
 	};
