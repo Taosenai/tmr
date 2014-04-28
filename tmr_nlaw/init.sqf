@@ -530,9 +530,9 @@ tmr_nlaw_fnc_plosMissile_guidance = {
 		if (!isNil "tmr_blastfrag") then {
 			// TODO: Replace with config file values rather than hard-coding.
 			if (_weaponType == "TMR_launch_NLAW_MPV_F") then {
-				[_missilePos, 1500, 200, "big", "sphere"] spawn tmr_blastfrag_fnc_createFrags;
+				[_missilePos, 4000, 100, 30, "big", "sphere"] spawn tmr_blastfrag_fnc_createFrags;
 			} else {
-				[_missilePos, 1000, 60, "med", "sphere"] spawn tmr_blastfrag_fnc_createFrags;
+				[_missilePos, 4000, 60, 5, "med", "sphere"] spawn tmr_blastfrag_fnc_createFrags;
 			};
 		};
 	}, 
