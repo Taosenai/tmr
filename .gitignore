@@ -4,7 +4,6 @@
 *.zip
 *.bin
 *.bisign
-Release
 
 # OS generated files #
 ######################
@@ -169,3 +168,13 @@ $RECYCLE.BIN/
 .DS_Store
 
 trash
+
+*.exp
+*.lib
+*.pdb
+*.tlog
+*.obj
+*.lastbuildstate
+*.log
+tmr_configwriter.tlog
+*.sdf
