@@ -50,8 +50,10 @@ class CfgAmmo {
 	//	tmr_blastfrag_fragVelocity = 2000;
 	//	tmr_blastfrag_fragCount = 30;
 	//  tmr_blastfrag_casualtyRadius = 4;
-	//	tmr_blastfrag_fragMaxSize = "light";
-	//	tmr_blastfrag_fragPattern = "sphere"; 
+	//	tmr_blastfrag_fragMaxSize = "light";  (tiny, light, med, big)
+	//	tmr_blastfrag_fragPattern = "sphere";
+
+	///////////////////////////////////////////////////////////////////
 
 	class GrenadeBase;
 	class Grenade;
@@ -70,7 +72,7 @@ class CfgAmmo {
 	class GrenadeHand : Grenade {
 		tmr_blastfrag_isFrag = true;
 		tmr_blastfrag_fragVelocity = 3890; // Gurney for: sphere, 0.18kg CompB, 0.14kg case (M67)
-		tmr_blastfrag_fragCount = 70;
+		tmr_blastfrag_fragCount = 50;
 		tmr_blastfrag_casualtyRadius = 15;
 	};
 
@@ -79,8 +81,69 @@ class CfgAmmo {
 	class mini_Grenade : GrenadeHand {
 		tmr_blastfrag_isFrag = true;
 		tmr_blastfrag_fragVelocity = 1830; // From spec sheet: http://www.ar15.com/media/mediaFiles/766/48183.JPG
-		tmr_blastfrag_fragCount = 40;
+		tmr_blastfrag_fragCount = 30;
 		tmr_blastfrag_casualtyRadius = 7;
+	};
+
+	// 20mm Automatic Grenade Launcher round (HEAB?) (?)
+	// Fictional, since the OCSW actually uses a 25mm grenade.
+	// We'll fudge some stuff.
+	class G_20mm_HE : G_40mm_HE {
+		tmr_blastfrag_isFrag = true;
+		tmr_blastfrag_fragVelocity = 1600;
+		tmr_blastfrag_fragCount = 20; // Performance -- this is always an AGL round
+		tmr_blastfrag_casualtyRadius = 6; // http://www.strategypage.com/htmw/htweap/articles/20101101.aspx
+		tmr_blastfrag_fragMaxSize = "tiny";
+	};
+
+	///////////////////////////////////////////////////////////////////
+
+	class ShellBase;
+
+	// M795 HE/Frag 155mm
+	// http://www.globalsecurity.org/military/systems/munitions/m795.htm
+	class Sh_155mm_AMOS : ShellBase {
+		tmr_blastfrag_isFrag = true;
+		tmr_blastfrag_fragVelocity = 2160;
+		tmr_blastfrag_fragCount = 60;
+		tmr_blastfrag_casualtyRadius = 60; // A bit higher than data for M107 HE
+		tmr_blastfrag_fragMaxSize = "med"
+	};
+
+	// 82mm? ... put that one on the shelf with 9x21.
+	// Whatever, we're going to use the 81mm M252 mortar for this.
+	// M821 HE mortar shell
+	// http://www.scribd.com/doc/18119197/TM-43000128-Army-Ammunition-
+	class Sh_82mm_AMOS : Sh_155mm_AMOS {
+		tmr_blastfrag_isFrag = true;
+		tmr_blastfrag_fragVelocity = 2138;
+		tmr_blastfrag_fragCount = 40; // Not pre-fragged round
+		tmr_blastfrag_casualtyRadius = 30;
+		tmr_blastfrag_fragMaxSize = "med";
+	};
+
+	// 120mm HE-T 
+	// http://www.gd-ots.com/download/120mm%20IM%20HE-T.pdf
+	// Not a frag round, but big enough to make a few fragments.
+	class Sh_120mm_HE : ShellBase {
+		tmr_blastfrag_isFrag = true;
+		tmr_blastfrag_fragVelocity = 2000; // Guesstimated.
+		tmr_blastfrag_fragCount = 10;
+		tmr_blastfrag_casualtyRadius = 10;
+	};
+
+    ///////////////////////////////////////////////////////////////////
+
+	class BombCore;
+
+	// Mk82 500lb bomb
+	// http://en.wikipedia.org/wiki/Mark_82_bomb
+	class Bo_Mk82 : BombCore {
+		tmr_blastfrag_isFrag = true;
+		tmr_blastfrag_fragVelocity = 2468;
+		tmr_blastfrag_fragCount = 80;
+		tmr_blastfrag_casualtyRadius = 170;
+		tmr_blastfrag_fragMaxSize = "big";
 	};
 };
 
