@@ -2,11 +2,13 @@
 # vim: set fileencoding=utf-8 :
 
 # make.py
-# An Arma addon build system
+# An Arma 3 addon build system
+
+###############################################################################
 
 # The MIT License (MIT)
 
-# Copyright (c) 2013 Ryan Schultz 
+# Copyright (c) 2013-2014 Ryan Schultz 
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,13 +28,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-#################################################################
+###############################################################################
 
-__version__ = "0.1"
+__version__ = "0.2dev-noaddonbuilder"
+
+import sys
+
+if sys.version_info[0] == 2:
+	print("Python 3 is required.")
+	sys.exit(1)
 
 import os
 import os.path
-import sys
 import shutil
 import platform
 import glob
@@ -45,7 +52,7 @@ import traceback
 if sys.platform == "win32":
 	import winreg
 
-
+###############################################################################
 # http://akiscode.com/articles/sha-1directoryhash.shtml
 # Copyright (c) 2009 Stephen Akiki
 # MIT License (Means you can do whatever you want with this)
@@ -84,10 +91,8 @@ def  get_directory_hash(directory):
 
 	return directory_hash.hexdigest()
 
-# Colors code
 # Copyright (c) André Burgaud
 # http://www.burgaud.com/bring-colors-to-the-windows-console-with-python/
-
 if sys.platform == "win32":
 	from ctypes import windll, Structure, c_short, c_ushort, byref
 
@@ -159,25 +164,52 @@ if sys.platform == "win32":
 	  buffer. Color is a combination of foreground and background color,
 	  foreground and background intensity."""
 	  SetConsoleTextAttribute(stdout_handle, color)
+###############################################################################
 
-# End of colors code
+def find_bi_tools():
+	"""Find BI tools."""
 
-def findtools():
-	"""Use registry entries to find BI tools."""
-	"""reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
+	# These have to be here if Arma 3 Tools is installed correctly.
+
+	if not os.path.isfile("P:\AddonBuilder.exe") or not os.path.isfile("P:\DSSignFile\DSSignFile.exe"):
+		raise Exception("BadTools","Arma 3 Tools are not installed correctly or the P: drive needs to be created.")
+	else:
+		print("Found Addon Builder.\nFound DSSignFile.")
+
+	return ["P:\AddonBuilder.exe", "P:\DSSignFile\DSSignFile.exe"]
+
+def find_depbo_tools():
+	"""Use registry entries to find DePBO-based tools."""
+
+	reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
 	try:
-		k = winreg.OpenKey(reg, r"Software\Bohemia Interactive\p drive")
-		binpbo_path = winreg.QueryValueEx(k, "path")[0]
-		binpbo_path = os.path.join(binpbo_path, 'AddonBuilder.exe')
-		winreg.CloseKey(k)
-		print ("Found Addon Builder at:", binpbo_path)
+		k = winreg.OpenKey(reg, r"Software\Mikero\pboProject")
+		try:
+			pboproject_path = winreg.QueryValueEx(k, "exe")[0]
+			winreg.CloseKey(k)
+			print("Found pboproject.")
+		except:
+			print_error("ERROR: Could not find pboProject.")
+
+		k = winreg.OpenKey(reg, r"Software\Mikero\rapify")
+		try:
+			rapify_path = winreg.QueryValueEx(k, "exe")[0]
+			winreg.CloseKey(k)
+			print("Found rapify.")
+		except:
+			print_error("Could not find rapify.")
+
+		k = winreg.OpenKey(reg, r"Software\Mikero\MakePbo")
+		try:
+			makepbo_path = winreg.QueryValueEx(k, "exe")[0]
+			winreg.CloseKey(k)
+			print("Found makepbo.")
+		except:
+			print_error("Could not find makepbo.")
 	except:
-		print ("ERROR: Could not find Addon Builder. Please reinstall BI Tools!")
-		sys.exit(1)
+		raise Exception("BadDePBO", "DePBO tools not installed correctly")
 
-	return [binpbo_path]"""
-
-	return ["P:\AddonBuilder.exe"]
+	return [pboproject_path]
 
 def color(color):
 	"""Set the color. Works on Win32 and normal terminals."""
@@ -200,25 +232,38 @@ def color(color):
 		elif color == "reset":
 			sys.stdout.write('\033[0m')
 
-
-def main(argv):
-	"""Build an Arma addon suite in a directory."""
-	color("blue")
-	print(("\nmake.py for Arma, v" + __version__))
+def print_error(msg):
+	color("red")
+	print ("ERROR: " + msg)
 	color("reset")
 
-	# if sys.platform != "win32":
-	# 	color("red")
-	# 	print ("ERROR: Non-Windows platform (Cygwin?). BinPBO won't work right! Please re-run from cmd.")
-	# 	color("reset")
-	# 	sys.exit(1)
+def print_green(msg):
+	color("green")
+	print(msg)
+	color("reset")
+
+def print_blue(msg):
+	color("blue")
+	print(msg)
+	color("reset")
+
+###############################################################################
+
+def main(argv):
+	"""Build an Arma addon suite in a directory from rules in a make.cfg file."""
+	print_blue(("\nmake.py for Arma, v" + __version__))
+
+	if sys.platform != "win32":
+		print_error("Non-Windows platform (Cygwin?). Please re-run from cmd.")
+		sys.exit(1)
 
 	# Default behaviors
 	test = False # Copy to Arma 3 directory?
 	arg_modules = False # Only build modules on command line?
 	make_release = False # Make zip file from the release?
 	release_version = 0 # Version of release
-	make_target = "Make" # Which section in make.cfg to use for the build
+	use_pboproject = True # Default to pboProject build tool
+	make_target = "DEFAULT" # Which section in make.cfg to use for the build
 
 	# Parse arguments
 	if "help" in argv or "-h" in argv or "--help" in argv:
@@ -229,8 +274,7 @@ release <version> -- Make archive with <version>.
 force -- Ignore cache and build all.
 target <name> -- Use rules in make.cfg under heading [<name>] rather than default [Make]
 
-If module names are specified, only those modules will be built.
-""")
+If module names are specified, only those modules will be built.""")
 		sys.exit(0)
 
 	if "force" in argv:
@@ -255,65 +299,75 @@ If module names are specified, only those modules will be built.
 		argv.remove(make_target)
 		force_build = True
 
-	# Get the directory the make script is in
+	# Get the directory the make script is in.
 	make_root = os.path.dirname(os.path.realpath(__file__))
-
-	# Chdir to the make dir
 	os.chdir(make_root)
 
-	# Read the make file
 	cfg = configparser.ConfigParser();
 	try:
 		cfg.read(os.path.join(make_root, "make.cfg"))
 
 		# Project name (with @ symbol)
-		project = cfg.get(make_target, "project")
+		project = cfg.get(make_target, "project", fallback="@MYPROJECT")
 
 		# Private key path
-		key = cfg.get(make_target, "key")
+		key = cfg.get(make_target, "key", fallback=None)
+
+		# Project prefix (folder path)
+		prefix = cfg.get(make_target, "prefix", fallback="")
 
 		# Should we autodetect modules on a complete build?
-		module_autodetect = cfg.getboolean(make_target, "module_autodetect")
+		module_autodetect = cfg.getboolean(make_target, "module_autodetect", fallback=True)
 
 		# Manual list of modules to build for a complete build
-		modules = [x.strip() for x in cfg.get(make_target, "modules").split(',')]
+		modules = cfg.get(make_target, "modules", fallback=None)
+		# Parse it out
+		if modules is not None:
+			modules = [x.strip() for x in modules.split(',')]
+		else:
+			modules = []
 		
 		# List of directories to ignore when detecting
-		ignore = [x.strip() for x in cfg.get(make_target, "ignore").split(',')]
-
-		# Prefix for the addon
-		prefix = cfg.get(make_target, "prefix")
+		ignore = [x.strip() for x in cfg.get(make_target, "ignore",  fallback="release").split(',')]
 
 		# BI Tools work drive on Windows
-		work_drive = cfg.get(make_target, "work_drive")
+		work_drive = cfg.get(make_target, "work_drive",  fallback="P:\\")
+
+		# Which build tool should we use?
+		build_tool = cfg.get(make_target, "build_tool", fallback="pboproject").lower()
 
 		# Release/build directory, relative to script dir
-		release_dir = cfg.get(make_target, "release_dir")
+		release_dir = cfg.get(make_target, "release_dir", fallback="release")
 
-		# Special configuration needed only for users building from Cygwin
-		cygwin_work_drive = cfg.get(make_target, "cygwin_work_drive")
-		cygwin_binpbo = cfg.get(make_target, "cygwin_binpbo")
-		cygwin_a3path = cfg.get(make_target, "cygwin_a3path")
 	except:
-		color("red")
-		print ("ERROR: Could not read make.cfg.")
 		raise
-		color("reset")
+		print_error("Could not parse make.cfg.")
 		sys.exit(1)
 
-	# See if we have been given specific modules to build on CLI
+	# See if we have been given specific modules to build from command line.
 	if len(argv) > 1 and not make_release:
 		arg_modules = True
 		modules = argv[1:]
 
-	# Find the tools we need (only if running on windows!)
-	if sys.platform == "win32":
-		tools = findtools()
+	# Find the tools we need.
+	try:
+		tools = find_bi_tools()
 		binpbo = tools[0]
-	else:
-		binpbo = cygwin_binpbo
+	except:
+		print_error("Arma 3 Tools are not installed correctly or the P: drive has not been created.")
+		sys.exit(1)
 
-	# Try to open and deserialize build cache file
+	dssignfile = tools[1]
+	if build_tool == "pboproject":
+		try:
+			depbo_tools = find_depbo_tools()
+			pboproject = depbo_tools[0]
+		except:
+			raise
+			print_error("Could not find dePBO tools. Download the needed tools from: https://dev.withsix.com/projects/mikero-pbodll/files")
+			sys.exit(1)
+
+	# Try to open and deserialize build cache file.
 	try:
 		cache = {}
 		with open(os.path.join(make_root, "make.cache"), 'r') as f:
@@ -322,26 +376,24 @@ If module names are specified, only those modules will be built.
 		cache = json.loads(cache_raw)
 
 	except:
-		print ("No cache found!")
+		print ("No cache found.")
 		cache = {}
 
-	# Get list of subdirs in make root
+	# Get list of subdirs in make root.
 	dirs = next(os.walk(make_root))[1]
 
-	# If wanted, autodetect what dirs to build
+	# Autodetect what directories to build.
 	if module_autodetect and not arg_modules:
 		modules = []
 		for path in dirs:
-			# Any dir that has a config.cpp in its root is an addon to build
+			# Any dir that has a config.cpp in its root is an addon to build.
 			config_path = os.path.join(path, 'config.cpp')
 			if os.path.isfile(config_path) and not path in ignore:
 				modules.append(path)
 
-	# For each module, prep files and run BinPBO
+	# For each module, prep files and then build.
 	for module in modules:
-		color("green")
-		print(("\nMaking " + module + "-"*max(1, (60-len(module)))))
-		color("reset")
+		print_green("\nMaking " + module + "-"*max(1, (60-len(module))))
 
 		# Cache check
 		if module in cache:
@@ -353,25 +405,19 @@ If module names are specified, only those modules will be built.
 		new_sha = get_directory_hash(os.path.join(make_root, module))
 
 		# Check if it needs rebuilt
-		print ("Hash:", new_sha)
+		# print ("Hash:", new_sha)
 		if old_sha == new_sha:
 			if not force_build:
-				print ("Module has not changed.")
+				print("Module has not changed.")
+				# Skip everything else
 				continue
-		else:
-			cache[module] = new_sha
 
 		try:
-			if sys.platform == "win32":
-				# Remove old work dir version (ignore errors)
-				shutil.rmtree(os.path.join(work_drive, module), True)
-				# Copy module to the work drive
-				shutil.copytree(module, os.path.join(work_drive, module))
-			else:
-				# Remove old work dir version (ignore errors)
-				shutil.rmtree(os.path.join(cygwin_work_drive, module), True)
-				# Copy module to the work drive
-				shutil.copytree(module, os.path.join(cygwin_work_drive, module))
+			# Remove old work drive version (ignore errors)
+			shutil.rmtree(os.path.join(work_drive, prefix, module), True)
+
+			# Copy module to the work drive
+			shutil.copytree(module, os.path.join(work_drive, prefix, module))
 
 			# Remove the old pbo, key, and log
 			old = os.path.join(make_root, release_dir, project, "Addons", module) + "*"
@@ -380,82 +426,82 @@ If module names are specified, only those modules will be built.
 				os.remove(f)
 
 		except:
-			color ("red")
-			print ("ERROR: Could not copy module to work drive.")
 			raise
-			color("reset")
-			eval(input("Press Enter to continue..."))
-			print ("Resuming build...")
+			print_error("ERROR: Could not copy module to work drive. Does the module exist?")
+			input("Press Enter to continue...")
+			print("Resuming build...")
 			continue
+
+		# Build the module into a pbo
+		print_blue("Building: " + os.path.join(work_drive, prefix, module))
+		print_blue("Destination: " + os.path.join(make_root, release_dir, project, "Addons"))
 		
+		# Make destination folder (if needed)
 		try:
-			# Call BinPBO
-			if prefix != "none":
-				module_prefix = prefix + '\\' + module
+			os.makedirs(os.path.join(make_root, release_dir, project, "Addons"))
+		except:
+			pass
 
-			if sys.platform == "win32":
-				color("blue")
-				print(("Building: " + os.path.join(work_drive, module)))
-				print(("Destination: " + os.path.join(make_root, release_dir, project, "Addons")))
-				color ("reset")
-				# Make destination folder
-				try:
-					os.makedirs(os.path.join(make_root, release_dir, project, "Addons"))
-				except:
-					pass
-
-				# Call binpbo
+		# Run build tool
+		build_successful = False
+		if build_tool == "pboproject":
+			try:
+				# Call pboProject
 				os.chdir("P:\\")
-				if prefix == "none":	
-					subprocess.call([binpbo, os.path.join(work_drive, module), "-SIGN", key, "-CLEAR", os.path.join(make_root, release_dir, project, "Addons")])
-				else:
-					subprocess.call([binpbo, os.path.join(work_drive, module), "-SIGN", key, "-PREFIX", module_prefix, "-CLEAR", os.path.join(make_root, release_dir, project, "Addons")])
+				ret = subprocess.call([pboproject, "-P", os.path.join(work_drive, prefix, module), "+Engine=Arma3", "-Noisy", "-X", "+Clean", "+Mod="+os.path.join(make_root, release_dir, project), "-Key"])
+				
+				if ret == 0:
+					# Sign result
+					if key is not None:
+						print("Signing with " + key + ".")
+						ret = subprocess.call([dssignfile, key, os.path.join(make_root, release_dir, project, "Addons", module + ".pbo")])
+						
+						if ret == 0:
+							build_successful = True
+					else:
+						build_successful = True
+
+				if not build_successful:
+					print_error("Module not successfully built.")
+
+				# Back to the root	
 				os.chdir(make_root)
 
-			else:
-				# Cygwin
-				# Convert the make_root path using cygpath util
-				win_make_root = subprocess.check_output(["cygpath","-w", make_root]).rstrip()
+			except:
+				raise
+				print_error("Could not run pboProject.")
+				input("Press Enter to continue...")
+				print ("Resuming build...")
+				continue
 
-				color("blue")
-				print(("Building: " + work_drive + module))
-				print(("Destination: " + win_make_root + '\\' + release_dir + '\\' + project + '\\' + "Addons"))
-				color("reset")
+		elif build_tool== "addonbuilder":
+			print_error("Addon Builder is not currently usable.")
+		else:
+			print_error("Unknown build_tool " + build_tool + "!")
 
-				# Make destination folder
-				try:
-					os.makedirs(os.path.join(make_root, release_dir, project, "Addons"))
-				except:
-					pass
+		# Update the hash for a successfully built module
+		if build_successful:
+			cache[module] = new_sha
 
-				# Hackily call binpbo from within Cygwin -- hey, it works!
-				if prefix == "none":
-					subprocess.call([binpbo, work_drive + module, win_make_root + '\\' + release_dir + '\\' + project + '\\' + "Addons", "-CLEAR -DEBUG"])
-				else:
-					subprocess.call([binpbo, work_drive + module, win_make_root + '\\' + release_dir + '\\' + project + '\\' + "Addons", "-PREFIX", module_prefix, "-CLEAR -DEBUG"])
-
-		except:
-			color("red")
-			print ("ERROR: Could not run BinPBO.")
-			raise
-			color("reset")
-			eval(input("Press Enter to continue..."))
-			print ("Resuming build...")
-			continue
+	# Done building all modules!
 
 	# Write out the cache state
 	cache_out = json.dumps(cache)
 	with open(os.path.join(make_root, "make.cache"), 'w') as f:
 		f.write(cache_out)
 
-	color("green")
-	print ("\nBuild complete.")
-	color("reset")
+	# Delete the pboproject temp files
+	if build_tool == "pboproject":
+		try:
+			shutil.rmtree(os.path.join(make_root, release_dir, project, "temp"), True)
+		except:
+			print_error("ERROR: Could not delete pboProject temp files.")
 
+	print_green("\nDone.")
+
+	# Make release
 	if make_release:
-		color("blue")
-		print(("\nMaking release: " + project + "-" + release_version + ".zip"))
-		color("reset")
+		print_blue("\nMaking release: " + project + "-" + release_version + ".zip")
 		
 		try:
 			# Delete all log files
@@ -467,16 +513,12 @@ If module names are specified, only those modules will be built.
 			# Create a zip with the contents of release/ in it
 			shutil.make_archive(project + "-" + release_version, "zip", os.path.join(make_root, release_dir))
 		except:
-			color("red")
-			print ("ERROR: Could not make release.")
 			raise
-			color("reset")
+			print_error("Could not make release.")
 
-	# Copy to Arma 3 folder
+	# Copy to Arma 3 folder for testing
 	if test:
-		color("blue")
-		print ("\nCopying to Arma 3.")
-		color("reset")
+		print_blue("\nCopying to Arma 3.")
 
 		if sys.platform == "win32":
 			reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
@@ -485,7 +527,7 @@ If module names are specified, only those modules will be built.
 				a3_path = winreg.EnumValue(k, 1)[1]
 				winreg.CloseKey(k)
 			except:
-				print ("ERROR: Could not find Arma 3's directory in the registry.")
+				print_error("Could not find Arma 3's directory in the registry.")
 		else:
 			a3_path = cygwin_a3path
 
@@ -494,7 +536,7 @@ If module names are specified, only those modules will be built.
 				shutil.rmtree(os.path.join(a3_path, project), True)
 				shutil.copytree(os.path.join(make_root, release_dir, project), os.path.join(a3_path, project))
 			except:
-				print ("ERROR: Could not copy files. Is Arma 3 running?")
+				print_error("Could not copy files. Is Arma 3 running?")
 
 if __name__ == "__main__":
 	main(sys.argv)
