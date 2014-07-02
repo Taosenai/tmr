@@ -447,7 +447,7 @@ tmr_autorest_fnc_init = {
 tmr_autorest_monitor = [] spawn tmr_autorest_fnc_init;
 
 // Register key binding.
-["TMR", "Rest/deploy weapon", "tmr_autorest_fnc_deployKeyDownEH", [15, false, false, false], false] call tao_configsys_fnc_registerKeyHandler;
+["TMR", "Rest/deploy weapon", "tmr_autorest_fnc_deployKeyDownEH", [15, false, false, false], false] call cba_fnc_registerKeybind;
 
 /////////////////////////////////////////////////////////////////////////////////
 
