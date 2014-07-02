@@ -44,19 +44,17 @@ class Extended_FiredBIS_EventHandlers {
 //    time since fired   rear movement of gun   camera climb
 
 // Global muzzle climb increase over base. (For easy tuning.)
-#define TMR_MC 0.0089
+#define TMR_MC 0.0105
 
 // Global recovery sequence duration increase (For easy tuning.)
-#define TMR_RSD 0.06029
+#define TMR_RSD 0.07529
 
 // Global recovery downward muzzle movement.
-#define TMR_RCT -0.00285
+#define TMR_RCT -0.00320
 
 // Global rearward movement mod
-#define TMR_RWD 0.004
+#define TMR_RWD 0.0041
 
-
- // 0.114 +tmr_RSD
 class CfgRecoils {
 	tmr_smallarms_recoil_single_mx[] = 				{0, 0.014+TMR_RWD, 0.024+TMR_MC,		0.048+TMR_RSD, 0, 0,		0.081+TMR_RSD, 0, -0.0069+TMR_RCT,		0.135+TMR_RSD, 0, 0};
 	tmr_smallarms_recoil_auto_mx[] = 				{0, 0.014+TMR_RWD, 0.024+TMR_MC,		0.048+TMR_RSD, 0, 0,		0.081+TMR_RSD, 0, -0.0072+TMR_RCT, 		0.135+TMR_RSD, 0, 0};

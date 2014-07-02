@@ -57,11 +57,6 @@ class CfgWeapons {
 			
 			class AmmoCoef {
 				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
 				typicalSpeed = 1.0;
 				airFriction = 1.0;
 			};
@@ -103,11 +98,6 @@ class CfgWeapons {
 			
 			class AmmoCoef {
 				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
 				typicalSpeed = 1.0;
 				airFriction = 1.0;
 			};
@@ -158,11 +148,6 @@ class CfgWeapons {
 			
 			class AmmoCoef {
 				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
 				typicalSpeed = 1.0;
 				airFriction = 1.0;
 			};
@@ -189,11 +174,6 @@ class CfgWeapons {
 			
 			class AmmoCoef {
 				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
 				typicalSpeed = 1.0;
 				airFriction = 1.0;
 			};
@@ -221,11 +201,6 @@ class CfgWeapons {
 			
 			class AmmoCoef {
 				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
-				cost = 1.0;
 				typicalSpeed = 1.0;
 				airFriction = 1.0;
 			};
@@ -261,10 +236,6 @@ class CfgWeapons {
 			
 			class AmmoCoef {
 				hit = 1;
-				visibleFire = 0.5;	// how much is visible when this weapon is fired
-				audibleFire = 0.6;
-				visibleFireTime = 0.5;	// how long is it visible
-				audibleFireTime = 0.6;
 				cost = 1.0;
 				typicalSpeed = 1.0;
 				airFriction = 1.0;

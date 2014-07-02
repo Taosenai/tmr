@@ -19,7 +19,7 @@ tmr_smallarms_recoil_fnc_firedEH = {
 	// Cam shake values for rifles and MGs
 	if (_weaponType == primaryWeapon player) then {
 		// Base camshake values.
-		_basePower = 0.40;
+		_basePower = 0.20;
 		_baseTime = 0.19;
 		_baseFreq = 13;
 
