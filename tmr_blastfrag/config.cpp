@@ -201,3 +201,16 @@ class CfgAmmo {
 
 // Bo_GBU12_LGB
 // Bo_Mk82
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class Fragmentation {
+			arguments[] = {};
+			description = "The Blast Fragmentation module adds shrapnel effects from many types of explosives. This shrapnel can be lethal, and generally increases the threat radius of most explosives in Arma 3.";
+			displayName = "Fragmentation";
+			image = "launcher_ca.paa";
+			tip = "All fragmentation behaviors are based on real data and the Gurney equations whenever possible!<br/><br/>tmr_blastfrag.pbo";
+		};
+	};
+};
