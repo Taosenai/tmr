@@ -129,3 +129,17 @@ class CfgWeapons {
 		};
 	};	
 };
+
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class UniqueSupressors {
+			arguments[] = {};
+			description = "When the Smallarms Unique Suppressors module is loaded, TMR will prevent suppressors designed for rifles to be mounted on pistols and vice versa. Rifles of the same caliber but different make will also be unable to share suppressors.";
+			displayName = "Unique Suppressors";
+			image = "";
+			tip = "Be advised: this can cause suppressors to be missing in the campaign and in certain missions.<br/><br/>tmr_smallarms_suppressors_unique.pbo";
+		};
+	};
+};
