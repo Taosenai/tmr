@@ -68,3 +68,16 @@ class CfgWeapons {
 		magazines[] = {"TMR_DisposableDummy"};
 	};
 };
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class Disposable {
+			arguments[] = {};
+			description = "Disposable single-shot launchers such as the PCML cannot be reloaded. You may discard the tube or keep it for its attached optics.";
+			displayName = "Disposable Launchers";
+			image = "";
+			tip = "tmr_disposable.pbo";
+		};
+	};
+};
