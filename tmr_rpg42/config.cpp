@@ -363,3 +363,16 @@ class CfgWeapons {
 		// };
 	};
 };
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class RPG42Changes {
+			arguments[] = {};
+			description = "TMR adds two new warheads for the RPG-42: smoke and thermobaric.";
+			displayName = "RPG-42 Changes";
+			image = "";
+			tip = "tmr_rpg42.pbo";
+		};
+	};
+};
