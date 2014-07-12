@@ -1,6 +1,9 @@
 // TMR: Autorest initialization and functions
 // (C) 2013-2014 Ryan Schultz. See LICENSE.
 
+// Include BI DIK codes.
+#include "\a3\editor_f\Data\Scripts\dikCodes.h"
+
 tmr_autorest = false;
 
 // Get rsc layers
@@ -53,13 +56,11 @@ tmr_autorest_fnc_deployKeyDownEH = {
 	_canDeployItem = false;
 	_bipodName = "";
 	{
-		scopeName "itemsearch";
 		_item = _x;
 		{
-			if ([_x, _item] call bis_fnc_inString) then {
+			if ([_x, _item] call bis_fnc_inString) exitWith {
 				_canDeployItem = true;
 				_bipodName = _item;
-				breakOut "itemsearch";
 			};
 		} foreach tmr_autorest_bipodItems;
 
@@ -446,8 +447,12 @@ tmr_autorest_fnc_init = {
 // Initialize the monitor.
 tmr_autorest_monitor = [] spawn tmr_autorest_fnc_init;
 
-// Register key binding.
-["TMR", "Rest/deploy weapon", "tmr_autorest_fnc_deployKeyDownEH", [15, false, false, false], false] call cba_fnc_registerKeybind;
+// Register keybinding.
+if (!isNil "cba_keybinding") then {
+	["TMR", "Rest/deploy weapon", "tmr_autorest_fnc_deployKeyDownEH", [DIK_TAB, false, false, false]] call cba_fnc_registerKeybind;
+} else {
+	["TMR: Your version of CBA is too old for this version of TMR. Please upgrade CBA."] call cba_fnc_systemChat;
+};
 
 /////////////////////////////////////////////////////////////////////////////////
 
