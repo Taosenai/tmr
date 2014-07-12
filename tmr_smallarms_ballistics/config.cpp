@@ -340,3 +340,16 @@ class CfgWeapons {
 		dispersion = 0.00029; // radians. Equal to 1 MOA. Not a problem with a scoped revolver.
 	};	
 };
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class Ballistics {
+			arguments[] = {};
+			description = "TMR matches the ballistics of small arms in Arma 3 to real data as closely as possible.";
+			displayName = "Small Arms Ballistics";
+			image = "";
+			tip = "tmr_smallarms_ballistics.pbo";
+		};
+	};
+};
