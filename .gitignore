@@ -178,3 +178,8 @@ trash
 *.log
 tmr_configwriter.tlog
 *.sdf
+
+release/@tmr-cso/temp/
+release-cso/@tmr/temp/
+release/temp/
+release-cso/temp/
