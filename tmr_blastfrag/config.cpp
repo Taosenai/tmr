@@ -107,7 +107,7 @@ class CfgAmmo {
 		tmr_blastfrag_fragVelocity = 2160;
 		tmr_blastfrag_fragCount = 60;
 		tmr_blastfrag_casualtyRadius = 60; // A bit higher than data for M107 HE
-		tmr_blastfrag_fragMaxSize = "med"
+		tmr_blastfrag_fragMaxSize = "med";
 	};
 
 	// 82mm? ... put that one on the shelf with 9x21.
@@ -209,7 +209,7 @@ class CfgHints {
 			arguments[] = {};
 			description = "The Blast Fragmentation module adds shrapnel effects from many types of explosives. This shrapnel can be lethal, and generally increases the threat radius of most explosives in Arma 3.";
 			displayName = "Fragmentation";
-			image = "launcher_ca.paa";
+			image = "";
 			tip = "All fragmentation behaviors are based on real data and the Gurney equations whenever possible!<br/><br/>tmr_blastfrag.pbo";
 		};
 	};

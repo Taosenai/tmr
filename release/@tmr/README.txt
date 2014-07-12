@@ -2,9 +2,9 @@
 README
 -------------------------------
 
-Tutorials are included -- check the 'Scenarios' menu to learn about some of the new features of TMR.
+Check the section 'TMR Info' in the Arma 3 Field Manual (in-game) to learn more about some of TMR's features.
 
-Please see the website at http://www.ryanschultz.org/tmr/ to learn more about TMR and how to use and customize it.
+Please also see the website at http://www.ryanschultz.org/tmr/ to learn more about TMR and how to use and customize it.
 
 
 DEVELOPMENT
