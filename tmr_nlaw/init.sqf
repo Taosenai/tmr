@@ -34,7 +34,7 @@ tmr_nlaw_fnc_trackingKeyDownEH = {
 	_weaponType = currentWeapon player;
 	if !(_weaponType == "launch_NLAW_F" || _weaponType == "tmr_launch_NLAW_MPV_F") exitWith {false};
 
-	if (_dikCode in actionKeys "LockTargets" && tmr_nlaw_trackingMode != 1 && currentMagazine player in tmr_nlaw_trackingWarheads) then {
+	if (_dikCode in actionKeys "LockTarget" && tmr_nlaw_trackingMode != 1 && currentMagazine player in tmr_nlaw_trackingWarheads) then {
 		_return = true;
 		// Switch mode to PLOS
 		tmr_nlaw_trackingMode = 1;
@@ -63,7 +63,7 @@ tmr_nlaw_fnc_trackingKeyUpEH = {
 
 	_return = false;
 
-	if (_dikCode in actionKeys "LockTargets" && tmr_nlaw_trackingMode != 0) then {
+	if (_dikCode in actionKeys "LockTarget" && tmr_nlaw_trackingMode != 0) then {
 		_return = true;
 		// Switch mode to direct attack
 		tmr_nlaw_trackingMode = 0;
