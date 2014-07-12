@@ -452,3 +452,16 @@ class PreloadTextures {
 		};
 	};
 };
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class Optics {
+			arguments[] = {};
+			description = "TMR Optics adds new highly accurate 2D reticles for many Arma 3 optics. These reticles are precisely calibrated for TMR's ballistics and the weapon types they are commonly mounted on.";
+			displayName = "Optics";
+			image = "";
+			tip = "tmr_optics.pbo";
+		};
+	};
+};
