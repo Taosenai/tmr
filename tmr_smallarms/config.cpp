@@ -648,3 +648,16 @@ class CfgWeapons {
 	class InventoryMuzzleItem_Base_F;
 
 };
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class SmallArms {
+			arguments[] = {};
+			description = "The fire modes, ammunition types, magazine sizes, tracer patterns, and names of many small arms are corrected and/or adjusted by TMR.";
+			displayName = "Small Arms";
+			image = "\a3\ui_f\data\gui\cfg\hints\firemode_ca.paa";
+			tip = "tmr_smallarms.pbo";
+		};
+	};
+};

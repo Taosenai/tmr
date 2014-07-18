@@ -207,18 +207,17 @@ class CfgWeapons {
 
 			modes[] = {"manual", "Single", "close", "short", "medium", "far_optic1", "far_optic2"};
 
+			class FullAuto : Mode_FullAuto {
+				reloadTime = 0.109;
+			};
+
 			class manual : Mode_FullAuto {
 				reloadTime = 0.109;
 			};
 
-			class Single : manual {
+			class Single : Mode_SemiAuto {
 				reloadTime = 0.109;
 				dispersion = 0.00175; // radians. Equal to 6 MOA.
-				autofire = 0;
-				burst = 1;
-				displayname = "Semi";
-				texturetype = "semi";
-				showToPlayer = true;
 			};
 		};
 	};
@@ -268,5 +267,19 @@ class CfgWeapons {
 		};
 
 		// Fire modes are inherited.
+	};
+};
+
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class Suppressors {
+			arguments[] = {};
+			description = "Suppressors do not alter the ballistics or damage of bullets fired through them. Cyclic rate is slightly increased due to additional backpressure.";
+			displayName = "Suppressors";
+			image = "\a3\ui_f\data\gui\cfg\hints\muzzles_ca.paa";
+			tip = "tmr_smallarms_suppressors.pbo";
+		};
 	};
 };

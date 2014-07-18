@@ -348,7 +348,7 @@ class CfgHints {
 			arguments[] = {};
 			description = "TMR matches the ballistics of small arms in Arma 3 to real data as closely as possible.";
 			displayName = "Small Arms Ballistics";
-			image = "";
+			image = "\a3\ui_f\data\gui\cfg\hints\annoucning_ca.paa";
 			tip = "tmr_smallarms_ballistics.pbo";
 		};
 	};
