@@ -85,14 +85,24 @@ class CfgAmmo {
 	};
 };
 
-class CfgMissions {
-	class Missions {
-		class TMRTraining {
-			displayName = "TMR Training";
-			briefingName = "TMR Training";
-			overviewText = "Training missions for the new systems and weapons in TMR.";
-			overviewPicture = "\tmr_core\data\training_ca.paa";
-			author = "TMR";
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class Modular {
+			arguments[] = {};
+			description = "TMR is a modular addon, which means that by deleting or moving certain .pbo files inside the @tmr\Addons folder, you can enable and disable many TMR features without requiring that you alter or remove other modifications.<br/><br/>Some modules depend on others, and you will be alerted when you start the game if you have removed a dependency. For example, tmr_smallarms_suppressors.pbo depends on tmr_smallarms.pbo.";
+			displayName = "Modular?";
+			image = "\a3\ui_f\data\gui\cfg\hints\tasks_ca.paa";
+			tip = "tmr_core.pbo";
+		};
+
+		class License {
+			arguments[] = {};
+			description = "TMR Modular Realism<br/>Copyright (c) 2012-2014, Ryan Schultz<br/>All rights reserved.<br/><br/>This Arma 3 modification is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.<br/><br/>This program is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY; without even the implied warranty ofMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.<br/><br/>http://www.gnu.org/licenses/gpl-2.0.html";
+			displayName = "License";
+			image = "\a3\ui_f\data\gui\cfg\hints\license_ca.paa";
+			tip = "tmr_core.pbo";
 		};
 	};
 };
