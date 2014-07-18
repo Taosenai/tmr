@@ -44,16 +44,19 @@ class Extended_FiredBIS_EventHandlers {
 //    time since fired   rear movement of gun   camera climb
 
 // Global muzzle climb increase over base. (For easy tuning.)
-#define TMR_MC 0.0105
+// was .0105
+#define TMR_MC 0.0225
 
 // Global recovery sequence duration increase (For easy tuning.)
-#define TMR_RSD 0.07529
+// was 0.07529
+#define TMR_RSD 0.06329
 
 // Global recovery downward muzzle movement.
-#define TMR_RCT -0.00320
+// was -0.00320
+#define TMR_RCT -0.01220
 
 // Global rearward movement mod
-#define TMR_RWD 0.0041
+#define TMR_RWD 0.0047
 
 class CfgRecoils {
 	tmr_smallarms_recoil_single_mx[] = 				{0, 0.014+TMR_RWD, 0.024+TMR_MC,		0.048+TMR_RSD, 0, 0,		0.081+TMR_RSD, 0, -0.0069+TMR_RCT,		0.135+TMR_RSD, 0, 0};
@@ -440,5 +443,18 @@ class CfgWeapons {
 		// Use 9mm recoil due to low centerline
 		recoil = "tmr_smallarms_recoil_single_pistol9mm";
 		recoilProne = "tmr_smallarms_recoil_single_pistol9mm";
+	};
+};
+
+class CfgHints {
+	class TMR {
+		displayName = "TMR Info";
+		class Recoil {
+			arguments[] = {};
+			description = "TMR alters the recoil profile of all Arma 3 small arms to be more controllable by adding an inherent return to center based on the concept of 'natural point of aim.'";
+			displayName = "Small Arms Recoil";
+			image = "\a3\ui_f\data\gui\cfg\hints\recoil_ca.paa";
+			tip = "tmr_smallarms_recoil.pbo";
+		};
 	};
 };
