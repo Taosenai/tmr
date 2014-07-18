@@ -1,0 +1,3 @@
+#define AI_RIFLE_FIRING_MODES "AI_Single_0to120_11ROF","AI_Single_0to120_07ROF","AI_FullAuto_0to120_Burst5","AI_Single_120to550_25ROF","AI_Single_120to550_35ROF","AI_FullAuto_120to550_Burst4","AI_Single_550to950_55ROF","AI_Single_550to950_120ROF","AI_Single_950to1300_300ROF"
+
+#define AI_MG_FIRING_MODES "AI_FullAuto_0to80_Burst25","AI_FullAuto_0to120_Burst20","AI_FullAuto_120to550_Burst15","AI_FullAuto_550to950_Burst10","AI_FullAuto_950to1300_Burst10" 
