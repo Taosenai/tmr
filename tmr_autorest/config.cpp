@@ -52,10 +52,10 @@ class CfgVehicles {
 	};
 };
 
-#define TMR_SWAY_DEPLOY 0.084
-#define TMR_SWAY_DEPLOYPRONE 0.042
-#define TMR_SWAY_RESTED 0.3
-#define TMR_SWAY_RESTEDPRONE 0.08
+#define TMR_SWAY_DEPLOY 0.065
+#define TMR_SWAY_DEPLOYPRONE 0.032
+#define TMR_SWAY_RESTED 0.27
+#define TMR_SWAY_RESTEDPRONE 0.07
 #define TMR_DEPLOY_TURNSPEED 0.1
 
 // Arma 3 doesn't respect turnSpeed.
@@ -946,7 +946,7 @@ class CfgHints {
 			arguments[] = {};
 			description = "TMR Autorest adds the ability for your weapons to rest on objects and allows you to deploy bipods on weapons which feature one.<br/><br/>Weapon resting happens automatically when placed on an appropriate surface. An icon will appear in the lower center of your screen when the weapon is rested. Muzzle climb will be reduced when firing. Use stance adjustments to rest on a variety of surfaces and objects!<br/><br/>When the weapon is rested, you can press the 'Rest/deploy weapon' key to reduce aim sway. If your weapon is equipped with a bipod, this will also attempt to deploy it.<br/><br/>Note that a weapon can be rested on objects to its sides, but a bipod can only be deployed on surfaces under it.";
 			displayName = "Weapon Resting";
-			image = "";
+			image = "\a3\ui_f\data\gui\cfg\hints\rifle_ca.paa";
 			tip = "Click 'Configure Addons' in the Controls configuration dialog if you'd like to change the keybinding.<br/><br/>tmr_autorest.pbo";
 		};
 	};
