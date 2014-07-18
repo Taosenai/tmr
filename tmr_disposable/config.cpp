@@ -54,11 +54,15 @@ class CfgWeapons {
 		displayname = "PCML AT (used)";
 
 		magazines[] = {"TMR_DisposableDummy"};
+
+		author = "Bohemia Interactive + TMR";
 	};
 
 	class TMR_launch_NLAW_MPV_F : launch_NLAW_F {
 		tmr_disposable = 1;
 		tmr_disposableUsed = "TMR_launch_NLAW_MPV_F_used";
+
+		author = "Bohemia Interactive + TMR";
 	};
 
 	class TMR_launch_NLAW_MPV_F_used : TMR_launch_NLAW_MPV_F {
@@ -66,6 +70,8 @@ class CfgWeapons {
 		displayname = "PCML MPV (used)";
 
 		magazines[] = {"TMR_DisposableDummy"};
+
+		author = "Bohemia Interactive + TMR";
 	};
 };
 
@@ -76,7 +82,7 @@ class CfgHints {
 			arguments[] = {};
 			description = "Disposable single-shot launchers such as the PCML cannot be reloaded. You may discard the tube or keep it for its attached optics.";
 			displayName = "Disposable Launchers";
-			image = "";
+			image = "\a3\ui_f\data\gui\cfg\hints\launcher_ca.paa";
 			tip = "tmr_disposable.pbo";
 		};
 	};
