@@ -186,6 +186,8 @@ class CfgWeapons {
 		descriptionshort = "Warhead: Multi-purpose, direct attack ";
 		displayname = "PCML MPV";
 
+		author = "Bohemia Interactive + TMR";
+
 		magazines[] = {"tmr_NLAW_MPV_F"};
 	};
 };
@@ -252,10 +254,10 @@ class CfgHints {
 	class TMR {
 		displayName = "TMR Info";
 		class PCMLOperation {
-			arguments[] = {};
-			description = "TMR NLAW Attack &amp; Guidance makes the PCML behave like its real counterpart, the NLAW. The standard PCML AT has two guidance modes: flattened trajectory and predicted line-of-sight (PLOS).<br/><br/>In flattened trajectory mode, the missile flies directly towards the target after reaching its overfly altitude. Gravity and wind are corrected.<br/><br/>The second guidance mode is called predicted line-of-sight (PLOS). In this mode, the missile will attempt to fly to the future location of the target. This mode is activated by depressing the plunger ('Lock target' key, currently %11) and tracking the target for 2-3 seconds.";
+			arguments[] = {{{"LockTarget"}}};
+			description = "TMR NLAW Attack &amp; Guidance makes the PCML behave like its real counterpart, the NLAW. The standard PCML AT has two guidance modes: flattened trajectory and predicted line-of-sight (PLOS).<br/><br/>In flattened trajectory mode, the missile flies directly towards the target after reaching its overfly altitude. Gravity and wind are corrected.<br/><br/>The second guidance mode is called predicted line-of-sight (PLOS). In this mode, the missile will attempt to fly to the future location of the target. This mode is activated by depressing the plunger ('Lock target' key, currently %11) and tracking the target for 2-3 seconds before firing.";
 			displayName = "PCML Operation";
-			image = "";
+			image = "\a3\ui_f\data\gui\cfg\hints\launcher_ca.paa";
 			tip = "The AT variant of the PCML uses a overhead top attack (OTA) flight profile. The PCML MPV (multi-purpose variant) is a direct attack weapon.<br/><br/>tmr_nlaw.pbo";
 		};
 
@@ -263,7 +265,7 @@ class CfgHints {
 			arguments[] = {};
 			description = "TMR adds a new PLOS guidance mode (detailed on the PCML Operation page) for the PCML. Two PCML variants exist: PCML AT, which is an overhead top-attack anti-tank launcher, and PCML MPV, which is a multi-purpose direct attack launcher with a combined penetration/fragmentation warhead.";
 			displayName = "PCML Changes";
-			image = "";
+			image = "\a3\ui_f\data\gui\cfg\hints\launcher_ca.paa";
 			tip = "tmr_nlaw.pbo";
 		};
 	};
