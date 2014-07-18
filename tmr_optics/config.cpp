@@ -164,7 +164,7 @@ class CfgWeapons {
 					discretefov[] = {0.0872664626};
 					discreteinitindex = 0;
 					usemodeloptics = 1;
-					modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
+					modeloptics = "\tmr_optics\data\tmr_optics_reticle90.p3d";
 					visionmode[] = {"Normal"};
 				};
 			};
@@ -222,7 +222,7 @@ class CfgWeapons {
 					discretefov[] = {0.0872664626};
 					discreteinitindex = 0;
 					usemodeloptics = 1;
-					modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
+					modeloptics = "\tmr_optics\data\tmr_optics_reticle90.p3d";
 					visionmode[] = {"Normal"};
 				};
 			};
@@ -266,7 +266,7 @@ class CfgWeapons {
 		tmr_optics_bodyNight = "\tmr_optics\data\sos\sos-bodyNight_ca.paa";
 
 		class ItemInfo: InventoryOpticsItem_Base_F {
-			modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
+			modeloptics = "\tmr_optics\data\tmr_optics_reticle90.p3d";
 			weaponinfotype = "RscWeaponRangeZeroingFOV";
 			opticType = 2; // Sniper optics
 
@@ -280,7 +280,7 @@ class CfgWeapons {
 					distancezoommax = 2300;
 					distancezoommin = 100;
 					memorypointcamera = "opticView";
-					modeloptics = "\tmr_optics\data\tmr_optics_reticle80.p3d";
+					modeloptics = "\tmr_optics\data\tmr_optics_reticle90.p3d";
 					opticsdisableperipherialvision = 1;
 					opticsdisplayname = "SOS";
 					opticsflare = 1;
@@ -460,7 +460,7 @@ class CfgHints {
 			arguments[] = {};
 			description = "TMR Optics adds new highly accurate 2D reticles for many Arma 3 optics. These reticles are precisely calibrated for TMR's ballistics and the weapon types they are commonly mounted on.";
 			displayName = "Optics";
-			image = "";
+			image = "\a3\ui_f\data\gui\cfg\hints\optics_ca.paa";
 			tip = "tmr_optics.pbo";
 		};
 	};
