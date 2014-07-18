@@ -13,6 +13,18 @@ class CfgPatches {
 	};
 };
 
+class CfgMods {
+	class tmr_blastfrag {
+		dir = "tmr_blastfrag";
+		name = "TMR: Blast Fragmentation Module";
+		picture = "";
+		hidePicture = "true";
+		hideName = "true";
+		actionName = "Website";
+		action = "http://www.ryanschultz.org/tmr/";
+	};
+};
+
 class Extended_PostInit_EventHandlers {
 	class tmr_blastfrag {
 		clientInit = "call compile preProcessFileLineNumbers '\tmr_blastfrag\init.sqf'";
@@ -63,7 +75,7 @@ class CfgAmmo {
 	class G_40mm_HE : GrenadeBase {
 		tmr_blastfrag_isFrag = true;
 		tmr_blastfrag_fragVelocity = 2169; // Gurney for: cylinder, 0.02kg CompB, 0.18kg case (M406)
-		tmr_blastfrag_fragCount = 40;
+		tmr_blastfrag_fragCount = 45;
 		tmr_blastfrag_casualtyRadius = 5;
 	};
 
@@ -72,7 +84,7 @@ class CfgAmmo {
 	class GrenadeHand : Grenade {
 		tmr_blastfrag_isFrag = true;
 		tmr_blastfrag_fragVelocity = 3890; // Gurney for: sphere, 0.18kg CompB, 0.14kg case (M67)
-		tmr_blastfrag_fragCount = 50;
+		tmr_blastfrag_fragCount = 55;
 		tmr_blastfrag_casualtyRadius = 15;
 	};
 
@@ -209,7 +221,7 @@ class CfgHints {
 			arguments[] = {};
 			description = "The Blast Fragmentation module adds shrapnel effects from many types of explosives. This shrapnel can be lethal, and generally increases the threat radius of most explosives in Arma 3.";
 			displayName = "Fragmentation";
-			image = "";
+			image = "\a3\ui_f\data\gui\cfg\hints\grenades_ca.paa";
 			tip = "All fragmentation behaviors are based on real data and the Gurney equations whenever possible!<br/><br/>tmr_blastfrag.pbo";
 		};
 	};
