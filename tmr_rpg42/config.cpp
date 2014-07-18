@@ -371,7 +371,7 @@ class CfgHints {
 			arguments[] = {};
 			description = "TMR adds two new warheads for the RPG-42: smoke and thermobaric.";
 			displayName = "RPG-42 Changes";
-			image = "";
+			image = "\a3\ui_f\data\gui\cfg\hints\ammotype_ca.paa";
 			tip = "tmr_rpg42.pbo";
 		};
 	};
