@@ -46,7 +46,7 @@ tmr_hiteffects_fnc_hit = {
 
 	// Randomly fall down if damage was considerable
 	if (_damage > 0.1) then {
-		if (random 1 > 0.55) then {
+		if (random 1 > 0.41) then {
 			[_unit] spawn tmr_hiteffects_fnc_fallDown;
 		};
 	};

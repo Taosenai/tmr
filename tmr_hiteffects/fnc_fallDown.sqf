@@ -8,10 +8,10 @@ _unit = _this select 0;
 if (!alive _unit || !local _unit) exitWith {};
 
 // Trucks don't fall.
-if (vehicle player != player) exitWith {};
+if (vehicle _unit != _unit) exitWith {};
 
 // Don't fall when tpw_fall is enabled.
-if (tpw_fall_active) exitWith {};
+if (!isNil "tpw_fall_active" && {tpw_fall_active}) exitWith {};
 
 // Get index for currently selected weapon type
 _cw = currentWeapon _unit;
