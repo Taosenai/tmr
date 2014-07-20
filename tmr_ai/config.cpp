@@ -111,7 +111,7 @@ class CfgWeapons {
 	 	aiDispersionCoefY = 7.0;
 		aiDispersionCoefX = 14.0;
 
-		modes[] += {AI_RIFLE_FIRING_MODES};
+		modes[] = {"Single", "FullAuto", AI_RIFLE_FIRING_MODES};
 
 		class Single : Single {
 			#include "disable_firing_mode.h"
