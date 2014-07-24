@@ -114,6 +114,8 @@ tmr_autorest_fnc_deployKeyDownEH = {
 			// 'Hard rest' the weapon
 			[] call tmr_autorest_fnc_hardRestWeapon;
 
+			_return = true;
+
 			// Spawn a watcher to undeploy if we're no longer aligned or if we move
 			[] spawn {
 				while {player getVariable ["tmr_autorest_hardrested", false]} do {
@@ -449,7 +451,7 @@ tmr_autorest_monitor = [] spawn tmr_autorest_fnc_init;
 
 // Register keybinding.
 if (!isNil "cba_keybinding") then {
-	["TMR", "Rest/deploy weapon", "tmr_autorest_fnc_deployKeyDownEH", [DIK_TAB, false, false, false]] call cba_fnc_registerKeybind;
+	["TMR", "Rest/deploy weapon", {_this call tmr_autorest_fnc_deployKeyDownEH}, [DIK_TAB, false, false, false]] call cba_fnc_registerKeybind;
 } else {
 	["TMR: Your version of CBA is too old for this version of TMR. Please upgrade CBA."] call cba_fnc_systemChat;
 };
