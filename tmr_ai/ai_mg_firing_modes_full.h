@@ -3,7 +3,7 @@
 
 class AI_FullAuto_0to80_Burst25 : FullAuto {
 	showToPlayer = false;
-	burst = 25;
+	burst = 20;
 	minRange = 0;
 	minRangeProbab = 0.9;
 	midRange = 40;
@@ -17,7 +17,7 @@ class AI_FullAuto_0to80_Burst25 : FullAuto {
 
 class AI_FullAuto_0to120_Burst20 : FullAuto {
 	showToPlayer = false;
-	burst = 20;
+	burst = 15;
 	minRange = 0;
 	minRangeProbab = 0.7;
 	midRange = 50;
@@ -34,7 +34,7 @@ class AI_FullAuto_0to120_Burst20 : FullAuto {
 
 class AI_FullAuto_120to550_Burst15 : FullAuto {
 	showToPlayer = false;
-	burst = 15;
+	burst = 9;
 	minRange = 120;
 	minRangeProbab = 0.3;
 	midRange = 220;
@@ -51,7 +51,7 @@ class AI_FullAuto_120to550_Burst15 : FullAuto {
 
 class AI_FullAuto_550to950_Burst10 : FullAuto {
 	showToPlayer = false;
-	burst = 10;
+	burst = 7;
 	minRange = 550;
 	minRangeProbab = 0.4;
 	midRange = 750;
@@ -71,7 +71,7 @@ class AI_FullAuto_950to1300_Burst10 : FullAuto {
 	requiredOpticType = 1;
 
 	showToPlayer = false;
-	burst = 10;
+	burst = 6;
 	minRange = 950;
 	minRangeProbab = 1;
 	midRange = 1125;
